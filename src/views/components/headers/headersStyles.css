@@ -1,0 +1,38 @@
+.navbar-header {
+    z-index: 10;
+    position: relative;
+}
+
+.navbar-haslayaout {
+    width: 100%;
+    float: left;
+}
+
+.navbar-navigationarea {
+    float: left;
+    width: 100%;
+    background-color: #fff;
+}
+
+.hidpi-logowrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-logo {
+    flex-basis: 247px;
+}
+
+.navbar-rightarea {
+    float: right;
+}
+
+.navbar-img {
+    height: auto;
+    max-width: 100%;
+}
+
+.color-text {
+    color: #004976 !important
+}

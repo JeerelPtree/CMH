@@ -1,24 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+/*
+  We have here the Switch of access routes's pages and will be render into index
+*/
+import { BrowserRouter, Route, Routes } from 'react-router-dom'; //importamos los componentes de react-router-dom
+import PageEncuestas from './views/pages/PageEncuestas'; //importamos el modulo de la pagina de Encuesta
+
+import Layout from './views/components/headers/Layout'; //importamos el layout que contiene el navbar
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Layout>
+        <Routes>
+          <Route exact path='/Encuestas' component={PageEncuestas} />
+        </Routes>
+      </Layout>
+    </BrowserRouter>
   );
 }
 
