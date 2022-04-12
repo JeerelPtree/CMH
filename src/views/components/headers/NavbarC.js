@@ -14,7 +14,7 @@ const NavbarC = () => {
 
         return (
             <header className="navbar-header navbar-haslayaout">
-                <div className="navbar-navigationarea">
+                <div className="navbar-navigationarea mt-4">
                     <Container>
                         <Row>
                             <Col sm={12} md={12} lg={12}>
