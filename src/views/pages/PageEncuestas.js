@@ -8,7 +8,7 @@ function PageEncuestas() {
             <Container className="mt-3">
                 <Row>
                     <Col xs={12} md={12}>
-
+                        Hola soy Jeerel
                     </Col>
                 </Row>
             </Container>
