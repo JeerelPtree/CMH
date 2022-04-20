@@ -9,6 +9,7 @@ function PageEncuestas() {
                 <Row>
                     <Col xs={12} md={12}>
                         hola jeerel!
+                        HOLA!
                     </Col>
                 </Row>
             </Container>
