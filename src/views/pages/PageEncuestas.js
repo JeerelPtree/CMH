@@ -1,5 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { Container, Col, Row } from "react-bootstrap"
+import { Container, Col, Row, Accordion, ProgressBar } from "react-bootstrap"
+
+import Encuestas from './json/encuestas.json'
 
 function PageEncuestas() {
     /*
@@ -30,7 +32,22 @@ function PageEncuestas() {
                         <h1>Encuestas</h1>
                         <Row>
                             <Col xs={12} md={12}>
-
+                                <Accordion>
+                                    {
+                                        Encuestas.map((encuesta) => {
+                                            return (
+                                                <Fragment>
+                                                    <Accordion.Item eventKey={encuesta.id} key={encuesta.id}>
+                                                        <Accordion.Header>{encuesta.title}</Accordion.Header>
+                                                        <Accordion.Body>
+                                                            <ProgressBar animated now={encuesta.progress} />
+                                                        </Accordion.Body>
+                                                    </Accordion.Item>
+                                                </Fragment>
+                                            )
+                                        })
+                                    }
+                                </Accordion>
                             </Col>
                         </Row>
                     </Col>
