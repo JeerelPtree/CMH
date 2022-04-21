@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { Container, Col, Row, FloatingLabel, Button, Form } from "react-bootstrap";
+import { Container, Col, Row, FloatingLabel, Button, Form, OverlayTrigger, Tooltip } from "react-bootstrap";
 import MultiSelect from "../components/selectors/MultiSelect";
 
 
@@ -48,10 +48,12 @@ function PagePrueba() {
                     <Col xs={12} md={12}>
                         <Row>
 
+                            {/*Titulo de la página*/}
                             <Col xs={12} md={12}>
                                 <h1 className="title-cmh">Encuesta RHo</h1>
                             </Col>
 
+                            {/*Perfil del Hospital*/}
                             <Col xs={12} md={12} className="mt-3">
                                 <Row>
                                     <Col xs={12} md={12} className="mb-3">
@@ -87,20 +89,19 @@ function PagePrueba() {
 
                                     </Col>
 
-                                    <Col xs={12} md={6}>
-                                        <Button variant="primary" onClick={prueba}> HOLA
-                                        </Button>
-                                    </Col>
-
                                 </Row>
                             </Col>
 
+                            {/*Características*/}
                             <Col xs={12} md={12} className="mt-3">
                                 <Row>
+
+                                    {/*Titulo de la encuesta*/}
                                     <Col xs={12} md={12} className="mt-3">
                                         <h4 className="text-center sub-title-cmh">Características</h4>
                                     </Col>
 
+                                    {/*Hospital asociado desde*/}
                                     <Col xs={12} md={4} className="mt-3">
 
                                         <FloatingLabel
@@ -116,6 +117,7 @@ function PagePrueba() {
 
                                     </Col>
 
+                                    {/*Fecha de fundación*/}
                                     <Col xs={12} md={4} className="mt-3">
 
                                         <FloatingLabel
@@ -131,6 +133,7 @@ function PagePrueba() {
 
                                     </Col>
 
+                                    {/*Área construida*/}
                                     <Col xs={12} md={4} className="mt-3">
 
                                         <FloatingLabel
@@ -146,6 +149,7 @@ function PagePrueba() {
 
                                     </Col>
 
+                                    {/*Número de colaboradores*/}
                                     <Col xs={12} md={4} className="mt-3">
 
                                         <FloatingLabel
@@ -161,6 +165,7 @@ function PagePrueba() {
 
                                     </Col>
 
+                                    {/*Número de camas de hospitalización*/}
                                     <Col xs={12} md={4} className="mt-3">
 
                                         <FloatingLabel
@@ -176,36 +181,51 @@ function PagePrueba() {
 
                                     </Col>
 
+                                    {/*Número de camas UCIA*/}
                                     <Col xs={12} md={4} className="mt-3">
 
                                         <FloatingLabel
                                             controlId="floatingInput"
                                             label="Nº Camas UCIA">
-                                            <Form.Control
-                                                type="number"
-                                                placeholder="Nº Camas UCIA"
-                                                value={form.numeroCamasUCIA ? form.numeroCamasUCIA : ''}
-                                                name="numeroCamasUCIA"
-                                                onChange={handleChange} />
+                                            <OverlayTrigger
+                                                placement="bottom"
+                                                overlay={
+                                                    <Tooltip id="tooltip-UCIA">Tooltip para UCIA</Tooltip>
+                                                }>
+                                                <Form.Control
+                                                    type="number"
+                                                    placeholder="Nº Camas UCIA"
+                                                    value={form.numeroCamasUCIA ? form.numeroCamasUCIA : ''}
+                                                    name="numeroCamasUCIA"
+                                                    onChange={handleChange} />
+                                            </OverlayTrigger>
                                         </FloatingLabel>
 
                                     </Col>
 
+                                    {/*Número de camas UCIN*/}
                                     <Col xs={12} md={4} className="mt-3">
 
                                         <FloatingLabel
                                             controlId="floatingInput"
                                             label="Nº Camas UCIN">
-                                            <Form.Control
-                                                type="number"
-                                                placeholder="Nº Camas UCIN"
-                                                value={form.numeroCamasUCIN ? form.numeroCamasUCIN : ''}
-                                                name="numeroCamasUCIN"
-                                                onChange={handleChange} />
+                                            <OverlayTrigger
+                                                placement="bottom"
+                                                overlay={
+                                                    <Tooltip id="tooltip-UCIA">Tooltip para UCIN</Tooltip>
+                                                }>
+                                                <Form.Control
+                                                    type="number"
+                                                    placeholder="Nº Camas UCIN"
+                                                    value={form.numeroCamasUCIN ? form.numeroCamasUCIN : ''}
+                                                    name="numeroCamasUCIN"
+                                                    onChange={handleChange} />
+                                            </OverlayTrigger>
                                         </FloatingLabel>
 
                                     </Col>
 
+                                    {/*Número de salas de cirugía*/}
                                     <Col xs={12} md={4} className="mt-3">
 
                                         <FloatingLabel
@@ -221,6 +241,7 @@ function PagePrueba() {
 
                                     </Col>
 
+                                    {/*Número de médicos credencializados*/}
                                     <Col xs={12} md={4} className="mt-3">
 
                                         <FloatingLabel
@@ -236,6 +257,7 @@ function PagePrueba() {
 
                                     </Col>
 
+                                    {/*Nivel de atención hospitalaria*/}
                                     <Col xs={12} md={6} className="mt-3">
 
                                         <FloatingLabel controlId="floatingSelect" label="Nivel de Atención Hospitalaria">
@@ -249,6 +271,7 @@ function PagePrueba() {
 
                                     </Col>
 
+                                    {/*Servicios de habilitados*/}
                                     <Col xs={12} md={6} className="mt-3">
 
                                         <Form.Group controlId="formFileMultiple" className="mb-3">
@@ -263,6 +286,7 @@ function PagePrueba() {
 
                                     </Col>
 
+                                    {/*Acreditaciones hospitalarias*/}
                                     <Col xs={12} md={12} className="mt-3">
 
                                         <Form.Group className="mb-3" controlId="formHospitalLevel">
@@ -272,6 +296,7 @@ function PagePrueba() {
 
                                     </Col>
 
+                                    {/*Reseña del hospital*/}
                                     <Col xs={12} md={6} className="mt-3">
 
                                         <FloatingLabel
@@ -288,6 +313,7 @@ function PagePrueba() {
 
                                     </Col>
 
+                                    {/*Lo destacado en el año*/}
                                     <Col xs={12} md={6} className="mt-3">
 
                                         <FloatingLabel
@@ -305,6 +331,12 @@ function PagePrueba() {
                                     </Col>
 
                                 </Row>
+                            </Col>
+
+                            {/*Botón de enviar*/}
+                            <Col xs={12} md={6} className="mt-3 mb-5">
+                                <Button variant="primary" onClick={prueba}> Enviar
+                                </Button>
                             </Col>
 
                         </Row>
