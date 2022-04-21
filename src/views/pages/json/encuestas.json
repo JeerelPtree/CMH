@@ -1,0 +1,92 @@
+[
+    {
+        "id": 1,
+        "abbreviation": "RHo",
+        "title": "Reseña del Hospital",
+        "progress": 100
+    },
+    {
+        "id": 2,
+        "abbreviation": "EyP",
+        "title": "Estructura y Producción",
+        "progress": 90
+    },
+    {
+        "id": 3,
+        "abbreviation": "S.A.",
+        "title": "Servicios Asistenciales",
+        "progress": 80
+    },
+    {
+        "id": 4,
+        "abbreviation": "PH",
+        "title": "Perfil Hospitalario",
+        "progress": 70
+    },
+    {
+        "id": 5,
+        "abbreviation": "Op",
+        "title": "Operaciones",
+        "progress": 60
+    },
+    {
+        "id": 5.2,
+        "abbreviation": "",
+        "title": "Operaciones 2ª Parte",
+        "progress": 50
+    },
+    {
+        "id": 6,
+        "abbreviation": "TC",
+        "title": "Tipos de Cliente",
+        "progress": 40
+    },
+    {
+        "id": 7,
+        "abbreviation": "GP",
+        "title": "Gestión de Personal",
+        "progress": 30
+    },
+    {
+        "id": 8,
+        "abbreviation": "CAP",
+        "title": "Capacitación",
+        "progress": 20
+    },
+    {
+        "id": 9,
+        "abbreviation": "S.I.",
+        "title": "Sistemas de Información Hospitalaria",
+        "progress": 10
+    },
+    {
+        "id": 10,
+        "abbreviation": "Com",
+        "title": "Compras",
+        "progress": 0
+    },
+    {
+        "id": 11,
+        "abbreviation": "Calidad",
+        "title": "Estadística General Hospitalaria",
+        "progress": 5
+    },
+    {
+        "id": 12,
+        "abbreviation": "MKT",
+        "title": "Mercadotecnia",
+        "progress": 15
+    },
+    {
+        "id": 13,
+        "abbreviation": "",
+        "title": "Integradora de Salud CMH",
+        "progress": 25
+    },
+    {
+        "id": 14,
+        "abbreviation": "",
+        "title": "Red Médica",
+        "progress": 35
+    }
+]
