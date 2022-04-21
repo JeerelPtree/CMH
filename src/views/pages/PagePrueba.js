@@ -23,7 +23,6 @@ const lastYear = currentYear - 1;
 class PagePrueba extends React.Component {
 
     render() {
-        console.log('hola desde prueba')
         return (
             <Fragment>
                 <Container className="mt-5">
