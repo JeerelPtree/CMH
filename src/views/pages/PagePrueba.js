@@ -26,10 +26,8 @@ function PagePrueba() {
     //module's functions
     const handleChange = async (e) => {
 
-        console.log('aqui')
         e.persist();
-        console.log(e)
-        //console.log('entrando a hanldle change: ', e.target.name, e.target.value)
+
         await setForm(
             {
                 ...form,
@@ -37,6 +35,18 @@ function PagePrueba() {
             }
         );
 
+    }
+
+    const handleMultiSelect = async (a) => {
+
+        console.log('entrando a handle change del multi: ', a)
+
+        await setForm(
+            {
+                ...form,
+                acreditacionesHospitalarias: a
+            }
+        );
     }
 
     const prueba = () => {
@@ -57,7 +67,7 @@ function PagePrueba() {
 
                             <PerfilHospital form={form} handleChange={handleChange} />
 
-                            <Caracteristicas form={form} handleChange={handleChange} dataMulti={dataMulti} />
+                            <Caracteristicas form={form} handleChange={handleChange} dataMulti={dataMulti} handleMulti={handleMultiSelect} />
 
                             {/*Botón de enviar*/}
                             <Col xs={12} md={6} className="mt-3 mb-5">
@@ -135,6 +145,7 @@ function Caracteristicas(props) {
     const form = props.form
     const handleChange = props.handleChange
     const dataMulti = props.dataMulti
+    const handleMulti = props.handleMulti
 
     return (
         <Fragment>
@@ -154,7 +165,7 @@ function Caracteristicas(props) {
                             controlId="floatingInput"
                             label="Hospital Asociado al CMH desde">
                             <Form.Control
-                                type="text"
+                                type="date"
                                 placeholder="Hospital Asociado al CMH desde"
                                 value={form.hospitalAsociadoCMHDesde ? form.hospitalAsociadoCMHDesde : ''}
                                 name="hospitalAsociadoCMHDesde"
@@ -339,8 +350,8 @@ function Caracteristicas(props) {
                             <Form.Label>Acreditación(es) Hospitalaria(s):</Form.Label>
                             <MultiSelect options={dataMulti} form={form}
                                 valueName={"acreditacionesHospitalarias"}
-                                handleChange={handleChange}
-                                controlId="formHospitalLevel" />
+                                handleChange={handleMulti}
+                                controlId="formHospitalCertifications" />
                         </Form.Group>
 
                     </Col>
