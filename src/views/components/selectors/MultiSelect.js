@@ -7,8 +7,12 @@ import Select from 'react-select';
 //const animatedComponents = makeAnimated();
 
 function MultiSelect(props) {
+    console.log(props.handleChange);
     return <Fragment>
         <Select
+            name={props.nameValue}
+            onChange={props.handleChange}
+            value={props.form.acreditacionesHospitalarias ? props.form.acreditacionesHospitalarias : "Sin valor"}
             closeMenuOnSelect={false}
             isMulti
             options={props.options}

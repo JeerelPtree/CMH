@@ -291,7 +291,11 @@ function PagePrueba() {
 
                                         <Form.Group className="mb-3" controlId="formHospitalLevel">
                                             <Form.Label>Acreditación(es) Hospitalaria(s):</Form.Label>
-                                            <MultiSelect options={dataMulti} />
+                                            <MultiSelect
+                                                options={dataMulti}
+                                                form={form}
+                                                handleChange={() => handleChange()}
+                                                nameValue="acreditacionesHospitalarias" />
                                         </Form.Group>
 
                                     </Col>
