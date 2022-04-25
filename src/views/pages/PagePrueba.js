@@ -27,6 +27,7 @@ function PagePrueba() {
     const handleChange = async (e) => {
 
         e.persist();
+        console.log(e.target.files)
 
         await setForm(
             {
@@ -34,6 +35,11 @@ function PagePrueba() {
                 [e.target.name]: e.target.value
             }
         );
+
+        let reader = new FileReader();
+        reader.readAsDataURL(e.target.files[0]);
+        console.log(reader);
+
 
     }
 
@@ -331,14 +337,14 @@ function Caracteristicas(props) {
                     {/*Servicios de habilitados*/}
                     <Col xs={12} md={6} className="mt-3">
 
-                        <Form.Group controlId="formFileMultiple" className="mb-3">
+                        <Form.Group controlId="formFileMultiple" className="mb-3" multiple>
                             <Form.Label>Servicios habilitados en su Hospital:</Form.Label>
                             <Form.Control
                                 type="file"
+                                multiple
                                 value={form.serviciosHabilitadosHospital ? form.serviciosHabilitadosHospital : ''}
                                 name="serviciosHabilitadosHospital"
-                                onChange={handleChange}
-                                multiple />
+                                onChange={handleChange} />
                         </Form.Group>
 
                     </Col>
