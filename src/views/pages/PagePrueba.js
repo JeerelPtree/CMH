@@ -35,8 +35,6 @@ function PagePrueba() {
             }
         );
 
-<<<<<<< HEAD
-=======
         /*Falta por subir los archivos en forma de enlace a una API o base de datos, o asignarlos al campo de 
         serviciosHabilitadosHospital para posteriormente subirlos*/
         /*
@@ -60,7 +58,6 @@ function PagePrueba() {
                 acreditacionesHospitalarias: a
             }
         );
->>>>>>> 7800393a1847d41bec75a40e38b885c2011cf33b
     }
 
     const prueba = () => {
@@ -362,18 +359,11 @@ function Caracteristicas(props) {
 
                         <Form.Group className="mb-3">
                             <Form.Label>Acreditación(es) Hospitalaria(s):</Form.Label>
-<<<<<<< HEAD
-                            <MultiSelect options={dataMulti} form={form.acreditacionesHospitalarias ? form.acreditacionesHospitalarias : ''}
-                                valueame={"acreditacionesHospitalarias"}
-                                handleChange={handleChange}
-                                controlId="formHospitalLevel" />
-=======
                             <MultiSelect
                                 options={dataMulti} form={form}
                                 valueName={"acreditacionesHospitalarias"}
                                 handleChange={handleMulti}
                                 controlId="formHospitalCertifications" />
->>>>>>> 7800393a1847d41bec75a40e38b885c2011cf33b
                         </Form.Group>
 
                     </Col>
