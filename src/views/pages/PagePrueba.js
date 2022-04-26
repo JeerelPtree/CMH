@@ -26,7 +26,6 @@ function PagePrueba() {
     const handleChange = async (e) => {
 
         e.persist();
-        console.log(e.target.files)
 
         await setForm(
             {
@@ -51,8 +50,6 @@ function PagePrueba() {
     }
 
     const handleMultiSelect = async (a) => {
-
-        console.log('entrando a handle change del multi: ', a)
 
         await setForm(
             {
