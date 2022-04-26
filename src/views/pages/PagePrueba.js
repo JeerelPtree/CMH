@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { Container, Col, Row, FloatingLabel, Button, Form, OverlayTrigger, Tooltip } from "react-bootstrap";
 import MultiSelect from "../components/selectors/MultiSelect";
+//import axios from "axios"
 
 
 //we import css
@@ -14,14 +15,12 @@ function PagePrueba() {
     //declared the variables, constants ans states for this module
     const [form, setForm] = useState({})
     const dataMulti = [
-        { value: 'Seleccione las acreditaciones', selected: true },
         { value: 'ISO 9001', label: 'ISO 9001' },
         { value: 'CSG', label: 'CSG' },
         { value: 'CertCan', label: 'Certificación Canadiense' },
         { value: 'JCI', label: 'JCI' },
         { value: 'DistH', label: 'Distintivo "H"' },
     ]
-
 
     //module's functions
     const handleChange = async (e) => {
@@ -36,6 +35,32 @@ function PagePrueba() {
             }
         );
 
+<<<<<<< HEAD
+=======
+        /*Falta por subir los archivos en forma de enlace a una API o base de datos, o asignarlos al campo de 
+        serviciosHabilitadosHospital para posteriormente subirlos*/
+        /*
+        let reader = new FileReader();
+
+        reader.readAsDataURL(e.target.files[0]);
+        console.log(typeof (reader));
+        reader.onload = (e) => {
+            console.log("ing data ", e.target.result);
+        }
+        */
+
+
+    }
+
+    const handleMultiSelect = async (a) => {
+
+        await setForm(
+            {
+                ...form,
+                acreditacionesHospitalarias: a
+            }
+        );
+>>>>>>> 7800393a1847d41bec75a40e38b885c2011cf33b
     }
 
     const prueba = () => {
@@ -322,6 +347,7 @@ function Caracteristicas(props) {
                         <Form.Group controlId="formFileMultiple" className="mb-3">
                             <Form.Label>Servicios habilitados en su Hospital:</Form.Label>
                             <Form.Control
+                                placeholder="Ningún archivo seleccionado"
                                 type="file"
                                 value={form.serviciosHabilitadosHospital ? form.serviciosHabilitadosHospital : ''}
                                 name="serviciosHabilitadosHospital"
@@ -336,10 +362,18 @@ function Caracteristicas(props) {
 
                         <Form.Group className="mb-3">
                             <Form.Label>Acreditación(es) Hospitalaria(s):</Form.Label>
+<<<<<<< HEAD
                             <MultiSelect options={dataMulti} form={form.acreditacionesHospitalarias ? form.acreditacionesHospitalarias : ''}
                                 valueame={"acreditacionesHospitalarias"}
                                 handleChange={handleChange}
                                 controlId="formHospitalLevel" />
+=======
+                            <MultiSelect
+                                options={dataMulti} form={form}
+                                valueName={"acreditacionesHospitalarias"}
+                                handleChange={handleMulti}
+                                controlId="formHospitalCertifications" />
+>>>>>>> 7800393a1847d41bec75a40e38b885c2011cf33b
                         </Form.Group>
 
                     </Col>
