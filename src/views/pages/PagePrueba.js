@@ -52,8 +52,6 @@ function PagePrueba() {
 
     const handleMultiSelect = async (a) => {
 
-        console.log('entrando a handle change del multi: ', a)
-
         await setForm(
             {
                 ...form,
