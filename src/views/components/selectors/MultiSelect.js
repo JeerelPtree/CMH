@@ -8,7 +8,7 @@ import Select from 'react-select';
 
 function MultiSelect(props) {
     //we obtain the props for this component
-    const { valueName, form, handleChange } = props
+    const { options, valueName, form, handleChange } = props
 
     //TODO: TEST 
 
@@ -37,11 +37,10 @@ function MultiSelect(props) {
     /*return (<Fragment>
         <Select
             name={valueName}
-            value={form.acreditacionesHospitalarias ? form.acreditacionesHospitalarias : ''}
             onChange={handleChange}
             closeMenuOnSelect={false}
             isMulti
-            options={props.options}
+            options={options}
         />
     </Fragment>)*/
 }

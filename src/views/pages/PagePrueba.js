@@ -12,12 +12,7 @@ const lastYear = currentYear - 1;
 function PagePrueba() {
 
     //declared the variables, constants ans states for this module
-    const [form, setForm] = useState({});
-    const [dataMulti, setDataMulti] = ([]);
-
-
-
-    /*
+    const [form, setForm] = useState({})
     const dataMulti = [
         { value: 'Seleccione las acreditaciones', selected: true },
         { value: 'ISO 9001', label: 'ISO 9001' },
@@ -25,8 +20,7 @@ function PagePrueba() {
         { value: 'CertCan', label: 'Certificación Canadiense' },
         { value: 'JCI', label: 'JCI' },
         { value: 'DistH', label: 'Distintivo "H"' },
-    ];
-    */
+    ]
 
 
     //module's functions
@@ -34,6 +28,7 @@ function PagePrueba() {
 
         e.persist();
 
+        console.log('entrando a hanldle change: ', e.target.name, e.target.value)
         await setForm(
             {
                 ...form,
@@ -45,7 +40,6 @@ function PagePrueba() {
 
     const prueba = () => {
         console.log(form)
-        console.log(dataMulti)
     }
 
     return (
@@ -62,7 +56,7 @@ function PagePrueba() {
 
                             <PerfilHospital form={form} handleChange={handleChange} />
 
-                            <Caracteristicas form={form} handleChange={handleChange} dataMulti={dataMulti} setDataMulti={setDataMulti} />
+                            <Caracteristicas form={form} handleChange={handleChange} dataMulti={dataMulti} />
 
                             {/*Botón de enviar*/}
                             <Col xs={12} md={6} className="mt-3 mb-5">
@@ -140,7 +134,6 @@ function Caracteristicas(props) {
     const form = props.form
     const handleChange = props.handleChange
     const dataMulti = props.dataMulti
-    const setDataMulti = props.setDataMulti
 
     return (
         <Fragment>
@@ -341,18 +334,11 @@ function Caracteristicas(props) {
                     {/*Acreditaciones hospitalarias*/}
                     <Col xs={12} md={12} className="mt-3">
 
-                        {/*<Form.Group className="mb-3">
-                            <Form.Label>Acreditación(es) Hospitalaria(s):</Form.Label>
-                            <MultiSelect options={dataMulti} form={form}
-                                valueName={"acreditacionesHospitalarias"}
-                                handleChange={handleChange}
-                                controlId="formHospitalLevel" />
-                            </Form.Group>*/}
                         <Form.Group className="mb-3">
                             <Form.Label>Acreditación(es) Hospitalaria(s):</Form.Label>
-                            <MultiSelect
-                                dataMulti={dataMulti}
-                                setDataMulti={setDataMulti}
+                            <MultiSelect options={dataMulti} form={form.acreditacionesHospitalarias ? form.acreditacionesHospitalarias : ''}
+                                valueame={"acreditacionesHospitalarias"}
+                                handleChange={handleChange}
                                 controlId="formHospitalLevel" />
                         </Form.Group>
 
