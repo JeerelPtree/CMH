@@ -8,10 +8,11 @@ import Select from 'react-select';
 
 function MultiSelect(props) {
     //we obtain the props for this component
-    const { options, valueName, form, handleChange } = props
+    const { options, valueName, handleChange } = props
 
     return <Fragment>
         <Select
+            placeholder="Seleccionar acreditaciones"
             name={valueName}
             onChange={handleChange}
             closeMenuOnSelect={false}

@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { Container, Col, Row, FloatingLabel, Button, Form, OverlayTrigger, Tooltip } from "react-bootstrap";
 import MultiSelect from "../components/selectors/MultiSelect";
+//import axios from "axios"
 
 
 //we import css
@@ -14,14 +15,12 @@ function PagePrueba() {
     //declared the variables, constants ans states for this module
     const [form, setForm] = useState({})
     const dataMulti = [
-        { value: 'Seleccione las acreditaciones', selected: true },
         { value: 'ISO 9001', label: 'ISO 9001' },
         { value: 'CSG', label: 'CSG' },
         { value: 'CertCan', label: 'Certificación Canadiense' },
         { value: 'JCI', label: 'JCI' },
         { value: 'DistH', label: 'Distintivo "H"' },
     ]
-
 
     //module's functions
     const handleChange = async (e) => {
@@ -36,9 +35,17 @@ function PagePrueba() {
             }
         );
 
+        /*Falta por subir los archivos en forma de enlace a una API o base de datos, o asignarlos al campo de 
+        serviciosHabilitadosHospital para posteriormente subirlos*/
+        /*
         let reader = new FileReader();
+
         reader.readAsDataURL(e.target.files[0]);
-        console.log(reader);
+        console.log(typeof (reader));
+        reader.onload = (e) => {
+            console.log("ing data ", e.target.result);
+        }
+        */
 
 
     }
@@ -340,6 +347,7 @@ function Caracteristicas(props) {
                         <Form.Group controlId="formFileMultiple" className="mb-3" multiple>
                             <Form.Label>Servicios habilitados en su Hospital:</Form.Label>
                             <Form.Control
+                                placeholder="Ningún archivo seleccionado"
                                 type="file"
                                 multiple
                                 value={form.serviciosHabilitadosHospital ? form.serviciosHabilitadosHospital : ''}
@@ -354,7 +362,8 @@ function Caracteristicas(props) {
 
                         <Form.Group className="mb-3">
                             <Form.Label>Acreditación(es) Hospitalaria(s):</Form.Label>
-                            <MultiSelect options={dataMulti} form={form}
+                            <MultiSelect
+                                options={dataMulti} form={form}
                                 valueName={"acreditacionesHospitalarias"}
                                 handleChange={handleMulti}
                                 controlId="formHospitalCertifications" />
