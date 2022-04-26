@@ -33,8 +33,6 @@ function PageEncuestas() {
 
     const setVariant = (progress) => {
 
-        console.log(progress)
-
         let variant = '';
 
         let auxSwitch = progress === 100 ? 1 :
