@@ -10,10 +10,11 @@ import "../../globalStyles.css"
 const currentYear = new Date().getFullYear();
 const lastYear = currentYear - 1;
 
-function PagePrueba() {
+function RHo() {
 
     //declared the variables, constants ans states for this module
     const [form, setForm] = useState({})
+    const title = "Encuesta RHo"
     const dataMulti = [
         { value: 'ISO 9001', label: 'ISO 9001' },
         { value: 'CSG', label: 'CSG' },
@@ -37,6 +38,7 @@ function PagePrueba() {
 
         /*Falta por subir los archivos en forma de enlace a una API o base de datos, o asignarlos al campo de 
         serviciosHabilitadosHospital para posteriormente subirlos*/
+
         /*
         let reader = new FileReader();
 
@@ -46,6 +48,7 @@ function PagePrueba() {
             console.log("ing data ", e.target.result);
         }
         */
+
 
 
     }
@@ -71,20 +74,22 @@ function PagePrueba() {
                     <Col xs={12} md={12}>
                         <Row>
 
-                            {/*Titulo de la página*/}
+                            {/*Titulo de la página
                             <Col xs={12} md={12}>
-                                <h1 className="title-cmh">Encuesta RHo</h1>
+                                <h1 className="title-cmh">{title}</h1>
                             </Col>
+                            */}
 
                             <PerfilHospital form={form} handleChange={handleChange} />
 
-                            <Caracteristicas form={form} handleChange={handleChange} dataMulti={dataMulti} />
+                            <Caracteristicas form={form} handleChange={handleChange} dataMulti={dataMulti} handleMulti={handleMultiSelect} />
 
-                            {/*Botón de enviar*/}
+                            {/*Botón de enviar
                             <Col xs={12} md={6} className="mt-3 mb-5">
                                 <Button variant="primary" onClick={prueba}> Enviar
                                 </Button>
                             </Col>
+                            */}
 
                         </Row>
                     </Col>
@@ -156,6 +161,7 @@ function Caracteristicas(props) {
     const form = props.form
     const handleChange = props.handleChange
     const dataMulti = props.dataMulti
+    const handleMulti = props.handleMulti
 
     return (
         <Fragment>
@@ -175,7 +181,7 @@ function Caracteristicas(props) {
                             controlId="floatingInput"
                             label="Hospital Asociado al CMH desde">
                             <Form.Control
-                                type="text"
+                                type="date"
                                 placeholder="Hospital Asociado al CMH desde"
                                 value={form.hospitalAsociadoCMHDesde ? form.hospitalAsociadoCMHDesde : ''}
                                 name="hospitalAsociadoCMHDesde"
@@ -408,4 +414,4 @@ function Caracteristicas(props) {
     )
 }
 
-export default PagePrueba;
+export default RHo;

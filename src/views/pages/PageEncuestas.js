@@ -18,6 +18,7 @@ function PageEncuestas() {
         //we modified the state modalIsOpen
         setModalIsOpen(!modalIsOpen);
 
+
     };
 
     let variants = [
@@ -125,6 +126,8 @@ function PageEncuestas() {
             <ModalGeneralEncuesta
                 modalIsOpen={modalIsOpen}
                 handleModalState={handleModalState}
+                surveyIndex={1}
+                encuestas={Encuestas}
             />
         </Fragment>
     )
