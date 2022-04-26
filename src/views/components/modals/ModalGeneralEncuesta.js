@@ -1,7 +1,8 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Container, Row, Col, Modal, FloatingLabel, Button, Form, OverlayTrigger, Tooltip } from "react-bootstrap";
 
 import '../../../globalStyles.css'
+import RHo from "../../pages/RHo";
 
 
 
@@ -10,11 +11,48 @@ function ModalGeneralEncuesta(props) {
     //we obtain the props
     const modalIsOpen = props.modalIsOpen;
     const handleModalState = props.handleModalState
+    const surveyIndex = props.surveyIndex
+    const encuestas = props.encuestas
 
     const switchEncuesta = () => {
         //vamos a comparar el id 
 
         //switch
+        switch (surveyIndex) {
+            case 1:
+                return (
+                    <Fragment>
+                        <RHo />
+                    </Fragment>
+                )
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
+            case 8:
+                break;
+            case 9:
+                break;
+            case 10:
+                break;
+            case 11:
+                break;
+            case 12:
+                break;
+            case 13:
+                break;
+            case 14:
+                break;
+        }
 
         //return regresamos la encuesta
     }
@@ -24,7 +62,7 @@ function ModalGeneralEncuesta(props) {
             <Form>
                 <Modal.Header closeButton>
                     <Modal.Title className="title-cmh">
-                        AQUI TITULO
+                        {encuestas[0].title}
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
@@ -32,7 +70,7 @@ function ModalGeneralEncuesta(props) {
                         <Row>
 
                             <Col>
-                                Contenido
+                                {switchEncuesta()}
                             </Col>
 
                         </Row>
