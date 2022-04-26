@@ -18,7 +18,6 @@ function PageEncuestas() {
         //we modified the state modalIsOpen
         setModalIsOpen(!modalIsOpen);
 
-
     };
 
     let variants = [
