@@ -10,10 +10,12 @@ function ModalGeneralEncuesta(props) {
 
     //we obtain the props
     const modalIsOpen = props.modalIsOpen;
-    const handleModalState = props.handleModalState
-    const surveyIndex = props.surveyIndex
-    const encuestas = props.encuestas
+    const handleModalState = props.handleModalState;
+    const dataEncuesta = props.dataEncuesta;
+    //const surveyIndex = props.surveyIndex
+    //const encuestas = props.encuestas
 
+    /*
     const switchEncuesta = () => {
         //vamos a comparar el id 
 
@@ -56,21 +58,24 @@ function ModalGeneralEncuesta(props) {
 
         //return regresamos la encuesta
     }
+    */
 
     return (
         <Modal show={modalIsOpen} backdrop="static" keyboard={false} size="xl" arial-labelledby="contained-modal-title-vcenter" onHide={handleModalState} centered> {/*onHide={this.cleanModal} */}
             <Form>
                 <Modal.Header closeButton>
                     <Modal.Title className="title-cmh">
-                        {encuestas[0].title}
+                        {dataEncuesta.title}
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Container>
                         <Row>
 
-                            <Col>
-                                {switchEncuesta()}
+                            <Col xs={12} md={12}>
+                                {dataEncuesta.id}
+                                {dataEncuesta.abbreviation}
+                                {dataEncuesta.progress}
                             </Col>
 
                         </Row>
