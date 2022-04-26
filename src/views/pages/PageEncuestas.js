@@ -18,6 +18,46 @@ function PageEncuestas() {
         //we modified the state modalIsOpen
         setModalIsOpen(!modalIsOpen);
 
+    };
+
+    let variants = [
+        'primary', //blue 0
+        'secondary', //grey 1
+        'success', //green 2
+        'danger', //red 3 
+        'warning', //yellow 4
+        'info', //lightblue 5
+        'light', //white 6
+        'dark', //black 7
+    ];
+
+    const setVariant = (progress) => {
+
+        console.log(progress)
+
+        let variant = '';
+
+        let auxSwitch = progress === 100 ? 1 :
+            progress >= 50 ? 2 : 3
+
+        switch (auxSwitch) {
+
+            case 1:
+                variant = variants[2];
+                break;
+
+            case 2:
+                variant = variants[4];
+                break;
+
+            default:
+                variant = variants[3];
+                break;
+
+        }
+
+        return variant
+
     }
 
     /*
@@ -63,7 +103,7 @@ function PageEncuestas() {
                                                                         <p className="text-center title-cmh">Progreso: <strong>{encuesta.progress}%</strong></p>
                                                                     </Col>
                                                                     <Col xs={12} md={12}>
-                                                                        <ProgressBar animated now={encuesta.progress} />
+                                                                        <ProgressBar animated variant={setVariant(encuesta.progress)} now={encuesta.progress} />
                                                                     </Col>
                                                                     <Col xs={12} md={12} className="mt-3">
                                                                         <Button variant="primary" onClick={handleModalState}>
