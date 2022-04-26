@@ -26,8 +26,8 @@ function PagePrueba() {
     const handleChange = async (e) => {
 
         e.persist();
-        console.log(e.target.files)
 
+        console.log('entrando a hanldle change: ', e.target.name, e.target.value)
         await setForm(
             {
                 ...form,
@@ -80,7 +80,7 @@ function PagePrueba() {
 
                             <PerfilHospital form={form} handleChange={handleChange} />
 
-                            <Caracteristicas form={form} handleChange={handleChange} dataMulti={dataMulti} handleMulti={handleMultiSelect} />
+                            <Caracteristicas form={form} handleChange={handleChange} dataMulti={dataMulti} />
 
                             {/*Botón de enviar*/}
                             <Col xs={12} md={6} className="mt-3 mb-5">
@@ -158,7 +158,6 @@ function Caracteristicas(props) {
     const form = props.form
     const handleChange = props.handleChange
     const dataMulti = props.dataMulti
-    const handleMulti = props.handleMulti
 
     return (
         <Fragment>
@@ -178,7 +177,7 @@ function Caracteristicas(props) {
                             controlId="floatingInput"
                             label="Hospital Asociado al CMH desde">
                             <Form.Control
-                                type="date"
+                                type="text"
                                 placeholder="Hospital Asociado al CMH desde"
                                 value={form.hospitalAsociadoCMHDesde ? form.hospitalAsociadoCMHDesde : ''}
                                 name="hospitalAsociadoCMHDesde"
@@ -344,15 +343,15 @@ function Caracteristicas(props) {
                     {/*Servicios de habilitados*/}
                     <Col xs={12} md={6} className="mt-3">
 
-                        <Form.Group controlId="formFileMultiple" className="mb-3" multiple>
+                        <Form.Group controlId="formFileMultiple" className="mb-3">
                             <Form.Label>Servicios habilitados en su Hospital:</Form.Label>
                             <Form.Control
                                 placeholder="Ningún archivo seleccionado"
                                 type="file"
-                                multiple
                                 value={form.serviciosHabilitadosHospital ? form.serviciosHabilitadosHospital : ''}
                                 name="serviciosHabilitadosHospital"
-                                onChange={handleChange} />
+                                onChange={handleChange}
+                                multiple />
                         </Form.Group>
 
                     </Col>
