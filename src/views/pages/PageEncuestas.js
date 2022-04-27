@@ -12,11 +12,13 @@ function PageEncuestas() {
 
     //we asigned the constans, variables and states
     const [modalIsOpen, setModalIsOpen] = useState(false)
+    const [dataEncuesta, setDataEncuesta] = useState({})
 
     const handleModalState = () => {
 
         //we modified the state modalIsOpen
         setModalIsOpen(!modalIsOpen);
+
 
     };
 
@@ -32,8 +34,6 @@ function PageEncuestas() {
     ];
 
     const setVariant = (progress) => {
-
-        console.log(progress)
 
         let variant = '';
 
@@ -58,6 +58,26 @@ function PageEncuestas() {
 
         return variant
 
+    }
+
+    const getEncuesta = (idEncuesta) => {
+
+        /*
+        here we get the specific encuesta with the id with axios
+        */
+        //
+        for (let i = 0; i < Encuestas.length; i++) {
+
+            if (Encuestas[i].id === idEncuesta) {
+                //dataEncuesta = Encuestas[i];
+                setDataEncuesta({ ...Encuestas[i] });
+                console.log(dataEncuesta)
+                break;
+            }
+        }
+        //
+
+        handleModalState()
     }
 
     /*
@@ -106,7 +126,7 @@ function PageEncuestas() {
                                                                         <ProgressBar animated variant={setVariant(encuesta.progress)} now={encuesta.progress} />
                                                                     </Col>
                                                                     <Col xs={12} md={12} className="mt-3">
-                                                                        <Button variant="primary" onClick={handleModalState}>
+                                                                        <Button variant="primary" onClick={() => { getEncuesta(encuesta.id) }}>
                                                                             <span className="margin-right"> <FontAwesomeIcon icon={faClipboard} /></span> Ver / Responder</Button>
                                                                     </Col>
                                                                 </Row>
@@ -127,6 +147,7 @@ function PageEncuestas() {
             <ModalGeneralEncuesta
                 modalIsOpen={modalIsOpen}
                 handleModalState={handleModalState}
+                dataEncuesta={dataEncuesta}
             />
         </Fragment>
     )

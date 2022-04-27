@@ -3,7 +3,7 @@
 */
 import { BrowserRouter, Route, Routes } from 'react-router-dom'; //importamos los componentes de react-router-dom
 import PageEncuestas from './views/pages/PageEncuestas'; //importamos el modulo de la pagina de Encuesta
-import PagePrueba from './views/pages/PagePrueba';
+import RHo from './views/pages/RHo';
 
 import Layout from './views/components/headers/Layout'; //importamos el layout que contiene el navbar
 
@@ -13,7 +13,7 @@ function App() {
       <Layout>
         <Routes>
           <Route exact path='/encuestas' element={<PageEncuestas />} />
-          <Route exact path='/prueba' element={<PagePrueba />} />
+          <Route exact path='/prueba' element={<RHo />} />
         </Routes>
       </Layout>
     </BrowserRouter>
