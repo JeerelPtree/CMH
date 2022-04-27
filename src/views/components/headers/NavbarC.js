@@ -10,63 +10,63 @@ const NavbarC = () => {
 
     //const toggle = () => setIsOpen(!isOpen) //change the state value
 
-    if (window.location.pathname !== '/') { //we validate that just see the navbar content if the pathname doest'n root position
+    //if (window.location.pathname !== '/') { //we validate that just see the navbar content if the pathname doest'n root position
 
-        return (
-            <Fragment>
-                <Container>
-                    <Row>
-                        <Col xs={12} md={12}>
-                            <header className="navbar-header navbar-haslayaout">
-                                <div className="navbar-navigationarea mt-4">
-                                    <Container>
-                                        <Row>
-                                            <Col sm={12} md={12} lg={12}>
-                                                <div className="hidpi-logowrap">
-                                                    <strong className="navbar-logo">
-                                                        <img className="navbar-img" src={Logo} alt="" />
-                                                    </strong>
-                                                    <div className="navbar-rightarea">
+    return (
+        <Fragment>
+            <Container>
+                <Row>
+                    <Col xs={12} md={12}>
+                        <header className="navbar-header navbar-haslayaout">
+                            <div className="navbar-navigationarea mt-4">
+                                <Container>
+                                    <Row>
+                                        <Col sm={12} md={12} lg={12}>
+                                            <div className="hidpi-logowrap">
+                                                <strong className="navbar-logo">
+                                                    <img className="navbar-img" src={Logo} alt="" />
+                                                </strong>
+                                                <div className="navbar-rightarea">
 
-                                                        <Navbar collapseOnSelect expand="lg">
-                                                            <Container>
+                                                    <Navbar collapseOnSelect expand="lg">
+                                                        <Container>
 
 
-                                                                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                                                                <Navbar.Collapse id="responsive-navbar-nav">
-                                                                    <Nav className="me-auto">
-                                                                        <Nav.Item>
-                                                                            <Link className="nav-link color-text" to='/encuestas'>
-                                                                                <strong>Encuestas</strong>
-                                                                            </Link>
-                                                                        </Nav.Item>
-                                                                        <Nav.Item>
-                                                                            <Link className="nav-link color-text" to='/prueba'>
-                                                                                <strong>Prueba</strong>
-                                                                            </Link>
-                                                                        </Nav.Item>
-                                                                    </Nav>
-                                                                </Navbar.Collapse>
-                                                            </Container>
-                                                        </Navbar>
+                                                            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                                                            <Navbar.Collapse id="responsive-navbar-nav">
+                                                                <Nav className="me-auto">
+                                                                    <Nav.Item>
+                                                                        <Link className="nav-link color-text" to='/encuestas'>
+                                                                            <strong>Encuestas</strong>
+                                                                        </Link>
+                                                                    </Nav.Item>
+                                                                    <Nav.Item>
+                                                                        <Link className="nav-link color-text" to='/prueba'>
+                                                                            <strong>Prueba</strong>
+                                                                        </Link>
+                                                                    </Nav.Item>
+                                                                </Nav>
+                                                            </Navbar.Collapse>
+                                                        </Container>
+                                                    </Navbar>
 
-                                                    </div>
                                                 </div>
-                                            </Col>
-                                        </Row>
-                                    </Container>
-                                </div>
-                            </header>
+                                            </div>
+                                        </Col>
+                                    </Row>
+                                </Container>
+                            </div>
+                        </header>
 
-                        </Col>
-                    </Row>
-                </Container>
-            </Fragment>
-        )
+                    </Col>
+                </Row>
+            </Container>
+        </Fragment>
+    )
 
-    } else {
+    /*} else {
         return <Fragment></Fragment>
-    }
+    }*/
 
 }
 
