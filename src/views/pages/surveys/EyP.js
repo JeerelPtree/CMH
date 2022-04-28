@@ -1,20 +1,22 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { Container, Col, Row, FloatingLabel, Button, Form, OverlayTrigger, Tooltip } from "react-bootstrap";
-import MultiSelect from "../components/selectors/MultiSelect";
+import MultiSelect from "../../components/selectors/MultiSelect";
 //import axios from "axios"
 
 
 //we import css
-import "../../globalStyles.css"
+import "../../../globalStyles.css"
 
 const currentYear = new Date().getFullYear();
 const lastYear = currentYear - 1;
 
-function RHo() {
+function EyP() {
 
     //declared the variables, constants ans states for this module
     const [form, setForm] = useState({})
-    const title = "Encuesta RHo"
+
+    /*Opciones para multiselector*/
+
     const dataMulti = [
         { value: 'ISO 9001', label: 'ISO 9001' },
         { value: 'CSG', label: 'CSG' },
@@ -69,20 +71,14 @@ function RHo() {
 
     return (
         <Fragment>
-            <Container className="mt-5">
+            <Container className="mt-3">
                 <Row>
                     <Col xs={12} md={12}>
                         <Row>
 
-                            {/*Titulo de la página
-                            <Col xs={12} md={12}>
-                                <h1 className="title-cmh">{title}</h1>
-                            </Col>
-                            */}
+                            <Servicios form={form} handleChange={handleChange} />
 
-                            <PerfilHospital form={form} handleChange={handleChange} />
-
-                            <Caracteristicas form={form} handleChange={handleChange} dataMulti={dataMulti} handleMulti={handleMultiSelect} />
+                            <ServiciosInternamiento form={form} handleChange={handleChange} dataMulti={dataMulti} handleMulti={handleMultiSelect} />
 
                             {/*Botón de enviar
                             <Col xs={12} md={6} className="mt-3 mb-5">
@@ -102,7 +98,7 @@ function RHo() {
 }
 
 
-function PerfilHospital(props) {
+function Servicios(props) {
 
     //we obtain the props for this component
     const form = props.form
@@ -112,17 +108,17 @@ function PerfilHospital(props) {
         <Fragment>
 
 
-            {/*Perfil del Hospital*/}
-            <Col xs={12} md={12} className="mt-3">
+            {/*Servicios*/}
+            <Col xs={12} md={12} >
                 <Row>
                     <Col xs={12} md={12} className="mb-3">
-                        <h4 className="text-center sub-title-cmh">Perfil del Hospital</h4>
+                        <h4 className="text-center sub-title-cmh">Servicios</h4>
                     </Col>
                     <Col xs={12} md={6}>
 
                         <FloatingLabel
                             controlId="floatingInput"
-                            label="Razón Social">
+                            label="Camas hospitalización">
                             <Form.Control
                                 type="text"
                                 placeholder="Razón Social"
@@ -155,7 +151,7 @@ function PerfilHospital(props) {
 
 }
 
-function Caracteristicas(props) {
+function ServiciosInternamiento(props) {
 
     //we obtain the props for this component
     const form = props.form
@@ -414,4 +410,49 @@ function Caracteristicas(props) {
     )
 }
 
-export default RHo;
+function ConsultaExterna(props) {
+    const form = props.form
+    const handleChange = props.handleChange
+}
+
+function ServicioImagenologia(props) {
+    const form = props.form
+    const handleChange = props.handleChange
+}
+
+function Transplantes(props) {
+    const form = props.form
+    const handleChange = props.handleChange
+}
+
+function TipoOrgano(props) {
+    const form = props.form
+    const handleChange = props.handleChange
+}
+
+function ServiciosUrgencias(props) {
+    const form = props.form
+    const handleChange = props.handleChange
+}
+
+function ServicioLaboratorio(props) {
+    const form = props.form
+    const handleChange = props.handleChange
+}
+
+function ADT(props) {
+    const form = props.form
+    const handleChange = props.handleChange
+}
+
+function Otros(props) {
+    const form = props.form
+    const handleChange = props.handleChange
+}
+
+function EquiposInversion(props) {
+    const form = props.form
+    const handleChange = props.handleChange
+}
+
+export default EyP;
