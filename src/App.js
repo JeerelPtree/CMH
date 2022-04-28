@@ -3,7 +3,7 @@
 */
 import { BrowserRouter, Route, Routes } from 'react-router-dom'; //importamos los componentes de react-router-dom
 import PageEncuestas from './views/pages/PageEncuestas'; //importamos el modulo de la pagina de Encuesta
-import RHo from './views/pages/surveys/RHo';
+import RHo from './views/components/encuestas/RHo';
 
 import Layout from './views/components/headers/Layout'; //importamos el layout que contiene el navbar
 
