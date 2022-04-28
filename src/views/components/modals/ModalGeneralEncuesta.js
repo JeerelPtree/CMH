@@ -15,50 +15,30 @@ function ModalGeneralEncuesta(props) {
     //const surveyIndex = props.surveyIndex
     //const encuestas = props.encuestas
 
-    /*
-    const switchEncuesta = () => {
-        //vamos a comparar el id 
+    //
+    const dictionaryEncuestas = [
+        {
+            id: 1,
+            content: <RHo />
+        }
+    ]
+    //
 
-        //switch
-        switch (surveyIndex) {
-            case 1:
-                return (
-                    <Fragment>
-                        <RHo />
-                    </Fragment>
-                )
+
+    const switchEncuesta = (idEncuesta) => {
+
+        let content = null;
+
+        for (let i = 0; i < dictionaryEncuestas.length; i++) {
+            if (dictionaryEncuestas[i].id === idEncuesta) {
+                content = dictionaryEncuestas[i].content;
                 break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
-            case 5:
-                break;
-            case 6:
-                break;
-            case 7:
-                break;
-            case 8:
-                break;
-            case 9:
-                break;
-            case 10:
-                break;
-            case 11:
-                break;
-            case 12:
-                break;
-            case 13:
-                break;
-            case 14:
-                break;
+            }
+
         }
 
-        //return regresamos la encuesta
+        return content;
     }
-    */
 
     return (
         <Modal show={modalIsOpen} backdrop="static" keyboard={false} size="xl" arial-labelledby="contained-modal-title-vcenter" onHide={handleModalState} centered> {/*onHide={this.cleanModal} */}
@@ -73,9 +53,9 @@ function ModalGeneralEncuesta(props) {
                         <Row>
 
                             <Col xs={12} md={12}>
-                                {dataEncuesta.id}
-                                {dataEncuesta.abbreviation}
-                                {dataEncuesta.progress}
+                                {
+                                    switchEncuesta(dataEncuesta.id) //we evaluate the id from encuesta and we pass to function 
+                                }
                             </Col>
 
                         </Row>
