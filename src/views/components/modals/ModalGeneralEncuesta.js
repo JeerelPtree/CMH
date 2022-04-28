@@ -12,25 +12,72 @@ function ModalGeneralEncuesta(props) {
     const modalIsOpen = props.modalIsOpen;
     const handleModalState = props.handleModalState;
     const dataEncuesta = props.dataEncuesta;
-    //const surveyIndex = props.surveyIndex
-    //const encuestas = props.encuestas
-
-    //
     const dictionaryEncuestas = [
         {
             id: 1,
             content: <RHo />
-        },
-        {
+        }, {
             id: 2,
             content: <EyP />
-        },
-        {
+        }, {
             id: 3,
             content: <SA />
+        }, {
+            id: 4,
+            content: <RHo />
+        }, {
+            id: 5,
+            content: <RHo />
+        }, {
+            id: 5.2,
+            content: <RHo />
+        }, {
+            id: 6,
+            content: <RHo />
+        }, {
+            id: 7,
+            content: <RHo />
+        }, {
+            id: 8,
+            content: <RHo />
+        }, {
+            id: 9,
+            content: <RHo />
+        }, {
+            id: 10,
+            content: <RHo />
+        }, {
+            id: 11,
+            content: <RHo />
+        }, {
+            id: 12,
+            content: <RHo />
+        }, {
+            id: 13,
+            content: <RHo />
+        }, {
+            id: 14,
+            content: <RHo />
+        }, {
+            id: 15,
+            content: <RHo />
+        }, {
+            id: 16,
+            content: <RHo />
+        }, {
+            id: 17,
+            content: <RHo />
+        }, {
+            id: 18,
+            content: <RHo />
+        }, {
+            id: 19,
+            content: <RHo />
+        }, {
+            id: 20,
+            content: <RHo />
         }
-    ]
-    //
+    ];
 
 
     const switchEncuesta = (idEncuesta) => {
