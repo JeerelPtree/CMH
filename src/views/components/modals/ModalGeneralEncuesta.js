@@ -3,7 +3,7 @@ import { Container, Row, Col, Modal, FloatingLabel, Button, Form, OverlayTrigger
 
 import '../../../globalStyles.css'
 import RHo from "../encuestas/RHo";
-
+import Outsourcing from "../encuestas/Outsourcing";
 
 
 function ModalGeneralEncuesta(props) {
@@ -60,7 +60,7 @@ function ModalGeneralEncuesta(props) {
             content: <RHo />
         }, {
             id: 15,
-            content: <RHo />
+            content: <Outsourcing />
         }, {
             id: 16,
             content: <RHo />
