@@ -3,3 +3,4 @@
 export { default as RHo } from './RHo'
 export { default as EyP } from './EyP'
 export { default as SA } from './SA'
+export { default as Outsourcing } from "./Outsourcing";
