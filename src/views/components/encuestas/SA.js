@@ -14,7 +14,7 @@ function SA() {
 
     //declared the variables, constants ans states for this module
     const [form, setForm] = useState({})
-    const title = "Encuesta RHo"
+
     const dataMulti = [
         { value: 'ISO 9001', label: 'ISO 9001' },
         { value: 'CSG', label: 'CSG' },
@@ -74,15 +74,11 @@ function SA() {
                     <Col xs={12} md={12}>
                         <Row>
 
-                            {/*Titulo de la página
-                            <Col xs={12} md={12}>
-                                <h1 className="title-cmh">{title}</h1>
-                            </Col>
-                            */}
+                            <Especialidad form={form} handleChange={handleChange} />
 
-                            <PerfilHospital form={form} handleChange={handleChange} />
+                            <EspecialidadesQuirurgicas form={form} handleChange={handleChange} />
 
-                            <Caracteristicas form={form} handleChange={handleChange} dataMulti={dataMulti} handleMulti={handleMultiSelect} />
+                            <EspecialidadesMedicas form={form} handleChange={handleChange} />
 
                             {/*Botón de enviar
                             <Col xs={12} md={6} className="mt-3 mb-5">
@@ -102,7 +98,7 @@ function SA() {
 }
 
 
-function PerfilHospital(props) {
+function Especialidad(props) {
 
     //we obtain the props for this component
     const form = props.form
@@ -111,307 +107,1214 @@ function PerfilHospital(props) {
     return (
         <Fragment>
 
-
-            {/*Perfil del Hospital*/}
-            <Col xs={12} md={12} >
+            {/*Especialidad*/}
+            <Col xs={12} md={12}>
                 <Row>
-                    <Col xs={12} md={12} className="mb-3">
-                        <h4 className="text-center sub-title-cmh">Perfil del Hospital</h4>
+
+                    {/*Credencialización*/}
+                    <Col xs={12} md={12} className="mt-3">
+                        {/*¿Cuenta con credencialización?*/}
+                        <Row className="align-items-center">
+                            {/*Etiqueta*/}
+                            <Col xs={9} md={6} className="my-auto">
+                                <Form.Label floatingInput>¿Cuenta con Procedimiento de Credencialización de Médicos?</Form.Label>
+                            </Col>
+
+                            {/*Selector*/}
+                            <Col xs={3} md={1} className="my-auto">
+                                <Form.Select aria-label="Floating label" value={form.credencializacion ? form.credencializacion : ''} onChange={handleChange} name="credencializacion"
+                                >
+                                    <option value="" disabled>Seleccione una opción</option>
+                                    <option value={true}>Si</option>
+                                    <option value={false}>No</option>
+                                </Form.Select>
+                            </Col>
+
+                            {/*Adjuntar archivos de credencialización*/}
+                            <Col xs={12} md={5} className="my-auto pt-3">
+
+                                <Form.Group controlId="formFileMultiple" className="mb-3">
+                                    <Form.Control
+                                        placeholder="Ningún archivo seleccionado"
+                                        type="file"
+                                        value={form.credencializacionArchivos ? form.credencializacionArchivos : ''}
+                                        name="credencializacionArchivos"
+                                        onChange={handleChange}
+                                        multiple />
+                                </Form.Group>
+
+                            </Col>
+                        </Row>
                     </Col>
-                    <Col xs={12} md={6}>
 
-                        <FloatingLabel
-                            controlId="floatingInput"
-                            label="Razón Social">
-                            <Form.Control
-                                type="text"
-                                placeholder="Razón Social"
-                                value={form.razonSocial ? form.razonSocial : ''}
-                                name="razonSocial"
-                                onChange={handleChange} />
-                        </FloatingLabel>
-
+                    {/*Titulo de la sección*/}
+                    <Col xs={12} md={12} className="mt-3 mb-3">
+                        <h4 className="text-center sub-title-cmh">Especialidad</h4>
                     </Col>
 
-                    <Col xs={12} md={6}>
+                    {/*Anestesiología*/}
+                    <Col xs={12} md={4} className="mt-3">
 
-                        <FloatingLabel
-                            controlId="floatingInput"
-                            label="Nombre Comercial">
-                            <Form.Control
-                                type="text"
-                                placeholder="Nombre Comercial"
-                                value={form.nombreComercial ? form.nombreComercial : ''}
-                                name="nombreComercial"
-                                onChange={handleChange} />
-                        </FloatingLabel>
+                        <Row className="align-items-center">
 
+                            {/*Etiqueta*/}
+                            <Col xs={9} md={5} className="my-auto">
+                                <Form.Label floatingInput>Anestesiología</Form.Label>
+                            </Col>
+
+                            {/*Selector*/}
+                            <Col xs={3} md={4} className="my-auto">
+                                <Form.Select value={form.especialidadAnestesiologia ? form.especialidadAnestesiologia : ''} onChange={handleChange} name="especialidadAnestesiologia"
+                                >
+                                    <option value="" disabled>Seleccione una opción</option>
+                                    <option value={true}>Si</option>
+                                    <option value={false}>No</option>
+                                </Form.Select>
+                            </Col>
+
+                            {/*Cantidad Anestesiología*/}
+                            <Col xs={12} md={3} className="my-auto">
+
+
+                                <Form.Control
+                                    type="number"
+                                    value={form.numeroMedicosAnestesiologia ? form.numeroMedicosAnestesiologia : ''}
+                                    name="numeroMedicosAnestesiologia"
+                                    onChange={handleChange} />
+
+
+                            </Col>
+                        </Row>
                     </Col>
 
+                    {/*Cirugía General*/}
+                    <Col xs={12} md={4} className="mt-3">
+
+                        <Row className="align-items-center">
+
+                            {/*Etiqueta*/}
+                            <Col xs={9} md={5} className="my-auto">
+                                <Form.Label floatingInput>Cirugía General</Form.Label>
+                            </Col>
+
+                            {/*Selector*/}
+                            <Col xs={3} md={4} className="my-auto">
+                                <Form.Select value={form.especialidadCirugiaGeneral ? form.especialidadCirugiaGeneral : ''} onChange={handleChange} name="especialidadCirugiaGeneral"
+                                >
+                                    <option value="" disabled>Seleccione una opción</option>
+                                    <option value={true}>Si</option>
+                                    <option value={false}>No</option>
+                                </Form.Select>
+                            </Col>
+
+                            {/*Cantidad Cirugía General*/}
+                            <Col xs={12} md={3} className="my-auto">
+                                <Form.Control
+                                    type="number"
+                                    value={form.numeroMedicosCirugiaGeneral ? form.numeroMedicosCirugiaGeneral : ''}
+                                    name="numeroMedicosCirugiaGeneral"
+                                    onChange={handleChange} />
+
+
+                            </Col>
+                        </Row>
+                    </Col>
+
+                    {/*Ginecología y Obstetricia*/}
+                    <Col xs={12} md={4} className="mt-3">
+
+                        <Row className="align-items-center">
+
+                            {/*Etiqueta*/}
+                            <Col xs={9} md={5} className="my-auto">
+                                <Form.Label floatingInput>Ginecología y Obstetricia</Form.Label>
+                            </Col>
+
+                            {/*Selector*/}
+                            <Col xs={3} md={4} className="mb-3">
+                                <Form.Select value={form.especialidadGinecologiaObstetricia ? form.especialidadGinecologiaObstetricia : ''} onChange={handleChange} name="especialidadGinecologiaObstetricia"
+                                >
+                                    <option value="" disabled>Seleccione una opción</option>
+                                    <option value={true}>Si</option>
+                                    <option value={false}>No</option>
+                                </Form.Select>
+                            </Col>
+
+                            {/*Cantidad Ginecología y Obstetricia*/}
+                            <Col xs={12} md={3} className="mb-3">
+
+
+                                <Form.Control
+                                    type="number"
+                                    value={form.numeroMedicosGinecologiaObstetricia ? form.numeroMedicosGinecologiaObstetricia : ''}
+                                    name="numeroMedicosGinecologiaObstetricia"
+                                    onChange={handleChange} />
+
+
+                            </Col>
+                        </Row>
+                    </Col>
+
+                    {/*Medicina Interna*/}
+                    <Col xs={12} md={4} className="mt-3 mb-3">
+
+                        <Row className="align-items-center">
+
+                            {/*Etiqueta*/}
+                            <Col xs={9} md={5} className="my-auto">
+                                <Form.Label floatingInput>Medicina Interna</Form.Label>
+                            </Col>
+
+                            {/*Selector*/}
+                            <Col xs={3} md={4} className="my-auto">
+                                <Form.Select value={form.especialidadMedicinaInterna ? form.especialidadMedicinaInterna : ''} onChange={handleChange} name="especialidadMedicinaInterna"
+                                >
+                                    <option value="" disabled>Seleccione una opción</option>
+                                    <option value={true}>Si</option>
+                                    <option value={false}>No</option>
+                                </Form.Select>
+                            </Col>
+
+                            {/*Cantidad Medicina Interna*/}
+                            <Col xs={12} md={3} className="my-auto">
+
+
+                                <Form.Control
+                                    type="number"
+                                    value={form.numeroMedicosMedicinaInterna ? form.numeroMedicosMedicinaInterna : ''}
+                                    name="numeroMedicosMedicinaInterna"
+                                    onChange={handleChange} />
+
+
+                            </Col>
+                        </Row>
+                    </Col>
+
+                    {/*Oftalmología*/}
+                    <Col xs={12} md={4} className="mt-3 mb-3">
+
+                        <Row className="align-items-center">
+
+                            {/*Etiqueta*/}
+                            <Col xs={9} md={5} className="my-auto">
+                                <Form.Label floatingInput>Oftalmología</Form.Label>
+                            </Col>
+
+                            {/*Selector*/}
+                            <Col xs={3} md={4} className="my-auto">
+                                <Form.Select value={form.especialidadOftalmologia ? form.especialidadOftalmologia : ''} onChange={handleChange} name="especialidadOftalmologia"
+                                >
+                                    <option value="" disabled>Seleccione una opción</option>
+                                    <option value={true}>Si</option>
+                                    <option value={false}>No</option>
+                                </Form.Select>
+                            </Col>
+
+                            {/*Cantidad Oftalmología*/}
+                            <Col xs={12} md={3} className="my-auto">
+
+
+                                <Form.Control
+                                    type="number"
+                                    value={form.numeroMedicosOftalmologia ? form.numeroMedicosOftalmologia : ''}
+                                    name="numeroMedicosOftalmologia"
+                                    onChange={handleChange} />
+
+
+                            </Col>
+                        </Row>
+                    </Col>
+
+                    {/*Pediatría*/}
+                    <Col xs={12} md={4} className="mt-3 mb-3">
+
+                        <Row className="align-items-center">
+
+                            {/*Etiqueta*/}
+                            <Col xs={9} md={5} className="my-auto">
+                                <Form.Label floatingInput>Pediatría</Form.Label>
+                            </Col>
+
+                            {/*Selector*/}
+                            <Col xs={3} md={4} className="my-auto">
+                                <Form.Select value={form.especialidadPediatria ? form.especialidadPediatria : ''} onChange={handleChange} name="especialidadPediatria"
+                                >
+                                    <option value="" disabled>Seleccione una opción</option>
+                                    <option value={true}>Si</option>
+                                    <option value={false}>No</option>
+                                </Form.Select>
+                            </Col>
+
+                            {/*Cantidad Pediatría*/}
+                            <Col xs={12} md={3} className="my-auto">
+
+
+                                <Form.Control
+                                    type="number"
+                                    value={form.numeroMedicosPediatria ? form.numeroMedicosPediatria : ''}
+                                    name="numeroMedicosPediatria"
+                                    onChange={handleChange} />
+
+
+                            </Col>
+                        </Row>
+                    </Col>
+
+                    {/*Neonatología*/}
+                    <Col xs={12} md={4} className="mt-3 mb-3">
+
+                        <Row className="align-items-center">
+
+                            {/*Etiqueta*/}
+                            <Col xs={9} md={5} className="my-auto">
+                                <Form.Label floatingInput>Neonatología</Form.Label>
+                            </Col>
+
+                            {/*Selector*/}
+                            <Col xs={3} md={4} className="my-auto">
+                                <Form.Select value={form.especialidadNeonatologia ? form.especialidadNeonatologia : ''} onChange={handleChange} name="especialidadNeonatologia"
+                                >
+                                    <option value="" disabled>Seleccione una opción</option>
+                                    <option value={true}>Si</option>
+                                    <option value={false}>No</option>
+                                </Form.Select>
+                            </Col>
+
+                            {/*Cantidad Neonatología*/}
+                            <Col xs={12} md={3} className="my-auto">
+
+
+                                <Form.Control
+                                    type="number"
+                                    value={form.numeroMedicosNeonatologia ? form.numeroMedicosNeonatologia : ''}
+                                    name="numeroMedicosNeonatologia"
+                                    onChange={handleChange} />
+
+
+                            </Col>
+                        </Row>
+                    </Col>
+
+                    {/*Medicina Familiar*/}
+                    <Col xs={12} md={4} className="mt-3 mb-3">
+
+                        <Row className="align-items-center">
+
+                            {/*Etiqueta*/}
+                            <Col xs={9} md={5} className="my-auto">
+                                <Form.Label floatingInput>Medicina Familiar</Form.Label>
+                            </Col>
+
+                            {/*Selector*/}
+                            <Col xs={3} md={4} className="mb-3">
+                                <Form.Select value={form.especialidadMedicinaFamiliar ? form.especialidadMedicinaFamiliar : ''} onChange={handleChange} name="especialidadMedicinaFamiliar"
+                                >
+                                    <option value="" disabled>Seleccione una opción</option>
+                                    <option value={true}>Si</option>
+                                    <option value={false}>No</option>
+                                </Form.Select>
+                            </Col>
+
+                            {/*Cantidad Medicina Familiar*/}
+                            <Col xs={12} md={3} className="mb-3">
+
+
+                                <Form.Control
+                                    type="number"
+                                    value={form.numeroMedicosMedicinaFamiliar ? form.numeroMedicosMedicinaFamiliar : ''}
+                                    name="numeroMedicosMedicinaFamiliar"
+                                    onChange={handleChange} />
+
+
+                            </Col>
+                        </Row>
+                    </Col>
                 </Row>
             </Col>
+
         </Fragment>
     )
 
 }
 
-function Caracteristicas(props) {
+function EspecialidadesQuirurgicas(props) {
 
     //we obtain the props for this component
     const form = props.form
     const handleChange = props.handleChange
-    const dataMulti = props.dataMulti
-    const handleMulti = props.handleMulti
 
     return (
         <Fragment>
-            {/*Características*/}
-            <Col xs={12} md={12} className="mt-3">
+
+            {/*Especialidad*/}
+            <Col xs={12} md={12}>
                 <Row>
 
-                    {/*Titulo de la encuesta*/}
-                    <Col xs={12} md={12} className="mt-3">
-                        <h4 className="text-center sub-title-cmh">Características</h4>
+                    {/*Titulo de la sección*/}
+                    <Col xs={12} md={12} className="mt-3 mb-3">
+                        <h4 className="text-center sub-title-cmh">Especialidades Quirúrgicas</h4>
                     </Col>
 
-                    {/*Hospital asociado desde*/}
+                    {/*Angiología y Cirugía Vascular*/}
                     <Col xs={12} md={4} className="mt-3">
 
-                        <FloatingLabel
-                            controlId="floatingInput"
-                            label="Hospital Asociado al CMH desde">
-                            <Form.Control
-                                type="date"
-                                placeholder="Hospital Asociado al CMH desde"
-                                value={form.hospitalAsociadoCMHDesde ? form.hospitalAsociadoCMHDesde : ''}
-                                name="hospitalAsociadoCMHDesde"
-                                onChange={handleChange} />
-                        </FloatingLabel>
+                        <Row className="align-items-center">
 
-                    </Col>
+                            {/*Etiqueta*/}
+                            <Col xs={9} md={5} className="my-auto">
+                                <Form.Label floatingInput>Angiología y Cirugía Vascular</Form.Label>
+                            </Col>
 
-                    {/*Fecha de fundación*/}
-                    <Col xs={12} md={4} className="mt-3">
+                            {/*Selector*/}
+                            <Col xs={3} md={4} className="mb-3">
+                                <Form.Select value={form.especialidadAngiologia ? form.especialidadAngiologia : ''} onChange={handleChange} name="especialidadAngiologia"
+                                >
+                                    <option value="" disabled>Seleccione una opción</option>
+                                    <option value={true}>Si</option>
+                                    <option value={false}>No</option>
+                                </Form.Select>
+                            </Col>
 
-                        <FloatingLabel
-                            controlId="floatingInput"
-                            label="Fecha de Fundación del Hospital">
-                            <Form.Control
-                                type="date"
-                                placeholder="Fecha de Fundación del Hospital"
-                                value={form.fechaFundacionHospital ? form.fechaFundacionHospital : ''}
-                                name="fechaFundacionHospital"
-                                onChange={handleChange} />
-                        </FloatingLabel>
+                            {/*Cantidad Angiología y Cirugía Vascular*/}
+                            <Col xs={12} md={3} className="mb-3">
 
-                    </Col>
 
-                    {/*Área construida*/}
-                    <Col xs={12} md={4} className="mt-3">
-
-                        <FloatingLabel
-                            controlId="floatingInput"
-                            label="Área construida [m²]">
-                            <Form.Control
-                                type="number"
-                                placeholder="Área construida [m²]"
-                                value={form.areaConstruida ? form.areaConstruida : ''}
-                                name="areaConstruida"
-                                onChange={handleChange} />
-                        </FloatingLabel>
-
-                    </Col>
-
-                    {/*Número de colaboradores*/}
-                    <Col xs={12} md={4} className="mt-3">
-
-                        <FloatingLabel
-                            controlId="floatingInput"
-                            label="Número de colaboradores">
-                            <Form.Control
-                                type="number"
-                                placeholder="Número de colaboradores"
-                                value={form.numeroColaboradores ? form.numeroColaboradores : ''}
-                                name="numeroColaboradores"
-                                onChange={handleChange} />
-                        </FloatingLabel>
-
-                    </Col>
-
-                    {/*Número de camas de hospitalización*/}
-                    <Col xs={12} md={4} className="mt-3">
-
-                        <FloatingLabel
-                            controlId="floatingInput"
-                            label="Nº de Camas de Hospitalización">
-                            <Form.Control
-                                type="number"
-                                placeholder="Nº de Camas de Hospitalización"
-                                value={form.numeroCamasHospitalizacion ? form.numeroCamasHospitalizacion : ''}
-                                name="numeroCamasHospitalizacion"
-                                onChange={handleChange} />
-                        </FloatingLabel>
-
-                    </Col>
-
-                    {/*Número de camas UCIA*/}
-                    <Col xs={12} md={4} className="mt-3">
-
-                        <FloatingLabel
-                            controlId="floatingInput"
-                            label="Nº Camas UCIA">
-                            <OverlayTrigger
-                                placement="bottom"
-                                overlay={
-                                    <Tooltip id="tooltip-UCIA">Tooltip para UCIA</Tooltip>
-                                }>
                                 <Form.Control
                                     type="number"
-                                    placeholder="Nº Camas UCIA"
-                                    value={form.numeroCamasUCIA ? form.numeroCamasUCIA : ''}
-                                    name="numeroCamasUCIA"
+                                    value={form.numeroMedicosAngiologia ? form.numeroMedicosAngiologia : ''}
+                                    name="numeroMedicosAngiologia"
                                     onChange={handleChange} />
-                            </OverlayTrigger>
-                        </FloatingLabel>
 
+
+                            </Col>
+                        </Row>
                     </Col>
 
-                    {/*Número de camas UCIN*/}
+                    {/*Cirugía Bariátrica*/}
                     <Col xs={12} md={4} className="mt-3">
 
-                        <FloatingLabel
-                            controlId="floatingInput"
-                            label="Nº Camas UCIN">
-                            <OverlayTrigger
-                                placement="bottom"
-                                overlay={
-                                    <Tooltip id="tooltip-UCIA">Tooltip para UCIN</Tooltip>
-                                }>
+                        <Row className="align-items-center">
+
+                            {/*Etiqueta*/}
+                            <Col xs={9} md={5} className="my-auto">
+                                <Form.Label floatingInput>Cirugía Bariátrica</Form.Label>
+                            </Col>
+
+                            {/*Selector*/}
+                            <Col xs={3} md={4} className="my-auto">
+                                <Form.Select value={form.especialidadCirugiaBariatrica ? form.especialidadCirugiaBariatrica : ''} onChange={handleChange} name="especialidadCirugiaBariatrica"
+                                >
+                                    <option value="" disabled>Seleccione una opción</option>
+                                    <option value={true}>Si</option>
+                                    <option value={false}>No</option>
+                                </Form.Select>
+                            </Col>
+
+                            {/*Cantidad Cirugía Bariátrica*/}
+                            <Col xs={12} md={3} className="my-auto">
+
+
                                 <Form.Control
                                     type="number"
-                                    placeholder="Nº Camas UCIN"
-                                    value={form.numeroCamasUCIN ? form.numeroCamasUCIN : ''}
-                                    name="numeroCamasUCIN"
+                                    value={form.numeroMedicosCirugiaBariatrica ? form.numeroMedicosCirugiaBariatrica : ''}
+                                    name="numeroMedicosCirugiaBariatrica"
                                     onChange={handleChange} />
-                            </OverlayTrigger>
-                        </FloatingLabel>
 
+
+                            </Col>
+                        </Row>
                     </Col>
 
-                    {/*Número de salas de cirugía*/}
+                    {/*Cirugía Cardiovascular*/}
                     <Col xs={12} md={4} className="mt-3">
 
-                        <FloatingLabel
-                            controlId="floatingInput"
-                            label="Nº Salas de Cirugía">
-                            <Form.Control
-                                type="number"
-                                placeholder="Nº Salas de Cirugía"
-                                value={form.numeroSalasCirugia ? form.numeroSalasCirugia : ''}
-                                name="numeroSalasCirugia"
-                                onChange={handleChange} />
-                        </FloatingLabel>
+                        <Row className="align-items-center">
 
+                            {/*Etiqueta*/}
+                            <Col xs={9} md={5} className="my-auto">
+                                <Form.Label floatingInput>Cirugía Cardiovascular</Form.Label>
+                            </Col>
+
+                            {/*Selector*/}
+                            <Col xs={3} md={4} className="mb-3">
+                                <Form.Select value={form.especialidadCirugiaCardiovascular ? form.especialidadCirugiaCardiovascular : ''} onChange={handleChange} name="especialidadCirugiaCardiovascular"
+                                >
+                                    <option value="" disabled>Seleccione una opción</option>
+                                    <option value={true}>Si</option>
+                                    <option value={false}>No</option>
+                                </Form.Select>
+                            </Col>
+
+                            {/*Cantidad Cirugía Cardiovascular*/}
+                            <Col xs={12} md={3} className="mb-3">
+
+
+                                <Form.Control
+                                    type="number"
+                                    value={form.numeroMedicosCirugiaCardiovascular ? form.numeroMedicosCirugiaCardiovascular : ''}
+                                    name="numeroMedicosCirugiaCardiovascular"
+                                    onChange={handleChange} />
+
+
+                            </Col>
+                        </Row>
                     </Col>
 
-                    {/*Número de médicos credencializados*/}
+                    {/*Cirugía Oncológica*/}
                     <Col xs={12} md={4} className="mt-3">
 
-                        <FloatingLabel
-                            controlId="floatingInput"
-                            label="Número de Médicos credencializados">
-                            <Form.Control
-                                type="number"
-                                placeholder="Número de Médicos credencializados"
-                                value={form.numeroMedicosCredencializados ? form.numeroMedicosCredencializados : ''}
-                                name="numeroMedicosCredencializados"
-                                onChange={handleChange} />
-                        </FloatingLabel>
+                        <Row className="align-items-center">
 
+                            {/*Etiqueta*/}
+                            <Col xs={9} md={5} className="my-auto">
+                                <Form.Label floatingInput>Cirugía Oncológica</Form.Label>
+                            </Col>
+
+                            {/*Selector*/}
+                            <Col xs={3} md={4} className="mb-3">
+                                <Form.Select value={form.especialidadCirugiaOncologica ? form.especialidadCirugiaOncologica : ''} onChange={handleChange} name="especialidadCirugiaOncologica"
+                                >
+                                    <option value="" disabled>Seleccione una opción</option>
+                                    <option value={true}>Si</option>
+                                    <option value={false}>No</option>
+                                </Form.Select>
+                            </Col>
+
+                            {/*Cantidad Cirugía Oncológica*/}
+                            <Col xs={12} md={3} className="mb-3">
+
+
+                                <Form.Control
+                                    type="number"
+                                    value={form.numeroMedicosCirugiaOncologica ? form.numeroMedicosCirugiaOncologica : ''}
+                                    name="numeroMedicosCirugiaOncologica"
+                                    onChange={handleChange} />
+
+
+                            </Col>
+                        </Row>
                     </Col>
 
-                    {/*Nivel de atención hospitalaria*/}
-                    <Col xs={12} md={6} className="mt-3">
+                    {/*Cirugía Oral y Maxilofacial */}
+                    <Col xs={12} md={4} className="mt-3">
 
-                        <FloatingLabel controlId="floatingSelect" label="Nivel de Atención Hospitalaria">
-                            <Form.Select aria-label="Floating label" value={form.nivelAtencionHospitalaria ? form.nivelAtencionHospitalaria : ''} onChange={handleChange} name="nivelAtencionHospitalaria"
-                                style={{ height: '70px' }}>
-                                <option value="" disabled>Seleccione el nivel de atención hospitalaria</option>
-                                <option value="Hospital General">Hospital General</option>
-                                <option value="Hospital Especializado">Hospital Especializado</option>
-                            </Form.Select>
-                        </FloatingLabel>
+                        <Row className="align-items-center">
 
+                            {/*Etiqueta*/}
+                            <Col xs={9} md={5} className="my-auto">
+                                <Form.Label floatingInput>Cirugía Oral y Maxilofacial </Form.Label>
+                            </Col>
+
+                            {/*Selector*/}
+                            <Col xs={3} md={4} className="mb-3">
+                                <Form.Select value={form.especialidadCirugiaOral ? form.especialidadCirugiaOral : ''} onChange={handleChange} name="especialidadCirugiaOral"
+                                >
+                                    <option value="" disabled>Seleccione una opción</option>
+                                    <option value={true}>Si</option>
+                                    <option value={false}>No</option>
+                                </Form.Select>
+                            </Col>
+
+                            {/*Cirugía Oral y Maxilofacial*/}
+                            <Col xs={12} md={3} className="mb-3">
+
+
+                                <Form.Control
+                                    type="number"
+                                    value={form.numeroMedicosCirugiaOral ? form.numeroMedicosCirugiaOral : ''}
+                                    name="numeroMedicosCirugiaOral"
+                                    onChange={handleChange} />
+
+
+                            </Col>
+                        </Row>
                     </Col>
 
-                    {/*Servicios de habilitados*/}
-                    <Col xs={12} md={6} className="mt-3">
+                    {/*Cirugía Pediátrica*/}
+                    <Col xs={12} md={4} className="mt-3">
 
-                        <Form.Group controlId="formFileMultiple" className="mb-3">
-                            <Form.Label>Servicios habilitados en su Hospital:</Form.Label>
-                            <Form.Control
-                                placeholder="Ningún archivo seleccionado"
-                                type="file"
-                                value={form.serviciosHabilitadosHospital ? form.serviciosHabilitadosHospital : ''}
-                                name="serviciosHabilitadosHospital"
-                                onChange={handleChange}
-                                multiple />
-                        </Form.Group>
+                        <Row className="align-items-center">
 
+                            {/*Etiqueta*/}
+                            <Col xs={9} md={5} className="my-auto">
+                                <Form.Label floatingInput>Cirugía Pediátrica</Form.Label>
+                            </Col>
+
+                            {/*Selector*/}
+                            <Col xs={3} md={4} className="my-auto">
+                                <Form.Select value={form.especialidadCirugiaPediatrica ? form.especialidadCirugiaPediatrica : ''} onChange={handleChange} name="especialidadCirugiaPediatrica"
+                                >
+                                    <option value="" disabled>Seleccione una opción</option>
+                                    <option value={true}>Si</option>
+                                    <option value={false}>No</option>
+                                </Form.Select>
+                            </Col>
+
+                            {/*Cirugía Pediátrica*/}
+                            <Col xs={12} md={3} className="my-auto">
+
+
+                                <Form.Control
+                                    type="number"
+                                    value={form.numeroMedicosCirugiaPediatrica ? form.numeroMedicosCirugiaPediatrica : ''}
+                                    name="numeroMedicosCirugiaPediatrica"
+                                    onChange={handleChange} />
+
+
+                            </Col>
+                        </Row>
                     </Col>
 
-                    {/*Acreditaciones hospitalarias*/}
-                    <Col xs={12} md={12} className="mt-3">
+                    {/*Cirugía Plástica y Reconstructiva*/}
+                    <Col xs={12} md={4} className="mt-3">
 
-                        <Form.Group className="mb-3">
-                            <Form.Label>Acreditación(es) Hospitalaria(s):</Form.Label>
-                            <MultiSelect
-                                options={dataMulti} form={form}
-                                valueName={"acreditacionesHospitalarias"}
-                                handleChange={handleMulti}
-                                controlId="formHospitalCertifications" />
-                        </Form.Group>
+                        <Row className="align-items-center">
 
+                            {/*Etiqueta*/}
+                            <Col xs={9} md={5} className="my-auto">
+                                <Form.Label floatingInput>Cirugía Plástica y Reconstructiva</Form.Label>
+                            </Col>
+
+                            {/*Selector*/}
+                            <Col xs={3} md={4} className="mb-3">
+                                <Form.Select value={form.especialidadCirugiaPlastica ? form.especialidadCirugiaPlastica : ''} onChange={handleChange} name="especialidadCirugiaPlastica"
+                                >
+                                    <option value="" disabled>Seleccione una opción</option>
+                                    <option value={true}>Si</option>
+                                    <option value={false}>No</option>
+                                </Form.Select>
+                            </Col>
+
+                            {/*Cirugía Plastica*/}
+                            <Col xs={12} md={3} className="mb-3">
+                                <Form.Control
+                                    type="number"
+                                    value={form.numeroMedicosCirugiaPlastica ? form.numeroMedicosCirugiaPlastica : ''}
+                                    name="numeroMedicosCirugiaPlastica"
+                                    onChange={handleChange} />
+
+
+                            </Col>
+                        </Row>
                     </Col>
 
-                    {/*Reseña del hospital*/}
-                    <Col xs={12} md={6} className="mt-3">
+                    {/*Neurocirugía*/}
+                    <Col xs={12} md={4} className="mt-3">
 
-                        <FloatingLabel
-                            controlId="floatingTextarea"
-                            label="Reseña de Hospital">
-                            <Form.Control
-                                as="textarea"
-                                placeholder="Reseña de Hospital"
-                                value={form.reseniaHospital ? form.reseniaHospital : ""}
-                                name="reseniaHospital"
-                                style={{ height: '100px' }}
-                                onChange={handleChange} />
-                        </FloatingLabel>
+                        <Row className="align-items-center">
 
+                            {/*Etiqueta*/}
+                            <Col xs={9} md={5} className="my-auto">
+                                <Form.Label floatingInput>Neurocirugía</Form.Label>
+                            </Col>
+
+                            {/*Selector*/}
+                            <Col xs={3} md={4} className="my-auto">
+                                <Form.Select value={form.especialidadNeurocirugia ? form.especialidadNeurocirugia : ''} onChange={handleChange} name="especialidadNeurocirugia"
+                                >
+                                    <option value="" disabled>Seleccione una opción</option>
+                                    <option value={true}>Si</option>
+                                    <option value={false}>No</option>
+                                </Form.Select>
+                            </Col>
+
+                            {/*Cantidad Neurocirugía*/}
+                            <Col xs={12} md={3} className="my-auto">
+
+
+                                <Form.Control
+                                    type="number"
+                                    value={form.numeroMedicosNeurocirugia ? form.numeroMedicosNeurocirugia : ''}
+                                    name="numeroMedicosNeurocirugia"
+                                    onChange={handleChange} />
+
+
+                            </Col>
+                        </Row>
                     </Col>
 
-                    {/*Lo destacado en el año*/}
-                    <Col xs={12} md={6} className="mt-3">
+                    {/*Ortopedia y Traumatología */}
+                    <Col xs={12} md={4} className="mt-3">
 
-                        <FloatingLabel
-                            controlId="floatingTextarea"
-                            label="Lo Destacado del Hospital en el año 2019">
-                            <Form.Control
-                                as="textarea"
-                                placeholder="Lo Destacado del Hospital en el año 2019"
-                                value={form.highlights ? form.highlights : ""}
-                                name="highlights"
-                                style={{ height: '100px' }}
-                                onChange={handleChange} />
-                        </FloatingLabel>
+                        <Row className="align-items-center">
 
+                            {/*Etiqueta*/}
+                            <Col xs={9} md={5} className="my-auto">
+                                <Form.Label floatingInput>Ortopedia y Traumatología </Form.Label>
+                            </Col>
+
+                            {/*Selector*/}
+                            <Col xs={3} md={4} className="mb-3">
+                                <Form.Select value={form.especialidadOrtopediaTraumatologia ? form.especialidadOrtopediaTraumatologia : ''} onChange={handleChange} name="especialidadOrtopediaTraumatologia"
+                                >
+                                    <option value="" disabled>Seleccione una opción</option>
+                                    <option value={true}>Si</option>
+                                    <option value={false}>No</option>
+                                </Form.Select>
+                            </Col>
+
+                            {/*Ortopedia y Traumatología*/}
+                            <Col xs={12} md={3} className="mb-3">
+
+
+                                <Form.Control
+                                    type="number"
+                                    value={form.numeroMedicosOrtopediaTraumatologia ? form.numeroMedicosOrtopediaTraumatologia : ''}
+                                    name="numeroMedicosOrtopediaTraumatologia"
+                                    onChange={handleChange} />
+
+
+                            </Col>
+                        </Row>
+                    </Col>
+
+                    {/*Otorrinolaringología */}
+                    <Col xs={12} md={4} className="mt-3">
+
+                        <Row className="align-items-center">
+
+                            {/*Etiqueta*/}
+                            <Col xs={9} md={5} className="my-auto">
+                                <Form.Label floatingInput>Otorrinolaringología</Form.Label>
+                            </Col>
+
+                            {/*Selector*/}
+                            <Col xs={3} md={4} className="my-auto">
+                                <Form.Select value={form.especialidadOtorrinolaringologia ? form.especialidadOtorrinolaringologia : ''} onChange={handleChange} name="especialidadOtorrinolaringologia"
+                                >
+                                    <option value="" disabled>Seleccione una opción</option>
+                                    <option value={true}>Si</option>
+                                    <option value={false}>No</option>
+                                </Form.Select>
+                            </Col>
+
+                            {/*Cantidad Otorrinolaringología*/}
+                            <Col xs={12} md={3} className="my-auto">
+
+
+                                <Form.Control
+                                    type="number"
+                                    value={form.numeroMedicosOtorrinolaringologia ? form.numeroMedicosOtorrinolaringologia : ''}
+                                    name="numeroMedicosOtorrinolaringologia"
+                                    onChange={handleChange} />
+
+
+                            </Col>
+                        </Row>
+                    </Col>
+
+                    {/*Proctología */}
+                    <Col xs={12} md={4} className="mt-3">
+
+                        <Row className="align-items-center">
+
+                            {/*Etiqueta*/}
+                            <Col xs={9} md={5} className="my-auto">
+                                <Form.Label floatingInput>Proctología</Form.Label>
+                            </Col>
+
+                            {/*Selector*/}
+                            <Col xs={3} md={4} className="my-auto">
+                                <Form.Select value={form.especialidadProctologia ? form.especialidadProctologia : ''} onChange={handleChange} name="especialidadProctologia"
+                                >
+                                    <option value="" disabled>Seleccione una opción</option>
+                                    <option value={true}>Si</option>
+                                    <option value={false}>No</option>
+                                </Form.Select>
+                            </Col>
+
+                            {/*Cantidad Proctología*/}
+                            <Col xs={12} md={3} className="my-auto">
+                                <Form.Control
+                                    type="number"
+                                    value={form.numeroMedicosProctologia ? form.numeroMedicosProctologia : ''}
+                                    name="numeroMedicosProctologia"
+                                    onChange={handleChange} />
+
+
+                            </Col>
+                        </Row>
+                    </Col>
+
+                    {/*Urología  */}
+                    <Col xs={12} md={4} className="mt-3">
+
+                        <Row className="align-items-center">
+
+                            {/*Etiqueta*/}
+                            <Col xs={9} md={5} className="my-auto">
+                                <Form.Label floatingInput>Urología</Form.Label>
+                            </Col>
+
+                            {/*Selector*/}
+                            <Col xs={3} md={4} className="my-auto">
+                                <Form.Select value={form.especialidadUrologia ? form.especialidadUrologia : ''} onChange={handleChange} name="especialidadUrologia"
+                                >
+                                    <option value="" disabled>Seleccione una opción</option>
+                                    <option value={true}>Si</option>
+                                    <option value={false}>No</option>
+                                </Form.Select>
+                            </Col>
+
+                            {/*Cantidad Urología*/}
+                            <Col xs={12} md={3} className="my-auto">
+                                <Form.Control
+                                    type="number"
+                                    value={form.numeroMedicosUrologia ? form.numeroMedicosUrologia : ''}
+                                    name="numeroMedicosUrologia"
+                                    onChange={handleChange} />
+
+
+                            </Col>
+                        </Row>
                     </Col>
 
                 </Row>
             </Col>
+
         </Fragment>
     )
+
+}
+
+function EspecialidadesMedicas(props) {
+
+    //we obtain the props for this component
+    const form = props.form
+    const handleChange = props.handleChange
+
+    return (
+        <Fragment>
+
+            {/*Especialidad*/}
+            <Col xs={12} md={12}>
+                <Row>
+
+                    {/*Titulo de la sección*/}
+                    <Col xs={12} md={12} className="mt-3 mb-3">
+                        <h4 className="text-center sub-title-cmh">Especialidades Quirúrgicas</h4>
+                    </Col>
+
+                    {/*Angiología y Cirugía Vascular*/}
+                    <Col xs={12} md={4} className="mt-3">
+
+                        <Row className="align-items-center">
+
+                            {/*Etiqueta*/}
+                            <Col xs={9} md={5} className="my-auto">
+                                <Form.Label floatingInput>Angiología y Cirugía Vascular</Form.Label>
+                            </Col>
+
+                            {/*Selector*/}
+                            <Col xs={3} md={4} className="mb-3">
+                                <Form.Select value={form.especialidadAngiologia ? form.especialidadAngiologia : ''} onChange={handleChange} name="especialidadAngiologia"
+                                >
+                                    <option value="" disabled>Seleccione una opción</option>
+                                    <option value={true}>Si</option>
+                                    <option value={false}>No</option>
+                                </Form.Select>
+                            </Col>
+
+                            {/*Cantidad Angiología y Cirugía Vascular*/}
+                            <Col xs={12} md={3} className="mb-3">
+
+
+                                <Form.Control
+                                    type="number"
+                                    value={form.numeroMedicosAngiologia ? form.numeroMedicosAngiologia : ''}
+                                    name="numeroMedicosAngiologia"
+                                    onChange={handleChange} />
+
+
+                            </Col>
+                        </Row>
+                    </Col>
+
+                    {/*Cirugía Bariátrica*/}
+                    <Col xs={12} md={4} className="mt-3">
+
+                        <Row className="align-items-center">
+
+                            {/*Etiqueta*/}
+                            <Col xs={9} md={5} className="my-auto">
+                                <Form.Label floatingInput>Cirugía Bariátrica</Form.Label>
+                            </Col>
+
+                            {/*Selector*/}
+                            <Col xs={3} md={4} className="my-auto">
+                                <Form.Select value={form.especialidadCirugiaBariatrica ? form.especialidadCirugiaBariatrica : ''} onChange={handleChange} name="especialidadCirugiaBariatrica"
+                                >
+                                    <option value="" disabled>Seleccione una opción</option>
+                                    <option value={true}>Si</option>
+                                    <option value={false}>No</option>
+                                </Form.Select>
+                            </Col>
+
+                            {/*Cantidad Cirugía Bariátrica*/}
+                            <Col xs={12} md={3} className="my-auto">
+
+
+                                <Form.Control
+                                    type="number"
+                                    value={form.numeroMedicosCirugiaBariatrica ? form.numeroMedicosCirugiaBariatrica : ''}
+                                    name="numeroMedicosCirugiaBariatrica"
+                                    onChange={handleChange} />
+
+
+                            </Col>
+                        </Row>
+                    </Col>
+
+                    {/*Cirugía Cardiovascular*/}
+                    <Col xs={12} md={4} className="mt-3">
+
+                        <Row className="align-items-center">
+
+                            {/*Etiqueta*/}
+                            <Col xs={9} md={5} className="my-auto">
+                                <Form.Label floatingInput>Cirugía Cardiovascular</Form.Label>
+                            </Col>
+
+                            {/*Selector*/}
+                            <Col xs={3} md={4} className="mb-3">
+                                <Form.Select value={form.especialidadCirugiaCardiovascular ? form.especialidadCirugiaCardiovascular : ''} onChange={handleChange} name="especialidadCirugiaCardiovascular"
+                                >
+                                    <option value="" disabled>Seleccione una opción</option>
+                                    <option value={true}>Si</option>
+                                    <option value={false}>No</option>
+                                </Form.Select>
+                            </Col>
+
+                            {/*Cantidad Cirugía Cardiovascular*/}
+                            <Col xs={12} md={3} className="mb-3">
+
+
+                                <Form.Control
+                                    type="number"
+                                    value={form.numeroMedicosCirugiaCardiovascular ? form.numeroMedicosCirugiaCardiovascular : ''}
+                                    name="numeroMedicosCirugiaCardiovascular"
+                                    onChange={handleChange} />
+
+
+                            </Col>
+                        </Row>
+                    </Col>
+
+                    {/*Cirugía Oncológica*/}
+                    <Col xs={12} md={4} className="mt-3">
+
+                        <Row className="align-items-center">
+
+                            {/*Etiqueta*/}
+                            <Col xs={9} md={5} className="my-auto">
+                                <Form.Label floatingInput>Cirugía Oncológica</Form.Label>
+                            </Col>
+
+                            {/*Selector*/}
+                            <Col xs={3} md={4} className="mb-3">
+                                <Form.Select value={form.especialidadCirugiaOncologica ? form.especialidadCirugiaOncologica : ''} onChange={handleChange} name="especialidadCirugiaOncologica"
+                                >
+                                    <option value="" disabled>Seleccione una opción</option>
+                                    <option value={true}>Si</option>
+                                    <option value={false}>No</option>
+                                </Form.Select>
+                            </Col>
+
+                            {/*Cantidad Cirugía Oncológica*/}
+                            <Col xs={12} md={3} className="mb-3">
+
+
+                                <Form.Control
+                                    type="number"
+                                    value={form.numeroMedicosCirugiaOncologica ? form.numeroMedicosCirugiaOncologica : ''}
+                                    name="numeroMedicosCirugiaOncologica"
+                                    onChange={handleChange} />
+
+
+                            </Col>
+                        </Row>
+                    </Col>
+
+                    {/*Cirugía Oral y Maxilofacial */}
+                    <Col xs={12} md={4} className="mt-3">
+
+                        <Row className="align-items-center">
+
+                            {/*Etiqueta*/}
+                            <Col xs={9} md={5} className="my-auto">
+                                <Form.Label floatingInput>Cirugía Oral y Maxilofacial </Form.Label>
+                            </Col>
+
+                            {/*Selector*/}
+                            <Col xs={3} md={4} className="mb-3">
+                                <Form.Select value={form.especialidadCirugiaOral ? form.especialidadCirugiaOral : ''} onChange={handleChange} name="especialidadCirugiaOral"
+                                >
+                                    <option value="" disabled>Seleccione una opción</option>
+                                    <option value={true}>Si</option>
+                                    <option value={false}>No</option>
+                                </Form.Select>
+                            </Col>
+
+                            {/*Cirugía Oral y Maxilofacial*/}
+                            <Col xs={12} md={3} className="mb-3">
+
+
+                                <Form.Control
+                                    type="number"
+                                    value={form.numeroMedicosCirugiaOral ? form.numeroMedicosCirugiaOral : ''}
+                                    name="numeroMedicosCirugiaOral"
+                                    onChange={handleChange} />
+
+
+                            </Col>
+                        </Row>
+                    </Col>
+
+                    {/*Cirugía Pediátrica*/}
+                    <Col xs={12} md={4} className="mt-3">
+
+                        <Row className="align-items-center">
+
+                            {/*Etiqueta*/}
+                            <Col xs={9} md={5} className="my-auto">
+                                <Form.Label floatingInput>Cirugía Pediátrica</Form.Label>
+                            </Col>
+
+                            {/*Selector*/}
+                            <Col xs={3} md={4} className="my-auto">
+                                <Form.Select value={form.especialidadCirugiaPediatrica ? form.especialidadCirugiaPediatrica : ''} onChange={handleChange} name="especialidadCirugiaPediatrica"
+                                >
+                                    <option value="" disabled>Seleccione una opción</option>
+                                    <option value={true}>Si</option>
+                                    <option value={false}>No</option>
+                                </Form.Select>
+                            </Col>
+
+                            {/*Cirugía Pediátrica*/}
+                            <Col xs={12} md={3} className="my-auto">
+
+
+                                <Form.Control
+                                    type="number"
+                                    value={form.numeroMedicosCirugiaPediatrica ? form.numeroMedicosCirugiaPediatrica : ''}
+                                    name="numeroMedicosCirugiaPediatrica"
+                                    onChange={handleChange} />
+
+
+                            </Col>
+                        </Row>
+                    </Col>
+
+                    {/*Cirugía Plástica y Reconstructiva*/}
+                    <Col xs={12} md={4} className="mt-3">
+
+                        <Row className="align-items-center">
+
+                            {/*Etiqueta*/}
+                            <Col xs={9} md={5} className="my-auto">
+                                <Form.Label floatingInput>Cirugía Plástica y Reconstructiva</Form.Label>
+                            </Col>
+
+                            {/*Selector*/}
+                            <Col xs={3} md={4} className="mb-3">
+                                <Form.Select value={form.especialidadCirugiaPlastica ? form.especialidadCirugiaPlastica : ''} onChange={handleChange} name="especialidadCirugiaPlastica"
+                                >
+                                    <option value="" disabled>Seleccione una opción</option>
+                                    <option value={true}>Si</option>
+                                    <option value={false}>No</option>
+                                </Form.Select>
+                            </Col>
+
+                            {/*Cirugía Plastica*/}
+                            <Col xs={12} md={3} className="mb-3">
+                                <Form.Control
+                                    type="number"
+                                    value={form.numeroMedicosCirugiaPlastica ? form.numeroMedicosCirugiaPlastica : ''}
+                                    name="numeroMedicosCirugiaPlastica"
+                                    onChange={handleChange} />
+
+
+                            </Col>
+                        </Row>
+                    </Col>
+
+                    {/*Neurocirugía*/}
+                    <Col xs={12} md={4} className="mt-3">
+
+                        <Row className="align-items-center">
+
+                            {/*Etiqueta*/}
+                            <Col xs={9} md={5} className="my-auto">
+                                <Form.Label floatingInput>Neurocirugía</Form.Label>
+                            </Col>
+
+                            {/*Selector*/}
+                            <Col xs={3} md={4} className="my-auto">
+                                <Form.Select value={form.especialidadNeurocirugia ? form.especialidadNeurocirugia : ''} onChange={handleChange} name="especialidadNeurocirugia"
+                                >
+                                    <option value="" disabled>Seleccione una opción</option>
+                                    <option value={true}>Si</option>
+                                    <option value={false}>No</option>
+                                </Form.Select>
+                            </Col>
+
+                            {/*Cantidad Neurocirugía*/}
+                            <Col xs={12} md={3} className="my-auto">
+
+
+                                <Form.Control
+                                    type="number"
+                                    value={form.numeroMedicosNeurocirugia ? form.numeroMedicosNeurocirugia : ''}
+                                    name="numeroMedicosNeurocirugia"
+                                    onChange={handleChange} />
+
+
+                            </Col>
+                        </Row>
+                    </Col>
+
+                    {/*Ortopedia y Traumatología */}
+                    <Col xs={12} md={4} className="mt-3">
+
+                        <Row className="align-items-center">
+
+                            {/*Etiqueta*/}
+                            <Col xs={9} md={5} className="my-auto">
+                                <Form.Label floatingInput>Ortopedia y Traumatología </Form.Label>
+                            </Col>
+
+                            {/*Selector*/}
+                            <Col xs={3} md={4} className="mb-3">
+                                <Form.Select value={form.especialidadOrtopediaTraumatologia ? form.especialidadOrtopediaTraumatologia : ''} onChange={handleChange} name="especialidadOrtopediaTraumatologia"
+                                >
+                                    <option value="" disabled>Seleccione una opción</option>
+                                    <option value={true}>Si</option>
+                                    <option value={false}>No</option>
+                                </Form.Select>
+                            </Col>
+
+                            {/*Ortopedia y Traumatología*/}
+                            <Col xs={12} md={3} className="mb-3">
+
+
+                                <Form.Control
+                                    type="number"
+                                    value={form.numeroMedicosOrtopediaTraumatologia ? form.numeroMedicosOrtopediaTraumatologia : ''}
+                                    name="numeroMedicosOrtopediaTraumatologia"
+                                    onChange={handleChange} />
+
+
+                            </Col>
+                        </Row>
+                    </Col>
+
+                    {/*Otorrinolaringología */}
+                    <Col xs={12} md={4} className="mt-3">
+
+                        <Row className="align-items-center">
+
+                            {/*Etiqueta*/}
+                            <Col xs={9} md={5} className="my-auto">
+                                <Form.Label floatingInput>Otorrinolaringología</Form.Label>
+                            </Col>
+
+                            {/*Selector*/}
+                            <Col xs={3} md={4} className="my-auto">
+                                <Form.Select value={form.especialidadOtorrinolaringologia ? form.especialidadOtorrinolaringologia : ''} onChange={handleChange} name="especialidadOtorrinolaringologia"
+                                >
+                                    <option value="" disabled>Seleccione una opción</option>
+                                    <option value={true}>Si</option>
+                                    <option value={false}>No</option>
+                                </Form.Select>
+                            </Col>
+
+                            {/*Cantidad Otorrinolaringología*/}
+                            <Col xs={12} md={3} className="my-auto">
+
+
+                                <Form.Control
+                                    type="number"
+                                    value={form.numeroMedicosOtorrinolaringologia ? form.numeroMedicosOtorrinolaringologia : ''}
+                                    name="numeroMedicosOtorrinolaringologia"
+                                    onChange={handleChange} />
+
+
+                            </Col>
+                        </Row>
+                    </Col>
+
+                    {/*Proctología */}
+                    <Col xs={12} md={4} className="mt-3">
+
+                        <Row className="align-items-center">
+
+                            {/*Etiqueta*/}
+                            <Col xs={9} md={5} className="my-auto">
+                                <Form.Label floatingInput>Proctología</Form.Label>
+                            </Col>
+
+                            {/*Selector*/}
+                            <Col xs={3} md={4} className="my-auto">
+                                <Form.Select value={form.especialidadProctologia ? form.especialidadProctologia : ''} onChange={handleChange} name="especialidadProctologia"
+                                >
+                                    <option value="" disabled>Seleccione una opción</option>
+                                    <option value={true}>Si</option>
+                                    <option value={false}>No</option>
+                                </Form.Select>
+                            </Col>
+
+                            {/*Cantidad Proctología*/}
+                            <Col xs={12} md={3} className="my-auto">
+                                <Form.Control
+                                    type="number"
+                                    value={form.numeroMedicosProctologia ? form.numeroMedicosProctologia : ''}
+                                    name="numeroMedicosProctologia"
+                                    onChange={handleChange} />
+
+
+                            </Col>
+                        </Row>
+                    </Col>
+
+                    {/*Urología  */}
+                    <Col xs={12} md={4} className="mt-3">
+
+                        <Row className="align-items-center">
+
+                            {/*Etiqueta*/}
+                            <Col xs={9} md={5} className="my-auto">
+                                <Form.Label floatingInput>Urología</Form.Label>
+                            </Col>
+
+                            {/*Selector*/}
+                            <Col xs={3} md={4} className="my-auto">
+                                <Form.Select value={form.especialidadUrologia ? form.especialidadUrologia : ''} onChange={handleChange} name="especialidadUrologia"
+                                >
+                                    <option value="" disabled>Seleccione una opción</option>
+                                    <option value={true}>Si</option>
+                                    <option value={false}>No</option>
+                                </Form.Select>
+                            </Col>
+
+                            {/*Cantidad Urología*/}
+                            <Col xs={12} md={3} className="my-auto">
+                                <Form.Control
+                                    type="number"
+                                    value={form.numeroMedicosUrologia ? form.numeroMedicosUrologia : ''}
+                                    name="numeroMedicosUrologia"
+                                    onChange={handleChange} />
+
+
+                            </Col>
+                        </Row>
+                    </Col>
+
+                </Row>
+            </Col>
+
+        </Fragment>
+    )
+
 }
 
 export default SA;

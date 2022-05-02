@@ -212,6 +212,7 @@ function Caracteristicas(props) {
                             label="Área construida [m²]">
                             <Form.Control
                                 type="number"
+                                step={0.01}
                                 placeholder="Área construida [m²]"
                                 value={form.areaConstruida ? form.areaConstruida : ''}
                                 name="areaConstruida"
