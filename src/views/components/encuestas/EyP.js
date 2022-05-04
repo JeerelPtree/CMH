@@ -1292,126 +1292,82 @@ function OtrosServicios(props) {
                         <h4 className="text-center sub-title-cmh">Otros Servicios</h4>
                     </Col>
 
+                    {/*Servicio de Nutrición y Dietética (Alimentación) en Internamiento*/}
                     <Col xs={12} md={6} className="mb-3">
-                        <Stack gap={3}>
+                        <FloatingLabel controlId="floatingSelect" label="Servicio de Nutrición y Dietética (Alimentación) en Internamiento">
 
-                            {/*Servicio de Nutrición y Dietética (Alimentación) en Internamiento*/}
-                            <Row className="align-items-center">
-                                {/*Etiqueta*/}
-                                <Col xs={9} md={9} className="my-auto">
-                                    <Form.Label floatingInput>Servicio de Nutrición y Dietética (Alimentación) en Internamiento</Form.Label>
-                                </Col>
-
-                                {/*Selector*/}
-                                <Col xs={3} md={3} className="my-auto">
-                                    <Form.Select aria-label="Floating label" value={form.alimentacionInternamiento ? form.alimentacionInternamiento : ''} onChange={handleChange} name="alimentacionInternamiento"
-                                    >
-                                        <option value="" disabled>Seleccione una opción</option>
-                                        <option value={true}>Si</option>
-                                        <option value={false}>No</option>
-                                    </Form.Select>
-                                </Col>
-                            </Row>
-
-                            {/*Servicio de Banco de Leche*/}
-                            <Row className="align-items-center">
-                                {/*Etiqueta*/}
-                                <Col xs={9} md={9} className="my-auto">
-                                    <Form.Label floatingInput>Servicio de Banco de Leche</Form.Label>
-                                </Col>
-
-                                {/*Selector*/}
-                                <Col xs={3} md={3} className="my-auto">
-                                    <Form.Select aria-label="Floating label" value={form.bancoDeLeche ? form.bancoDeLeche : ''} onChange={handleChange} name="bancoDeLeche"
-                                    >
-                                        <option value="" disabled>Seleccione una opción</option>
-                                        <option value={true}>Si</option>
-                                        <option value={false}>No</option>
-                                    </Form.Select>
-                                </Col>
-                            </Row>
-
-                            {/*Servicio de Lavandería para Ropa Hospitalaria*/}
-                            <Row className="align-items-center">
-                                {/*Etiqueta*/}
-                                <Col xs={9} md={9} className="my-auto">
-                                    <Form.Label floatingInput>Servicio de Lavandería para Ropa Hospitalaria</Form.Label>
-                                </Col>
-
-                                {/*Selector*/}
-                                <Col xs={3} md={3} className="my-auto">
-                                    <Form.Select aria-label="Floating label" value={form.servicioLavanderia ? form.servicioLavanderia : ''} onChange={handleChange} name="servicioLavanderia"
-                                    >
-                                        <option value="" disabled>Seleccione una opción</option>
-                                        <option value={true}>Si</option>
-                                        <option value={false}>No</option>
-                                    </Form.Select>
-                                </Col>
-                            </Row>
-
-                        </Stack>
+                            <Form.Select aria-label="Floating label" value={form.alimentacionInternamiento ? form.alimentacionInternamiento : ''} onChange={handleChange} name="alimentacionInternamiento"
+                            >
+                                <option value="" disabled>Seleccione una opción</option>
+                                <option value={true}>Si</option>
+                                <option value={false}>No</option>
+                            </Form.Select>
+                        </FloatingLabel>
                     </Col>
 
+                    {/*Servicio de Banco de Leche*/}
                     <Col xs={12} md={6} className="mb-3">
-                        <Stack gap={3}>
-
-                            {/*Central de Equipos y Esterilización (CEYE)*/}
-                            <Row className="align-items-center">
-                                {/*Etiqueta*/}
-                                <Col xs={9} md={9} className="my-auto">
-                                    <Form.Label floatingInput>Central de Equipos y Esterilización (CEYE)</Form.Label>
-                                </Col>
-
-                                {/*Selector*/}
-                                <Col xs={3} md={3} className="my-auto">
-                                    <Form.Select aria-label="Floating label" value={form.ceye ? form.ceye : ''} onChange={handleChange} name="ceye"
-                                    >
-                                        <option value="" disabled>Seleccione una opción</option>
-                                        <option value={true}>Si</option>
-                                        <option value={false}>No</option>
-                                    </Form.Select>
-                                </Col>
-                            </Row>
-
-                            {/*Servicio de Evaluaciones Médicas (Check up´s)*/}
-                            <Row className="align-items-center">
-                                {/*Etiqueta*/}
-                                <Col xs={9} md={9} className="my-auto">
-                                    <Form.Label floatingInput>Servicio de Evaluaciones Médicas (Check up´s)</Form.Label>
-                                </Col>
-
-                                {/*Selector*/}
-                                <Col xs={3} md={3} className="my-auto">
-                                    <Form.Select aria-label="Floating label" value={form.evaluacionesMedicasCheckUps ? form.evaluacionesMedicasCheckUps : ''} onChange={handleChange} name="evaluacionesMedicasCheckUps"
-                                    >
-                                        <option value="" disabled>Seleccione una opción</option>
-                                        <option value={true}>Si</option>
-                                        <option value={false}>No</option>
-                                    </Form.Select>
-                                </Col>
-                            </Row>
-
-                            {/*Farmacia Venta al Público*/}
-                            <Row className="align-items-center">
-                                {/*Etiqueta*/}
-                                <Col xs={9} md={9} className="my-auto">
-                                    <Form.Label floatingInput>Farmacia Venta al Público</Form.Label>
-                                </Col>
-
-                                {/*Selector*/}
-                                <Col xs={3} md={3} className="my-auto">
-                                    <Form.Select aria-label="Floating label" value={form.farmaciaVentaPublico ? form.farmaciaVentaPublico : ''} onChange={handleChange} name="farmaciaVentaPublico"
-                                    >
-                                        <option value="" disabled>Seleccione una opción</option>
-                                        <option value={true}>Si</option>
-                                        <option value={false}>No</option>
-                                    </Form.Select>
-                                </Col>
-                            </Row>
-
-                        </Stack>
+                        <FloatingLabel controlId="floatingSelect" label="Servicio de Banco de Leche">
+                            <Form.Select aria-label="Floating label" value={form.bancoDeLeche ? form.bancoDeLeche : ''} onChange={handleChange} name="bancoDeLeche"
+                            >
+                                <option value="" disabled>Seleccione una opción</option>
+                                <option value={true}>Si</option>
+                                <option value={false}>No</option>
+                            </Form.Select>
+                        </FloatingLabel>
                     </Col>
 
+                    {/*Servicio de Lavandería para Ropa Hospitalaria*/}
+                    <Col xs={12} md={6} className="mb-3">
+                        <FloatingLabel controlId="floatingSelect" label="Servicio de Lavandería para Ropa Hospitalaria">
+
+                            <Form.Select aria-label="Floating label" value={form.servicioLavanderia ? form.servicioLavanderia : ''} onChange={handleChange} name="servicioLavanderia"
+                            >
+                                <option value="" disabled>Seleccione una opción</option>
+                                <option value={true}>Si</option>
+                                <option value={false}>No</option>
+                            </Form.Select>
+                        </FloatingLabel>
+                    </Col>
+
+                    {/*Central de Equipos y Esterilización (CEYE)*/}
+                    <Col xs={12} md={6} className="mb-3">
+                        <FloatingLabel controlId="floatingSelect" label="Central de Equipos y Esterilización (CEYE)">
+                            <Form.Select aria-label="Floating label" value={form.ceye ? form.ceye : ''} onChange={handleChange} name="ceye"
+                            >
+                                <option value="" disabled>Seleccione una opción</option>
+                                <option value={true}>Si</option>
+                                <option value={false}>No</option>
+                            </Form.Select>
+                        </FloatingLabel>
+                    </Col>
+
+                    {/*Servicio de Evaluaciones Médicas (Check up´s)*/}
+
+                    <Col xs={12} md={6} className="mb-3">
+                        <FloatingLabel controlId="floatingSelect" label="Servicio de Evaluaciones Médicas (Check up´s)">
+
+                            <Form.Select aria-label="Floating label" value={form.evaluacionesMedicasCheckUps ? form.evaluacionesMedicasCheckUps : ''} onChange={handleChange} name="evaluacionesMedicasCheckUps"
+                            >
+                                <option value="" disabled>Seleccione una opción</option>
+                                <option value={true}>Si</option>
+                                <option value={false}>No</option>
+                            </Form.Select>
+                        </FloatingLabel>
+                    </Col>
+
+                    {/*Farmacia Venta al Público*/}
+                    <Col xs={12} md={6} className="mb-3">
+                        <FloatingLabel controlId="floatingSelect" label="Farmacia Venta al Público">
+
+                            <Form.Select aria-label="Floating label" value={form.farmaciaVentaPublico ? form.farmaciaVentaPublico : ''} onChange={handleChange} name="farmaciaVentaPublico"
+                            >
+                                <option value="" disabled>Seleccione una opción</option>
+                                <option value={true}>Si</option>
+                                <option value={false}>No</option>
+                            </Form.Select>
+                        </FloatingLabel>
+                    </Col>
                 </Row>
             </Col>
         </Fragment>

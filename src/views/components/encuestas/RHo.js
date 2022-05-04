@@ -74,6 +74,12 @@ function RHo() {
 
                             <Caracteristicas form={form} handleChange={handleChange} dataMulti={dataMulti} handleMulti={handleMultiSelect} />
 
+                            {/*Botón de enviar
+                            <Col xs={12} md={6} className="mt-3 mb-5">
+                                <Button variant="primary" onClick={prueba}> Enviar
+                                </Button>
+                            </Col>
+                            */}
                         </Row>
                     </Col>
                 </Row>
