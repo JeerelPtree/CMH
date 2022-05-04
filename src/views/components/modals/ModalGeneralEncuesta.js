@@ -2,8 +2,7 @@ import React, { Fragment } from "react";
 import { Container, Row, Col, Modal, FloatingLabel, Button, Form, OverlayTrigger, Tooltip } from "react-bootstrap";
 
 import '../../../globalStyles.css'
-import RHo from "../../pages/RHo";
-
+import { RHo, EyP, SA, Outsourcing } from '../encuestas/index_surveys';
 
 
 function ModalGeneralEncuesta(props) {
@@ -12,53 +11,88 @@ function ModalGeneralEncuesta(props) {
     const modalIsOpen = props.modalIsOpen;
     const handleModalState = props.handleModalState;
     const dataEncuesta = props.dataEncuesta;
-    //const surveyIndex = props.surveyIndex
-    //const encuestas = props.encuestas
+    const dictionaryEncuestas = [
+        {
+            id: 1,
+            content: <RHo />
+        }, {
+            id: 2,
+            content: <EyP />
+        }, {
+            id: 3,
+            content: <SA />
+        }, {
+            id: 4,
+            content: <RHo />
+        }, {
+            id: 5,
+            content: <RHo />
+        }, {
+            id: 5.2,
+            content: <RHo />
+        }, {
+            id: 6,
+            content: <RHo />
+        }, {
+            id: 7,
+            content: <RHo />
+        }, {
+            id: 8,
+            content: <RHo />
+        }, {
+            id: 9,
+            content: <RHo />
+        }, {
+            id: 10,
+            content: <RHo />
+        }, {
+            id: 11,
+            content: <RHo />
+        }, {
+            id: 12,
+            content: <RHo />
+        }, {
+            id: 13,
+            content: <RHo />
+        }, {
+            id: 14,
+            content: <RHo />
+        }, {
+            id: 15,
+            content: <Outsourcing />
+        }, {
+            id: 16,
+            content: <RHo />
+        }, {
+            id: 17,
+            content: <RHo />
+        }, {
+            id: 18,
+            content: <RHo />
+        }, {
+            id: 19,
+            content: <RHo />
+        }, {
+            id: 20,
+            content: <RHo />
+        }
+    ];
 
-    /*
-    const switchEncuesta = () => {
-        //vamos a comparar el id 
 
-        //switch
-        switch (surveyIndex) {
-            case 1:
-                return (
-                    <Fragment>
-                        <RHo />
-                    </Fragment>
-                )
+    const switchEncuesta = (idEncuesta) => {
+
+        let content = null;
+
+        for (let i = 0; i < dictionaryEncuestas.length; i++) {
+            if (dictionaryEncuestas[i].id === idEncuesta) {
+                content = dictionaryEncuestas[i].content;
                 break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
-            case 5:
-                break;
-            case 6:
-                break;
-            case 7:
-                break;
-            case 8:
-                break;
-            case 9:
-                break;
-            case 10:
-                break;
-            case 11:
-                break;
-            case 12:
-                break;
-            case 13:
-                break;
-            case 14:
-                break;
+            }
+
         }
 
-        //return regresamos la encuesta
+        return content;
     }
-    */
 
     return (
         <Modal show={modalIsOpen} backdrop="static" keyboard={false} size="xl" arial-labelledby="contained-modal-title-vcenter" onHide={handleModalState} centered> {/*onHide={this.cleanModal} */}
@@ -73,9 +107,9 @@ function ModalGeneralEncuesta(props) {
                         <Row>
 
                             <Col xs={12} md={12}>
-                                {dataEncuesta.id}
-                                {dataEncuesta.abbreviation}
-                                {dataEncuesta.progress}
+                                {
+                                    switchEncuesta(dataEncuesta.id) //we evaluate the id from encuesta and we pass to function 
+                                }
                             </Col>
 
                         </Row>

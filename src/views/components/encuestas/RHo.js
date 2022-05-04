@@ -1,20 +1,16 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { Container, Col, Row, FloatingLabel, Button, Form, OverlayTrigger, Tooltip } from "react-bootstrap";
-import MultiSelect from "../components/selectors/MultiSelect";
-//import axios from "axios"
-
+import MultiSelect from "../selectors/MultiSelect";
 
 //we import css
-import "../../globalStyles.css"
+import "../../../globalStyles.css"
 
 const currentYear = new Date().getFullYear();
-const lastYear = currentYear - 1;
 
 function RHo() {
 
     //declared the variables, constants ans states for this module
     const [form, setForm] = useState({})
-    const title = "Encuesta RHo"
     const dataMulti = [
         { value: 'ISO 9001', label: 'ISO 9001' },
         { value: 'CSG', label: 'CSG' },
@@ -69,27 +65,14 @@ function RHo() {
 
     return (
         <Fragment>
-            <Container className="mt-5">
+            <Container>
                 <Row>
                     <Col xs={12} md={12}>
                         <Row>
 
-                            {/*Titulo de la página
-                            <Col xs={12} md={12}>
-                                <h1 className="title-cmh">{title}</h1>
-                            </Col>
-                            */}
-
                             <PerfilHospital form={form} handleChange={handleChange} />
 
                             <Caracteristicas form={form} handleChange={handleChange} dataMulti={dataMulti} handleMulti={handleMultiSelect} />
-
-                            {/*Botón de enviar
-                            <Col xs={12} md={6} className="mt-3 mb-5">
-                                <Button variant="primary" onClick={prueba}> Enviar
-                                </Button>
-                            </Col>
-                            */}
 
                         </Row>
                     </Col>
@@ -214,6 +197,7 @@ function Caracteristicas(props) {
                             label="Área construida [m²]">
                             <Form.Control
                                 type="number"
+                                step={0.01}
                                 placeholder="Área construida [m²]"
                                 value={form.areaConstruida ? form.areaConstruida : ''}
                                 name="areaConstruida"

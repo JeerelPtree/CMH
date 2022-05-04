@@ -19,7 +19,6 @@ function PageEncuestas() {
         //we modified the state modalIsOpen
         setModalIsOpen(!modalIsOpen);
 
-
     };
 
     let variants = [
@@ -71,7 +70,7 @@ function PageEncuestas() {
             if (Encuestas[i].id === idEncuesta) {
                 //dataEncuesta = Encuestas[i];
                 setDataEncuesta({ ...Encuestas[i] });
-                console.log(dataEncuesta)
+
                 break;
             }
         }
@@ -113,8 +112,8 @@ function PageEncuestas() {
                                     {
                                         Encuestas.map((encuesta) => {
                                             return (
-                                                <Fragment>
-                                                    <Accordion.Item eventKey={encuesta.id} key={encuesta.id}>
+                                                <Fragment key={encuesta.id}>
+                                                    <Accordion.Item eventKey={encuesta.id}>
                                                         <Accordion.Header>{encuesta.title}</Accordion.Header>
                                                         <Accordion.Body>
                                                             <Container>

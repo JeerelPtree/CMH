@@ -1,0 +1,17 @@
+[
+    {
+        "value": "N/A",
+        "name": "No aplica",
+        "id": 1
+    },
+    {
+        "value": "propio",
+        "name": "Propio",
+        "id": 2
+    },
+    {
+        "value": "subrogado",
+        "name": "Subrogado",
+        "id": 3
+    }
+]
