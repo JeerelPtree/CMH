@@ -1,90 +1,94 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { Container, Col, Row, FloatingLabel, Button, Form, OverlayTrigger, Tooltip, Table } from "react-bootstrap";
+import { Container, Col, Row, Button, Form, OverlayTrigger, Tooltip, Table, Alert } from "react-bootstrap";
 import ModalEditarRegistro from "../modals/ModalEditarRegistro";
+import { faTrash, faPen } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "../../../globalStyles.css"
 
 function CRUD(props) {
     //Obtenemos las propiedades de la tabla
-    const { handleChange, form, data, setData, tipo } = props
+    const { handleChange, form, handleChangeAseguradorasDelete } = props
 
-    const [modalIsOpen, setModalIsOpen] = useState(false)
-    const [dataSelected, setDataSelected] = useState({
-        id: '',
-        nombre: '',
-        numeroPacientes: '',
-        ingresos: ''
-    })
+    const [modalTriggerEditar, setModalTriggerEditar] = useState(false);
 
-    //Función para manejar el cambio en un registro de la tabla
-    const handleRegisterChange = async (e) => {
 
-        e.persist();
-        await setDataSelected(
-            {
-                ...dataSelected,
-                [e.target.name]: e.target.value
-            }
-        );
+    const handleModalChangeEditar = () => {
+        setModalTriggerEditar(!modalTriggerEditar);
     }
 
-    const handleModalState = () => {
-
-        //we modified the state modalIsOpen
-        setModalIsOpen(!modalIsOpen);
-
-    };
-
-    const registerSelected = (item) => {
-        setDataSelected(item)
-        handleModalState()
+    const editarAseguradora = (index) => {
+        return null;
     }
 
-    return (
-        <Fragment>
-            <Table striped bordered hover className="align-middle text-center">
-                <thead>
-                    <tr>
-                        <th>{tipo}</th>
-                        <th>No. Pacientes</th>
-                        <th>Ingresos</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        data && data.map((elemento) => (
-                            <tr key={elemento.id}>
-                                <td>{elemento.nombre}</td>
-                                <td>{elemento.numeroPacientes}</td>
-                                <td>{elemento.ingresos}</td>
-                                <td>
-                                    <Row className="justify-content-center">
-                                        <Col xs={3} md={3}>
-                                            <Button variant="primary" onClick={() => { registerSelected(elemento) }}> Editar
-                                            </Button>
-                                        </Col>
-                                        <Col xs={3} md={3} >
-                                            <Button variant="danger" onClick={() => { }}> Eliminar
-                                            </Button>
-                                        </Col>
-                                    </Row>
-                                </td>
-                            </tr>
-                        ))
-                    }
-                </tbody>
-            </Table>
+    console.log('AQUI', form, typeof form.aseguradoras)
 
-            <ModalEditarRegistro
+    if (Object.keys(form.aseguradoras).length) {
 
-                modalIsOpen={modalIsOpen}//bandera para abrir cerrar la modal
-                handleModalState={handleModalState}//handleState para abrir cerrar la modal
-                tipo={"Aseguradora"}//Titulo de la modal de editar
-                handleChange={handleRegisterChange}//handleChange del registro de la aseguradora
-                data={dataSelected}//registro a modificar (Aseguradora)
+        return (
+            <Fragment>
+                <Table striped hover responsive className="align-middle text-center ">
+                    <thead className="thead-cmh">
+                        <tr>
+                            <th>Aseguradora</th>
+                            <th>No. Pacientes</th>
+                            <th>Ingresos</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            form.aseguradoras && form.aseguradoras.map((aseguradora, index) => (
+                                <tr key={index}>
+                                    <td>{aseguradora.nombre}</td>
+                                    <td>{aseguradora.numeroPacientes}</td>
+                                    <td>{aseguradora.ingresos}</td>
+                                    <td>
+                                        <Row className="justify-content-center">
+                                            <Col xs={3} md={3}>
+                                                <Button variant="warning" onClick={() => { editarAseguradora(index) }}><FontAwesomeIcon className="text-white" icon={faPen} />
+                                                </Button>
+                                            </Col>
+                                            <Col xs={3} md={3} >
+                                                <Button variant="danger" onClick={() => { handleChangeAseguradorasDelete(index) }}> <FontAwesomeIcon icon={faTrash} />
+                                                </Button>
+                                            </Col>
+                                        </Row>
+                                    </td>
+                                </tr>
+                            ))
+                        }
+                    </tbody>
+                </Table>
 
-            />
-        </Fragment>
-    )
+                {
+                /*<ModalEditarRegistro
+
+                modalIsOpen={modalTriggerEditar}//bandera para abrir cerrar la modal
+                handleModalState={handleModalChangeEditar}//handleState para abrir cerrar la modal
+                handleChange={handleChange}//handleChange del form
+
+            />*/}
+            </Fragment>
+        )
+    } else {
+        return (
+            <Fragment>
+                <Container>
+                    <Row className="justify-content-center">
+                        <Col xs={12} md={8}>
+                            <Alert variant="danger">
+                                <Alert.Heading className="text-center">
+                                    No hay ninguna aseguradora que mostrar.
+                                </Alert.Heading>
+                                <hr />
+                                <p className="text-center">favor de agregar una nueva haciendo click en el botón de arriba.</p>
+                            </Alert>
+                        </Col>
+                    </Row>
+                </Container>
+            </Fragment>
+        )
+    }
 }
 
 export default CRUD;

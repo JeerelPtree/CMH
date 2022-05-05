@@ -1,5 +1,9 @@
 import React, { Input, Fragment, useState, useEffect } from "react";
 import { Stack, Container, Col, Row, FloatingLabel, Button, Form, OverlayTrigger, Tooltip, FormGroup, InputGroup } from "react-bootstrap";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Swal from "sweetalert2";
+import ModalAdd from "../modals/modals encuestas/TC/ModalAdd";
 //import axios from "axios"
 
 
@@ -9,20 +13,12 @@ import CRUD from "../tables/CRUD";
 
 function TC() {
 
-    {/*arreglo de aseguradoras con datos precargados*/ }
-    const listaAseguradoras = [
-        { id: 1, nombre: "GNP", numeroPacientes: 248, ingresos: '' }
-    ]
-
     //declared the variables, constants ans states for this module
-    const [form, setForm] = useState({})
+    const [form, setForm] = useState({ aseguradoras: [] })
     const [viewFlags, setViewFlags] = useState({})
 
-    {/*Inicializamos dataAseguradoras con la información de listaAseguradoras*/ }
-    const [dataAseguradoras, setDataAseguradoras] = useState()
-
     useEffect(() => {
-        setDataAseguradoras(listaAseguradoras);
+        //setDataAseguradoras(listaAseguradoras);
     }, []);
 
 
@@ -40,6 +36,72 @@ function TC() {
         );
     }
 
+    {/*Función para agregar aseguradoras al arrays de aseguradoras*/ }
+
+    /**
+     * It checks if the name of the object that is being added to the array is already in the array. If
+     * it is, it returns false, if it isn't, it adds the object to the array and returns true
+     * @param aseguradora - is the object that I want to add to the array.
+     */
+    const handleChangeAseguradoras = async (aseguradora) => {
+
+        console.log('antes de entrar a  for')
+
+        if (form.aseguradoras.length > 0) {
+
+            for (let i = 0; i < form.aseguradoras.length; i++) {
+                console.log('entrando a for')
+                console.log(form.aseguradoras[i].nombre.toLowerCase(), aseguradora.nombre.toLowerCase())
+                if (form.aseguradoras[i].nombre.toLowerCase() === aseguradora.nombre.toLowerCase()) {
+                    //Swal.fire('Oooooops!', 'El nombre de la aseguradora ya esta registrado.', 'error')
+                    return false;
+                    break;
+                } else if (i === form.aseguradoras.length - 1) {
+
+                    await setForm(
+                        {
+                            ...form,
+                            aseguradoras: form.aseguradoras.concat(aseguradora)
+                        }
+                    );
+
+                    return true;
+
+                }
+            }
+        } else {
+
+            await setForm(
+                {
+                    ...form,
+                    aseguradoras: form.aseguradoras.concat(aseguradora)
+                }
+            );
+
+            return true;
+
+        }
+
+    }
+
+    const handleChangeAseguradorasDelete = async (index) => {
+
+        //we create an aux for our array 
+        let aseguradorasArray = form.aseguradoras;
+
+        //we remove the content for it index
+        aseguradorasArray.splice(index, 1);
+
+        //we re asigned our aux to aseguradoras array
+        setForm(
+            {
+                ...form,
+                aseguradoras: aseguradorasArray
+            }
+        )
+
+    }
+
     const prueba = () => {
         console.log(form)
     }
@@ -53,13 +115,18 @@ function TC() {
 
                             <TotalAtendidos form={form} handleChange={handleChange} />
 
-                            <Aseguradoras form={form} handleChange={handleChange} data={dataAseguradoras} setData={setDataAseguradoras} />
+                            <Aseguradoras form={form} handleChange={handleChange} handleChangeAseguradoras={handleChangeAseguradoras} handleChangeAseguradorasDelete={handleChangeAseguradorasDelete} />
 
                             <Gobierno form={form} handleChange={handleChange} />
 
                             <Empresas form={form} handleChange={handleChange} />
 
                             <Particulares form={form} handleChange={handleChange} />
+
+                            <Col xs={12} md={6} className="mt-3 mb-5">
+                                <Button variant="primary" onClick={prueba}> Enviar
+                                </Button>
+                            </Col>
 
                             {/*Botón de enviar
                             <Col xs={12} md={6} className="mt-3 mb-5">
@@ -286,8 +353,15 @@ function Aseguradoras(props) {
     //we obtain the props for this component
     const form = props.form //Formulario
     const handleChange = props.handleChange //HandleChange del formulario
-    const data = props.data //variable dataAseguradoras
-    const setData = props.setData //metodo setDataAseguradoras
+    const handleChangeAseguradoras = props.handleChangeAseguradoras;
+    const handleChangeAseguradorasDelete = props.handleChangeAseguradorasDelete;
+
+    const [modalTriggerAdd, setModalTriggerAdd] = useState(false);
+
+
+    const handleModalChangeAdd = () => {
+        setModalTriggerAdd(!modalTriggerAdd);
+    }
 
     return (
         <Fragment>
@@ -300,11 +374,30 @@ function Aseguradoras(props) {
                         <h4 className="text-center sub-title-cmh">Aseguradoras</h4>
                     </Col>
                     <Col xs={12} md={12} className="mb-3">
-                        <CRUD form={form} handleChange={handleChange} data={data} setData={setData} tipo={"Aseguradora"} />
+
+                        <Row className="justify-content-center">
+
+                            <Col xs={12} md={1} className="text-center">
+                                {/*TODO: Agregar tooltip y si quieres cambiar el icon o dejar el icon mas un texto de agregar aseguradora */}
+                                <Button variant="success" onClick={handleModalChangeAdd}><FontAwesomeIcon icon={faPlus} /></Button>
+
+                            </Col>
+
+                        </Row>
+
+                    </Col>
+                    <Col xs={12} md={12} className="mb-3">
+                        <CRUD form={form} handleChange={handleChange} handleChangeAseguradorasDelete={handleChangeAseguradorasDelete} />
                     </Col>
 
                 </Row>
             </Col>
+            <ModalAdd
+                modalTriggerAdd={modalTriggerAdd}
+                handleModalChangeAdd={handleModalChangeAdd}
+                handleChange={handleChange}
+                handleChangeAseguradoras={handleChangeAseguradoras}
+            />
         </Fragment>
     )
 
