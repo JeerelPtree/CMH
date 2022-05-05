@@ -7,3 +7,4 @@ export { default as Outsourcing } from "./Outsourcing";
 export { default as PH } from "./PH";
 export { default as Ops_part1 } from "./Ops_part1";
 export { default as TC } from "./TC";
+export { default as GP } from "./GP"

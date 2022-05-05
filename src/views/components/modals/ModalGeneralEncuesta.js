@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { Container, Row, Col, Modal, FloatingLabel, Button, Form, OverlayTrigger, Tooltip } from "react-bootstrap";
 
 import '../../../globalStyles.css'
-import { RHo, EyP, SA, Outsourcing, PH, Ops_part1, TC } from '../encuestas/index_surveys';
+import { RHo, EyP, SA, Outsourcing, PH, Ops_part1, TC, GP } from '../encuestas/index_surveys';
 
 
 function ModalGeneralEncuesta(props) {
@@ -35,7 +35,7 @@ function ModalGeneralEncuesta(props) {
             content: <TC />
         }, {
             id: 7,
-            content: <RHo />
+            content: <GP />
         }, {
             id: 8,
             content: <RHo />
