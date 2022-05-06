@@ -8,3 +8,4 @@ export { default as PH } from "./PH";
 export { default as Ops_part1 } from "./Ops_part1";
 export { default as TC } from "./TC";
 export { default as GP } from "./GP"
+export { default as CAP } from "./CAP"

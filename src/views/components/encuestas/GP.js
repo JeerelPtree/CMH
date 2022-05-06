@@ -1,7 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { Container, Col, Row, FloatingLabel, Button, Form, OverlayTrigger, Tooltip, InputGroup } from "react-bootstrap";
-import MultiSelect from "../../components/selectors/MultiSelect";
-import SelectorCantidad from "../selectors/SelectorCantidad";
 
 //import axios from "axios"
 
@@ -10,6 +8,7 @@ import SelectorCantidad from "../selectors/SelectorCantidad";
 import "../../../globalStyles.css"
 
 const currentYear = new Date().getFullYear();
+let totalEmpleados = 0;
 
 function GP() {
 
@@ -21,6 +20,10 @@ function GP() {
 
         e.persist();
 
+        //TODO: Como acumular este total empleados mientras se van recibiendo desde los inputs?
+        totalEmpleados += e.target.name.match(/escolaridad\w/) ? ~~e.target.value : 0;
+
+        console.log(totalEmpleados);
         await setForm(
             {
                 ...form,
@@ -40,9 +43,6 @@ function GP() {
             console.log("ing data ", e.target.result);
         }
         */
-
-
-
     }
 
     const prueba = () => {
@@ -165,8 +165,8 @@ function NivelEscolaridad(props) {
                             <Form.Control
                                 type="number"
                                 placeholder="Medio Superior/Tecnica Completo"
-                                value={form.medioSuperiorTecnica ? form.medioSuperiorTecnica : ''}
-                                name="medioSuperiorTecnica"
+                                value={form.escolaridadMedioSuperiorTecnica ? form.escolaridadMedioSuperiorTecnica : ''}
+                                name="escolaridadMedioSuperiorTecnica"
                                 onChange={handleChange} />
                         </FloatingLabel>
                     </Col>
@@ -179,8 +179,8 @@ function NivelEscolaridad(props) {
                             <Form.Control
                                 type="number"
                                 placeholder="Profesional Completa"
-                                value={form.profesionalCompleta ? form.profesionalCompleta : ''}
-                                name="profesionalCompleta"
+                                value={form.escolaridadMedioSuperiorTecnica ? form.escolaridadMedioSuperiorTecnica : ''}
+                                name="escolaridadMedioSuperiorTecnica"
                                 onChange={handleChange} />
                         </FloatingLabel>
                     </Col>
@@ -193,8 +193,8 @@ function NivelEscolaridad(props) {
                             <Form.Control
                                 type="number"
                                 placeholder="Maestría o más"
-                                value={form.maestriaMas ? form.maestriaMas : ''}
-                                name="maestriaMas"
+                                value={form.escolaridadMaestriaMas ? form.escolaridadMaestriaMas : ''}
+                                name="escolaridadMaestriaMas"
                                 onChange={handleChange} />
                         </FloatingLabel>
                     </Col>
