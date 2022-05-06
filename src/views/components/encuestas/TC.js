@@ -45,17 +45,12 @@ function TC() {
      */
     const handleChangeAseguradoras = async (aseguradora) => {
 
-        console.log('antes de entrar a  for')
-
         if (form.aseguradoras.length > 0) {
 
             for (let i = 0; i < form.aseguradoras.length; i++) {
-                console.log('entrando a for')
-                console.log(form.aseguradoras[i].nombre.toLowerCase(), aseguradora.nombre.toLowerCase())
+
                 if (form.aseguradoras[i].nombre.toLowerCase() === aseguradora.nombre.toLowerCase()) {
-                    //Swal.fire('Oooooops!', 'El nombre de la aseguradora ya esta registrado.', 'error')
                     return false;
-                    break;
                 } else if (i === form.aseguradoras.length - 1) {
 
                     await setForm(
