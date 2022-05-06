@@ -1,23 +1,16 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { Col, Modal, FloatingLabel, Button, Form, OverlayTrigger, Tooltip } from "react-bootstrap";
 import Swal from "sweetalert2";
-//TODO: Investigar como hacer validaciones con Yup o con Formik para que no pongan campos vacios y replicarlo en los cuestionarios
-//https://www.npmjs.com/package/yup
-//https://formik.org/
-//No puede haber seguradoras con el mismo nombre
-import { useFormik } from 'formik';
-import * as yup from 'yup'
 
 import '../../../../../globalStyles.css'
 
-
+//TODO: pasar los inputs a los componentes, replicar este ejemplo en las encuestas que ya venimos haciendo
 
 function ModalAdd(props) {
 
     //we obtain the props
     const modalIsOpen = props.modalTriggerAdd;
     const handleModalState = props.handleModalChangeAdd;
-    const handleChange = props.handleChange;
     const handleChangeAseguradoras = props.handleChangeAseguradoras;
 
     const [form, setForm] = useState({});
@@ -37,10 +30,18 @@ function ModalAdd(props) {
     }
 
 
+
     /**
-     * It saves the data of the form to the database
+     * It takes an event, prevents the default behavior, stops the propagation of the event, and then
+     * calls the handleChangeAseguradoras function, passing the form as an argument. If the
+     * handleChangeAseguradoras function returns true, then the handleModalState function is called. If
+     * the handleChangeAseguradoras function returns false, then a sweet alert is displayed
+     * @param e - The event object
      */
-    const saveAseguradora = async () => {
+    const saveAseguradora = async (e) => {
+
+        e.preventDefault();
+        e.stopPropagation();
 
         await handleChangeAseguradoras(form) ? handleModalState() : Swal.fire('Oooooops!', 'El nombre de la aseguradora ya esta registrado.', 'error');
 
@@ -53,30 +54,25 @@ function ModalAdd(props) {
 
     return (
         <Modal show={modalIsOpen} backdrop="static" keyboard={false} size="sm" arial-labelledby="contained-modal-title-vcenter" onHide={handleModalState} centered>
-            <Form>
-                <Modal.Header closeButton>
+            <Form onSubmit={saveAseguradora}>
+                <Modal.Header className="modal-cmh-header-footer" closeButton>
                     <Modal.Title className="title-cmh">Agregar Aseguradora</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
 
                     {/*Aseguradora*/}
                     <Col xs={12} md={12} className="mb-3">
-                        <FloatingLabel
-                            controlId="floatingInput"
-                            label="Aseguradora">
-                            <OverlayTrigger
-                                placement="right"
-                                overlay={
-                                    <Tooltip id="tooltip-Aseguradora">Nombre de la aseguradora</Tooltip>
-                                }>
-                                <Form.Control
-                                    type="text"
-                                    placeholder="Aseguradora"
-                                    value={form.nombre ? form.nombre : ''}
-                                    name="nombre"
-                                    onChange={handleChangeModal} />
-                            </OverlayTrigger>
-                        </FloatingLabel>
+
+                        <GetInput
+                            label="Aseguradora"
+                            value={form.nombre}
+                            name="nombre"
+                            handleChangeModal={handleChangeModal}
+                            tooltipDescrip="Nombre de la aseguradora"
+                            type="text"
+                            isRequired={true}
+                        />
+
                     </Col>
 
                     {/*No. Pacientes*/}
@@ -94,7 +90,7 @@ function ModalAdd(props) {
                                     placeholder="No. Pacientes"
                                     value={form.numeroPacientes ? form.numeroPacientes : ''}
                                     name="numeroPacientes"
-                                    onChange={handleChangeModal} />
+                                    onChange={handleChangeModal} required autoComplete="off" />
                             </OverlayTrigger>
                         </FloatingLabel>
                     </Col>
@@ -114,18 +110,48 @@ function ModalAdd(props) {
                                     placeholder="Ingresos"
                                     value={form.ingresos ? form.ingresos : ''}
                                     name="ingresos"
-                                    onChange={handleChangeModal} />
+                                    onChange={handleChangeModal} required autoComplete="off" />
                             </OverlayTrigger>
                         </FloatingLabel>
                     </Col>
                 </Modal.Body>
-                <Modal.Footer>
+                <Modal.Footer className="modal-cmh-header-footer">
                     <Button variant="danger" onClick={handleModalState}>Cancelar</Button>
-                    <Button variant="success" onClick={saveAseguradora}>Guardar</Button>
+                    <Button type="submit" variant="success" >Guardar</Button>
+                    {/*onClick={saveAseguradora} */}
                 </Modal.Footer>
             </Form>
         </Modal>
     )
+
+}
+
+function GetInput(props) {
+
+    //we obtain their props
+    const { label, value, name, handleChangeModal, tooltipDescrip, type, isRequired } = props
+
+    return (
+        <Fragment>
+            <FloatingLabel
+                controlId="floatingInput"
+                label={label}>
+                <OverlayTrigger
+                    placement="right"
+                    overlay={
+                        <Tooltip id={`tooltip-${name}`}>{tooltipDescrip}</Tooltip>
+                    }>
+                    <Form.Control
+                        type={type}
+                        placeholder={label}
+                        value={value ? value : ''}
+                        name={name}
+                        onChange={handleChangeModal} required={isRequired} autoComplete="off" />
+                </OverlayTrigger>
+            </FloatingLabel>
+        </Fragment>
+    )
+
 
 }
 

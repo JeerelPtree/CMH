@@ -39,31 +39,28 @@ function TC() {
     {/*Función para agregar aseguradoras al arrays de aseguradoras*/ }
 
     /**
-     * It checks if the name of the object that is being added to the array is already in the array. If
-     * it is, it returns false, if it isn't, it adds the object to the array and returns true
-     * @param aseguradora - is the object that I want to add to the array.
+     * It takes an object as an argument, checks if the object's name property is already in the array,
+     * and if it isn't, it adds it to the array
+     * @param aseguradora - is the object that is going to be added to the array.
      */
     const handleChangeAseguradoras = async (aseguradora) => {
 
         if (form.aseguradoras.length > 0) {
 
-            for (let i = 0; i < form.aseguradoras.length; i++) {
+            if (nameAseguradoraValidation(aseguradora.nombre)) {
 
-                if (form.aseguradoras[i].nombre.toLowerCase() === aseguradora.nombre.toLowerCase()) {
-                    return false;
-                } else if (i === form.aseguradoras.length - 1) {
+                await setForm(
+                    {
+                        ...form,
+                        aseguradoras: form.aseguradoras.concat(aseguradora)
+                    }
+                );
 
-                    await setForm(
-                        {
-                            ...form,
-                            aseguradoras: form.aseguradoras.concat(aseguradora)
-                        }
-                    );
-
-                    return true;
-
-                }
+                return true
+            } else {
+                return false
             }
+
         } else {
 
             await setForm(
@@ -79,6 +76,11 @@ function TC() {
 
     }
 
+    /**
+     * We create an aux for our array, we remove the content for it index, we re asigned our aux to
+     * aseguradoras array
+     * @param index - the index of the array that we want to delete
+     */
     const handleChangeAseguradorasDelete = async (index) => {
 
         //we create an aux for our array 
@@ -97,6 +99,62 @@ function TC() {
 
     }
 
+    /**
+     * It takes an index and an object as parameters, then it validates the object's name property, if
+     * it's valid it replaces the object in the array at the given index, and returns true, if it's not
+     * valid it returns false
+     * @param index - the index of the array that we want to edit
+     * @param aseguradora - is the object that contains the data of the aseguradora
+     */
+    const handleChangeAseguradorasEdit = async (index, aseguradora) => {
+
+        if (nameAseguradoraValidation(aseguradora.nombre)) {
+
+            //we create an aux for our array 
+            let aseguradorasArray = form.aseguradoras;
+
+            //we replaces the content for it index
+            aseguradorasArray.splice(index, 1, aseguradora);
+
+            await setForm(
+                {
+                    ...form,
+                    aseguradoras: aseguradorasArray
+                }
+            );
+
+            return true
+
+        } else {
+            return false;
+        }
+
+    }
+
+    /**
+     * It takes a string as an argument and returns true if the string is not found in the array of
+     * objects, and false if it is found
+     * @param name - The name of the insurance company.
+     * @returns A boolean value.
+     */
+    const nameAseguradoraValidation = (name) => {
+
+        for (let i = 0; i < form.aseguradoras.length; i++) {
+
+            if (form.aseguradoras[i].nombre.toLowerCase() === name.toLowerCase()) {
+
+                return false; //the name exist
+
+            } else if (i === form.aseguradoras.length - 1) {
+
+                return true; //doesnt exit the name
+
+            }
+
+        }
+
+    }
+
     const prueba = () => {
         console.log(form)
     }
@@ -110,7 +168,7 @@ function TC() {
 
                             <TotalAtendidos form={form} handleChange={handleChange} />
 
-                            <Aseguradoras form={form} handleChange={handleChange} handleChangeAseguradoras={handleChangeAseguradoras} handleChangeAseguradorasDelete={handleChangeAseguradorasDelete} />
+                            <Aseguradoras form={form} handleChange={handleChange} handleChangeAseguradoras={handleChangeAseguradoras} handleChangeAseguradorasDelete={handleChangeAseguradorasDelete} handleChangeAseguradorasEdit={handleChangeAseguradorasEdit} />
 
                             <Gobierno form={form} handleChange={handleChange} />
 
@@ -350,6 +408,7 @@ function Aseguradoras(props) {
     const handleChange = props.handleChange //HandleChange del formulario
     const handleChangeAseguradoras = props.handleChangeAseguradoras;
     const handleChangeAseguradorasDelete = props.handleChangeAseguradorasDelete;
+    const handleChangeAseguradorasEdit = props.handleChangeAseguradorasEdit;
 
     const [modalTriggerAdd, setModalTriggerAdd] = useState(false);
 
@@ -382,7 +441,7 @@ function Aseguradoras(props) {
 
                     </Col>
                     <Col xs={12} md={12} className="mb-3">
-                        <CRUD form={form} handleChange={handleChange} handleChangeAseguradorasDelete={handleChangeAseguradorasDelete} />
+                        <CRUD form={form} handleChange={handleChange} handleChangeAseguradorasDelete={handleChangeAseguradorasDelete} handleChangeAseguradorasEdit={handleChangeAseguradorasEdit} />
                     </Col>
 
                 </Row>
@@ -390,7 +449,6 @@ function Aseguradoras(props) {
             <ModalAdd
                 modalTriggerAdd={modalTriggerAdd}
                 handleModalChangeAdd={handleModalChangeAdd}
-                handleChange={handleChange}
                 handleChangeAseguradoras={handleChangeAseguradoras}
             />
         </Fragment>

@@ -4,23 +4,28 @@ import ModalEditarRegistro from "../modals/ModalEditarRegistro";
 import { faTrash, faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../../../globalStyles.css"
+import Swal from "sweetalert2";
+
+//TODO: hace falta poner tooltips en los botones
 
 function CRUD(props) {
     //Obtenemos las propiedades de la tabla
-    const { handleChange, form, handleChangeAseguradorasDelete } = props
-
+    const { handleChange, form, handleChangeAseguradorasDelete, handleChangeAseguradorasEdit } = props
+    const [dataEdit, setDataEdit] = useState({})
     const [modalTriggerEditar, setModalTriggerEditar] = useState(false);
-
+    const [indexEdit, setIndexEdit] = useState()
 
     const handleModalChangeEditar = () => {
         setModalTriggerEditar(!modalTriggerEditar);
     }
 
-    const editarAseguradora = (index) => {
-        return null;
-    }
+    const editarAseguradora = async (index) => {
 
-    console.log('AQUI', form, typeof form.aseguradoras)
+        setIndexEdit(index);
+        await setDataEdit(form.aseguradoras[index])
+
+        handleModalChangeEditar();
+    }
 
     if (Object.keys(form.aseguradoras).length) {
 
@@ -49,7 +54,26 @@ function CRUD(props) {
                                                 </Button>
                                             </Col>
                                             <Col xs={3} md={3} >
-                                                <Button variant="danger" onClick={() => { handleChangeAseguradorasDelete(index) }}> <FontAwesomeIcon icon={faTrash} />
+                                                <Button variant="danger" onClick={() => {
+
+                                                    Swal.fire({
+                                                        title: '¿Desea eliminar la aseguradora ' + aseguradora.nombre + '?',
+                                                        icon: 'error',
+                                                        iconHtml: '!',
+                                                        confirmButtonText: 'Aceptar',
+                                                        cancelButtonText: 'Cancelar',
+                                                        confirmButtonColor: '#d33',
+                                                        cancelButtonColor: '#3085d6',
+                                                        showCancelButton: true,
+                                                        showCloseButton: true
+                                                    }).then((result) => {
+                                                        if (result.isConfirmed) {
+                                                            handleChangeAseguradorasDelete(index)
+                                                            Swal.fire('Eliminada!', '', 'success')
+                                                        }
+                                                    })
+
+                                                }}> <FontAwesomeIcon icon={faTrash} />
                                                 </Button>
                                             </Col>
                                         </Row>
@@ -60,14 +84,17 @@ function CRUD(props) {
                     </tbody>
                 </Table>
 
-                {
-                /*<ModalEditarRegistro
 
-                modalIsOpen={modalTriggerEditar}//bandera para abrir cerrar la modal
-                handleModalState={handleModalChangeEditar}//handleState para abrir cerrar la modal
-                handleChange={handleChange}//handleChange del form
+                <ModalEditarRegistro
 
-            />*/}
+                    modalIsOpen={modalTriggerEditar}//bandera para abrir cerrar la modal
+                    handleModalState={handleModalChangeEditar}//handleState para abrir cerrar la modal
+                    data={dataEdit}
+                    index={indexEdit}
+                    handleChangeAseguradorasEdit={handleChangeAseguradorasEdit}
+                //handleChange={handleChange}//handleChange del form
+
+                />
             </Fragment>
         )
     } else {

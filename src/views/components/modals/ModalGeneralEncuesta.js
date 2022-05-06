@@ -95,7 +95,7 @@ function ModalGeneralEncuesta(props) {
     }
 
     return (
-        <Modal show={modalIsOpen} backdrop="static" keyboard={false} size="xl" arial-labelledby="contained-modal-title-vcenter" onHide={handleModalState} centered> {/*onHide={this.cleanModal} */}
+        <Modal show={modalIsOpen} backdrop="static" keyboard={false} size="xl" arial-labelledby="contained-modal-title-vcenter" onHide={handleModalState} centered>
             <Form>
                 <Modal.Header className="modal-cmh-header-footer" closeButton>
                     <Modal.Title className="title-cmh">
