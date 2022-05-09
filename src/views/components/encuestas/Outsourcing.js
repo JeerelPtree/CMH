@@ -1,12 +1,12 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { Container, Col, Row, FloatingLabel, Button, Form, OverlayTrigger, Tooltip, Alert } from "react-bootstrap";
 import OPTIONS from "./json/outsourcingOptions.json"
-//import MultiSelect from "../selectors/MultiSelect";
 
 //we import css
 import "../../../globalStyles.css"
 
-//const currentYear = new Date().getFullYear();
+//TODO: PONER LOS TOOLTIPS EN ESTA SECC
+
 
 function Outsourcing() {
 
@@ -863,7 +863,7 @@ function GetSelect(props) {
                     value={value ? value : ''}
                     onChange={handleChange} name={name}>
                     <option value="" disabled>Seleccione una opción</option>
-                    {
+                    {//TODO: REPLICAR EN TODOS LOS SELECTORES
                         OPTIONS.map((option) => {
                             return (
                                 <Fragment key={option.id}>

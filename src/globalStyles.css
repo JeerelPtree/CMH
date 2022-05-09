@@ -1,5 +1,5 @@
 .title-cmh {
-    color: #004976
+    color: #004976;
 }
 
 .sub-title-cmh {
@@ -8,4 +8,13 @@
 
 .margin-right {
     margin-right: 0.313rem !important;
+}
+
+.thead-cmh {
+    background-color: #C6D602;
+    color: white;
+}
+
+.modal-cmh-header-footer {
+    background: -webkit-linear-gradient(right, rgba(198, 216, 2, 1), rgba(252, 255, 222, 1));
 }
