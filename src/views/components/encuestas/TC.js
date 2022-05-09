@@ -43,7 +43,7 @@ function TC() {
      * and if it isn't, it adds it to the array
      * @param aseguradora - is the object that is going to be added to the array.
      */
-    const handleChangeAseguradoras = async (aseguradora) => {
+    const handleChangeRegistros = async (aseguradora) => {
 
         if (form.aseguradoras.length > 0) {
 
@@ -81,7 +81,7 @@ function TC() {
      * aseguradoras array
      * @param index - the index of the array that we want to delete
      */
-    const handleChangeAseguradorasDelete = async (index) => {
+    const handleChangeRegistrosDelete = async (index) => {
 
         //we create an aux for our array 
         let aseguradorasArray = form.aseguradoras;
@@ -106,7 +106,7 @@ function TC() {
      * @param index - the index of the array that we want to edit
      * @param aseguradora - is the object that contains the data of the aseguradora
      */
-    const handleChangeAseguradorasEdit = async (index, aseguradora) => {
+    const handleChangeRegistrosEdit = async (index, aseguradora) => {
 
         if (nameAseguradoraValidation(aseguradora.nombre)) {
 
@@ -168,7 +168,7 @@ function TC() {
 
                             <TotalAtendidos form={form} handleChange={handleChange} />
 
-                            <Aseguradoras form={form} handleChange={handleChange} handleChangeAseguradoras={handleChangeAseguradoras} handleChangeAseguradorasDelete={handleChangeAseguradorasDelete} handleChangeAseguradorasEdit={handleChangeAseguradorasEdit} />
+                            <Aseguradoras form={form} handleChange={handleChange} handleChangeRegistros={handleChangeRegistros} handleChangeRegistrosDelete={handleChangeRegistrosDelete} handleChangeRegistrosEdit={handleChangeRegistrosEdit} />
 
                             <Gobierno form={form} handleChange={handleChange} />
 
@@ -406,9 +406,9 @@ function Aseguradoras(props) {
     //we obtain the props for this component
     const form = props.form //Formulario
     const handleChange = props.handleChange //HandleChange del formulario
-    const handleChangeAseguradoras = props.handleChangeAseguradoras;
-    const handleChangeAseguradorasDelete = props.handleChangeAseguradorasDelete;
-    const handleChangeAseguradorasEdit = props.handleChangeAseguradorasEdit;
+    const handleChangeRegistros = props.handleChangeRegistros;
+    const handleChangeRegistrosDelete = props.handleChangeRegistrosDelete;
+    const handleChangeRegistrosEdit = props.handleChangeRegistrosEdit;
 
     const [modalTriggerAdd, setModalTriggerAdd] = useState(false);
 
@@ -441,7 +441,7 @@ function Aseguradoras(props) {
 
                     </Col>
                     <Col xs={12} md={12} className="mb-3">
-                        <CRUD form={form} handleChange={handleChange} handleChangeAseguradorasDelete={handleChangeAseguradorasDelete} handleChangeAseguradorasEdit={handleChangeAseguradorasEdit} />
+                        <CRUD form={form} handleChange={handleChange} handleChangeRegistrosDelete={handleChangeRegistrosDelete} handleChangeRegistrosEdit={handleChangeRegistrosEdit} />
                     </Col>
 
                 </Row>
@@ -449,7 +449,7 @@ function Aseguradoras(props) {
             <ModalAdd
                 modalTriggerAdd={modalTriggerAdd}
                 handleModalChangeAdd={handleModalChangeAdd}
-                handleChangeAseguradoras={handleChangeAseguradoras}
+                handleChangeRegistros={handleChangeRegistros}
             />
         </Fragment>
     )

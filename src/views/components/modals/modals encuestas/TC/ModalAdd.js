@@ -11,7 +11,7 @@ function ModalAdd(props) {
     //we obtain the props
     const modalIsOpen = props.modalTriggerAdd;
     const handleModalState = props.handleModalChangeAdd;
-    const handleChangeAseguradoras = props.handleChangeAseguradoras;
+    const handleChangeRegistros = props.handleChangeRegistros;
 
     const [form, setForm] = useState({});
 
@@ -33,9 +33,9 @@ function ModalAdd(props) {
 
     /**
      * It takes an event, prevents the default behavior, stops the propagation of the event, and then
-     * calls the handleChangeAseguradoras function, passing the form as an argument. If the
-     * handleChangeAseguradoras function returns true, then the handleModalState function is called. If
-     * the handleChangeAseguradoras function returns false, then a sweet alert is displayed
+     * calls the handleChangeRegistros function, passing the form as an argument. If the
+     * handleChangeRegistros function returns true, then the handleModalState function is called. If
+     * the handleChangeRegistros function returns false, then a sweet alert is displayed
      * @param e - The event object
      */
     const saveAseguradora = async (e) => {
@@ -43,7 +43,7 @@ function ModalAdd(props) {
         e.preventDefault();
         e.stopPropagation();
 
-        await handleChangeAseguradoras(form) ? handleModalState() : Swal.fire('Oooooops!', 'El nombre de la aseguradora ya esta registrado.', 'error');
+        await handleChangeRegistros(form) ? handleModalState() : Swal.fire('Oooooops!', 'El nombre de la aseguradora ya esta registrado.', 'error');
 
     }
 

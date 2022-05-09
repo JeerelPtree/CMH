@@ -10,7 +10,7 @@ import Swal from "sweetalert2";
 
 function CRUD(props) {
     //Obtenemos las propiedades de la tabla
-    const { handleChange, form, handleChangeAseguradorasDelete, handleChangeAseguradorasEdit } = props
+    const { handleChange, form, handleChangeRegistrosDelete, handleChangeRegistrosEdit } = props
     const [dataEdit, setDataEdit] = useState({})
     const [modalTriggerEditar, setModalTriggerEditar] = useState(false);
     const [indexEdit, setIndexEdit] = useState()
@@ -68,7 +68,7 @@ function CRUD(props) {
                                                         showCloseButton: true
                                                     }).then((result) => {
                                                         if (result.isConfirmed) {
-                                                            handleChangeAseguradorasDelete(index)
+                                                            handleChangeRegistrosDelete(index)
                                                             Swal.fire('Eliminada!', '', 'success')
                                                         }
                                                     })
@@ -91,7 +91,7 @@ function CRUD(props) {
                     handleModalState={handleModalChangeEditar}//handleState para abrir cerrar la modal
                     data={dataEdit}
                     index={indexEdit}
-                    handleChangeAseguradorasEdit={handleChangeAseguradorasEdit}
+                    handleChangeRegistrosEdit={handleChangeRegistrosEdit}
                 //handleChange={handleChange}//handleChange del form
 
                 />

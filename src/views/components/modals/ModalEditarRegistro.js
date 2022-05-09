@@ -15,7 +15,7 @@ function ModalEditarRegistro(props) {
     const handleModalState = props.handleModalState;
     const data = props.data;
     const index = props.index;
-    const handleChangeAseguradorasEdit = props.handleChangeAseguradorasEdit;
+    const handleChangeRegistrosEdit = props.handleChangeRegistrosEdit;
 
     const [dataEdit, setDataEdit] = useState({});
 
@@ -57,7 +57,7 @@ function ModalEditarRegistro(props) {
             showCloseButton: true
         }).then(async (result) => {
             if (result.isConfirmed) {
-                await handleChangeAseguradorasEdit(index, dataEdit) ? handleModalState() : Swal.fire('Oooooops!', 'El nombre de la aseguradora ya esta registrado.', 'error');
+                await handleChangeRegistrosEdit(index, dataEdit) ? handleModalState() : Swal.fire('Oooooops!', 'El nombre de la aseguradora ya esta registrado.', 'error');
                 Swal.fire('Actualizada!', '', 'success')
             }
         })
