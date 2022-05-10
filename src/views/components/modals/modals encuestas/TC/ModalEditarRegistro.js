@@ -1,88 +1,101 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { Col, Modal, FloatingLabel, Button, Form, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Container, Row, Col, Modal, FloatingLabel, Button, Form, OverlayTrigger, Tooltip } from "react-bootstrap";
 import Swal from "sweetalert2";
 
 import '../../../../../globalStyles.css'
 
-//TODO: pasar los inputs a los componentes, replicar este ejemplo en las encuestas que ya venimos haciendo
 
-function ModalAdd(props) {
+function ModalEditarRegistro(props) {
+
+    /**modalIsOpen={modalTriggerEditar}//bandera para abrir cerrar la modal
+                    handleModalState={handleModalChangeEditar}//handleState para abrir cerrar la modal */
 
     //we obtain the props
-    const modalIsOpen = props.modalTriggerAdd;
-    const handleModalState = props.handleModalChangeAdd;
-    const handleChangeRegistros = props.handleChangeRegistros;
+    const modalIsOpen = props.modalIsOpen;
+    const handleModalState = props.handleModalState;
+    const data = props.data;
+    const index = props.index;
+    const handleChangeRegistrosEdit = props.handleChangeRegistrosEdit;
     const elemento = props.elemento;
 
-    const [form, setForm] = useState({});
+    const [dataEdit, setDataEdit] = useState({});
 
-    const handleChangeModal = async (e) => {
+    useEffect(() => {
+        setDataEdit(data)
+    }, [modalIsOpen])
 
-        e.persist()
+    const handleChange = async (e) => {
 
-        await setForm(
+        e.preventDefault();
+
+        await setDataEdit(
             {
-                ...form,
+                ...dataEdit,
                 [e.target.name]: e.target.value
 
             }
         )
-
     }
 
-
-
     /**
-     * It takes an event, prevents the default behavior, stops the propagation of the event, and then
-     * calls the handleChangeRegistros function, passing the form as an argument. If the
-     * handleChangeRegistros function returns true, then the handleModalState function is called. If
-     * the handleChangeRegistros function returns false, then a sweet alert is displayed
+     * It's a function that updates the data of an insurance company
      * @param e - The event object
      */
-    const saveRegistro = async (e) => {
+    const updateRegistro = async (e) => {
 
         e.preventDefault();
         e.stopPropagation();
 
-        await handleChangeRegistros(form) ? handleModalState() : Swal.fire('Oooooops!', `El nombre de ${elemento.toLowerCase()} ya esta registrado.`, 'error');
-
+        await Swal.fire({
+            title: `¿Desea actualizar ${elemento.toLowerCase()} ` + dataEdit.nombre + '?',
+            icon: 'warning',
+            iconHtml: '?',
+            confirmButtonText: 'Aceptar',
+            cancelButtonText: 'Cancelar',
+            confirmButtonColor: '#157347',
+            cancelButtonColor: '#d33',
+            showCancelButton: true,
+            showCloseButton: true
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                if (await handleChangeRegistrosEdit(index, dataEdit)) {
+                    handleModalState();
+                    Swal.fire('¡Registro actualizado!', '', 'success');
+                } else {
+                    Swal.fire('Oooooops!', `El nombre de ${elemento.toLowerCase()} ya esta registrado.`, 'error');
+                }
+            }
+        })
     }
-
-    /* A hook that is called when the component is mounted and when the modalIsOpen state changes. */
-    useEffect(() => {
-        setForm({})
-    }, [modalIsOpen])
 
     return (
         <Modal show={modalIsOpen} backdrop="static" keyboard={false} size="sm" arial-labelledby="contained-modal-title-vcenter" onHide={handleModalState} centered>
-            <Form onSubmit={saveRegistro}>
+            <Form onSubmit={updateRegistro}>
                 <Modal.Header className="modal-cmh-header-footer" closeButton>
-                    <Modal.Title className="title-cmh">Agregar {elemento}</Modal.Title>
+                    <Modal.Title className="title-cmh">Editar {elemento}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
 
-                    {/*Elemento*/}
+                    {/*Tipo de elemento*/}
                     <Col xs={12} md={12} className="mb-3">
-
                         <GetInput
                             label={elemento}
-                            value={form.nombre}
+                            value={dataEdit.nombre}
                             name="nombre"
-                            handleChangeModal={handleChangeModal}
+                            handleChangeModal={handleChange}
                             tooltipDescrip={`Nombre de ${elemento}`}
                             type="text"
                             isRequired={true}
                         />
-
                     </Col>
 
                     {/*No. Pacientes*/}
                     <Col xs={12} md={12} className="mb-3">
                         <GetInput
-                            label='No. Pacientes'
-                            value={form.numeroPacientes}
+                            label="No. Pacientes"
+                            value={dataEdit.numeroPacientes}
                             name="numeroPacientes"
-                            handleChangeModal={handleChangeModal}
+                            handleChangeModal={handleChange}
                             tooltipDescrip='Número de pacientes atendidos'
                             type="text"
                             isRequired={true}
@@ -92,20 +105,20 @@ function ModalAdd(props) {
                     {/*Ingresos*/}
                     <Col xs={12} md={12} className="mb-3">
                         <GetInput
-                            label='Ingresos'
-                            value={form.ingresos}
+                            label="Ingresos"
+                            value={dataEdit.ingresos}
                             name="ingresos"
-                            handleChangeModal={handleChangeModal}
+                            handleChangeModal={handleChange}
                             tooltipDescrip='Ingresos promedio'
                             type="text"
                             isRequired={false}
                         />
                     </Col>
+
                 </Modal.Body>
                 <Modal.Footer className="modal-cmh-header-footer">
                     <Button variant="danger" onClick={handleModalState}>Cancelar</Button>
-                    <Button type="submit" variant="success" >Guardar</Button>
-                    {/*onClick={saveRegistro} */}
+                    <Button type="submit" variant="success">Guardar</Button>
                 </Modal.Footer>
             </Form>
         </Modal>
@@ -142,4 +155,5 @@ function GetInput(props) {
 
 }
 
-export default ModalAdd;
+
+export default ModalEditarRegistro;

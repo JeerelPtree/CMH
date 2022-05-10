@@ -58,7 +58,7 @@ function GP() {
 
                             {/*Titulo de la sección*/}
                             <Col xs={12} md={12} className="mt-3 mb-3">
-                                <h4 className="text-center title-cmh">Indicadores</h4>
+                                <h5 className="text-center title-cmh">Indicadores</h5>
                             </Col>
 
                             {/*TODO: Hacer la suma del personal*/}

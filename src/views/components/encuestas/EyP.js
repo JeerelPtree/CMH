@@ -787,7 +787,7 @@ function TipoOrgano(props) {
                     <Row>
                         {/*Título de la sección de la encuesta*/}
                         <Col xs={12} md={12} className="mb-3">
-                            <h4 className="text-center sub-title-cmh">Tipo de Organo Transplantado</h4>
+                            <h5 className="text-center title-cmh">Tipo de Organo Transplantado</h5>
                         </Col>
 
                         {/*Riñon*/}
@@ -937,7 +937,7 @@ function TipoOrgano(props) {
 
                         </Col>
 
-                        {/*TODO: Aún no se especifica como implementar esta opción*/}
+                        {/*TODO: Implementar como una tabla CRUD*/}
                         {/*Otro órgano (especifique)*/}
                         <Col xs={12} md={4} className="mb-3">
                             <Row>
@@ -1374,7 +1374,7 @@ function OtrosServicios(props) {
     )
 }
 
-{/*TODO: Aun falta revisar como se implementara esta ultima parte de la encuesta*/ }
+{/*TODO: Implementar como una lista dinámica*/ }
 function EquiposInversion(props) {
     const form = props.form
     const handleChange = props.handleChange

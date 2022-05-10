@@ -2,25 +2,19 @@ import React, { Input, Fragment, useState, useEffect } from "react";
 import { Stack, Container, Col, Row, FloatingLabel, Button, Form, OverlayTrigger, Tooltip, FormGroup, InputGroup } from "react-bootstrap";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Swal from "sweetalert2";
 import ModalAdd from "../modals/modals encuestas/TC/ModalAdd";
 //import axios from "axios"
 
 
 //we import css
 import "../../../globalStyles.css"
-import CRUD from "../tables/CRUD";
+import TCCrud from "../tables/TCCrud";
 
 function TC() {
 
-    //declared the variables, constants ans states for this module
-    const [form, setForm] = useState({ aseguradoras: [] })
+    //declared the variables, constants and states for this module
+    const [form, setForm] = useState({ aseguradoras: [], gobierno: [], empresas: [] })
     const [viewFlags, setViewFlags] = useState({})
-
-    useEffect(() => {
-        //setDataAseguradoras(listaAseguradoras);
-    }, []);
-
 
     //module's functions
     {/*Función para manejar el cambio en los campos del formulario de la modal*/ }
@@ -36,18 +30,19 @@ function TC() {
         );
     }
 
-    {/*Función para agregar aseguradoras al arrays de aseguradoras*/ }
-
+    {/*Funciones para manejo del CRUD de Aseguradoras*/ }
     /**
-     * It takes an object as an argument, checks if the object's name property is already in the array,
-     * and if it isn't, it adds it to the array
-     * @param aseguradora - is the object that is going to be added to the array.
+     * If the form.aseguradoras array is empty, then add the aseguradora object to the array. If the
+     * array is not empty, then check if the aseguradora object already exists in the array. If it
+     * does, then return false. If it doesn't, then add the aseguradora object to the array.
+     * @param aseguradora - {
+     * @returns a boolean value.
      */
-    const handleChangeRegistros = async (aseguradora) => {
+    const handleChangeAseguradoras = async (aseguradora) => {
 
         if (form.aseguradoras.length > 0) {
 
-            if (nameAseguradoraValidation(aseguradora.nombre)) {
+            if (nameRegistroValidation(aseguradora.nombre, form.aseguradoras)) {
 
                 await setForm(
                     {
@@ -78,10 +73,10 @@ function TC() {
 
     /**
      * We create an aux for our array, we remove the content for it index, we re asigned our aux to
-     * aseguradoras array
-     * @param index - the index of the array that we want to delete
+     * aseguradoras array.
+     * @param index - the index of the array that we want to remove
      */
-    const handleChangeRegistrosDelete = async (index) => {
+    const handleChangeAseguradorasDelete = async (index) => {
 
         //we create an aux for our array 
         let aseguradorasArray = form.aseguradoras;
@@ -100,15 +95,21 @@ function TC() {
     }
 
     /**
-     * It takes an index and an object as parameters, then it validates the object's name property, if
-     * it's valid it replaces the object in the array at the given index, and returns true, if it's not
-     * valid it returns false
-     * @param index - the index of the array that we want to edit
-     * @param aseguradora - is the object that contains the data of the aseguradora
+     * It takes an index and an object, and replaces the object in the array at the index with the new
+     * object.
+     * @param index - the index of the array that we want to replace
+     * @param aseguradora - {
+     * @returns {
+     *         "id": 1,
+     *         "nombre": "Aseguradora 1",
+     *         "porcentaje": "10",
+     *         "monto": "100",
+     *         "total": "10"
+     *     }
      */
-    const handleChangeRegistrosEdit = async (index, aseguradora) => {
+    const handleChangeAseguradorasEdit = async (index, aseguradora) => {
 
-        if (nameAseguradoraValidation(aseguradora.nombre)) {
+        if (nameRegistroValidationEdit(aseguradora.nombre, form.aseguradoras, index)) {
 
             //we create an aux for our array 
             let aseguradorasArray = form.aseguradoras;
@@ -122,6 +123,106 @@ function TC() {
                     aseguradoras: aseguradorasArray
                 }
             );
+            return true
+
+        } else {
+            return false;
+        }
+
+    }
+
+    {/*Funciones para manejo del CRUD de Gobierno*/ }
+    /**
+     * It takes an object as a parameter and adds it to an array in the state.
+     * @param institucion - {
+     * @returns {
+     *         "id": "5e8f8f8f8f8f8f8f8f8f8f8f",
+     *         "nombre": "Institucion 1",
+     *         "tipo": "Gobierno"
+     *     }
+     */
+    const handleChangeGobierno = async (institucion) => {
+
+        if (form.gobierno.length > 0) {
+
+            if (nameRegistroValidation(institucion.nombre, form.gobierno)) {
+
+                await setForm(
+                    {
+                        ...form,
+                        gobierno: form.gobierno.concat(institucion)
+                    }
+                );
+
+                return true
+            } else {
+                return false
+            }
+
+        } else {
+
+            await setForm(
+                {
+                    ...form,
+                    gobierno: form.gobierno.concat(institucion)
+                }
+            );
+
+            return true;
+
+        }
+
+    }
+
+    /**
+     * We create an aux for our array, we remove the content for it index, we re asigned our aux to
+     * gobierno array.
+     * @param index - the index of the array you want to remove
+     */
+    const handleChangeGobiernoDelete = async (index) => {
+
+        //we create an aux for our array 
+        let gobiernoArray = form.gobierno;
+
+        //we remove the content for it index
+        gobiernoArray.splice(index, 1);
+
+        //we re asigned our aux to gobierno array
+        setForm(
+            {
+                ...form,
+                gobierno: gobiernoArray
+            }
+        )
+
+    }
+
+    /**
+     * It takes an index and an object, and replaces the object in the array at the given index.
+     * @param index - the index of the array that we want to change
+     * @param institucion - {
+     * @returns {
+     *         ...form,
+     *         gobierno: gobiernoArray
+     *     }
+     */
+    const handleChangeGobiernoEdit = async (index, institucion) => {
+
+
+        if (nameRegistroValidationEdit(institucion.nombre, form.gobierno, index)) {
+
+            //we create an aux for our array 
+            let gobiernoArray = form.gobierno;
+
+            //we replaces the content for it index
+            gobiernoArray.splice(index, 1, institucion);
+
+            await setForm(
+                {
+                    ...form,
+                    gobierno: gobiernoArray
+                }
+            );
 
             return true
 
@@ -131,21 +232,161 @@ function TC() {
 
     }
 
+    {/*Funciones para manejo del CRUD de Empresas*/ }
     /**
-     * It takes a string as an argument and returns true if the string is not found in the array of
-     * objects, and false if it is found
-     * @param name - The name of the insurance company.
+     * It adds an object to an array, but only if the object doesn't already exist in the array.
+     * @param empresa - {
+     */
+    const handleChangeEmpresas = async (empresa) => {
+
+        if (form.empresas.length > 0) {
+
+            if (nameRegistroValidation(empresa.nombre, form.empresas)) {
+
+                await setForm(
+                    {
+                        ...form,
+                        empresas: form.empresas.concat(empresa)
+                    }
+                );
+
+                return true
+            } else {
+                return false
+            }
+
+        } else {
+
+            await setForm(
+                {
+                    ...form,
+                    empresas: form.empresas.concat(empresa)
+                }
+            );
+
+            return true;
+
+        }
+
+    }
+
+    /**
+     * We create an aux for our array, we remove the content for it index, we re asigned our aux to
+     * empresas array.
+     * @param index - the index of the array that we want to remove
+     */
+    const handleChangeEmpresasDelete = async (index) => {
+
+        //we create an aux for our array 
+        let empresasArray = form.empresas;
+
+        //we remove the content for it index
+        empresasArray.splice(index, 1);
+
+        //we re asigned our aux to empresas array
+        setForm(
+            {
+                ...form,
+                empresas: empresasArray
+            }
+        )
+
+    }
+
+    /**
+     * We create an aux for our array, we replaces the content for it index, and we set the state with
+     * the new array.
+     * @param index - the index of the array that we want to replace
+     * @param empresa - {
+     * @returns {
+     *         ...form,
+     *         empresas: empresasArray
+     *     }
+     */
+    const handleChangeEmpresasEdit = async (index, empresa) => {
+
+
+        if (nameRegistroValidationEdit(empresa.nombre, form.empresas, index)) {
+
+            //we create an aux for our array 
+            let empresasArray = form.empresas;
+
+            //we replaces the content for it index
+            empresasArray.splice(index, 1, empresa);
+
+            await setForm(
+                {
+                    ...form,
+                    empresas: empresasArray
+                }
+            );
+
+            return true
+
+        } else {
+            return false;
+        }
+
+    }
+
+    {/*Función para validar existencia de nombre para cuando se crea un registro*/ }
+    /**
+     * It takes a string and an array of objects as arguments and returns true if the string is not
+     * found in the array of objects and false if it is found.
+     * 
+     * The function is not very efficient. It loops through the array of objects and compares the
+     * string to the value of the nombre property of each object. If the string is found, the function
+     * returns false. If the string is not found, the function returns true.
+     * 
+     * The function is not very efficient because it loops through the entire array of objects even if
+     * the string is found in the first object.
+     * 
+     * The function can be made more efficient by using the Array.prototype.some() method. The some()
+     * method loops through the array of objects and returns true if the callback function returns true
+     * for any of the objects. The callback function returns true if the string is found in the array
+     * of objects.
+     * 
+     * The some() method stops looping through
+     * @param name - the name that the user is trying to register
+     * @param array - is an array of objects, each object has a property called nombre.
      * @returns A boolean value.
      */
-    const nameAseguradoraValidation = (name) => {
+    const nameRegistroValidation = (name, array) => {
 
-        for (let i = 0; i < form.aseguradoras.length; i++) {
+        for (let i = 0; i < array.length; i++) {
 
-            if (form.aseguradoras[i].nombre.toLowerCase() === name.toLowerCase()) {
+            if (array[i].nombre.toLowerCase() === name.toLowerCase()) {
 
                 return false; //the name exist
 
-            } else if (i === form.aseguradoras.length - 1) {
+            } else if (i === array.length - 1) {
+
+                return true; //doesnt exit the name
+
+            }
+
+        }
+
+    }
+
+    {/*Función para validar existencia de nombre para cuando se edita un registro*/ }
+    /**
+     * It checks if the name exists in the array, if it does, it returns false, if it doesn't, it
+     * returns true.
+     * @param name - the name of the new register
+     * @param array - is the array of objects that I'm using to validate the name.
+     * @param index - the index of the item in the array
+     * @returns A boolean value.
+     */
+    const nameRegistroValidationEdit = (name, array, index) => {
+
+        for (let i = 0; i < array.length; i++) {
+
+            if (array[i].nombre.toLowerCase() === name.toLowerCase() && index != i) {
+
+                return false; //the name exist
+
+            } else if (i === array.length - 1) {
 
                 return true; //doesnt exit the name
 
@@ -168,18 +409,13 @@ function TC() {
 
                             <TotalAtendidos form={form} handleChange={handleChange} />
 
-                            <Aseguradoras form={form} handleChange={handleChange} handleChangeRegistros={handleChangeRegistros} handleChangeRegistrosDelete={handleChangeRegistrosDelete} handleChangeRegistrosEdit={handleChangeRegistrosEdit} />
+                            <Aseguradoras form={form} handleChange={handleChange} handleChangeAseguradoras={handleChangeAseguradoras} handleChangeAseguradorasDelete={handleChangeAseguradorasDelete} handleChangeAseguradorasEdit={handleChangeAseguradorasEdit} />
 
-                            <Gobierno form={form} handleChange={handleChange} />
+                            <Gobierno form={form} handleChange={handleChange} handleChangeGobierno={handleChangeGobierno} handleChangeGobiernoDelete={handleChangeGobiernoDelete} handleChangeGobiernoEdit={handleChangeGobiernoEdit} />
 
-                            <Empresas form={form} handleChange={handleChange} />
+                            <Empresas form={form} handleChange={handleChange} handleChangeEmpresas={handleChangeEmpresas} handleChangeEmpresasDelete={handleChangeEmpresasDelete} handleChangeEmpresasEdit={handleChangeEmpresasEdit} />
 
                             <Particulares form={form} handleChange={handleChange} />
-
-                            <Col xs={12} md={6} className="mt-3 mb-5">
-                                <Button variant="primary" onClick={prueba}> Enviar
-                                </Button>
-                            </Col>
 
                             {/*Botón de enviar
                             <Col xs={12} md={6} className="mt-3 mb-5">
@@ -197,7 +433,6 @@ function TC() {
 
 
 }
-
 
 function TotalAtendidos(props) {
 
@@ -406,9 +641,9 @@ function Aseguradoras(props) {
     //we obtain the props for this component
     const form = props.form //Formulario
     const handleChange = props.handleChange //HandleChange del formulario
-    const handleChangeRegistros = props.handleChangeRegistros;
-    const handleChangeRegistrosDelete = props.handleChangeRegistrosDelete;
-    const handleChangeRegistrosEdit = props.handleChangeRegistrosEdit;
+    const handleChangeAseguradoras = props.handleChangeAseguradoras;
+    const handleChangeAseguradorasDelete = props.handleChangeAseguradorasDelete;
+    const handleChangeAseguradorasEdit = props.handleChangeAseguradorasEdit;
 
     const [modalTriggerAdd, setModalTriggerAdd] = useState(false);
 
@@ -432,16 +667,20 @@ function Aseguradoras(props) {
                         <Row className="justify-content-center">
 
                             <Col xs={12} md={1} className="text-center">
-                                {/*TODO: Agregar tooltip y si quieres cambiar el icon o dejar el icon mas un texto de agregar aseguradora */}
-                                <Button variant="success" onClick={handleModalChangeAdd}><FontAwesomeIcon icon={faPlus} /></Button>
-
+                                <OverlayTrigger
+                                    placement="right"
+                                    overlay={
+                                        <Tooltip id="tooltip-agregarAseguradora">Agregar nueva Aseguradora</Tooltip>
+                                    }>
+                                    <Button variant="success" onClick={handleModalChangeAdd}><FontAwesomeIcon icon={faPlus} /></Button>
+                                </OverlayTrigger>
                             </Col>
 
                         </Row>
 
                     </Col>
                     <Col xs={12} md={12} className="mb-3">
-                        <CRUD form={form} handleChange={handleChange} handleChangeRegistrosDelete={handleChangeRegistrosDelete} handleChangeRegistrosEdit={handleChangeRegistrosEdit} />
+                        <TCCrud variableForm={form.aseguradoras} handleChange={handleChange} handleChangeRegistrosDelete={handleChangeAseguradorasDelete} handleChangeRegistrosEdit={handleChangeAseguradorasEdit} elemento={"Aseguradora"} />
                     </Col>
 
                 </Row>
@@ -449,7 +688,8 @@ function Aseguradoras(props) {
             <ModalAdd
                 modalTriggerAdd={modalTriggerAdd}
                 handleModalChangeAdd={handleModalChangeAdd}
-                handleChangeRegistros={handleChangeRegistros}
+                handleChangeRegistros={handleChangeAseguradoras}
+                elemento={"Aseguradora"}
             />
         </Fragment>
     )
@@ -458,9 +698,20 @@ function Aseguradoras(props) {
 
 function Gobierno(props) {
 
+
     //we obtain the props for this component
-    const form = props.form
-    const handleChange = props.handleChange
+    const form = props.form //Formulario
+    const handleChange = props.handleChange //HandleChange del formulario
+    const handleChangeGobierno = props.handleChangeGobierno;
+    const handleChangeGobiernoDelete = props.handleChangeGobiernoDelete;
+    const handleChangeGobiernoEdit = props.handleChangeGobiernoEdit;
+
+    const [modalTriggerAdd, setModalTriggerAdd] = useState(false);
+
+
+    const handleModalChangeAdd = () => {
+        setModalTriggerAdd(!modalTriggerAdd);
+    }
 
     return (
         <Fragment>
@@ -472,187 +723,35 @@ function Gobierno(props) {
                     <Col xs={12} md={12} className="mb-3">
                         <h4 className="text-center sub-title-cmh">Gobierno</h4>
                     </Col>
+                    <Col xs={12} md={12} className="mb-3">
 
-                    {/*Particulares*/}
-                    <Col xs={12} md={6} className="mb-3">
-                        <Row>
-                            <Col xs={12} md={6}>
-                                {/*Cantidad de pacientes*/}
-                                <FloatingLabel
-                                    controlId="floatingInput"
-                                    label="Particulares">
-                                    <OverlayTrigger
-                                        placement="top"
-                                        overlay={
-                                            <Tooltip id="tooltip-habitaciones">Número de pacientes particulares atendidos</Tooltip>
-                                        }>
-                                        <Form.Control
-                                            type="number"
-                                            placeholder="Particulares"
-                                            value={form.numeroPacientesParticulares ? form.numeroPacientesParticulares : ''}
-                                            name="numeroPacientesParticulares"
-                                            onChange={handleChange} />
-                                    </OverlayTrigger>
-                                </FloatingLabel>
+                        <Row className="justify-content-center">
+
+                            <Col xs={12} md={1} className="text-center">
+                                <OverlayTrigger
+                                    placement="right"
+                                    overlay={
+                                        <Tooltip id="tooltip-agregarInstitucion">Agregar nueva Institución gubernamental</Tooltip>
+                                    }>
+                                    <Button variant="success" onClick={handleModalChangeAdd}><FontAwesomeIcon icon={faPlus} /></Button>
+                                </OverlayTrigger>
                             </Col>
 
-                            <Col xs={12} md={6}>
-                                {/*Ingresos promedio*/}
-                                <FloatingLabel
-                                    controlId="floatingInput"
-                                    label="Ingresos">
-                                    <OverlayTrigger
-                                        placement="top"
-                                        overlay={
-                                            <Tooltip id="tooltip-habitaciones">Ingresos promedio debido a pacientes particulares</Tooltip>
-                                        }>
-                                        <Form.Control
-                                            type="number"
-                                            placeholder="Ingresos"
-                                            value={form.ingresosPacientesParticulares ? form.ingresosPacientesParticulares : ''}
-                                            name="ingresosPacientesParticulares"
-                                            onChange={handleChange} />
-                                    </OverlayTrigger>
-                                </FloatingLabel>
-                            </Col>
                         </Row>
+
+                    </Col>
+                    <Col xs={12} md={12} className="mb-3">
+                        <TCCrud variableForm={form.gobierno} handleChange={handleChange} handleChangeRegistrosDelete={handleChangeGobiernoDelete} handleChangeRegistrosEdit={handleChangeGobiernoEdit} elemento={"Institución"} />
                     </Col>
 
-                    {/*Aseguradora*/}
-                    <Col xs={12} md={6} className="mb-3">
-
-                        <Row>
-                            <Col xs={12} md={6}>
-                                {/*Cantidad de pacientes*/}
-                                <FloatingLabel
-                                    controlId="floatingInput"
-                                    label="Aseguradora">
-                                    <OverlayTrigger
-                                        placement="top"
-                                        overlay={
-                                            <Tooltip id="tooltip-habitaciones">Número de pacientes atendidos con seguro privado</Tooltip>
-                                        }>
-                                        <Form.Control
-                                            type="number"
-                                            placeholder="Aseguradora"
-                                            value={form.numeroPacientesAseguradora ? form.numeroPacientesAseguradora : ''}
-                                            name="numeroPacientesAseguradora"
-                                            onChange={handleChange} />
-                                    </OverlayTrigger>
-                                </FloatingLabel>
-                            </Col>
-                            <Col xs={12} md={6}>
-                                {/*Ingresos promedio*/}
-                                <FloatingLabel
-                                    controlId="floatingInput"
-                                    label="Ingresos">
-                                    <OverlayTrigger
-                                        placement="top"
-                                        overlay={
-                                            <Tooltip id="tooltip-habitaciones">Ingresos promedio debido a pacientes con seguro privado</Tooltip>
-                                        }>
-                                        <Form.Control
-                                            type="number"
-                                            placeholder="Ingresos"
-                                            value={form.ingresosPacientesAseguradora ? form.ingresosPacientesAseguradora : ''}
-                                            name="ingresosPacientesAseguradora"
-                                            onChange={handleChange} />
-                                    </OverlayTrigger>
-                                </FloatingLabel>
-                            </Col>
-                        </Row>
-                    </Col>
-
-                    {/*Gobierno*/}
-                    <Col xs={12} md={6} className="mb-3">
-
-                        <Row>
-                            <Col xs={12} md={6}>
-                                {/*Cantidad de pacientes*/}
-                                <FloatingLabel
-                                    controlId="floatingInput"
-                                    label="Gobierno">
-                                    <OverlayTrigger
-                                        placement="top"
-                                        overlay={
-                                            <Tooltip id="tooltip-habitaciones">Número de pacientes atendidos de Gobierno</Tooltip>
-                                        }>
-                                        <Form.Control
-                                            type="number"
-                                            placeholder="Gobierno"
-                                            value={form.numeroPacientesGobierno ? form.numeroPacientesGobierno : ''}
-                                            name="numeroPacientesGobierno"
-                                            onChange={handleChange} />
-                                    </OverlayTrigger>
-                                </FloatingLabel>
-                            </Col>
-                            <Col xs={12} md={6}>
-                                {/*Ingresos promedio*/}
-                                <FloatingLabel
-                                    controlId="floatingInput"
-                                    label="Ingresos">
-                                    <OverlayTrigger
-                                        placement="top"
-                                        overlay={
-                                            <Tooltip id="tooltip-habitaciones">Ingresos promedio debido a pacientes del ambito gubernamental</Tooltip>
-                                        }>
-                                        <Form.Control
-                                            type="number"
-                                            placeholder="Ingresos"
-                                            value={form.ingresosPacientesGobierno ? form.ingresosPacientesGobierno : ''}
-                                            name="ingresosPacientesGobierno"
-                                            onChange={handleChange} />
-                                    </OverlayTrigger>
-                                </FloatingLabel>
-                            </Col>
-                        </Row>
-                    </Col>
-
-                    {/*Empresas*/}
-                    <Col xs={12} md={6} className="mb-3">
-                        <Row>
-                            <Col xs={12} md={6}>
-                                {/*Cantidad de pacientes*/}
-                                <FloatingLabel
-                                    controlId="floatingInput"
-                                    label="Empresas">
-                                    <OverlayTrigger
-                                        placement="top"
-                                        overlay={
-                                            <Tooltip id="tooltip-habitaciones">Número de pacientes atendidos de empresas privadas</Tooltip>
-                                        }>
-                                        <Form.Control
-                                            type="number"
-                                            placeholder="Empresas"
-                                            value={form.numeroPacientesEmpresas ? form.numeroPacientesEmpresas : ''}
-                                            name="numeroPacientesEmpresas"
-                                            onChange={handleChange} />
-                                    </OverlayTrigger>
-                                </FloatingLabel>
-                            </Col>
-                            <Col xs={12} md={6}>
-                                {/*Ingresos promedio*/}
-                                <FloatingLabel
-                                    controlId="floatingInput"
-                                    label="Ingresos">
-                                    <OverlayTrigger
-                                        placement="top"
-                                        overlay={
-                                            <Tooltip id="tooltip-habitaciones">Ingresos promedio debido a pacientes de empresas privadas</Tooltip>
-                                        }>
-                                        <Form.Control
-                                            type="number"
-                                            placeholder="Ingresos"
-                                            value={form.ingresosPacientesEmpresas ? form.ingresosPacientesEmpresas : ''}
-                                            name="ingresosPacientesEmpresas"
-                                            onChange={handleChange} />
-                                    </OverlayTrigger>
-                                </FloatingLabel>
-                            </Col>
-                        </Row>
-                    </Col>
                 </Row>
             </Col>
+            <ModalAdd
+                modalTriggerAdd={modalTriggerAdd}
+                handleModalChangeAdd={handleModalChangeAdd}
+                handleChangeRegistros={handleChangeGobierno}
+                elemento={"Institución"}
+            />
         </Fragment>
     )
 
@@ -660,9 +759,20 @@ function Gobierno(props) {
 
 function Empresas(props) {
 
+
     //we obtain the props for this component
-    const form = props.form
-    const handleChange = props.handleChange
+    const form = props.form //Formulario
+    const handleChange = props.handleChange //HandleChange del formulario
+    const handleChangeEmpresas = props.handleChangeEmpresas;
+    const handleChangeEmpresasDelete = props.handleChangeEmpresasDelete;
+    const handleChangeEmpresasEdit = props.handleChangeEmpresasEdit;
+
+    const [modalTriggerAdd, setModalTriggerAdd] = useState(false);
+
+
+    const handleModalChangeAdd = () => {
+        setModalTriggerAdd(!modalTriggerAdd);
+    }
 
     return (
         <Fragment>
@@ -674,187 +784,35 @@ function Empresas(props) {
                     <Col xs={12} md={12} className="mb-3">
                         <h4 className="text-center sub-title-cmh">Empresas</h4>
                     </Col>
+                    <Col xs={12} md={12} className="mb-3">
 
-                    {/*Particulares*/}
-                    <Col xs={12} md={6} className="mb-3">
-                        <Row>
-                            <Col xs={12} md={6}>
-                                {/*Cantidad de pacientes*/}
-                                <FloatingLabel
-                                    controlId="floatingInput"
-                                    label="Particulares">
-                                    <OverlayTrigger
-                                        placement="top"
-                                        overlay={
-                                            <Tooltip id="tooltip-habitaciones">Número de pacientes particulares atendidos</Tooltip>
-                                        }>
-                                        <Form.Control
-                                            type="number"
-                                            placeholder="Particulares"
-                                            value={form.numeroPacientesParticulares ? form.numeroPacientesParticulares : ''}
-                                            name="numeroPacientesParticulares"
-                                            onChange={handleChange} />
-                                    </OverlayTrigger>
-                                </FloatingLabel>
+                        <Row className="justify-content-center">
+
+                            <Col xs={12} md={1} className="text-center">
+                                <OverlayTrigger
+                                    placement="right"
+                                    overlay={
+                                        <Tooltip id="tooltip-agregarEmpresa">Agregar nueva Empresa local</Tooltip>
+                                    }>
+                                    <Button variant="success" onClick={handleModalChangeAdd}><FontAwesomeIcon icon={faPlus} /></Button>
+                                </OverlayTrigger>
                             </Col>
 
-                            <Col xs={12} md={6}>
-                                {/*Ingresos promedio*/}
-                                <FloatingLabel
-                                    controlId="floatingInput"
-                                    label="Ingresos">
-                                    <OverlayTrigger
-                                        placement="top"
-                                        overlay={
-                                            <Tooltip id="tooltip-habitaciones">Ingresos promedio debido a pacientes particulares</Tooltip>
-                                        }>
-                                        <Form.Control
-                                            type="number"
-                                            placeholder="Ingresos"
-                                            value={form.ingresosPacientesParticulares ? form.ingresosPacientesParticulares : ''}
-                                            name="ingresosPacientesParticulares"
-                                            onChange={handleChange} />
-                                    </OverlayTrigger>
-                                </FloatingLabel>
-                            </Col>
                         </Row>
+
+                    </Col>
+                    <Col xs={12} md={12} className="mb-3">
+                        <TCCrud variableForm={form.empresas} handleChange={handleChange} handleChangeRegistrosDelete={handleChangeEmpresasDelete} handleChangeRegistrosEdit={handleChangeEmpresasEdit} elemento={"Empresa"} />
                     </Col>
 
-                    {/*Aseguradora*/}
-                    <Col xs={12} md={6} className="mb-3">
-
-                        <Row>
-                            <Col xs={12} md={6}>
-                                {/*Cantidad de pacientes*/}
-                                <FloatingLabel
-                                    controlId="floatingInput"
-                                    label="Aseguradora">
-                                    <OverlayTrigger
-                                        placement="top"
-                                        overlay={
-                                            <Tooltip id="tooltip-habitaciones">Número de pacientes atendidos con seguro privado</Tooltip>
-                                        }>
-                                        <Form.Control
-                                            type="number"
-                                            placeholder="Aseguradora"
-                                            value={form.numeroPacientesAseguradora ? form.numeroPacientesAseguradora : ''}
-                                            name="numeroPacientesAseguradora"
-                                            onChange={handleChange} />
-                                    </OverlayTrigger>
-                                </FloatingLabel>
-                            </Col>
-                            <Col xs={12} md={6}>
-                                {/*Ingresos promedio*/}
-                                <FloatingLabel
-                                    controlId="floatingInput"
-                                    label="Ingresos">
-                                    <OverlayTrigger
-                                        placement="top"
-                                        overlay={
-                                            <Tooltip id="tooltip-habitaciones">Ingresos promedio debido a pacientes con seguro privado</Tooltip>
-                                        }>
-                                        <Form.Control
-                                            type="number"
-                                            placeholder="Ingresos"
-                                            value={form.ingresosPacientesAseguradora ? form.ingresosPacientesAseguradora : ''}
-                                            name="ingresosPacientesAseguradora"
-                                            onChange={handleChange} />
-                                    </OverlayTrigger>
-                                </FloatingLabel>
-                            </Col>
-                        </Row>
-                    </Col>
-
-                    {/*Gobierno*/}
-                    <Col xs={12} md={6} className="mb-3">
-
-                        <Row>
-                            <Col xs={12} md={6}>
-                                {/*Cantidad de pacientes*/}
-                                <FloatingLabel
-                                    controlId="floatingInput"
-                                    label="Gobierno">
-                                    <OverlayTrigger
-                                        placement="top"
-                                        overlay={
-                                            <Tooltip id="tooltip-habitaciones">Número de pacientes atendidos de Gobierno</Tooltip>
-                                        }>
-                                        <Form.Control
-                                            type="number"
-                                            placeholder="Gobierno"
-                                            value={form.numeroPacientesGobierno ? form.numeroPacientesGobierno : ''}
-                                            name="numeroPacientesGobierno"
-                                            onChange={handleChange} />
-                                    </OverlayTrigger>
-                                </FloatingLabel>
-                            </Col>
-                            <Col xs={12} md={6}>
-                                {/*Ingresos promedio*/}
-                                <FloatingLabel
-                                    controlId="floatingInput"
-                                    label="Ingresos">
-                                    <OverlayTrigger
-                                        placement="top"
-                                        overlay={
-                                            <Tooltip id="tooltip-habitaciones">Ingresos promedio debido a pacientes del ambito gubernamental</Tooltip>
-                                        }>
-                                        <Form.Control
-                                            type="number"
-                                            placeholder="Ingresos"
-                                            value={form.ingresosPacientesGobierno ? form.ingresosPacientesGobierno : ''}
-                                            name="ingresosPacientesGobierno"
-                                            onChange={handleChange} />
-                                    </OverlayTrigger>
-                                </FloatingLabel>
-                            </Col>
-                        </Row>
-                    </Col>
-
-                    {/*Empresas*/}
-                    <Col xs={12} md={6} className="mb-3">
-                        <Row>
-                            <Col xs={12} md={6}>
-                                {/*Cantidad de pacientes*/}
-                                <FloatingLabel
-                                    controlId="floatingInput"
-                                    label="Empresas">
-                                    <OverlayTrigger
-                                        placement="top"
-                                        overlay={
-                                            <Tooltip id="tooltip-habitaciones">Número de pacientes atendidos de empresas privadas</Tooltip>
-                                        }>
-                                        <Form.Control
-                                            type="number"
-                                            placeholder="Empresas"
-                                            value={form.numeroPacientesEmpresas ? form.numeroPacientesEmpresas : ''}
-                                            name="numeroPacientesEmpresas"
-                                            onChange={handleChange} />
-                                    </OverlayTrigger>
-                                </FloatingLabel>
-                            </Col>
-                            <Col xs={12} md={6}>
-                                {/*Ingresos promedio*/}
-                                <FloatingLabel
-                                    controlId="floatingInput"
-                                    label="Ingresos">
-                                    <OverlayTrigger
-                                        placement="top"
-                                        overlay={
-                                            <Tooltip id="tooltip-habitaciones">Ingresos promedio debido a pacientes de empresas privadas</Tooltip>
-                                        }>
-                                        <Form.Control
-                                            type="number"
-                                            placeholder="Ingresos"
-                                            value={form.ingresosPacientesEmpresas ? form.ingresosPacientesEmpresas : ''}
-                                            name="ingresosPacientesEmpresas"
-                                            onChange={handleChange} />
-                                    </OverlayTrigger>
-                                </FloatingLabel>
-                            </Col>
-                        </Row>
-                    </Col>
                 </Row>
             </Col>
+            <ModalAdd
+                modalTriggerAdd={modalTriggerAdd}
+                handleModalChangeAdd={handleModalChangeAdd}
+                handleChangeRegistros={handleChangeEmpresas}
+                elemento={"Empresa"}
+            />
         </Fragment>
     )
 
@@ -877,24 +835,27 @@ function Particulares(props) {
                         <h4 className="text-center sub-title-cmh">Particulares</h4>
                     </Col>
 
-                    {/*Particulares*/}
+                    {/*Crédito Hospital*/}
                     <Col xs={12} md={6} className="mb-3">
                         <Row>
+                            <Col xs={12} md={12} className="mb-3">
+                                <h5 className="text-center title-cmh">Crédito Hospital</h5>
+                            </Col>
                             <Col xs={12} md={6}>
                                 {/*Cantidad de pacientes*/}
                                 <FloatingLabel
                                     controlId="floatingInput"
-                                    label="Particulares">
+                                    label="Número de Pacientes">
                                     <OverlayTrigger
                                         placement="top"
                                         overlay={
-                                            <Tooltip id="tooltip-habitaciones">Número de pacientes particulares atendidos</Tooltip>
+                                            <Tooltip id="tooltip-habitaciones">Número de pacientes con crédito hospital</Tooltip>
                                         }>
                                         <Form.Control
                                             type="number"
-                                            placeholder="Particulares"
-                                            value={form.numeroPacientesParticulares ? form.numeroPacientesParticulares : ''}
-                                            name="numeroPacientesParticulares"
+                                            placeholder="Número de Pacientes"
+                                            value={form.pacientesCreditoHospital ? form.pacientesCreditoHospital : ''}
+                                            name="pacientesCreditoHospital"
                                             onChange={handleChange} />
                                     </OverlayTrigger>
                                 </FloatingLabel>
@@ -908,13 +869,13 @@ function Particulares(props) {
                                     <OverlayTrigger
                                         placement="top"
                                         overlay={
-                                            <Tooltip id="tooltip-habitaciones">Ingresos promedio debido a pacientes particulares</Tooltip>
+                                            <Tooltip id="tooltip-habitaciones">Ingresos promedio debido a pacientes con crédito hospital</Tooltip>
                                         }>
                                         <Form.Control
                                             type="number"
                                             placeholder="Ingresos"
-                                            value={form.ingresosPacientesParticulares ? form.ingresosPacientesParticulares : ''}
-                                            name="ingresosPacientesParticulares"
+                                            value={form.ingresosCreditoHospital ? form.ingresosCreditoHospital : ''}
+                                            name="ingresosCreditoHospital"
                                             onChange={handleChange} />
                                     </OverlayTrigger>
                                 </FloatingLabel>
@@ -922,29 +883,32 @@ function Particulares(props) {
                         </Row>
                     </Col>
 
-                    {/*Aseguradora*/}
+                    {/*Alivio Capital*/}
                     <Col xs={12} md={6} className="mb-3">
-
                         <Row>
+                            <Col xs={12} md={12} className="mb-3">
+                                <h5 className="text-center title-cmh">Alivio Capital</h5>
+                            </Col>
                             <Col xs={12} md={6}>
                                 {/*Cantidad de pacientes*/}
                                 <FloatingLabel
                                     controlId="floatingInput"
-                                    label="Aseguradora">
+                                    label="Número de Pacientes">
                                     <OverlayTrigger
                                         placement="top"
                                         overlay={
-                                            <Tooltip id="tooltip-habitaciones">Número de pacientes atendidos con seguro privado</Tooltip>
+                                            <Tooltip id="tooltip-habitaciones">Número de pacientes de alivio capital</Tooltip>
                                         }>
                                         <Form.Control
                                             type="number"
-                                            placeholder="Aseguradora"
-                                            value={form.numeroPacientesAseguradora ? form.numeroPacientesAseguradora : ''}
-                                            name="numeroPacientesAseguradora"
+                                            placeholder="Número de Pacientes"
+                                            value={form.pacientesAlivioCapital ? form.pacientesAlivioCapital : ''}
+                                            name="pacientesAlivioCapital"
                                             onChange={handleChange} />
                                     </OverlayTrigger>
                                 </FloatingLabel>
                             </Col>
+
                             <Col xs={12} md={6}>
                                 {/*Ingresos promedio*/}
                                 <FloatingLabel
@@ -953,13 +917,13 @@ function Particulares(props) {
                                     <OverlayTrigger
                                         placement="top"
                                         overlay={
-                                            <Tooltip id="tooltip-habitaciones">Ingresos promedio debido a pacientes con seguro privado</Tooltip>
+                                            <Tooltip id="tooltip-habitaciones">Ingresos promedio debido a pacientes de alivio capital</Tooltip>
                                         }>
                                         <Form.Control
                                             type="number"
                                             placeholder="Ingresos"
-                                            value={form.ingresosPacientesAseguradora ? form.ingresosPacientesAseguradora : ''}
-                                            name="ingresosPacientesAseguradora"
+                                            value={form.ingresosAlivioCapital ? form.ingresosAlivioCapital : ''}
+                                            name="ingresosAlivioCapital"
                                             onChange={handleChange} />
                                     </OverlayTrigger>
                                 </FloatingLabel>
@@ -967,94 +931,6 @@ function Particulares(props) {
                         </Row>
                     </Col>
 
-                    {/*Gobierno*/}
-                    <Col xs={12} md={6} className="mb-3">
-
-                        <Row>
-                            <Col xs={12} md={6}>
-                                {/*Cantidad de pacientes*/}
-                                <FloatingLabel
-                                    controlId="floatingInput"
-                                    label="Gobierno">
-                                    <OverlayTrigger
-                                        placement="top"
-                                        overlay={
-                                            <Tooltip id="tooltip-habitaciones">Número de pacientes atendidos de Gobierno</Tooltip>
-                                        }>
-                                        <Form.Control
-                                            type="number"
-                                            placeholder="Gobierno"
-                                            value={form.numeroPacientesGobierno ? form.numeroPacientesGobierno : ''}
-                                            name="numeroPacientesGobierno"
-                                            onChange={handleChange} />
-                                    </OverlayTrigger>
-                                </FloatingLabel>
-                            </Col>
-                            <Col xs={12} md={6}>
-                                {/*Ingresos promedio*/}
-                                <FloatingLabel
-                                    controlId="floatingInput"
-                                    label="Ingresos">
-                                    <OverlayTrigger
-                                        placement="top"
-                                        overlay={
-                                            <Tooltip id="tooltip-habitaciones">Ingresos promedio debido a pacientes del ambito gubernamental</Tooltip>
-                                        }>
-                                        <Form.Control
-                                            type="number"
-                                            placeholder="Ingresos"
-                                            value={form.ingresosPacientesGobierno ? form.ingresosPacientesGobierno : ''}
-                                            name="ingresosPacientesGobierno"
-                                            onChange={handleChange} />
-                                    </OverlayTrigger>
-                                </FloatingLabel>
-                            </Col>
-                        </Row>
-                    </Col>
-
-                    {/*Empresas*/}
-                    <Col xs={12} md={6} className="mb-3">
-                        <Row>
-                            <Col xs={12} md={6}>
-                                {/*Cantidad de pacientes*/}
-                                <FloatingLabel
-                                    controlId="floatingInput"
-                                    label="Empresas">
-                                    <OverlayTrigger
-                                        placement="top"
-                                        overlay={
-                                            <Tooltip id="tooltip-habitaciones">Número de pacientes atendidos de empresas privadas</Tooltip>
-                                        }>
-                                        <Form.Control
-                                            type="number"
-                                            placeholder="Empresas"
-                                            value={form.numeroPacientesEmpresas ? form.numeroPacientesEmpresas : ''}
-                                            name="numeroPacientesEmpresas"
-                                            onChange={handleChange} />
-                                    </OverlayTrigger>
-                                </FloatingLabel>
-                            </Col>
-                            <Col xs={12} md={6}>
-                                {/*Ingresos promedio*/}
-                                <FloatingLabel
-                                    controlId="floatingInput"
-                                    label="Ingresos">
-                                    <OverlayTrigger
-                                        placement="top"
-                                        overlay={
-                                            <Tooltip id="tooltip-habitaciones">Ingresos promedio debido a pacientes de empresas privadas</Tooltip>
-                                        }>
-                                        <Form.Control
-                                            type="number"
-                                            placeholder="Ingresos"
-                                            value={form.ingresosPacientesEmpresas ? form.ingresosPacientesEmpresas : ''}
-                                            name="ingresosPacientesEmpresas"
-                                            onChange={handleChange} />
-                                    </OverlayTrigger>
-                                </FloatingLabel>
-                            </Col>
-                        </Row>
-                    </Col>
                 </Row>
             </Col>
         </Fragment>

@@ -13,6 +13,7 @@ function ModalAdd(props) {
     const handleModalState = props.handleModalChangeAdd;
     const handleChangeRegistros = props.handleChangeRegistros;
     const elemento = props.elemento;
+    const variableForm = props.variableForm;
 
     const [form, setForm] = useState({});
 
@@ -44,7 +45,13 @@ function ModalAdd(props) {
         e.preventDefault();
         e.stopPropagation();
 
-        await handleChangeRegistros(form) ? handleModalState() : Swal.fire('Oooooops!', `El nombre de ${elemento.toLowerCase()} ya esta registrado.`, 'error');
+        await handleChangeRegistros(form) ?
+            handleModalState()
+            :
+            variableForm.length < 10 ?
+                Swal.fire('Oooooops!', `El nombre de ${elemento.toLowerCase()} ya esta registrado.`, 'error')
+                :
+                Swal.fire('Oooooops!', 'No es posible agregar un regsitro más a la tabla', 'error');
 
     }
 
@@ -76,30 +83,24 @@ function ModalAdd(props) {
 
                     </Col>
 
-                    {/*No. Pacientes*/}
+                    {/*Total Pacientes*/}
                     <Col xs={12} md={12} className="mb-3">
-                        <GetInput
-                            label='No. Pacientes'
-                            value={form.numeroPacientes}
-                            name="numeroPacientes"
-                            handleChangeModal={handleChangeModal}
-                            tooltipDescrip='Número de pacientes atendidos'
-                            type="text"
-                            isRequired={true}
-                        />
-                    </Col>
-
-                    {/*Ingresos*/}
-                    <Col xs={12} md={12} className="mb-3">
-                        <GetInput
-                            label='Ingresos'
-                            value={form.ingresos}
-                            name="ingresos"
-                            handleChangeModal={handleChangeModal}
-                            tooltipDescrip='Ingresos promedio'
-                            type="text"
-                            isRequired={false}
-                        />
+                        <FloatingLabel
+                            controlId="floatingInput"
+                            label="Total Pacientes">
+                            <OverlayTrigger
+                                placement="right"
+                                overlay={
+                                    <Tooltip id="tooltip-TotalPacientes">Número total de pacientes con {elemento}</Tooltip>
+                                }>
+                                <Form.Control
+                                    type="number"
+                                    placeholder="Total Pacientes"
+                                    value={form.totalPacientes ? form.totalPacientes : ''}
+                                    name="totalPacientes"
+                                    onChange={handleChangeModal} required autoComplete="off" />
+                            </OverlayTrigger>
+                        </FloatingLabel>
                     </Col>
                 </Modal.Body>
                 <Modal.Footer className="modal-cmh-header-footer">

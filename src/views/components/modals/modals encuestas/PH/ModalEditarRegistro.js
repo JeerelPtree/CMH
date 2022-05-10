@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import { Container, Row, Col, Modal, FloatingLabel, Button, Form, OverlayTrigger, Tooltip } from "react-bootstrap";
 import Swal from "sweetalert2";
 
-import '../../../globalStyles.css'
+import '../../../../../globalStyles.css'
 
 
 function ModalEditarRegistro(props) {
@@ -16,6 +16,7 @@ function ModalEditarRegistro(props) {
     const data = props.data;
     const index = props.index;
     const handleChangeRegistrosEdit = props.handleChangeRegistrosEdit;
+    const elemento = props.elemento;
 
     const [dataEdit, setDataEdit] = useState({});
 
@@ -40,13 +41,13 @@ function ModalEditarRegistro(props) {
      * It's a function that updates the data of an insurance company
      * @param e - The event object
      */
-    const updateAseguradora = async (e) => {
+    const updateRegistro = async (e) => {
 
         e.preventDefault();
         e.stopPropagation();
 
         await Swal.fire({
-            title: '¿Desea actualizar la aseguradora ' + dataEdit.nombre + '?',
+            title: `¿Desea actualizar ${elemento.toLowerCase()} ` + dataEdit.nombre + '?',
             icon: 'warning',
             iconHtml: '?',
             confirmButtonText: 'Aceptar',
@@ -57,33 +58,37 @@ function ModalEditarRegistro(props) {
             showCloseButton: true
         }).then(async (result) => {
             if (result.isConfirmed) {
-                await handleChangeRegistrosEdit(index, dataEdit) ? handleModalState() : Swal.fire('Oooooops!', 'El nombre de la aseguradora ya esta registrado.', 'error');
-                Swal.fire('Actualizada!', '', 'success')
+                if (await handleChangeRegistrosEdit(index, dataEdit)) {
+                    handleModalState();
+                    Swal.fire('¡Registro actualizado!', '', 'success');
+                } else {
+                    Swal.fire('Oooooops!', `El nombre de ${elemento.toLowerCase()} ya esta registrado.`, 'error');
+                }
             }
         })
     }
 
     return (
         <Modal show={modalIsOpen} backdrop="static" keyboard={false} size="sm" arial-labelledby="contained-modal-title-vcenter" onHide={handleModalState} centered>
-            <Form onSubmit={updateAseguradora}>
+            <Form onSubmit={updateRegistro}>
                 <Modal.Header className="modal-cmh-header-footer" closeButton>
-                    <Modal.Title className="title-cmh">Editar Aseguradora</Modal.Title>
+                    <Modal.Title className="title-cmh">Editar {elemento}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
 
-                    {/*Aseguradora*/}
+                    {/*Tipo de elemento*/}
                     <Col xs={12} md={12} className="mb-3">
                         <FloatingLabel
                             controlId="floatingInput"
-                            label="Aseguradora">
+                            label={elemento}>
                             <OverlayTrigger
                                 placement="right"
                                 overlay={
-                                    <Tooltip id="tooltip-Aseguradora">Nombre de la aseguradora</Tooltip>
+                                    <Tooltip id={`tooltip-${elemento}`}>Nombre de {elemento}</Tooltip>
                                 }>
                                 <Form.Control
                                     type="text"
-                                    placeholder="Aseguradora"
+                                    placeholder={elemento}
                                     value={dataEdit.nombre ? dataEdit.nombre : ''}
                                     name="nombre"
                                     onChange={handleChange} />
@@ -91,46 +96,25 @@ function ModalEditarRegistro(props) {
                         </FloatingLabel>
                     </Col>
 
-                    {/*No. Pacientes*/}
+                    {/*Total Pacientes*/}
                     <Col xs={12} md={12} className="mb-3">
                         <FloatingLabel
                             controlId="floatingInput"
-                            label="No. Pacientes">
+                            label="Total Pacientes">
                             <OverlayTrigger
                                 placement="right"
                                 overlay={
-                                    <Tooltip id="tooltip-NoPacientes">Número de pacientes atendidos</Tooltip>
+                                    <Tooltip id="tooltip-TotalPacientes">Número total de pacientes con {elemento}</Tooltip>
                                 }>
                                 <Form.Control
                                     type="text"
-                                    placeholder="No. Pacientes"
-                                    value={dataEdit.numeroPacientes ? dataEdit.numeroPacientes : ''}
-                                    name="numeroPacientes"
+                                    placeholder="Total Pacientes"
+                                    value={dataEdit.totalPacientes ? dataEdit.totalPacientes : ''}
+                                    name="totalPacientes"
                                     onChange={handleChange} />
                             </OverlayTrigger>
                         </FloatingLabel>
                     </Col>
-
-                    {/*Ingresos*/}
-                    <Col xs={12} md={12} className="mb-3">
-                        <FloatingLabel
-                            controlId="floatingInput"
-                            label="Ingresos">
-                            <OverlayTrigger
-                                placement="right"
-                                overlay={
-                                    <Tooltip id="tooltip-Ingresos">Ingresos promedio</Tooltip>
-                                }>
-                                <Form.Control
-                                    type="text"
-                                    placeholder="Ingresos"
-                                    value={dataEdit.ingresos ? dataEdit.ingresos : ''}
-                                    name="ingresos"
-                                    onChange={handleChange} />
-                            </OverlayTrigger>
-                        </FloatingLabel>
-                    </Col>
-
                 </Modal.Body>
                 <Modal.Footer className="modal-cmh-header-footer">
                     <Button variant="danger" onClick={handleModalState}>Cancelar</Button>
