@@ -1,8 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { Container, Col, Row, FloatingLabel, Button, Form, OverlayTrigger, Tooltip } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import YNOptions from "./json/yesOrNotOptions.json"
+import servidorOptions from "./json/SI/servidorOptions"
 //import axios from "axios"
 
 
@@ -65,7 +64,7 @@ function SI() {
 
                             <SistemaBIA form={form} handleChange={handleChange} />
 
-                            <OtraInformacion form={form} handleChange={handleChange} />
+                            <OtraInformacion form={form} handleChange={handleChange} servidorOptions={servidorOptions} />
 
                             {/*Botón de enviar
                             <Col xs={12} md={6} className="mt-3 mb-5">
@@ -762,8 +761,11 @@ function SistemaBIA(props) {
 }
 
 function OtraInformacion(props) {
-    const form = props.form
-    const handleChange = props.handleChange
+
+    /* Destructuring the props object. */
+    const form = props.form;
+    const handleChange = props.handleChange;
+    const servidorOptions = props.servidorOptions;
 
     return (
         <Fragment>
@@ -781,9 +783,7 @@ function OtraInformacion(props) {
                             value={form.servidor}
                             name={"servidor"}
                             handleChange={handleChange}
-                            options={[
-                                { "value": "propio", "name": "PROPIO", "id": 1 },
-                                { "value": "rentado", "name": "RENTADO", "id": 2 }]}
+                            options={servidorOptions}
                             isRequired={false}
                             show={true}
                         />

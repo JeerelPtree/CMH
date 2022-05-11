@@ -1,0 +1,17 @@
+[
+    {
+        "value": "reportes mensuales",
+        "name": "Reportes Mensuales",
+        "id": 1
+    },
+    {
+        "value": "bionexo",
+        "name": "Bionexo",
+        "id": 2
+    },
+    {
+        "value": "comparativo de precios",
+        "name": "Comparativo de Precios",
+        "id": 3
+    }
+]

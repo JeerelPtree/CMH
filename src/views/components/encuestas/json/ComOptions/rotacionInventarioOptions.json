@@ -1,0 +1,22 @@
+[
+    {
+        "value": "semanal",
+        "name": "Semanal",
+        "id": 1
+    },
+    {
+        "value": "quincenal",
+        "name": "Quincenal",
+        "id": 2
+    },
+    {
+        "value": "mensual",
+        "name": "Mensual",
+        "id": 3
+    },
+    {
+        "value": "trimestral",
+        "name": "Trimestral",
+        "id": 4
+    }
+]

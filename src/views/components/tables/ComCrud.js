@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react";
 import { Container, Col, Row, Button, Table, Alert } from "react-bootstrap";
-import ModalEditarRegistro from "../modals/modals encuestas/PH/ModalEditarRegistro";
+import ModalEditarRegistro from "../modals/modals encuestas/Com/ModalEditarRegistro";
 import { faTrash, faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../../../globalStyles.css"
@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 
 //TODO: hace falta poner tooltips en los botones
 
-function PHCrud(props) {
+function ComCrud(props) {
     //Obtenemos las propiedades de la tabla
     const { variableForm, handleChangeRegistrosDelete, handleChangeRegistrosEdit, elemento } = props
     const [dataEdit, setDataEdit] = useState({})
@@ -34,9 +34,10 @@ function PHCrud(props) {
                 <Table striped hover responsive className="align-middle text-center ">
                     <thead className="thead-cmh">
                         <tr>
-                            <th>No.</th>
-                            <th>Top 10 {elemento}s</th>
-                            <th>Total de pacientes</th>
+                            <th>{elemento}</th>
+                            <th>Monto Anual de Compra</th>
+                            <th>Tipo de Insumos</th>
+                            <th>Financiamiento</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -44,9 +45,10 @@ function PHCrud(props) {
                         {
                             variableForm && variableForm.map((item, index) => (
                                 <tr key={index}>
-                                    <td>{index + 1}</td>
                                     <td>{item.nombre}</td>
-                                    <td>{item.totalPacientes}</td>
+                                    <td>{item.montoAnualCompra}</td>
+                                    <td>{item.tipoInsumos}</td>
+                                    <td>{item.diasFinanciamientoProveedor}</td>
                                     <td>
                                         <Row className="justify-content-center">
                                             <Col xs={3} md={3}>
@@ -86,6 +88,7 @@ function PHCrud(props) {
 
 
                 <ModalEditarRegistro
+
                     modalIsOpen={modalTriggerEditar}//bandera para abrir cerrar la modal
                     handleModalState={handleModalChangeEditar}//handleState para abrir cerrar la modal
                     data={dataEdit}
@@ -109,7 +112,7 @@ function PHCrud(props) {
                                 </Alert.Heading>
                                 <hr />
                                 <p className="text-center">Favor de agregar uno nuevo haciendo click en el botón de arriba.</p>
-                                <p className="text-center">(Recuerde que son 10 registros necesarios).</p>
+                                <p className="text-center">(Recuerde que son 8 registros necesarios).</p>
                             </Alert>
                         </Col>
                     </Row>
@@ -119,4 +122,4 @@ function PHCrud(props) {
     }
 }
 
-export default PHCrud;
+export default ComCrud;

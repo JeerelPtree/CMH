@@ -10,3 +10,4 @@ export { default as TC } from "./TC";
 export { default as GP } from "./GP"
 export { default as CAP } from "./CAP"
 export { default as SI } from "./SI"
+export { default as Com } from "./Com"

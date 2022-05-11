@@ -1,0 +1,27 @@
+[
+    {
+        "value": "medicamento",
+        "name": "Medicamento",
+        "id": 1
+    },
+    {
+        "value": "medicamento y material",
+        "name": "Medicamento y Material",
+        "id": 2
+    },
+    {
+        "value": "material y medio de contraste",
+        "name": "Material y Medio de contraste",
+        "id": 3
+    },
+    {
+        "value": "oxigeno medicinal",
+        "name": "Oxigeno Medicinal",
+        "id": 4
+    },
+    {
+        "value": "insumo de laboratorio",
+        "name": "Insumo de Laboratorio",
+        "id": 5
+    }
+]

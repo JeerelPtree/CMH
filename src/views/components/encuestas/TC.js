@@ -14,7 +14,6 @@ function TC() {
 
     //declared the variables, constants and states for this module
     const [form, setForm] = useState({ aseguradoras: [], gobierno: [], empresas: [] })
-    const [viewFlags, setViewFlags] = useState({})
 
     //module's functions
     {/*Función para manejar el cambio en los campos del formulario de la modal*/ }
