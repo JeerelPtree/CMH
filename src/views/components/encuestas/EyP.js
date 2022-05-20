@@ -313,49 +313,54 @@ function Servicios(props) {
 
                     </Col>
 
-                    {/*Salas de Tococirugía*/}
-                    <Col xs={12} md={4} className="mb-3">
+                    <Row className="justify-content-center">
 
-                        <FloatingLabel
-                            controlId="floatingInput"
-                            label="Salas de Partos">
-                            <OverlayTrigger
-                                placement="top"
-                                overlay={
-                                    <Tooltip id="tooltip-partos">Número de salas de Tococirugía</Tooltip>
-                                }>
-                                <Form.Control
-                                    type="number"
-                                    placeholder="Salas de partos"
-                                    value={form.numeroSalasPartos ? form.numeroSalasPartos : ''}
-                                    name="numeroSalasPartos"
-                                    onChange={handleChange} />
-                            </OverlayTrigger>
-                        </FloatingLabel>
+                        {/*Salas de Tococirugía*/}
+                        <Col xs={12} md={4} className="mb-3">
 
-                    </Col>
+                            <FloatingLabel
+                                controlId="floatingInput"
+                                label="Salas de Partos">
+                                <OverlayTrigger
+                                    placement="top"
+                                    overlay={
+                                        <Tooltip id="tooltip-partos">Número de salas de Tococirugía</Tooltip>
+                                    }>
+                                    <Form.Control
+                                        type="number"
+                                        placeholder="Salas de partos"
+                                        value={form.numeroSalasPartos ? form.numeroSalasPartos : ''}
+                                        name="numeroSalasPartos"
+                                        onChange={handleChange} />
+                                </OverlayTrigger>
+                            </FloatingLabel>
 
-                    {/*Salas exclusivas de cirugía ambulatoria*/}
-                    <Col xs={12} md={4} className="mb-3">
+                        </Col>
 
-                        <FloatingLabel
-                            controlId="floatingInput"
-                            label="Salas de Cirugía Ambulatoria">
-                            <OverlayTrigger
-                                placement="top"
-                                overlay={
-                                    <Tooltip id="tooltip-ambulatoria">Número de salas exclusivas de Cirugía Ambulatoria</Tooltip>
-                                }>
-                                <Form.Control
-                                    type="number"
-                                    placeholder="Salas de Cirugía Ambulatoria"
-                                    value={form.numeroSalasAmbulatoria ? form.numeroSalasAmbulatoria : ''}
-                                    name="numeroSalasAmbulatoria"
-                                    onChange={handleChange} />
-                            </OverlayTrigger>
-                        </FloatingLabel>
+                        {/*Salas exclusivas de cirugía ambulatoria*/}
+                        <Col xs={12} md={4} className="mb-3">
 
-                    </Col>
+                            <FloatingLabel
+                                controlId="floatingInput"
+                                label="Salas de Cirugía Ambulatoria">
+                                <OverlayTrigger
+                                    placement="top"
+                                    overlay={
+                                        <Tooltip id="tooltip-ambulatoria">Número de salas exclusivas de Cirugía Ambulatoria</Tooltip>
+                                    }>
+                                    <Form.Control
+                                        type="number"
+                                        placeholder="Salas de Cirugía Ambulatoria"
+                                        value={form.numeroSalasAmbulatoria ? form.numeroSalasAmbulatoria : ''}
+                                        name="numeroSalasAmbulatoria"
+                                        onChange={handleChange} />
+                                </OverlayTrigger>
+                            </FloatingLabel>
+
+                        </Col>
+
+                    </Row>
+
 
                 </Row>
             </Col>
@@ -692,48 +697,51 @@ function ServicioImagenologia(props) {
 
                     </Col>
 
-                    {/*Mastógrafía*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <FloatingLabel
-                            controlId="floatingInput"
-                            label="Mastógrafía">
-                            <OverlayTrigger
-                                placement="top"
-                                overlay={
-                                    <Tooltip id="tooltip-mastografia">Número de mastógrafías</Tooltip>
-                                }>
-                                <Form.Control
-                                    type="number"
-                                    placeholder="Mastógrafía"
-                                    value={form.numeroMastografia ? form.numeroMastografia : ''}
-                                    name="numeroMastografia"
-                                    onChange={handleChange} />
-                            </OverlayTrigger>
-                        </FloatingLabel>
+                    <Row className="justify-content-center">
 
-                    </Col>
+                        {/*Mastógrafía*/}
+                        <Col xs={12} md={4} className="mb-3">
+                            <FloatingLabel
+                                controlId="floatingInput"
+                                label="Mastógrafía">
+                                <OverlayTrigger
+                                    placement="top"
+                                    overlay={
+                                        <Tooltip id="tooltip-mastografia">Número de mastógrafías</Tooltip>
+                                    }>
+                                    <Form.Control
+                                        type="number"
+                                        placeholder="Mastógrafía"
+                                        value={form.numeroMastografia ? form.numeroMastografia : ''}
+                                        name="numeroMastografia"
+                                        onChange={handleChange} />
+                                </OverlayTrigger>
+                            </FloatingLabel>
 
-                    {/*Densitómetría*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <FloatingLabel
-                            controlId="floatingInput"
-                            label="Densitómetría">
-                            <OverlayTrigger
-                                placement="top"
-                                overlay={
-                                    <Tooltip id="tooltip-densitometria">Número de estudios de densitómetría</Tooltip>
-                                }>
-                                <Form.Control
-                                    type="number"
-                                    placeholder="Densitómetría"
-                                    value={form.numeroDensitometria ? form.numeroDensitometria : ''}
-                                    name="numeroDensitometria"
-                                    onChange={handleChange} />
-                            </OverlayTrigger>
-                        </FloatingLabel>
+                        </Col>
 
-                    </Col>
+                        {/*Densitómetría*/}
+                        <Col xs={12} md={4} className="mb-3">
+                            <FloatingLabel
+                                controlId="floatingInput"
+                                label="Densitómetría">
+                                <OverlayTrigger
+                                    placement="top"
+                                    overlay={
+                                        <Tooltip id="tooltip-densitometria">Número de estudios de densitómetría</Tooltip>
+                                    }>
+                                    <Form.Control
+                                        type="number"
+                                        placeholder="Densitómetría"
+                                        value={form.numeroDensitometria ? form.numeroDensitometria : ''}
+                                        name="numeroDensitometria"
+                                        onChange={handleChange} />
+                                </OverlayTrigger>
+                            </FloatingLabel>
 
+                        </Col>
+
+                    </Row>
 
                 </Row>
             </Col>
@@ -755,18 +763,25 @@ function Transplantes(props) {
                         <h4 className="text-center sub-title-cmh">Transplantes</h4>
                     </Col>
 
-                    {/*¿Realizan transplantes?*/}
-                    <Col xs={12} md={6} className="mb-3">
-                        <FloatingLabel controlId="floatingSelect" label="¿Realizan Transplantes?">
-                            <Form.Select aria-label="Floating label" value={form.realizanTransplantes ? form.realizanTransplantes : ''} onChange={handleChange} name="realizanTransplantes"
-                                style={{ height: '70px' }}>
-                                <option value="" disabled>Seleccione una opción</option>
-                                <option value={true}>Si</option>
-                                <option value={false}>No</option>
-                            </Form.Select>
-                        </FloatingLabel>
-                    </Col>
+                    <Row className="justify-content-center">
+
+                        {/*¿Realizan transplantes?*/}
+                        <Col xs={12} md={6} className="mb-3">
+                            <FloatingLabel controlId="floatingSelect" label="¿Realizan Transplantes?">
+                                <Form.Select aria-label="Floating label" value={form.realizanTransplantes ? form.realizanTransplantes : ''} onChange={handleChange} name="realizanTransplantes"
+                                    style={{ height: '70px' }}>
+                                    <option value="" disabled>Seleccione una opción</option>
+                                    <option value={true}>Si</option>
+                                    <option value={false}>No</option>
+                                </Form.Select>
+                            </FloatingLabel>
+                        </Col>
+
+                    </Row>
+
                     <TipoOrgano form={form} handleChange={handleChange} show={viewFlags} />
+
+
                 </Row>
             </Col>
 
@@ -916,48 +931,54 @@ function TipoOrgano(props) {
 
                         </Col>
 
-                        {/*Medula ósea*/}
-                        <Col xs={12} md={4} className="mb-3">
-                            <FloatingLabel
-                                controlId="floatingInput"
-                                label="Médula ósea">
-                                <OverlayTrigger
-                                    placement="top"
-                                    overlay={
-                                        <Tooltip id="tooltip-medula">Cantidad de Células hematopoyéticas transplantadas</Tooltip>
-                                    }>
-                                    <Form.Control
-                                        type="number"
-                                        placeholder="Médula ósea"
-                                        value={form.numeroMedulas ? form.numeroMedulas : ''}
-                                        name="numeroMedulas"
-                                        onChange={handleChange} />
-                                </OverlayTrigger>
-                            </FloatingLabel>
+                        <Row className="justify-content-center">
 
-                        </Col>
-
-                        {/*TODO: Implementar como una tabla CRUD*/}
-                        {/*Otro órgano (especifique)*/}
-                        <Col xs={12} md={4} className="mb-3">
-                            <Row>
-                                <Col xs={12} md={8}>
-                                    <p>
-                                        Otro órgano (especifique)
-                                    </p>
-                                </Col>
-                                <Col xs={12} md={4}>
+                            {/*Medula ósea*/}
+                            <Col xs={12} md={4} className="mb-3">
+                                <FloatingLabel
+                                    controlId="floatingInput"
+                                    label="Médula ósea">
                                     <OverlayTrigger
                                         placement="top"
                                         overlay={
-                                            <Tooltip id="tooltip-otroOrgano">Agregar otro tipo de organo</Tooltip>
+                                            <Tooltip id="tooltip-medula">Cantidad de Células hematopoyéticas transplantadas</Tooltip>
                                         }>
-                                        <Button variant="success" onClick={() => { }}>
-                                            <span> <FontAwesomeIcon icon={faPlus} /></span></Button>
+                                        <Form.Control
+                                            type="number"
+                                            placeholder="Médula ósea"
+                                            value={form.numeroMedulas ? form.numeroMedulas : ''}
+                                            name="numeroMedulas"
+                                            onChange={handleChange} />
                                     </OverlayTrigger>
-                                </Col>
-                            </Row>
-                        </Col>
+                                </FloatingLabel>
+
+                            </Col>
+
+                            {/*TODO: Implementar como una tabla CRUD*/}
+                            {/*Otro órgano (especifique)*/}
+                            <Col xs={12} md={4} className="mb-3">
+                                <Row>
+                                    <Col xs={12} md={8}>
+                                        <p>
+                                            Otro órgano (especifique)
+                                        </p>
+                                    </Col>
+                                    <Col xs={12} md={4}>
+                                        <OverlayTrigger
+                                            placement="top"
+                                            overlay={
+                                                <Tooltip id="tooltip-otroOrgano">Agregar otro tipo de organo</Tooltip>
+                                            }>
+                                            <Button variant="success" onClick={() => { }}>
+                                                <span> <FontAwesomeIcon icon={faPlus} /></span></Button>
+                                        </OverlayTrigger>
+                                    </Col>
+                                </Row>
+                            </Col>
+
+                        </Row>
+
+
                     </Row>
                 </Col>
             </Fragment>
@@ -1030,11 +1051,44 @@ function ServiciosUrgencias(props) {
 
                     {/*TODO: Extraer el componente para hacerlo reutilizable*/}
                     {/*Tasa de Internamiento por Urgencias*/}
-                    <Col xs={12} md={6} className="mb-3">
-                        <Form.Label floatingInput>Tasa de Internamiento por Urgencias</Form.Label>
+                    <Col xs={12} md={12} className="mb-3">
+
                         <Row className="align-items-center">
+
+                            <Row className="justify-content-center">
+                                <Col xs={12} md={12} className="text-center">
+                                    <Form.Label floatingInput>Tasa de Internamiento por Urgencias</Form.Label>
+                                </Col>
+                            </Row>
+
+                            <Row className="justify-content-center">
+
+                                {/*Input field*/}
+                                <Col xs={12} md={2} className="my-auto">
+                                    <OverlayTrigger
+                                        placement="top"
+                                        overlay={
+                                            <Tooltip id="tooltip-atencionesUrgencias">Porcentaje de internamientos por urgencias</Tooltip>
+                                        }>
+                                        <InputGroup>
+                                            <InputGroup.Text id="percentage">%</InputGroup.Text>
+                                            <Form.Control
+                                                type="number"
+                                                aria-describedby="percentage"
+                                                name="numeroTasaInternamientoUrgencias"
+                                                onChange={handleChange}
+                                                value={
+                                                    form.numeroTasaInternamientoUrgencias > 100 ? 100 :
+                                                        form.numeroTasaInternamientoUrgencias < 0 ? 0 :
+                                                            form.numeroTasaInternamientoUrgencias ? form.numeroTasaInternamientoUrgencias : ''
+                                                } />
+                                        </InputGroup>
+                                    </OverlayTrigger>
+                                </Col>
+                            </Row>
+
                             {/*Slide bar*/}
-                            <Col xs={10} md={10} className="my-auto">
+                            <Col xs={12} md={12} className="my-auto">
                                 <Form.Range
                                     min="0"
                                     max="100"
@@ -1045,24 +1099,6 @@ function ServiciosUrgencias(props) {
                                     onChange={handleChange} />
                             </Col>
 
-                            {/*Input field*/}
-                            <Col xs={2} md={2} className="my-auto">
-                                <OverlayTrigger
-                                    placement="top"
-                                    overlay={
-                                        <Tooltip id="tooltip-atencionesUrgencias">Porcentaje de internamientos por urgencias</Tooltip>
-                                    }>
-                                    <Form.Control
-                                        type="text"
-                                        name="numeroTasaInternamientoUrgencias"
-                                        onChange={handleChange}
-                                        value={
-                                            form.numeroTasaInternamientoUrgencias > 100 ? 100 :
-                                                form.numeroTasaInternamientoUrgencias < 0 ? 0 :
-                                                    form.numeroTasaInternamientoUrgencias ? form.numeroTasaInternamientoUrgencias : ''
-                                        } />
-                                </OverlayTrigger>
-                            </Col>
                         </Row>
                     </Col>
 
@@ -1085,26 +1121,30 @@ function ServicioLaboratorio(props) {
                         <h4 className="text-center sub-title-cmh">Servicio de Laboratorio</h4>
                     </Col>
 
-                    {/*Radiología simple*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <FloatingLabel
-                            controlId="floatingInput"
-                            label="Cantidad de Estudios realizados">
-                            <OverlayTrigger
-                                placement="top"
-                                overlay={
-                                    <Tooltip id="tooltip-numeroEstudios">Número de estudios de laboratorio realizados</Tooltip>
-                                }>
-                                <Form.Control
-                                    type="number"
-                                    placeholder="Cantidad de Estudios realizados"
-                                    value={form.numeroEstudiosRealizados ? form.numeroEstudiosRealizados : ''}
-                                    name="numeroEstudiosRealizados"
-                                    onChange={handleChange} />
-                            </OverlayTrigger>
-                        </FloatingLabel>
+                    <Row className="justify-content-center">
 
-                    </Col>
+                        {/*Radiología simple*/}
+                        <Col xs={12} md={4} className="mb-3">
+                            <FloatingLabel
+                                controlId="floatingInput"
+                                label="Cantidad de Estudios realizados">
+                                <OverlayTrigger
+                                    placement="top"
+                                    overlay={
+                                        <Tooltip id="tooltip-numeroEstudios">Número de estudios de laboratorio realizados</Tooltip>
+                                    }>
+                                    <Form.Control
+                                        type="number"
+                                        placeholder="Cantidad de Estudios realizados"
+                                        value={form.numeroEstudiosRealizados ? form.numeroEstudiosRealizados : ''}
+                                        name="numeroEstudiosRealizados"
+                                        onChange={handleChange} />
+                                </OverlayTrigger>
+                            </FloatingLabel>
+
+                        </Col>
+
+                    </Row>
 
                 </Row>
             </Col>
@@ -1140,7 +1180,8 @@ function ADT(props) {
                                     placeholder="HEMODINAMIA"
                                     value={form.numeroPacientesHemodinamia ? form.numeroPacientesHemodinamia : ''}
                                     name="numeroPacientesHemodinamia"
-                                    onChange={handleChange} />
+                                    onChange={handleChange}
+                                    style={{ height: '70px' }} />
                             </OverlayTrigger>
                         </FloatingLabel>
 
@@ -1161,7 +1202,8 @@ function ADT(props) {
                                     placeholder="HEMODIALISIS"
                                     value={form.numeroPacientesHemodialisis ? form.numeroPacientesHemodialisis : ''}
                                     name="numeroPacientesHemodialisis"
-                                    onChange={handleChange} />
+                                    onChange={handleChange}
+                                    style={{ height: '70px' }} />
                             </OverlayTrigger>
                         </FloatingLabel>
 
@@ -1182,7 +1224,8 @@ function ADT(props) {
                                     placeholder="TRANSFUSIÓN DE HEMOCOMPONENTES"
                                     value={form.numeroPacientesTransfusionHemocomponentes ? form.numeroPacientesTransfusionHemocomponentes : ''}
                                     name="numeroPacientesTransfusionHemocomponentes"
-                                    onChange={handleChange} />
+                                    onChange={handleChange}
+                                    style={{ height: '70px' }} />
                             </OverlayTrigger>
                         </FloatingLabel>
 
@@ -1251,26 +1294,30 @@ function ADT(props) {
 
                     </Col>
 
-                    {/*REHABILITACIÓN Y FISIATRIA*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <FloatingLabel
-                            controlId="floatingInput"
-                            label="REHABILITACIÓN Y FISIATRíA">
-                            <OverlayTrigger
-                                placement="top"
-                                overlay={
-                                    <Tooltip id="tooltip-ENDOSCOPIA">Cantidad de pacientes atendidos en unidad de Rehabilitación y Fisiatría</Tooltip>
-                                }>
-                                <Form.Control
-                                    type="number"
-                                    placeholder="REHABILITACIÓN Y FISIATRIA"
-                                    value={form.numeroPacientesRehabilitacionFisiatria ? form.numeroPacientesRehabilitacionFisiatria : ''}
-                                    name="numeroPacientesRehabilitacionFisiatria"
-                                    onChange={handleChange} />
-                            </OverlayTrigger>
-                        </FloatingLabel>
+                    <Row className="justify-content-center">
 
-                    </Col>
+                        {/*REHABILITACIÓN Y FISIATRIA*/}
+                        <Col xs={12} md={4} className="mb-3">
+                            <FloatingLabel
+                                controlId="floatingInput"
+                                label="REHABILITACIÓN Y FISIATRíA">
+                                <OverlayTrigger
+                                    placement="top"
+                                    overlay={
+                                        <Tooltip id="tooltip-ENDOSCOPIA">Cantidad de pacientes atendidos en unidad de Rehabilitación y Fisiatría</Tooltip>
+                                    }>
+                                    <Form.Control
+                                        type="number"
+                                        placeholder="REHABILITACIÓN Y FISIATRIA"
+                                        value={form.numeroPacientesRehabilitacionFisiatria ? form.numeroPacientesRehabilitacionFisiatria : ''}
+                                        name="numeroPacientesRehabilitacionFisiatria"
+                                        onChange={handleChange} />
+                                </OverlayTrigger>
+                            </FloatingLabel>
+
+                        </Col>
+
+                    </Row>
 
                 </Row>
             </Col>

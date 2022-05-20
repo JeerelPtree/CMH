@@ -740,78 +740,427 @@ function Sueldos(props) {
                     </Col>
 
                     {/*Director/ Gerente General*/}
-                    <Col xs={12} md={4} className="mb-3">
+                    <Col xs={12} md={3} className="mb-3">
 
-                        <InputGroup className="justify-content-center">
-                            <FloatingLabel
-                                controlId="floatingInput"
-                                label="Director General">
-                                <OverlayTrigger
-                                    placement="top"
-                                    overlay={
-                                        <Tooltip id="tooltip-rinion">Director/Gerente General</Tooltip>
-                                    }>
-                                    <Form.Control
-                                        type="number"
-                                        placeholder="Director General"
-                                        value={form.sueldoDirectorGerenteGeneral ? form.sueldoDirectorGerenteGeneral : ''}
-                                        name="sueldoDirectorGerenteGeneral"
-                                        onChange={handleChange} />
-                                </OverlayTrigger>
-                            </FloatingLabel>
-                            <InputGroup.Text id="currency">$</InputGroup.Text>
-                        </InputGroup>
+                        <GetSelectSueldos
+                            label="Director General"
+                            value={form.sueldoDirectorGerenteGeneral}
+                            name="sueldoDirectorGerenteGeneral"
+                            handleChange={handleChange}
+                            tooltipDescrip="Director/Gerente General"
+                        />
+
                     </Col>
 
                     {/*Director/Gerente Administrativo*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <InputGroup className="justify-content-center">
-                            <FloatingLabel
-                                controlId="floatingInput"
-                                label="Director Administrativo">
-                                <OverlayTrigger
-                                    placement="top"
-                                    overlay={
-                                        <Tooltip id="tooltip-rinion">Director/Gerente Administrativo</Tooltip>
-                                    }>
-                                    <Form.Control
-                                        type="number"
-                                        placeholder="Director Administrativo"
-                                        value={form.sueldoDirectorGerenteAdministrativo ? form.sueldoDirectorGerenteAdministrativo : ''}
-                                        name="sueldoDirectorGerenteAdministrativo"
-                                        onChange={handleChange} />
-                                </OverlayTrigger>
-                            </FloatingLabel>
-                            <InputGroup.Text id="currency">$</InputGroup.Text>
-                        </InputGroup>
+                    <Col xs={12} md={3} className="mb-3">
+
+                        <GetSelectSueldos
+                            label="Director Administrativo"
+                            value={form.sueldoDirectorGerenteAdministrativo}
+                            name="sueldoDirectorGerenteAdministrativo"
+                            handleChange={handleChange}
+                            tooltipDescrip="Director/Gerente Administrativo"
+                        />
+
                     </Col>
 
                     {/*Director/ Gerente Médico*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <InputGroup className="justify-content-center">
-                            <FloatingLabel
-                                controlId="floatingInput"
-                                label="Director Médico">
-                                <OverlayTrigger
-                                    placement="top"
-                                    overlay={
-                                        <Tooltip id="tooltip-rinion">Director/Gerente Médico</Tooltip>
-                                    }>
-                                    <Form.Control
-                                        type="number"
-                                        placeholder="Director Médico"
-                                        value={form.sueldoDirectorGerenteMedico ? form.sueldoDirectorGerenteMedico : ''}
-                                        name="sueldoDirectorGerenteMedico"
-                                        onChange={handleChange} />
-                                </OverlayTrigger>
-                            </FloatingLabel>
-                            <InputGroup.Text id="currency">$</InputGroup.Text>
-                        </InputGroup>
+                    <Col xs={12} md={3} className="mb-3">
+
+                        <GetSelectSueldos
+                            label="Director Médico"
+                            value={form.sueldoDirectorGerenteMedico}
+                            name="sueldoDirectorGerenteMedico"
+                            handleChange={handleChange}
+                            tooltipDescrip="Director/Gerente Médico"
+                        />
+
                     </Col>
 
-                    {/*Director/ Gerente de Operaciones*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <InputGroup className="justify-content-center">
+                    {/*Gerente/Jefatura de Enfermería*/}
+                    <Col xs={12} md={3} className="mb-3">
+
+                        <GetSelectSueldos
+                            label="Gerente de Enfermería"
+                            value={form.sueldoGerenteJefaturaEnfermeria}
+                            name="sueldoGerenteJefaturaEnfermeria"
+                            handleChange={handleChange}
+                            tooltipDescrip="Gerente/Jefatura de Enfermería"
+                        />
+
+                    </Col>
+
+                    {/*Jefe/Gerente/Coordinador de Calidad*/}
+                    <Col xs={12} md={3} className="mb-3">
+
+                        <GetSelectSueldos
+                            label="Jefe de Calidad"
+                            value={form.sueldoJefeGerenteCoordinadorCalidad}
+                            name="sueldoJefeGerenteCoordinadorCalidad"
+                            handleChange={handleChange}
+                            tooltipDescrip="Jefe/Gerente/Coordinador de Calidad"
+                        />
+
+                    </Col>
+
+                    {/*Jefe/Gerente de Compras*/}
+                    <Col xs={12} md={3} className="mb-3">
+
+                        <GetSelectSueldos
+                            label="Jefe de Compras"
+                            value={form.sueldoJefeGerenteCompras}
+                            name="sueldoJefeGerenteCompras"
+                            handleChange={handleChange}
+                            tooltipDescrip="Jefe/Gerente de Compras"
+                        />
+
+                    </Col>
+
+                    {/*Jefe/Gerente de Mercadotecnia*/}
+                    <Col xs={12} md={3} className="mb-3">
+
+                        <GetSelectSueldos
+                            label="Jefe de Mercadotecnia"
+                            value={form.sueldoJefeGerenteMercadotecnia}
+                            name="sueldoJefeGerenteMercadotecnia"
+                            handleChange={handleChange}
+                            tooltipDescrip="Jefe/Gerente de Mercadotecnia"
+                        />
+
+                    </Col>
+
+                    {/*Jefe/Gerente de Recursos Humanos*/}
+                    <Col xs={12} md={3} className="mb-3">
+
+                        <GetSelectSueldos
+                            label="Jefe de RH"
+                            value={form.sueldoJefeGerenteRecursosHumanos}
+                            name="sueldoJefeGerenteRecursosHumanos"
+                            handleChange={handleChange}
+                            tooltipDescrip="Jefe/Gerente de Recursos Humanos"
+                        />
+
+                    </Col>
+
+                    {/*Jefe de Contabilidad*/}
+                    <Col xs={12} md={3} className="mb-3">
+
+                        <GetSelectSueldos
+                            label="Jefe de Contabilidad"
+                            value={form.sueldoJefeContabilidad}
+                            name="sueldoJefeContabilidad"
+                            handleChange={handleChange}
+                            tooltipDescrip="Jefe de Contabilidad"
+                        />
+
+                    </Col>
+
+                    {/*Jefe de Radiología*/}
+                    <Col xs={12} md={3} className="mb-3">
+
+                        <GetSelectSueldos
+                            label="Jefe de Radiología"
+                            value={form.sueldoJefeRadiologia}
+                            name="sueldoJefeRadiologia"
+                            handleChange={handleChange}
+                            tooltipDescrip="Jefe de Radiología- *propio"
+                        />
+
+                    </Col>
+
+                    {/*Jefe de Laboratorio*/}
+                    <Col xs={12} md={3} className="mb-3">
+
+                        <GetSelectSueldos
+                            label="Jefe de Laboratorio"
+                            value={form.sueldoJefeLaboratorio}
+                            name="sueldoJefeLaboratorio"
+                            handleChange={handleChange}
+                            tooltipDescrip="Jefe de Laboratorio- *propio"
+                        />
+
+                    </Col>
+
+                    {/*TODO: Falta por editar estos inputs hacia abajo*/}
+                    {/*Jefe de Servicio Médico (Urgencias, UCI, UCIN, Quirófano, Hospitalización, etc.)*/}
+                    <Col xs={12} md={3} className="mb-3">
+
+                        <GetSelectSueldos
+                            label="Jefe de Servicio Médico"
+                            value={form.sueldoJefeServicioMedico}
+                            name="sueldoJefeServicioMedico"
+                            handleChange={handleChange}
+                            tooltipDescrip="Jefe de Servicio Médico (Urgencias, UCI, UCIN, Quirófano, Hospitalización, etc.)"
+                        />
+
+                    </Col>
+
+                    {/*Médicos de Urgencias*/}
+                    <Col xs={12} md={3} className="mb-3">
+
+                        <GetSelectSueldos
+                            label="Médicos de Urgencias"
+                            value={form.sueldoMedicosUrgencias}
+                            name="sueldoMedicosUrgencias"
+                            handleChange={handleChange}
+                            tooltipDescrip="Médicos de Urgencias"
+                        />
+
+                    </Col>
+
+                    {/*Supervisora de Enfermería*/}
+                    <Col xs={12} md={3} className="mb-3">
+
+                        <GetSelectSueldos
+                            label="Supervisora Enfermería"
+                            value={form.sueldoSupervisoraEnfermeria}
+                            name="sueldoSupervisoraEnfermeria"
+                            handleChange={handleChange}
+                            tooltipDescrip="Supervisora de Enfermería"
+                        />
+
+                    </Col>
+
+                    {/*Enfermera Especialista*/}
+                    <Col xs={12} md={3} className="mb-3">
+
+                        <GetSelectSueldos
+                            label="Enfermera Especialista"
+                            value={form.sueldoEnfermeraEspecialista}
+                            name="sueldoEnfermeraEspecialista"
+                            handleChange={handleChange}
+                            tooltipDescrip="Enfermera Especialista"
+                        />
+
+                    </Col>
+
+                    {/*Enfermera General*/}
+                    <Col xs={12} md={3} className="mb-3">
+
+                        <GetSelectSueldos
+                            label="Enfermera General"
+                            value={form.sueldoEnfermeraGeneral}
+                            name="sueldoEnfermeraGeneral"
+                            handleChange={handleChange}
+                            tooltipDescrip="Enfermera General"
+                        />
+
+                    </Col>
+
+                    {/*Técnico en Enfermería*/}
+                    <Col xs={12} md={3} className="mb-3">
+
+                        <GetSelectSueldos
+                            label="Técnico en Enfermería"
+                            value={form.sueldoTecnicoEnfermeria}
+                            name="sueldoTecnicoEnfermeria"
+                            handleChange={handleChange}
+                            tooltipDescrip="Técnico en Enfermería"
+                        />
+
+                    </Col>
+
+                    {/*Auxiliar de Enfermería*/}
+                    <Col xs={12} md={3} className="mb-3">
+
+                        <GetSelectSueldos
+                            label="Auxiliar de Enfermería"
+                            value={form.sueldoAuxiliarEnfermeria}
+                            name="sueldoAuxiliarEnfermeria"
+                            handleChange={handleChange}
+                            tooltipDescrip="Auxiliar de Enfermería"
+                        />
+
+                    </Col>
+
+                    {/*Técnico de Laboratorio*/}
+                    <Col xs={12} md={3} className="mb-3">
+
+                        <GetSelectSueldos
+                            label="Técnico de Laboratorio"
+                            value={form.sueldoTecnicoLaboratorio}
+                            name="sueldoTecnicoLaboratorio"
+                            handleChange={handleChange}
+                            tooltipDescrip="Técnico de Laboratorio"
+                        />
+
+                    </Col>
+
+                    {/*Técnico de Rayos X*/}
+                    <Col xs={12} md={3} className="mb-3">
+
+                        <GetSelectSueldos
+                            label="Técnico de Rayos X"
+                            value={form.sueldoTecnicoRayosX}
+                            name="sueldoTecnicoRayosX"
+                            handleChange={handleChange}
+                            tooltipDescrip="Técnico de Rayos X"
+                        />
+
+                    </Col>
+
+
+
+                    {/*Camillero*/}
+                    <Col xs={12} md={3} className="mb-3">
+
+                        <GetSelectSueldos
+                            label="Camillero"
+                            value={form.sueldoCamillero}
+                            name="sueldoCamillero"
+                            handleChange={handleChange}
+                            tooltipDescrip="Camillero"
+                        />
+
+                    </Col>
+
+                    {/*Admisión*/}
+                    <Col xs={12} md={3} className="mb-3">
+
+                        <GetSelectSueldos
+                            label="Admisión"
+                            value={form.sueldoAdmision}
+                            name="sueldoAdmision"
+                            handleChange={handleChange}
+                            tooltipDescrip="Admisión"
+                        />
+
+                    </Col>
+
+                    {/*Jefe/Coordinador Intendencia*/}
+                    <Col xs={12} md={3} className="mb-3">
+
+                        <GetSelectSueldos
+                            label="Jefe Intendencia"
+                            value={form.sueldoJefeIntendencia}
+                            name="sueldoJefeIntendencia"
+                            handleChange={handleChange}
+                            tooltipDescrip="Jefe/Coordinador Intendencia"
+                        />
+
+                    </Col>
+
+                    {/*Personal de Intendencia*/}
+                    <Col xs={12} md={3} className="mb-3">
+
+                        <GetSelectSueldos
+                            label="Personal de Intendencia"
+                            value={form.sueldoPersonalIntendencia}
+                            name="sueldoPersonalIntendencia"
+                            handleChange={handleChange}
+                            tooltipDescrip="Personal de Intendencia"
+                        />
+
+                    </Col>
+
+                    {/*Jefe/Coordinador de Nutrición Hospitalaria*/}
+                    <Col xs={12} md={3} className="mb-3">
+
+                        <GetSelectSueldos
+                            label="Jefe de NH"
+                            value={form.sueldoJefeNutricionHospitalaria}
+                            name="sueldoJefeNutricionHospitalaria"
+                            handleChange={handleChange}
+                            tooltipDescrip="Jefe/Coordinador de Nutrición Hospitalaria"
+                        />
+
+                    </Col>
+
+                    {/*Cocineros*/}
+                    <Col xs={12} md={3} className="mb-3">
+
+                        <GetSelectSueldos
+                            label="Cocineros"
+                            value={form.sueldoCocineros}
+                            name="sueldoCocineros"
+                            handleChange={handleChange}
+                            tooltipDescrip="Cocineros"
+                        />
+
+                    </Col>
+
+                    {/*Jefe de Mantenimiento*/}
+                    <Col xs={12} md={3} className="mb-3">
+
+                        <GetSelectSueldos
+                            label="Jefe de Mantenimiento"
+                            value={form.sueldoJefeMantenimiento}
+                            name="sueldoJefeMantenimiento"
+                            handleChange={handleChange}
+                            tooltipDescrip="Jefe de Mantenimiento"
+                        />
+
+                    </Col>
+
+                    {/*Personal de Mantenimiento*/}
+                    <Col xs={12} md={3} className="mb-3">
+
+                        <GetSelectSueldos
+                            label="Personal Mantenimiento"
+                            value={form.sueldoPersonalMantenimiento}
+                            name="sueldoPersonalMantenimiento"
+                            handleChange={handleChange}
+                            tooltipDescrip="Personal de Mantenimiento"
+                        />
+
+                    </Col>
+
+                    {/*Personal de Lavanderia*/}
+                    <Col xs={12} md={3} className="mb-3">
+
+                        <GetSelectSueldos
+                            label="Personal de Lavanderia"
+                            value={form.sueldoPersonalLavanderia}
+                            name="sueldoPersonalLavanderia"
+                            handleChange={handleChange}
+                            tooltipDescrip="Personal de Lavanderia"
+                        />
+
+                    </Col>
+
+                    {/*Jefe de Seguridad*/}
+                    <Col xs={12} md={3} className="mb-3">
+
+                        <GetSelectSueldos
+                            label="Jefe de Seguridad"
+                            value={form.sueldoJefeSeguridad}
+                            name="sueldoJefeSeguridad"
+                            handleChange={handleChange}
+                            tooltipDescrip="Jefe de Seguridad"
+                        />
+
+                    </Col>
+
+                    {/*Vigilantes-Guardias de Seguridad*/}
+                    <Col xs={12} md={3} className="mb-3">
+
+                        <GetSelectSueldos
+                            label="Guardias de Seguridad"
+                            value={form.sueldoVigilantesGuardiasSeguridad}
+                            name="sueldoVigilantesGuardiasSeguridad"
+                            handleChange={handleChange}
+                            tooltipDescrip="Vigilantes-Guardias de Seguridad"
+                        />
+
+                    </Col>
+
+                    {/*Otros Puestos Operativos*/}
+                    <Col xs={12} md={3} className="mb-3">
+
+                        <GetSelectSueldos
+                            label="Otros"
+                            value={form.sueldoOtrosPuestosOperativos}
+                            name="sueldoOtrosPuestosOperativos"
+                            handleChange={handleChange}
+                            tooltipDescrip="Otros Puestos Operativos"
+                        />
+
+                    </Col>
+
+                    <Col xs={12} md={12} className="mb-3">
+
+                        <InputGroup>
                             <FloatingLabel
                                 controlId="floatingInput"
                                 label="Director de Operaciones">
@@ -825,107 +1174,44 @@ function Sueldos(props) {
                                         placeholder="Director de Operaciones"
                                         value={form.sueldoDirectorGerenteOperaciones ? form.sueldoDirectorGerenteOperaciones : ''}
                                         name="sueldoDirectorGerenteOperaciones"
-                                        onChange={handleChange} />
+                                        onChange={handleChange}
+                                        style={{ height: '100px' }} />
                                 </OverlayTrigger>
                             </FloatingLabel>
                             <InputGroup.Text id="currency">$</InputGroup.Text>
                         </InputGroup>
+
                     </Col>
 
-                    {/*Gerente/Jefatura de Enfermería*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <InputGroup className="justify-content-center">
+                    {/*Director/ Gerente de Operaciones*/}
+                    <Col xs={12} md={12} className="mb-3">
+
+                        <InputGroup>
                             <FloatingLabel
                                 controlId="floatingInput"
-                                label="Gerente de Enfermería">
+                                label="Director de Operaciones">
                                 <OverlayTrigger
                                     placement="top"
                                     overlay={
-                                        <Tooltip id="tooltip-rinion">Gerente/Jefatura de Enfermería</Tooltip>
+                                        <Tooltip id="tooltip-rinion">Director/Gerente de Operaciones</Tooltip>
                                     }>
                                     <Form.Control
                                         type="number"
-                                        placeholder="Gerente de Enfermería"
-                                        value={form.sueldoGerenteJefaturaEnfermeria ? form.sueldoGerenteJefaturaEnfermeria : ''}
-                                        name="sueldoGerenteJefaturaEnfermeria"
-                                        onChange={handleChange} />
+                                        placeholder="Director de Operaciones"
+                                        value={form.sueldoDirectorGerenteOperaciones ? form.sueldoDirectorGerenteOperaciones : ''}
+                                        name="sueldoDirectorGerenteOperaciones"
+                                        onChange={handleChange}
+                                        style={{ height: '100px' }} />
                                 </OverlayTrigger>
                             </FloatingLabel>
                             <InputGroup.Text id="currency">$</InputGroup.Text>
                         </InputGroup>
-                    </Col>
 
-                    {/*Jefe/Gerente/Coordinador de Calidad*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <InputGroup className="justify-content-center">
-                            <FloatingLabel
-                                controlId="floatingInput"
-                                label="Jefe de Calidad">
-                                <OverlayTrigger
-                                    placement="top"
-                                    overlay={
-                                        <Tooltip id="tooltip-rinion">Jefe/Gerente/Coordinador de Calidad</Tooltip>
-                                    }>
-                                    <Form.Control
-                                        type="number"
-                                        placeholder="Jefe de Calidad"
-                                        value={form.sueldoJefeGerenteCoordinadorCalidad ? form.sueldoJefeGerenteCoordinadorCalidad : ''}
-                                        name="sueldoJefeGerenteCoordinadorCalidad"
-                                        onChange={handleChange} />
-                                </OverlayTrigger>
-                            </FloatingLabel>
-                            <InputGroup.Text id="currency">$</InputGroup.Text>
-                        </InputGroup>
-                    </Col>
-
-                    {/*Jefe/Gerente de Compras*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <InputGroup className="justify-content-center">
-                            <FloatingLabel
-                                controlId="floatingInput"
-                                label="Jefe de Compras">
-                                <OverlayTrigger
-                                    placement="top"
-                                    overlay={
-                                        <Tooltip id="tooltip-rinion">Jefe/Gerente de Compras</Tooltip>
-                                    }>
-                                    <Form.Control
-                                        type="number"
-                                        placeholder="Jefe de Compras"
-                                        value={form.sueldoJefeGerenteCompras ? form.sueldoJefeGerenteCompras : ''}
-                                        name="sueldoJefeGerenteCompras"
-                                        onChange={handleChange} />
-                                </OverlayTrigger>
-                            </FloatingLabel>
-                            <InputGroup.Text id="currency">$</InputGroup.Text>
-                        </InputGroup>
-                    </Col>
-
-                    {/*Jefe/Gerente de Mercadotecnia*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <InputGroup className="justify-content-center">
-                            <FloatingLabel
-                                controlId="floatingInput"
-                                label="Jefe de Mercadotecnia">
-                                <OverlayTrigger
-                                    placement="top"
-                                    overlay={
-                                        <Tooltip id="tooltip-rinion">Jefe/Gerente de Mercadotecnia</Tooltip>
-                                    }>
-                                    <Form.Control
-                                        type="number"
-                                        placeholder="Jefe de Mercadotecnia"
-                                        value={form.sueldoJefeGerenteMercadotecnia ? form.sueldoJefeGerenteMercadotecnia : ''}
-                                        name="sueldoJefeGerenteMercadotecnia"
-                                        onChange={handleChange} />
-                                </OverlayTrigger>
-                            </FloatingLabel>
-                            <InputGroup.Text id="currency">$</InputGroup.Text>
-                        </InputGroup>
                     </Col>
 
                     {/*Jefe/Gerente de Comercialización-Ventas*/}
-                    <Col xs={12} md={4} className="mb-3">
+                    <Col xs={12} md={3} className="mb-3">
+
                         <InputGroup className="justify-content-center">
                             <FloatingLabel
                                 controlId="floatingInput"
@@ -940,146 +1226,8 @@ function Sueldos(props) {
                                         placeholder="Jefe de Comercialización"
                                         value={form.sueldoJefeGerenteComercializaciónVentas ? form.sueldoJefeGerenteComercializaciónVentas : ''}
                                         name="sueldoJefeGerenteComercializaciónVentas"
-                                        onChange={handleChange} />
-                                </OverlayTrigger>
-                            </FloatingLabel>
-                            <InputGroup.Text id="currency">$</InputGroup.Text>
-                        </InputGroup>
-                    </Col>
-
-                    {/*Jefe/Gerente de Recursos Humanos*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <InputGroup className="justify-content-center">
-                            <FloatingLabel
-                                controlId="floatingInput"
-                                label="Jefe de RH">
-                                <OverlayTrigger
-                                    placement="top"
-                                    overlay={
-                                        <Tooltip id="tooltip-rinion">Jefe/Gerente de Recursos Humanos</Tooltip>
-                                    }>
-                                    <Form.Control
-                                        type="number"
-                                        placeholder="Jefe de RH"
-                                        value={form.sueldoJefeGerenteRecursosHumanos ? form.sueldoJefeGerenteRecursosHumanos : ''}
-                                        name="sueldoJefeGerenteRecursosHumanos"
-                                        onChange={handleChange} />
-                                </OverlayTrigger>
-                            </FloatingLabel>
-                            <InputGroup.Text id="currency">$</InputGroup.Text>
-                        </InputGroup>
-                    </Col>
-
-                    {/*Jefe de Contabilidad*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <InputGroup className="justify-content-center">
-                            <FloatingLabel
-                                controlId="floatingInput"
-                                label="Jefe de Contabilidad">
-                                <OverlayTrigger
-                                    placement="top"
-                                    overlay={
-                                        <Tooltip id="tooltip-rinion">Jefe de Contabilidad</Tooltip>
-                                    }>
-                                    <Form.Control
-                                        type="number"
-                                        placeholder="Jefe de Contabilidad"
-                                        value={form.sueldoJefeContabilidad ? form.sueldoJefeContabilidad : ''}
-                                        name="sueldoJefeContabilidad"
-                                        onChange={handleChange} />
-                                </OverlayTrigger>
-                            </FloatingLabel>
-                            <InputGroup.Text id="currency">$</InputGroup.Text>
-                        </InputGroup>
-                    </Col>
-
-                    {/*Jefe de Radiología*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <InputGroup className="justify-content-center">
-                            <FloatingLabel
-                                controlId="floatingInput"
-                                label="Jefe de Radiología">
-                                <OverlayTrigger
-                                    placement="top"
-                                    overlay={
-                                        <Tooltip id="tooltip-rinion">Jefe de Radiología- *propio</Tooltip>
-                                    }>
-                                    <Form.Control
-                                        type="number"
-                                        placeholder="Jefe de Radiología"
-                                        value={form.sueldoJefeRadiologia ? form.sueldoJefeRadiologia : ''}
-                                        name="sueldoJefeRadiologia"
-                                        onChange={handleChange} />
-                                </OverlayTrigger>
-                            </FloatingLabel>
-                            <InputGroup.Text id="currency">$</InputGroup.Text>
-                        </InputGroup>
-                    </Col>
-
-                    {/*Jefe de Laboratorio*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <InputGroup className="justify-content-center">
-                            <FloatingLabel
-                                controlId="floatingInput"
-                                label="Jefe de Laboratorio">
-                                <OverlayTrigger
-                                    placement="top"
-                                    overlay={
-                                        <Tooltip id="tooltip-rinion">Jefe de Laboratorio- *propio</Tooltip>
-                                    }>
-                                    <Form.Control
-                                        type="number"
-                                        placeholder="Jefe de Laboratorio"
-                                        value={form.sueldoJefeLaboratorio ? form.sueldoJefeLaboratorio : ''}
-                                        name="sueldoJefeLaboratorio"
-                                        onChange={handleChange} />
-                                </OverlayTrigger>
-                            </FloatingLabel>
-                            <InputGroup.Text id="currency">$</InputGroup.Text>
-                        </InputGroup>
-                    </Col>
-
-                    {/*TODO: Falta por editar estos inputs hacia abajo*/}
-                    {/*Jefe de Servicio Médico (Urgencias, UCI, UCIN, Quirófano, Hospitalización, etc.)*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <InputGroup className="justify-content-center">
-                            <FloatingLabel
-                                controlId="floatingInput"
-                                label="Jefe de Servicio Médico">
-                                <OverlayTrigger
-                                    placement="top"
-                                    overlay={
-                                        <Tooltip id="tooltip-rinion">Jefe de Servicio Médico (Urgencias, UCI, UCIN, Quirófano, Hospitalización, etc.)</Tooltip>
-                                    }>
-                                    <Form.Control
-                                        type="number"
-                                        placeholder="Jefe de Servicio Médico"
-                                        value={form.sueldoJefeServicioMedico ? form.sueldoJefeServicioMedico : ''}
-                                        name="sueldoJefeServicioMedico"
-                                        onChange={handleChange} />
-                                </OverlayTrigger>
-                            </FloatingLabel>
-                            <InputGroup.Text id="currency">$</InputGroup.Text>
-                        </InputGroup>
-                    </Col>
-
-                    {/*Médicos de Urgencias*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <InputGroup className="justify-content-center">
-                            <FloatingLabel
-                                controlId="floatingInput"
-                                label="Médicos de Urgencias">
-                                <OverlayTrigger
-                                    placement="top"
-                                    overlay={
-                                        <Tooltip id="tooltip-rinion">Médicos de Urgencias</Tooltip>
-                                    }>
-                                    <Form.Control
-                                        type="number"
-                                        placeholder="Médicos de Urgencias"
-                                        value={form.sueldoMedicosUrgencias ? form.sueldoMedicosUrgencias : ''}
-                                        name="sueldoMedicosUrgencias"
-                                        onChange={handleChange} />
+                                        onChange={handleChange}
+                                        style={{ height: '100px' }} />
                                 </OverlayTrigger>
                             </FloatingLabel>
                             <InputGroup.Text id="currency">$</InputGroup.Text>
@@ -1087,7 +1235,8 @@ function Sueldos(props) {
                     </Col>
 
                     {/*Jefe de Nutrición Clínica*/}
-                    <Col xs={12} md={4} className="mb-3">
+                    <Col xs={12} md={3} className="mb-3">
+
                         <InputGroup className="justify-content-center">
                             <FloatingLabel
                                 controlId="floatingInput"
@@ -1102,30 +1251,8 @@ function Sueldos(props) {
                                         placeholder="Contratación"
                                         value={form.sueldoJefeNutricionClinica ? form.sueldoJefeNutricionClinica : ''}
                                         name="sueldoJefeNutricionClinica"
-                                        onChange={handleChange} />
-                                </OverlayTrigger>
-                            </FloatingLabel>
-                            <InputGroup.Text id="currency">$</InputGroup.Text>
-                        </InputGroup>
-                    </Col>
-
-                    {/*Supervisora de Enfermería*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <InputGroup className="justify-content-center">
-                            <FloatingLabel
-                                controlId="floatingInput"
-                                label="Supervisora Enfermería">
-                                <OverlayTrigger
-                                    placement="top"
-                                    overlay={
-                                        <Tooltip id="tooltip-rinion">Supervisora de Enfermería</Tooltip>
-                                    }>
-                                    <Form.Control
-                                        type="number"
-                                        placeholder="Supervisora Enfermería"
-                                        value={form.sueldoSupervisoraEnfermeria ? form.sueldoSupervisoraEnfermeria : ''}
-                                        name="sueldoSupervisoraEnfermeria"
-                                        onChange={handleChange} />
+                                        onChange={handleChange}
+                                        style={{ height: '100px' }} />
                                 </OverlayTrigger>
                             </FloatingLabel>
                             <InputGroup.Text id="currency">$</InputGroup.Text>
@@ -1133,7 +1260,7 @@ function Sueldos(props) {
                     </Col>
 
                     {/*Coordinadora de Enfermería*/}
-                    <Col xs={12} md={4} className="mb-3">
+                    <Col xs={12} md={3} className="mb-3">
                         <InputGroup className="justify-content-center">
                             <FloatingLabel
                                 controlId="floatingInput"
@@ -1148,145 +1275,8 @@ function Sueldos(props) {
                                         placeholder="Coordinadora Enfermería"
                                         value={form.sueldoCoordinadoraEnfermeria ? form.sueldoCoordinadoraEnfermeria : ''}
                                         name="sueldoCoordinadoraEnfermeria"
-                                        onChange={handleChange} />
-                                </OverlayTrigger>
-                            </FloatingLabel>
-                            <InputGroup.Text id="currency">$</InputGroup.Text>
-                        </InputGroup>
-                    </Col>
-
-                    {/*Enfermera Especialista*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <InputGroup className="justify-content-center">
-                            <FloatingLabel
-                                controlId="floatingInput"
-                                label="Enfermera Especialista">
-                                <OverlayTrigger
-                                    placement="top"
-                                    overlay={
-                                        <Tooltip id="tooltip-rinion">Enfermera Especialista</Tooltip>
-                                    }>
-                                    <Form.Control
-                                        type="number"
-                                        placeholder="Enfermera Especialista"
-                                        value={form.sueldoEnfermeraEspecialista ? form.sueldoEnfermeraEspecialista : ''}
-                                        name="sueldoEnfermeraEspecialista"
-                                        onChange={handleChange} />
-                                </OverlayTrigger>
-                            </FloatingLabel>
-                            <InputGroup.Text id="currency">$</InputGroup.Text>
-                        </InputGroup>
-                    </Col>
-
-                    {/*Enfermera General*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <InputGroup className="justify-content-center">
-                            <FloatingLabel
-                                controlId="floatingInput"
-                                label="Enfermera General">
-                                <OverlayTrigger
-                                    placement="top"
-                                    overlay={
-                                        <Tooltip id="tooltip-rinion">Enfermera General</Tooltip>
-                                    }>
-                                    <Form.Control
-                                        type="number"
-                                        placeholder="Enfermera General"
-                                        value={form.sueldoEnfermeraGeneral ? form.sueldoEnfermeraGeneral : ''}
-                                        name="sueldoEnfermeraGeneral"
-                                        onChange={handleChange} />
-                                </OverlayTrigger>
-                            </FloatingLabel>
-                            <InputGroup.Text id="currency">$</InputGroup.Text>
-                        </InputGroup>
-                    </Col>
-
-                    {/*Técnico en Enfermería*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <InputGroup className="justify-content-center">
-                            <FloatingLabel
-                                controlId="floatingInput"
-                                label="Técnico en Enfermería">
-                                <OverlayTrigger
-                                    placement="top"
-                                    overlay={
-                                        <Tooltip id="tooltip-rinion">Técnico en Enfermería</Tooltip>
-                                    }>
-                                    <Form.Control
-                                        type="number"
-                                        placeholder="Técnico en Enfermería"
-                                        value={form.sueldoTecnicoEnfermeria ? form.sueldoTecnicoEnfermeria : ''}
-                                        name="sueldoTecnicoEnfermeria"
-                                        onChange={handleChange} />
-                                </OverlayTrigger>
-                            </FloatingLabel>
-                            <InputGroup.Text id="currency">$</InputGroup.Text>
-                        </InputGroup>
-                    </Col>
-
-                    {/*Auxiliar de Enfermería*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <InputGroup className="justify-content-center">
-                            <FloatingLabel
-                                controlId="floatingInput"
-                                label="Auxiliar de Enfermería">
-                                <OverlayTrigger
-                                    placement="top"
-                                    overlay={
-                                        <Tooltip id="tooltip-rinion">Auxiliar de Enfermería</Tooltip>
-                                    }>
-                                    <Form.Control
-                                        type="number"
-                                        placeholder="Auxiliar de Enfermería"
-                                        value={form.sueldoAuxiliarEnfermeria ? form.sueldoAuxiliarEnfermeria : ''}
-                                        name="sueldoAuxiliarEnfermeria"
-                                        onChange={handleChange} />
-                                </OverlayTrigger>
-                            </FloatingLabel>
-                            <InputGroup.Text id="currency">$</InputGroup.Text>
-                        </InputGroup>
-                    </Col>
-
-                    {/*Técnico de Laboratorio*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <InputGroup className="justify-content-center">
-                            <FloatingLabel
-                                controlId="floatingInput"
-                                label="Técnico de Laboratorio">
-                                <OverlayTrigger
-                                    placement="top"
-                                    overlay={
-                                        <Tooltip id="tooltip-rinion">Técnico de Laboratorio</Tooltip>
-                                    }>
-                                    <Form.Control
-                                        type="number"
-                                        placeholder="Técnico de Laboratorio"
-                                        value={form.sueldoTecnicoLaboratorio ? form.sueldoTecnicoLaboratorio : ''}
-                                        name="sueldoTecnicoLaboratorio"
-                                        onChange={handleChange} />
-                                </OverlayTrigger>
-                            </FloatingLabel>
-                            <InputGroup.Text id="currency">$</InputGroup.Text>
-                        </InputGroup>
-                    </Col>
-
-                    {/*Técnico de Rayos X*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <InputGroup className="justify-content-center">
-                            <FloatingLabel
-                                controlId="floatingInput"
-                                label="Técnico de Rayos X">
-                                <OverlayTrigger
-                                    placement="top"
-                                    overlay={
-                                        <Tooltip id="tooltip-rinion">Técnico de Rayos X</Tooltip>
-                                    }>
-                                    <Form.Control
-                                        type="number"
-                                        placeholder="Técnico de Rayos X"
-                                        value={form.sueldoTecnicoRayosX ? form.sueldoTecnicoRayosX : ''}
-                                        name="sueldoTecnicoRayosX"
-                                        onChange={handleChange} />
+                                        onChange={handleChange}
+                                        style={{ height: '100px' }} />
                                 </OverlayTrigger>
                             </FloatingLabel>
                             <InputGroup.Text id="currency">$</InputGroup.Text>
@@ -1294,7 +1284,8 @@ function Sueldos(props) {
                     </Col>
 
                     {/*Técnico en Inhaloterapia o Terapia Respiratoria*/}
-                    <Col xs={12} md={4} className="mb-3">
+                    <Col xs={12} md={3} className="mb-3">
+
                         <InputGroup className="justify-content-center">
                             <FloatingLabel
                                 controlId="floatingInput"
@@ -1316,288 +1307,45 @@ function Sueldos(props) {
                         </InputGroup>
                     </Col>
 
-                    {/*Camillero*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <InputGroup className="justify-content-center">
-                            <FloatingLabel
-                                controlId="floatingInput"
-                                label="Camillero">
-                                <OverlayTrigger
-                                    placement="top"
-                                    overlay={
-                                        <Tooltip id="tooltip-rinion">Camillero</Tooltip>
-                                    }>
-                                    <Form.Control
-                                        type="number"
-                                        placeholder="Camillero"
-                                        value={form.sueldoCamillero ? form.sueldoCamillero : ''}
-                                        name="sueldoCamillero"
-                                        onChange={handleChange} />
-                                </OverlayTrigger>
-                            </FloatingLabel>
-                            <InputGroup.Text id="currency">$</InputGroup.Text>
-                        </InputGroup>
-                    </Col>
-
-                    {/*Admisión*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <InputGroup className="justify-content-center">
-                            <FloatingLabel
-                                controlId="floatingInput"
-                                label="Admisión">
-                                <OverlayTrigger
-                                    placement="top"
-                                    overlay={
-                                        <Tooltip id="tooltip-rinion">Admisión</Tooltip>
-                                    }>
-                                    <Form.Control
-                                        type="number"
-                                        placeholder="Admisión"
-                                        value={form.sueldoAdmision ? form.sueldoAdmision : ''}
-                                        name="sueldoAdmision"
-                                        onChange={handleChange} />
-                                </OverlayTrigger>
-                            </FloatingLabel>
-                            <InputGroup.Text id="currency">$</InputGroup.Text>
-                        </InputGroup>
-                    </Col>
-
-                    {/*Jefe/Coordinador Intendencia*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <InputGroup className="justify-content-center">
-                            <FloatingLabel
-                                controlId="floatingInput"
-                                label="Jefe Intendencia">
-                                <OverlayTrigger
-                                    placement="top"
-                                    overlay={
-                                        <Tooltip id="tooltip-rinion">Jefe/Coordinador Intendencia</Tooltip>
-                                    }>
-                                    <Form.Control
-                                        type="number"
-                                        placeholder="Jefe Intendencia"
-                                        value={form.sueldoJefeIntendencia ? form.sueldoJefeIntendencia : ''}
-                                        name="sueldoJefeIntendencia"
-                                        onChange={handleChange} />
-                                </OverlayTrigger>
-                            </FloatingLabel>
-                            <InputGroup.Text id="currency">$</InputGroup.Text>
-                        </InputGroup>
-                    </Col>
-
-                    {/*Personal de Intendencia*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <InputGroup className="justify-content-center">
-                            <FloatingLabel
-                                controlId="floatingInput"
-                                label="Personal de Intendencia">
-                                <OverlayTrigger
-                                    placement="top"
-                                    overlay={
-                                        <Tooltip id="tooltip-rinion">Personal de Intendencia</Tooltip>
-                                    }>
-                                    <Form.Control
-                                        type="number"
-                                        placeholder="Personal de Intendencia"
-                                        value={form.sueldoPersonalIntendencia ? form.sueldoPersonalIntendencia : ''}
-                                        name="sueldoPersonalIntendencia"
-                                        onChange={handleChange} />
-                                </OverlayTrigger>
-                            </FloatingLabel>
-                            <InputGroup.Text id="currency">$</InputGroup.Text>
-                        </InputGroup>
-                    </Col>
-
-                    {/*Jefe/Coordinador de Nutrición Hospitalaria*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <InputGroup className="justify-content-center">
-                            <FloatingLabel
-                                controlId="floatingInput"
-                                label="Jefe de NH">
-                                <OverlayTrigger
-                                    placement="top"
-                                    overlay={
-                                        <Tooltip id="tooltip-rinion">Jefe/Coordinador de Nutrición Hospitalaria</Tooltip>
-                                    }>
-                                    <Form.Control
-                                        type="number"
-                                        placeholder="Jefe de NH"
-                                        value={form.sueldoJefeNutricionHospitalaria ? form.sueldoJefeNutricionHospitalaria : ''}
-                                        name="sueldoJefeNutricionHospitalaria"
-                                        onChange={handleChange} />
-                                </OverlayTrigger>
-                            </FloatingLabel>
-                            <InputGroup.Text id="currency">$</InputGroup.Text>
-                        </InputGroup>
-                    </Col>
-
-                    {/*Cocineros*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <InputGroup className="justify-content-center">
-                            <FloatingLabel
-                                controlId="floatingInput"
-                                label="Cocineros">
-                                <OverlayTrigger
-                                    placement="top"
-                                    overlay={
-                                        <Tooltip id="tooltip-rinion">Cocineros</Tooltip>
-                                    }>
-                                    <Form.Control
-                                        type="number"
-                                        placeholder="Cocineros"
-                                        value={form.sueldoCocineros ? form.sueldoCocineros : ''}
-                                        name="sueldoCocineros"
-                                        onChange={handleChange} />
-                                </OverlayTrigger>
-                            </FloatingLabel>
-                            <InputGroup.Text id="currency">$</InputGroup.Text>
-                        </InputGroup>
-                    </Col>
-
-                    {/*Jefe de Mantenimiento*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <InputGroup className="justify-content-center">
-                            <FloatingLabel
-                                controlId="floatingInput"
-                                label="Jefe de Mantenimiento">
-                                <OverlayTrigger
-                                    placement="top"
-                                    overlay={
-                                        <Tooltip id="tooltip-rinion">Jefe de Mantenimiento</Tooltip>
-                                    }>
-                                    <Form.Control
-                                        type="number"
-                                        placeholder="Jefe de Mantenimiento"
-                                        value={form.sueldoJefeMantenimiento ? form.sueldoJefeMantenimiento : ''}
-                                        name="sueldoJefeMantenimiento"
-                                        onChange={handleChange} />
-                                </OverlayTrigger>
-                            </FloatingLabel>
-                            <InputGroup.Text id="currency">$</InputGroup.Text>
-                        </InputGroup>
-                    </Col>
-
-                    {/*Personal de Mantenimiento*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <InputGroup className="justify-content-center">
-                            <FloatingLabel
-                                controlId="floatingInput"
-                                label="Personal Mantenimiento">
-                                <OverlayTrigger
-                                    placement="top"
-                                    overlay={
-                                        <Tooltip id="tooltip-rinion">Personal de Mantenimiento</Tooltip>
-                                    }>
-                                    <Form.Control
-                                        type="number"
-                                        placeholder="Personal Mantenimiento"
-                                        value={form.sueldoPersonalMantenimiento ? form.sueldoPersonalMantenimiento : ''}
-                                        name="sueldoPersonalMantenimiento"
-                                        onChange={handleChange} />
-                                </OverlayTrigger>
-                            </FloatingLabel>
-                            <InputGroup.Text id="currency">$</InputGroup.Text>
-                        </InputGroup>
-                    </Col>
-
-                    {/*Personal de Lavanderia*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <InputGroup className="justify-content-center">
-                            <FloatingLabel
-                                controlId="floatingInput"
-                                label="Personal de Lavanderia">
-                                <OverlayTrigger
-                                    placement="top"
-                                    overlay={
-                                        <Tooltip id="tooltip-rinion">Personal de Lavanderia</Tooltip>
-                                    }>
-                                    <Form.Control
-                                        type="number"
-                                        placeholder="Personal de Lavanderia"
-                                        value={form.sueldoPersonalLavanderia ? form.sueldoPersonalLavanderia : ''}
-                                        name="sueldoPersonalLavanderia"
-                                        onChange={handleChange} />
-                                </OverlayTrigger>
-                            </FloatingLabel>
-                            <InputGroup.Text id="currency">$</InputGroup.Text>
-                        </InputGroup>
-                    </Col>
-
-                    {/*Jefe de Seguridad*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <InputGroup className="justify-content-center">
-                            <FloatingLabel
-                                controlId="floatingInput"
-                                label="Jefe de Seguridad">
-                                <OverlayTrigger
-                                    placement="top"
-                                    overlay={
-                                        <Tooltip id="tooltip-rinion">Jefe de Seguridad</Tooltip>
-                                    }>
-                                    <Form.Control
-                                        type="number"
-                                        placeholder="Jefe de Seguridad"
-                                        value={form.sueldoJefeSeguridad ? form.sueldoJefeSeguridad : ''}
-                                        name="sueldoJefeSeguridad"
-                                        onChange={handleChange} />
-                                </OverlayTrigger>
-                            </FloatingLabel>
-                            <InputGroup.Text id="currency">$</InputGroup.Text>
-                        </InputGroup>
-                    </Col>
-
-                    {/*Vigilantes-Guardias de Seguridad*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <InputGroup className="justify-content-center">
-                            <FloatingLabel
-                                controlId="floatingInput"
-                                label="Guardias de Seguridad">
-                                <OverlayTrigger
-                                    placement="top"
-                                    overlay={
-                                        <Tooltip id="tooltip-rinion">Vigilantes-Guardias de Seguridad</Tooltip>
-                                    }>
-                                    <Form.Control
-                                        type="number"
-                                        placeholder="Guardias de Seguridad"
-                                        value={form.sueldoVigilantesGuardiasSeguridad ? form.sueldoVigilantesGuardiasSeguridad : ''}
-                                        name="sueldoVigilantesGuardiasSeguridad"
-                                        onChange={handleChange} />
-                                </OverlayTrigger>
-                            </FloatingLabel>
-                            <InputGroup.Text id="currency">$</InputGroup.Text>
-                        </InputGroup>
-                    </Col>
-
-                    {/*Otros Puestos Operativos*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <InputGroup className="justify-content-center">
-                            <FloatingLabel
-                                controlId="floatingInput"
-                                label="Otros">
-                                <OverlayTrigger
-                                    placement="top"
-                                    overlay={
-                                        <Tooltip id="tooltip-rinion">Otros Puestos Operativos</Tooltip>
-                                    }>
-                                    <Form.Control
-                                        type="number"
-                                        placeholder="Otros"
-                                        value={form.sueldoOtrosPuestosOperativos ? form.sueldoOtrosPuestosOperativos : ''}
-                                        name="sueldoOtrosPuestosOperativos"
-                                        onChange={handleChange} />
-                                </OverlayTrigger>
-                            </FloatingLabel>
-                            <InputGroup.Text id="currency">$</InputGroup.Text>
-                        </InputGroup>
-                    </Col>
-
                 </Row>
             </Col>
 
         </Fragment>
     )
 
+}
+
+function GetSelectSueldos(props) {
+
+    //we obtain their props
+    const { label, value, name, handleChange, tooltipDescrip } = props
+
+    return (
+        <Fragment>
+            <InputGroup>
+                <FloatingLabel
+                    controlId="floatingInput"
+                    label={label}>
+                    <OverlayTrigger
+                        placement="right"
+                        overlay={
+                            <Tooltip id={`tooltip-${name}`}>{tooltipDescrip}</Tooltip>
+                        }>
+                        <Form.Control
+                            type="number"
+                            min={0}
+                            placeholder={label}
+                            value={value ? value : ''}
+                            name={name}
+                            onChange={handleChange}
+                            autoComplete="off"
+                        />
+                    </OverlayTrigger>
+                </FloatingLabel>
+                <InputGroup.Text id="currency" className="input-group-text-currency">$</InputGroup.Text>
+            </InputGroup>
+        </Fragment>
+    )
 }
 
 

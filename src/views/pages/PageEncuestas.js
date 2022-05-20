@@ -107,6 +107,15 @@ function PageEncuestas() {
                         <h1 className="title-cmh mb-3">Encuestas</h1>
 
                         <Row>
+
+                            <Col xs={12} md={12} className="mb-3">
+                                <h4 className="sub-title-cmh text-center">Progreso general de las encuestas</h4>
+                            </Col>
+
+                            <Col xs={12} md={12} className="mb-5">
+                                <ProgressBar animated variant={setVariant(60)} now={60} />
+                            </Col>
+
                             <Col xs={12} md={12}>
                                 <Accordion>
                                     {

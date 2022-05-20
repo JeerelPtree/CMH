@@ -18,3 +18,9 @@
 .modal-cmh-header-footer {
     background: -webkit-linear-gradient(right, rgba(198, 216, 2, 1), rgba(252, 255, 222, 1));
 }
+
+.input-group-text-currency {
+    color: white !important;
+    background-color: #118C50 !important;
+    font-weight: bold !important;
+}
