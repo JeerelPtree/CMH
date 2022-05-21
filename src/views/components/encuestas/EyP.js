@@ -64,7 +64,9 @@ function EyP() {
 
                             <Servicios form={form} handleChange={handleChange} />
 
+
                             <ServiciosInternamiento form={form} handleChange={handleChange} />
+
 
                             <ConsultaExterna form={form} handleChange={handleChange} />
 
@@ -79,6 +81,7 @@ function EyP() {
                             <ADT form={form} handleChange={handleChange} />
 
                             <OtrosServicios form={form} handleChange={handleChange} />
+
 
                             {/*Botón de enviar
                             <Col xs={12} md={6} className="mt-3 mb-5">
@@ -131,7 +134,8 @@ function Servicios(props) {
                                     placeholder="Habitaciones"
                                     value={form.numeroCamasHospitalizacion ? form.numeroCamasHospitalizacion : ''}
                                     name="numeroCamasHospitalizacion"
-                                    onChange={handleChange} />
+                                    onChange={handleChange}
+                                    min={0} />
                             </OverlayTrigger>
                         </FloatingLabel>
 
@@ -153,7 +157,8 @@ function Servicios(props) {
                                     placeholder="Camas UCIA"
                                     value={form.numeroCamasUCIA ? form.numeroCamasUCIA : ''}
                                     name="numeroCamasUCIA"
-                                    onChange={handleChange} />
+                                    onChange={handleChange}
+                                    min={0} />
                             </OverlayTrigger>
                         </FloatingLabel>
 
@@ -175,7 +180,8 @@ function Servicios(props) {
                                     placeholder="Camas UCIP"
                                     value={form.numeroCamasUCIP ? form.numeroCamasUCIP : ''}
                                     name="numeroCamasUCIP"
-                                    onChange={handleChange} />
+                                    onChange={handleChange}
+                                    min={0} />
                             </OverlayTrigger>
                         </FloatingLabel>
 
@@ -197,7 +203,8 @@ function Servicios(props) {
                                     placeholder="Camas UCIN"
                                     value={form.numeroCamasUCIN ? form.numeroCamasUCIN : ''}
                                     name="numeroCamasUCIN"
-                                    onChange={handleChange} />
+                                    onChange={handleChange}
+                                    min={0} />
                             </OverlayTrigger>
                         </FloatingLabel>
 
@@ -219,7 +226,8 @@ function Servicios(props) {
                                     placeholder="Camas en urgencias"
                                     value={form.numeroCamasUrgencias ? form.numeroCamasUrgencias : ''}
                                     name="numeroCamasUrgencias"
-                                    onChange={handleChange} />
+                                    onChange={handleChange}
+                                    min={0} />
                             </OverlayTrigger>
                         </FloatingLabel>
 
@@ -241,7 +249,8 @@ function Servicios(props) {
                                     placeholder="Camas de aislamiento"
                                     value={form.numeroCamasAislamiento ? form.numeroCamasAislamiento : ''}
                                     name="numeroCamasAislamiento"
-                                    onChange={handleChange} />
+                                    onChange={handleChange}
+                                    min={0} />
                             </OverlayTrigger>
                         </FloatingLabel>
 
@@ -263,7 +272,8 @@ function Servicios(props) {
                                     placeholder="Cunas"
                                     value={form.numeroCunas ? form.numeroCunas : ''}
                                     name="numeroCunas"
-                                    onChange={handleChange} />
+                                    onChange={handleChange}
+                                    min={0} />
                             </OverlayTrigger>
                         </FloatingLabel>
 
@@ -285,7 +295,8 @@ function Servicios(props) {
                                     placeholder="Incubadoras"
                                     value={form.numeroIncubadoras ? form.numeroIncubadoras : ''}
                                     name="numeroIncubadoras"
-                                    onChange={handleChange} />
+                                    onChange={handleChange}
+                                    min={0} />
                             </OverlayTrigger>
                         </FloatingLabel>
 
@@ -307,7 +318,8 @@ function Servicios(props) {
                                     placeholder="Quirofanos"
                                     value={form.numeroQuirofanos ? form.numeroQuirofanos : ''}
                                     name="numeroQuirofanos"
-                                    onChange={handleChange} />
+                                    onChange={handleChange}
+                                    min={0} />
                             </OverlayTrigger>
                         </FloatingLabel>
 
@@ -331,7 +343,8 @@ function Servicios(props) {
                                         placeholder="Salas de partos"
                                         value={form.numeroSalasPartos ? form.numeroSalasPartos : ''}
                                         name="numeroSalasPartos"
-                                        onChange={handleChange} />
+                                        onChange={handleChange}
+                                        min={0} />
                                 </OverlayTrigger>
                             </FloatingLabel>
 
@@ -353,7 +366,8 @@ function Servicios(props) {
                                         placeholder="Salas de Cirugía Ambulatoria"
                                         value={form.numeroSalasAmbulatoria ? form.numeroSalasAmbulatoria : ''}
                                         name="numeroSalasAmbulatoria"
-                                        onChange={handleChange} />
+                                        onChange={handleChange}
+                                        min={0} />
                                 </OverlayTrigger>
                             </FloatingLabel>
 
@@ -400,7 +414,8 @@ function ServiciosInternamiento(props) {
                                     placeholder="Pacientes Adultos internados"
                                     value={form.numeroPacientesAdultos ? form.numeroPacientesAdultos : ''}
                                     name="numeroPacientesAdultos"
-                                    onChange={handleChange} />
+                                    onChange={handleChange}
+                                    min={0} />
                             </OverlayTrigger>
                         </FloatingLabel>
 
@@ -422,7 +437,8 @@ function ServiciosInternamiento(props) {
                                     placeholder="Pacientes Pediátricos internados"
                                     value={form.numeroPacientesPediátricos ? form.numeroPacientesPediátricos : ''}
                                     name="numeroPacientesPediátricos"
-                                    onChange={handleChange} />
+                                    onChange={handleChange}
+                                    min={0} />
                             </OverlayTrigger>
                         </FloatingLabel>
 
@@ -462,7 +478,8 @@ function ConsultaExterna(props) {
                                     placeholder="General"
                                     value={form.numeroConsultasGeneral ? form.numeroConsultasGeneral : ''}
                                     name="numeroConsultasGeneral"
-                                    onChange={handleChange} />
+                                    onChange={handleChange}
+                                    min={0} />
                             </OverlayTrigger>
                         </FloatingLabel>
 
@@ -483,7 +500,8 @@ function ConsultaExterna(props) {
                                     placeholder="Especializada"
                                     value={form.numeroConsultasEspecializada ? form.numeroConsultasEspecializada : ''}
                                     name="numeroConsultasEspecializada"
-                                    onChange={handleChange} />
+                                    onChange={handleChange}
+                                    min={0} />
                             </OverlayTrigger>
                         </FloatingLabel>
 
@@ -523,7 +541,8 @@ function ServicioImagenologia(props) {
                                     placeholder="Radiología Simple"
                                     value={form.numeroRadiologiaSimple ? form.numeroRadiologiaSimple : ''}
                                     name="numeroRadiologiaSimple"
-                                    onChange={handleChange} />
+                                    onChange={handleChange}
+                                    min={0} />
                             </OverlayTrigger>
                         </FloatingLabel>
 
@@ -544,7 +563,8 @@ function ServicioImagenologia(props) {
                                     placeholder="Radiología Contrastada"
                                     value={form.numeroRadiologiaContrastada ? form.numeroRadiologiaContrastada : ''}
                                     name="numeroRadiologiaContrastada"
-                                    onChange={handleChange} />
+                                    onChange={handleChange}
+                                    min={0} />
                             </OverlayTrigger>
                         </FloatingLabel>
 
@@ -565,7 +585,8 @@ function ServicioImagenologia(props) {
                                     placeholder="Tomografía"
                                     value={form.numeroTomografia ? form.numeroTomografia : ''}
                                     name="numeroTomografia"
-                                    onChange={handleChange} />
+                                    onChange={handleChange}
+                                    min={0} />
                             </OverlayTrigger>
                         </FloatingLabel>
 
@@ -586,7 +607,8 @@ function ServicioImagenologia(props) {
                                     placeholder="Ecografía"
                                     value={form.numeroEcografía ? form.numeroEcografía : ''}
                                     name="numeroEcografía"
-                                    onChange={handleChange} />
+                                    onChange={handleChange}
+                                    min={0} />
                             </OverlayTrigger>
                         </FloatingLabel>
 
@@ -607,7 +629,8 @@ function ServicioImagenologia(props) {
                                     placeholder="Estudios Vasculares No Invasivos"
                                     value={form.numeroEVNI ? form.numeroEVNI : ''}
                                     name="numeroEVNI"
-                                    onChange={handleChange} />
+                                    onChange={handleChange}
+                                    min={0} />
                             </OverlayTrigger>
                         </FloatingLabel>
 
@@ -628,7 +651,8 @@ function ServicioImagenologia(props) {
                                     placeholder="Resonancia Magnética"
                                     value={form.numeroResonanciaMagnetica ? form.numeroResonanciaMagnetica : ''}
                                     name="numeroResonanciaMagnetica"
-                                    onChange={handleChange} />
+                                    onChange={handleChange}
+                                    min={0} />
                             </OverlayTrigger>
                         </FloatingLabel>
 
@@ -649,7 +673,8 @@ function ServicioImagenologia(props) {
                                     placeholder="Gammagrafía y Estudios Isotópicos "
                                     value={form.numeroGammagrafia ? form.numeroGammagrafia : ''}
                                     name="numeroGammagrafia"
-                                    onChange={handleChange} />
+                                    onChange={handleChange}
+                                    min={0} />
                             </OverlayTrigger>
                         </FloatingLabel>
 
@@ -670,7 +695,8 @@ function ServicioImagenologia(props) {
                                     placeholder="PET"
                                     value={form.numeroPET ? form.numeroPET : ''}
                                     name="numeroPET"
-                                    onChange={handleChange} />
+                                    onChange={handleChange}
+                                    min={0} />
                             </OverlayTrigger>
                         </FloatingLabel>
 
@@ -691,7 +717,8 @@ function ServicioImagenologia(props) {
                                     placeholder="RADIOTERAPIA"
                                     value={form.numeroRADIOTERAPIA ? form.numeroRADIOTERAPIA : ''}
                                     name="numeroRADIOTERAPIA"
-                                    onChange={handleChange} />
+                                    onChange={handleChange}
+                                    min={0} />
                             </OverlayTrigger>
                         </FloatingLabel>
 
@@ -714,7 +741,8 @@ function ServicioImagenologia(props) {
                                         placeholder="Mastógrafía"
                                         value={form.numeroMastografia ? form.numeroMastografia : ''}
                                         name="numeroMastografia"
-                                        onChange={handleChange} />
+                                        onChange={handleChange}
+                                        min={0} />
                                 </OverlayTrigger>
                             </FloatingLabel>
 
@@ -735,7 +763,8 @@ function ServicioImagenologia(props) {
                                         placeholder="Densitómetría"
                                         value={form.numeroDensitometria ? form.numeroDensitometria : ''}
                                         name="numeroDensitometria"
-                                        onChange={handleChange} />
+                                        onChange={handleChange}
+                                        min={0} />
                                 </OverlayTrigger>
                             </FloatingLabel>
 
@@ -767,14 +796,25 @@ function Transplantes(props) {
 
                         {/*¿Realizan transplantes?*/}
                         <Col xs={12} md={6} className="mb-3">
-                            <FloatingLabel controlId="floatingSelect" label="¿Realizan Transplantes?">
-                                <Form.Select aria-label="Floating label" value={form.realizanTransplantes ? form.realizanTransplantes : ''} onChange={handleChange} name="realizanTransplantes"
-                                    style={{ height: '70px' }}>
-                                    <option value="" disabled>Seleccione una opción</option>
-                                    <option value={true}>Si</option>
-                                    <option value={false}>No</option>
-                                </Form.Select>
-                            </FloatingLabel>
+
+                            <span>
+                                <OverlayTrigger
+                                    placement="top"
+                                    overlay={
+                                        <Tooltip id="tooltip-rinion">¿Realizan Transplantes?</Tooltip>
+                                    }>
+
+                                    <FloatingLabel controlId="floatingSelect" label="¿Realizan Transplantes?">
+                                        <Form.Select aria-label="Floating label" value={form.realizanTransplantes ? form.realizanTransplantes : ''} onChange={handleChange} name="realizanTransplantes"
+                                            style={{ height: '70px' }}>
+                                            <option value="" disabled>Seleccione una opción</option>
+                                            <option value={true}>Si</option>
+                                            <option value={false}>No</option>
+                                        </Form.Select>
+                                    </FloatingLabel>
+                                </OverlayTrigger>
+                            </span>
+
                         </Col>
 
                     </Row>
@@ -820,7 +860,8 @@ function TipoOrgano(props) {
                                         placeholder="Riñon"
                                         value={form.numeroRiniones ? form.numeroRiniones : ''}
                                         name="numeroRiniones"
-                                        onChange={handleChange} />
+                                        onChange={handleChange}
+                                        min={0} />
                                 </OverlayTrigger>
                             </FloatingLabel>
 
@@ -841,7 +882,8 @@ function TipoOrgano(props) {
                                         placeholder="Higado"
                                         value={form.numeroHigados ? form.numeroHigados : ''}
                                         name="numeroHigados"
-                                        onChange={handleChange} />
+                                        onChange={handleChange}
+                                        min={0} />
                                 </OverlayTrigger>
                             </FloatingLabel>
 
@@ -862,7 +904,8 @@ function TipoOrgano(props) {
                                         placeholder="Riñon"
                                         value={form.numeroPulmones ? form.numeroPulmones : ''}
                                         name="numeroPulmones"
-                                        onChange={handleChange} />
+                                        onChange={handleChange}
+                                        min={0} />
                                 </OverlayTrigger>
                             </FloatingLabel>
 
@@ -883,7 +926,8 @@ function TipoOrgano(props) {
                                         placeholder="Riñon"
                                         value={form.numeroCorazones ? form.numeroCorazones : ''}
                                         name="numeroCorazones"
-                                        onChange={handleChange} />
+                                        onChange={handleChange}
+                                        min={0} />
                                 </OverlayTrigger>
                             </FloatingLabel>
 
@@ -904,7 +948,8 @@ function TipoOrgano(props) {
                                         placeholder="Córnea"
                                         value={form.numeroCorneas ? form.numeroCorneas : ''}
                                         name="numeroCorneas"
-                                        onChange={handleChange} />
+                                        onChange={handleChange}
+                                        min={0} />
                                 </OverlayTrigger>
                             </FloatingLabel>
 
@@ -925,7 +970,8 @@ function TipoOrgano(props) {
                                         placeholder="Hueso"
                                         value={form.numeroHuesos ? form.numeroHuesos : ''}
                                         name="numeroHuesos"
-                                        onChange={handleChange} />
+                                        onChange={handleChange}
+                                        min={0} />
                                 </OverlayTrigger>
                             </FloatingLabel>
 
@@ -948,7 +994,8 @@ function TipoOrgano(props) {
                                             placeholder="Médula ósea"
                                             value={form.numeroMedulas ? form.numeroMedulas : ''}
                                             name="numeroMedulas"
-                                            onChange={handleChange} />
+                                            onChange={handleChange}
+                                            min={0} />
                                     </OverlayTrigger>
                                 </FloatingLabel>
 
@@ -1021,7 +1068,8 @@ function ServiciosUrgencias(props) {
                                     placeholder="Nº de Salas de Observación"
                                     value={form.numeroSalasObservacionUrgencias ? form.numeroSalasObservacionUrgencias : ''}
                                     name="numeroSalasObservacionUrgencias"
-                                    onChange={handleChange} />
+                                    onChange={handleChange}
+                                    min={0} />
                             </OverlayTrigger>
                         </FloatingLabel>
 
@@ -1043,7 +1091,8 @@ function ServiciosUrgencias(props) {
                                     placeholder="Atenciones Médicas de Urgencias"
                                     value={form.numeroAtencionesMedicasUrgencias ? form.numeroAtencionesMedicasUrgencias : ''}
                                     name="numeroAtencionesMedicasUrgencias"
-                                    onChange={handleChange} />
+                                    onChange={handleChange}
+                                    min={0} />
                             </OverlayTrigger>
                         </FloatingLabel>
 
@@ -1057,7 +1106,7 @@ function ServiciosUrgencias(props) {
 
                             <Row className="justify-content-center">
                                 <Col xs={12} md={12} className="text-center">
-                                    <Form.Label floatingInput>Tasa de Internamiento por Urgencias</Form.Label>
+                                    <Form.Label>Tasa de Internamiento por Urgencias</Form.Label>
                                 </Col>
                             </Row>
 
@@ -1077,6 +1126,7 @@ function ServiciosUrgencias(props) {
                                                 aria-describedby="percentage"
                                                 name="numeroTasaInternamientoUrgencias"
                                                 onChange={handleChange}
+                                                min={0}
                                                 value={
                                                     form.numeroTasaInternamientoUrgencias > 100 ? 100 :
                                                         form.numeroTasaInternamientoUrgencias < 0 ? 0 :
@@ -1089,14 +1139,24 @@ function ServiciosUrgencias(props) {
 
                             {/*Slide bar*/}
                             <Col xs={12} md={12} className="my-auto">
-                                <Form.Range
-                                    min="0"
-                                    max="100"
-                                    step="1"
-                                    placeholder="Tasa de Internamiento por Urgencias"
-                                    value={form.numeroTasaInternamientoUrgencias ? form.numeroTasaInternamientoUrgencias : ''}
-                                    name="numeroTasaInternamientoUrgencias"
-                                    onChange={handleChange} />
+
+                                <span>
+                                    <OverlayTrigger
+                                        placement="top"
+                                        overlay={
+                                            <Tooltip id="tooltip-rinion">Tasa de Internamiento por Urgencias: %{form.numeroTasaInternamientoUrgencias}</Tooltip>
+                                        }>
+                                        <Form.Range
+                                            min="0"
+                                            max="100"
+                                            step="1"
+                                            placeholder="Tasa de Internamiento por Urgencias"
+                                            value={form.numeroTasaInternamientoUrgencias ? form.numeroTasaInternamientoUrgencias : ''}
+                                            name="numeroTasaInternamientoUrgencias"
+                                            onChange={handleChange} />
+                                    </OverlayTrigger>
+                                </span>
+
                             </Col>
 
                         </Row>
@@ -1138,7 +1198,8 @@ function ServicioLaboratorio(props) {
                                         placeholder="Cantidad de Estudios realizados"
                                         value={form.numeroEstudiosRealizados ? form.numeroEstudiosRealizados : ''}
                                         name="numeroEstudiosRealizados"
-                                        onChange={handleChange} />
+                                        onChange={handleChange}
+                                        min={0} />
                                 </OverlayTrigger>
                             </FloatingLabel>
 
@@ -1181,6 +1242,7 @@ function ADT(props) {
                                     value={form.numeroPacientesHemodinamia ? form.numeroPacientesHemodinamia : ''}
                                     name="numeroPacientesHemodinamia"
                                     onChange={handleChange}
+                                    min={0}
                                     style={{ height: '70px' }} />
                             </OverlayTrigger>
                         </FloatingLabel>
@@ -1203,6 +1265,7 @@ function ADT(props) {
                                     value={form.numeroPacientesHemodialisis ? form.numeroPacientesHemodialisis : ''}
                                     name="numeroPacientesHemodialisis"
                                     onChange={handleChange}
+                                    min={0}
                                     style={{ height: '70px' }} />
                             </OverlayTrigger>
                         </FloatingLabel>
@@ -1225,6 +1288,7 @@ function ADT(props) {
                                     value={form.numeroPacientesTransfusionHemocomponentes ? form.numeroPacientesTransfusionHemocomponentes : ''}
                                     name="numeroPacientesTransfusionHemocomponentes"
                                     onChange={handleChange}
+                                    min={0}
                                     style={{ height: '70px' }} />
                             </OverlayTrigger>
                         </FloatingLabel>
@@ -1246,7 +1310,8 @@ function ADT(props) {
                                     placeholder="QUIMIOTERAPIA"
                                     value={form.numeroPacientesQuimioterapia ? form.numeroPacientesQuimioterapia : ''}
                                     name="numeroPacientesQuimioterapia"
-                                    onChange={handleChange} />
+                                    onChange={handleChange}
+                                    min={0} />
                             </OverlayTrigger>
                         </FloatingLabel>
 
@@ -1267,7 +1332,8 @@ function ADT(props) {
                                     placeholder="ENDOSCOPIA"
                                     value={form.numeroPacientesEndoscopia ? form.numeroPacientesEndoscopia : ''}
                                     name="numeroPacientesEndoscopia"
-                                    onChange={handleChange} />
+                                    onChange={handleChange}
+                                    min={0} />
                             </OverlayTrigger>
                         </FloatingLabel>
 
@@ -1288,7 +1354,8 @@ function ADT(props) {
                                     placeholder="UNIDAD DE QUEMADOS"
                                     value={form.numeroPacientesQuemados ? form.numeroPacientesQuemados : ''}
                                     name="numeroPacientesQuemados"
-                                    onChange={handleChange} />
+                                    onChange={handleChange}
+                                    min={0} />
                             </OverlayTrigger>
                         </FloatingLabel>
 
@@ -1311,7 +1378,8 @@ function ADT(props) {
                                         placeholder="REHABILITACIÓN Y FISIATRIA"
                                         value={form.numeroPacientesRehabilitacionFisiatria ? form.numeroPacientesRehabilitacionFisiatria : ''}
                                         name="numeroPacientesRehabilitacionFisiatria"
-                                        onChange={handleChange} />
+                                        onChange={handleChange}
+                                        min={0} />
                                 </OverlayTrigger>
                             </FloatingLabel>
 
@@ -1341,79 +1409,138 @@ function OtrosServicios(props) {
 
                     {/*Servicio de Nutrición y Dietética (Alimentación) en Internamiento*/}
                     <Col xs={12} md={6} className="mb-3">
-                        <FloatingLabel controlId="floatingSelect" label="Servicio de Nutrición y Dietética (Alimentación) en Internamiento">
 
-                            <Form.Select aria-label="Floating label" value={form.alimentacionInternamiento ? form.alimentacionInternamiento : ''} onChange={handleChange} name="alimentacionInternamiento"
-                            >
-                                <option value="" disabled>Seleccione una opción</option>
-                                <option value={true}>Si</option>
-                                <option value={false}>No</option>
-                            </Form.Select>
-                        </FloatingLabel>
+                        <span>
+                            <OverlayTrigger
+                                placement="top"
+                                overlay={
+                                    <Tooltip id="tooltip-rinion">Servicio de Nutrición y Dietética (Alimentación) en Internamiento</Tooltip>
+                                }>
+                                <FloatingLabel controlId="floatingSelect" label="Servicio de Nutrición y Dietética (Alimentación) en Internamiento">
+
+                                    <Form.Select aria-label="Floating label" value={form.alimentacionInternamiento ? form.alimentacionInternamiento : ''} onChange={handleChange} name="alimentacionInternamiento"
+                                    >
+                                        <option value="" disabled>Seleccione una opción</option>
+                                        <option value={true}>Si</option>
+                                        <option value={false}>No</option>
+                                    </Form.Select>
+                                </FloatingLabel>
+                            </OverlayTrigger>
+                        </span>
+
                     </Col>
 
                     {/*Servicio de Banco de Leche*/}
                     <Col xs={12} md={6} className="mb-3">
-                        <FloatingLabel controlId="floatingSelect" label="Servicio de Banco de Leche">
-                            <Form.Select aria-label="Floating label" value={form.bancoDeLeche ? form.bancoDeLeche : ''} onChange={handleChange} name="bancoDeLeche"
-                            >
-                                <option value="" disabled>Seleccione una opción</option>
-                                <option value={true}>Si</option>
-                                <option value={false}>No</option>
-                            </Form.Select>
-                        </FloatingLabel>
+
+                        <span>
+                            <OverlayTrigger
+                                placement="top"
+                                overlay={
+                                    <Tooltip id="tooltip-rinion">Servicio de Banco de Leche</Tooltip>
+                                }>
+                                <FloatingLabel controlId="floatingSelect" label="Servicio de Banco de Leche">
+                                    <Form.Select aria-label="Floating label" value={form.bancoDeLeche ? form.bancoDeLeche : ''} onChange={handleChange} name="bancoDeLeche"
+                                    >
+                                        <option value="" disabled>Seleccione una opción</option>
+                                        <option value={true}>Si</option>
+                                        <option value={false}>No</option>
+                                    </Form.Select>
+                                </FloatingLabel>
+                            </OverlayTrigger>
+                        </span>
+
                     </Col>
 
                     {/*Servicio de Lavandería para Ropa Hospitalaria*/}
                     <Col xs={12} md={6} className="mb-3">
-                        <FloatingLabel controlId="floatingSelect" label="Servicio de Lavandería para Ropa Hospitalaria">
 
-                            <Form.Select aria-label="Floating label" value={form.servicioLavanderia ? form.servicioLavanderia : ''} onChange={handleChange} name="servicioLavanderia"
-                            >
-                                <option value="" disabled>Seleccione una opción</option>
-                                <option value={true}>Si</option>
-                                <option value={false}>No</option>
-                            </Form.Select>
-                        </FloatingLabel>
+                        <span>
+                            <OverlayTrigger
+                                placement="top"
+                                overlay={
+                                    <Tooltip id="tooltip-rinion">Servicio de Lavandería para Ropa Hospitalaria</Tooltip>
+                                }>
+                                <FloatingLabel controlId="floatingSelect" label="Servicio de Lavandería para Ropa Hospitalaria">
+
+                                    <Form.Select aria-label="Floating label" value={form.servicioLavanderia ? form.servicioLavanderia : ''} onChange={handleChange} name="servicioLavanderia"
+                                    >
+                                        <option value="" disabled>Seleccione una opción</option>
+                                        <option value={true}>Si</option>
+                                        <option value={false}>No</option>
+                                    </Form.Select>
+                                </FloatingLabel>
+                            </OverlayTrigger>
+                        </span>
+
                     </Col>
 
                     {/*Central de Equipos y Esterilización (CEYE)*/}
                     <Col xs={12} md={6} className="mb-3">
-                        <FloatingLabel controlId="floatingSelect" label="Central de Equipos y Esterilización (CEYE)">
-                            <Form.Select aria-label="Floating label" value={form.ceye ? form.ceye : ''} onChange={handleChange} name="ceye"
-                            >
-                                <option value="" disabled>Seleccione una opción</option>
-                                <option value={true}>Si</option>
-                                <option value={false}>No</option>
-                            </Form.Select>
-                        </FloatingLabel>
+
+                        <span>
+                            <OverlayTrigger
+                                placement="top"
+                                overlay={
+                                    <Tooltip id="tooltip-rinion">Central de Equipos y Esterilización (CEYE)</Tooltip>
+                                }>
+                                <FloatingLabel controlId="floatingSelect" label="Central de Equipos y Esterilización (CEYE)">
+                                    <Form.Select aria-label="Floating label" value={form.ceye ? form.ceye : ''} onChange={handleChange} name="ceye"
+                                    >
+                                        <option value="" disabled>Seleccione una opción</option>
+                                        <option value={true}>Si</option>
+                                        <option value={false}>No</option>
+                                    </Form.Select>
+                                </FloatingLabel>
+                            </OverlayTrigger>
+                        </span>
                     </Col>
 
                     {/*Servicio de Evaluaciones Médicas (Check up´s)*/}
 
                     <Col xs={12} md={6} className="mb-3">
-                        <FloatingLabel controlId="floatingSelect" label="Servicio de Evaluaciones Médicas (Check up´s)">
 
-                            <Form.Select aria-label="Floating label" value={form.evaluacionesMedicasCheckUps ? form.evaluacionesMedicasCheckUps : ''} onChange={handleChange} name="evaluacionesMedicasCheckUps"
-                            >
-                                <option value="" disabled>Seleccione una opción</option>
-                                <option value={true}>Si</option>
-                                <option value={false}>No</option>
-                            </Form.Select>
-                        </FloatingLabel>
+                        <span>
+                            <OverlayTrigger
+                                placement="top"
+                                overlay={
+                                    <Tooltip id="tooltip-rinion">Servicio de Evaluaciones Médicas (Check up´s)</Tooltip>
+                                }>
+                                <FloatingLabel controlId="floatingSelect" label="Servicio de Evaluaciones Médicas (Check up´s)">
+
+                                    <Form.Select aria-label="Floating label" value={form.evaluacionesMedicasCheckUps ? form.evaluacionesMedicasCheckUps : ''} onChange={handleChange} name="evaluacionesMedicasCheckUps"
+                                    >
+                                        <option value="" disabled>Seleccione una opción</option>
+                                        <option value={true}>Si</option>
+                                        <option value={false}>No</option>
+                                    </Form.Select>
+                                </FloatingLabel>
+                            </OverlayTrigger>
+                        </span>
+
                     </Col>
 
                     {/*Farmacia Venta al Público*/}
                     <Col xs={12} md={6} className="mb-3">
-                        <FloatingLabel controlId="floatingSelect" label="Farmacia Venta al Público">
 
-                            <Form.Select aria-label="Floating label" value={form.farmaciaVentaPublico ? form.farmaciaVentaPublico : ''} onChange={handleChange} name="farmaciaVentaPublico"
-                            >
-                                <option value="" disabled>Seleccione una opción</option>
-                                <option value={true}>Si</option>
-                                <option value={false}>No</option>
-                            </Form.Select>
-                        </FloatingLabel>
+                        <span>
+                            <OverlayTrigger
+                                placement="top"
+                                overlay={
+                                    <Tooltip id="tooltip-rinion">Farmacia Venta al Público</Tooltip>
+                                }>
+                                <FloatingLabel controlId="floatingSelect" label="Farmacia Venta al Público">
+
+                                    <Form.Select aria-label="Floating label" value={form.farmaciaVentaPublico ? form.farmaciaVentaPublico : ''} onChange={handleChange} name="farmaciaVentaPublico"
+                                    >
+                                        <option value="" disabled>Seleccione una opción</option>
+                                        <option value={true}>Si</option>
+                                        <option value={false}>No</option>
+                                    </Form.Select>
+                                </FloatingLabel>
+                            </OverlayTrigger>
+                        </span>
+
                     </Col>
                 </Row>
             </Col>

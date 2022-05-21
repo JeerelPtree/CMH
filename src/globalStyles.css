@@ -24,3 +24,9 @@
     background-color: #118C50 !important;
     font-weight: bold !important;
 }
+
+.input-group-text-primary {
+    color: white !important;
+    background-color: #0d6efd !important;
+    font-weight: bold !important;
+}

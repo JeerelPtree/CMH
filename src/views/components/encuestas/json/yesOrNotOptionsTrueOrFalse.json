@@ -1,0 +1,12 @@
+[
+    {
+        "value": true,
+        "name": "Si",
+        "id": 1
+    },
+    {
+        "value": false,
+        "name": "No",
+        "id": 2
+    }
+]

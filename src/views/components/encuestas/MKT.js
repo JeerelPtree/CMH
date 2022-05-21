@@ -214,11 +214,14 @@ function MKT() {
 
                             <RedesSociales form={form} handleChange={handleChange} />
 
-                            <SitioWeb form={form} handleChange={handleChange} />
+                            {
+                                //<SitioWeb form={form} handleChange={handleChange} />
 
-                            <PromocionVentas form={form} handleChange={handleChange} />
 
-                            <InvestigacionMercado form={form} handleChange={handleChange} />
+                                //<PromocionVentas form={form} handleChange={handleChange} />
+
+                                //<InvestigacionMercado form={form} handleChange={handleChange} />
+                            }
 
                             {/*Botón de enviar
                             <Col xs={12} md={6} className="mt-3 mb-5">

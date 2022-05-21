@@ -1,9 +1,13 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { Container, Col, Row, FloatingLabel, Button, Form, OverlayTrigger, Tooltip } from "react-bootstrap";
-import MultiSelect from "../../components/selectors/MultiSelect";
+import { Container, Col, Row, FloatingLabel, Button, InputGroup, Form, OverlayTrigger, Tooltip, FormControl, Alert } from "react-bootstrap";
+import MultiSelect from "../selectors/MultiSelect";
 import SelectorCantidad from "../selectors/SelectorCantidad";
+import { faUserDoctor } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import OPTIONS from "./json/yesOrNotOptionsTrueOrFalse.json";
 
 //import axios from "axios"
+//TODO: recibiremos o haremos una peticion de la encuesta 1RHo. donde se especifica el total de numero de medicos certificados
 
 
 //we import css
@@ -17,18 +21,25 @@ function SA() {
     //declared the variables, constants ans states for this module
     const [form, setForm] = useState({})
 
+    const RHoTotalMedicos = 10 //FIXME: aqui se tiene que cap el valor de la encuesta 1
+
     //module's functions
     const handleChange = async (e) => {
 
         e.persist();
 
-        console.log('entrando a hanldle change: ', e.target.name, e.target.value)
+        let auxTotalMedicos = form.numeroTotalMedicosCredencializados ? form.numeroTotalMedicosCredencializados : 0;
+        auxTotalMedicos = !isNaN(e.target.value) ? getTotalMedicos(e.target.value, e.target.name) : auxTotalMedicos;
+
         await setForm(
             {
                 ...form,
-                [e.target.name]: e.target.value
+                [e.target.name]: e.target.value,
+                ['numeroTotalMedicosCredencializados']: auxTotalMedicos
             }
         );
+
+        console.log(form)
 
         /*Falta por subir los archivos en forma de enlace a una API o base de datos, o asignarlos al campo de 
         serviciosHabilitadosHospital para posteriormente subirlos*/
@@ -47,8 +58,232 @@ function SA() {
 
     }
 
+    /**
+     * It takes two arguments, a value and a name, and returns the difference between the value and the
+     * name
+     * @param value - The value of the input
+     * @param name - The name of the input field
+     * @returns the value of the variable numeroMedicosTotal.
+     */
+    const getTotalMedicos = (value, name) => {
+
+        let newValue = !isNaN(parseInt(value)) ? parseInt(value) : 0;
+        let oldValue = !isNaN(parseInt(form[name])) ? parseInt(form[name]) : 0;
+        let resOperation = oldValue - newValue;
+
+        let numeroMedicosTotal = !isNaN(form.numeroTotalMedicosCredencializados) ? form.numeroTotalMedicosCredencializados - resOperation : resOperation;
+
+        return numeroMedicosTotal;
+    }
+
     const prueba = () => {
         console.log(form)
+    }
+
+    const hasCredentials = () => {
+        if (form.credencializacion === 'true') {
+            return (
+                <Fragment>
+                    <OverlayTrigger
+                        placement="top"
+                        overlay={
+                            <Tooltip id="tooltip-rinion">Seleccione y suba sus archivos</Tooltip>
+                        }>
+                        <Form.Group controlId="formFileMultiple" className="mb-3">
+                            <Form.Control
+                                placeholder="Ningún archivo seleccionado"
+                                type="file"
+                                value={form.credencializacionArchivos ? form.credencializacionArchivos : ''}
+                                name="credencializacionArchivos"
+                                onChange={handleChange}
+                                multiple />
+                        </Form.Group>
+                    </OverlayTrigger>
+                </Fragment>
+            )
+
+        } else {
+            return null
+        }
+    }
+
+    /**
+     * It validates the total number of doctors in the hospital.
+     * @returns the value of the variable variantColorAlert.
+     */
+    const validationTotalMedicos = () => {
+
+
+        let variantColorAlert = null
+
+        if (!isNaN(parseInt(RHoTotalMedicos))) {
+            if (!isNaN(parseInt(form.numeroTotalMedicosCredencializados))) {
+                variantColorAlert = parseInt(form.numeroTotalMedicosCredencializados) === parseInt(RHoTotalMedicos) ? 'success' : 'warning';
+
+            } else {
+                variantColorAlert = 'danger'
+            }
+        } else {
+            variantColorAlert = 'danger'
+        }
+
+        return variantColorAlert;
+
+    }
+
+    /**
+     * It compares the number of doctors in the current survey with the number of doctors in the
+     * "Hospital Review" survey.
+     * @returns A fragment of JSX.
+     */
+    const getContentTotalMedicos = () => {
+
+        console.log('isNAN: ', isNaN(RHoTotalMedicos))
+        if (!isNaN(RHoTotalMedicos)) {
+            console.log('AQUI:', RHoTotalMedicos)
+
+            if (parseInt(RHoTotalMedicos) === parseInt(form.numeroTotalMedicosCredencializados)) {
+                console.log(2)
+                return (
+                    <Fragment>
+                        <Row className="justify-content-center">
+
+                            <Col xs={12} md={12}>
+                                <p className="text-center">
+                                    El Número total de Médicos credencializados hacen match.
+                                </p>
+                            </Col>
+
+                            <Col xs={12} md={6} className="text-center align-items-center">
+
+                                <Col xs={12} md={12}>
+                                    <p>
+                                        Número total de Médicos credencializados (presente)
+                                    </p>
+                                </Col>
+
+                                <Col xs={12} md={12}>
+                                    <Row className="justify-content-center">
+                                        <Col xs={12} md={4}>
+                                            <GetSelectTotalMedicos
+                                                label="Número total de Médicos credencializados (presente)"
+                                                value={form.numeroTotalMedicosCredencializados}
+                                                name="numeroTotalMedicosCredencializados"
+                                                handleChange={handleChange}
+                                            />
+                                        </Col>
+                                    </Row>
+                                </Col>
+
+                            </Col>
+
+                            <Col xs={12} md={6} className="text-center align-items-center">
+
+                                <Col xs={12} md={12}>
+                                    <p>
+                                        Número total de Médicos credencializados (RHo)
+                                    </p>
+                                </Col>
+
+                                <Col xs={12} md={12}>
+                                    <Row className="justify-content-center">
+                                        <Col xs={12} md={4}>
+                                            <GetSelectTotalMedicos
+                                                label="Número total de Médicos credencializados (RHo)"
+                                                value={RHoTotalMedicos}
+                                                name={null}
+                                                handleChange={null}
+                                            />
+                                        </Col>
+                                    </Row>
+                                </Col>
+
+                            </Col>
+
+                        </Row>
+                    </Fragment>
+                )
+            } else {
+                console.log(1)
+                return (
+                    <Fragment>
+                        <Col xs={12} md={12}>
+                            <p className="text-center">
+                                No coincide el número total de Médicos crendencializados de esta encuesta capturada con la encuesta de
+                                "Reseña del Hospital", campo: "Número de Médicos credencializados".
+                            </p>
+                        </Col>
+                        <Row className="justify-content-center">
+
+                            <Col xs={12} md={6} className="text-center align-items-center">
+
+                                <Col xs={12} md={12}>
+                                    <p>
+                                        Número total de Médicos credencializados (presente)
+                                    </p>
+                                </Col>
+
+                                <Col xs={12} md={12}>
+                                    <Row className="justify-content-center">
+                                        <Col xs={12} md={4}>
+                                            <GetSelectTotalMedicos
+                                                label="Número total de Médicos credencializados (presente)"
+                                                value={form.numeroTotalMedicosCredencializados}
+                                                name="numeroTotalMedicosCredencializados"
+                                                handleChange={handleChange}
+                                            />
+                                        </Col>
+                                    </Row>
+                                </Col>
+
+                            </Col>
+
+                            <Col xs={12} md={6} className="text-center align-items-center">
+
+                                <Col xs={12} md={12}>
+                                    <p>
+                                        Número total de Médicos credencializados (RHo)
+                                    </p>
+                                </Col>
+
+                                <Col xs={12} md={12}>
+                                    <Row className="justify-content-center">
+                                        <Col xs={12} md={4}>
+                                            <GetSelectTotalMedicos
+                                                label="Número total de Médicos credencializados (RHo)"
+                                                value={RHoTotalMedicos}
+                                                name={null}
+                                                handleChange={null}
+                                            />
+                                        </Col>
+                                    </Row>
+                                </Col>
+
+                            </Col>
+
+                        </Row>
+
+                    </Fragment>
+                )
+            }
+
+        } else {
+            console.log(3)
+            return (
+                <Fragment>
+                    <Col xs={12} md={12}>
+                        <p className="text-center">
+                            No hay datos en la encuesta de "Reseña del Hospital", campo: "Número de Médicos credencializados".
+                        </p>
+                    </Col>
+                    <Col xs={12} md={12}>
+                        <p className="text-center">
+                            Favor de regresar a la encuesta y llenarlo antes enviar los datos correctos.
+                        </p>
+                    </Col>
+                </Fragment>
+            )
+        }
     }
 
     return (
@@ -62,33 +297,26 @@ function SA() {
                             <Col xs={12} md={12} className="mt-3">
                                 {/*¿Cuenta con credencialización?*/}
                                 <Row className="align-items-center">
-                                    {/*Etiqueta*/}
-                                    <Col xs={9} md={6} className="my-auto">
-                                        <Form.Label floatingInput>¿Cuenta con Procedimiento de Credencialización de Médicos?</Form.Label>
-                                    </Col>
 
                                     {/*Selector*/}
-                                    <Col xs={3} md={1} className="my-auto">
-                                        <Form.Select aria-label="Floating label" value={form.credencializacion ? form.credencializacion : ''} onChange={handleChange} name="credencializacion"
-                                        >
-                                            <option value="" disabled>Seleccione una opción</option>
-                                            <option value={true}>Si</option>
-                                            <option value={false}>No</option>
-                                        </Form.Select>
+                                    <Col xs={12} md={6} className="my-auto">
+
+                                        <GetSelect
+                                            label="¿Cuenta con Procedimiento de Credencialización de Médicos?"
+                                            value={form.credencializacion}
+                                            name="credencializacion"
+                                            handleChange={handleChange}
+                                        />
+
                                     </Col>
 
                                     {/*Adjuntar archivos de credencialización*/}
-                                    <Col xs={12} md={5} className="my-auto pt-3">
+                                    <Col xs={12} md={6} className="my-auto pt-3">
 
-                                        <Form.Group controlId="formFileMultiple" className="mb-3">
-                                            <Form.Control
-                                                placeholder="Ningún archivo seleccionado"
-                                                type="file"
-                                                value={form.credencializacionArchivos ? form.credencializacionArchivos : ''}
-                                                name="credencializacionArchivos"
-                                                onChange={handleChange}
-                                                multiple />
-                                        </Form.Group>
+                                        {
+                                            hasCredentials()
+                                        }
+
 
                                     </Col>
                                 </Row>
@@ -102,31 +330,20 @@ function SA() {
 
                             <ServiciosSoporteTerapeutico form={form} handleChange={handleChange} />
 
-                            {/*TODO: Hacer la suma de los médicos*/}
+                            {/*TODO: Hacer la validacion con la encuesta 1RHo, que sean exactos los medicos*/}
                             {/*Total medicos credencializados*/}
                             <Col xs={12} md={12} className="mt-3 mb-3">
-                                <Row className="align-items-center">
-
-                                    {/*Etiqueta*/}
-                                    <Col xs={9} md={6} className="my-auto">
-                                        <Form.Label floatingInput>Número total de Médicos credencializados:</Form.Label>
-                                    </Col>
-
-                                    {/*Input*/}
-                                    <Col xs={3} md={6} className="my-auto">
-                                        <Form.Control
-                                            type="number"
-                                            readOnly
-                                            placeholder=""
-                                            value={form.numeroTotalMedicosCredencializados ? form.numeroTotalMedicosCredencializados : ''}
-                                            name="numeroTotalMedicosCredencializados"
-                                            onChange={handleChange} />
-                                    </Col>
-                                </Row>
+                                <Alert variant={validationTotalMedicos()}>
+                                    <Alert.Heading className="text-center">Número total de Médicos credencializados</Alert.Heading>
+                                    <hr />
+                                    {
+                                        getContentTotalMedicos()
+                                    }
+                                </Alert>
                             </Col>
 
                             {/*Botón de enviar
-                            <Col xs={12} md={6} className="mt-3 mb-5">
+                            <Col xs={12} md={12} className="mt-3 mb-5">
                                 <Button variant="primary" onClick={prueba}> Enviar
                                 </Button>
                             </Col>
@@ -135,8 +352,8 @@ function SA() {
                         </Row>
                     </Col>
                 </Row>
-            </Container>
-        </Fragment>
+            </Container >
+        </Fragment >
     )
 
 
@@ -162,7 +379,7 @@ function Especialidad(props) {
                     </Col>
 
                     {/*Anestesiología*/}
-                    <Col xs={12} md={6} className="mt-3">
+                    <Col xs={12} md={12} className="mt-3">
 
                         <Row className="align-items-center">
                             <SelectorCantidad
@@ -177,7 +394,7 @@ function Especialidad(props) {
                     </Col>
 
                     {/*Cirugía General*/}
-                    <Col xs={12} md={6} className="mt-3">
+                    <Col xs={12} md={12} className="mt-3">
 
                         <Row className="align-items-center">
                             <SelectorCantidad
@@ -192,7 +409,7 @@ function Especialidad(props) {
                     </Col>
 
                     {/*Ginecología y Obstetricia*/}
-                    <Col xs={12} md={6} className="mt-3">
+                    <Col xs={12} md={12} className="mt-3">
 
                         <Row className="align-items-center">
                             <SelectorCantidad
@@ -207,7 +424,7 @@ function Especialidad(props) {
                     </Col>
 
                     {/*Medicina Interna*/}
-                    <Col xs={12} md={6} className="mt-3 mb-3">
+                    <Col xs={12} md={12} className="mt-3 mb-3">
 
                         <Row className="align-items-center">
                             <SelectorCantidad
@@ -222,7 +439,7 @@ function Especialidad(props) {
                     </Col>
 
                     {/*Oftalmología*/}
-                    <Col xs={12} md={6} className="mt-3 mb-3">
+                    <Col xs={12} md={12} className="mt-3 mb-3">
 
                         <Row className="align-items-center">
                             <SelectorCantidad
@@ -237,7 +454,7 @@ function Especialidad(props) {
                     </Col>
 
                     {/*Pediatría*/}
-                    <Col xs={12} md={6} className="mt-3 mb-3">
+                    <Col xs={12} md={12} className="mt-3 mb-3">
 
                         <Row className="align-items-center">
                             <SelectorCantidad
@@ -252,7 +469,7 @@ function Especialidad(props) {
                     </Col>
 
                     {/*Neonatología*/}
-                    <Col xs={12} md={6} className="mt-3 mb-3">
+                    <Col xs={12} md={12} className="mt-3 mb-3">
 
                         <Row className="align-items-center">
                             <SelectorCantidad
@@ -267,7 +484,7 @@ function Especialidad(props) {
                     </Col>
 
                     {/*Medicina Familiar*/}
-                    <Col xs={12} md={6} className="mt-3 mb-3">
+                    <Col xs={12} md={12} className="mt-3 mb-3">
 
                         <Row className="align-items-center">
                             <SelectorCantidad
@@ -307,7 +524,7 @@ function EspecialidadesQuirurgicas(props) {
                     </Col>
 
                     {/*Angiología y Cirugía Vascular*/}
-                    <Col xs={12} md={6} className="mt-3">
+                    <Col xs={12} md={12} className="mt-3">
 
                         <Row className="align-items-center">
                             <SelectorCantidad
@@ -322,7 +539,7 @@ function EspecialidadesQuirurgicas(props) {
                     </Col>
 
                     {/*Cirugía Bariátrica*/}
-                    <Col xs={12} md={6} className="mt-3">
+                    <Col xs={12} md={12} className="mt-3">
 
                         <Row className="align-items-center">
                             <SelectorCantidad
@@ -338,7 +555,7 @@ function EspecialidadesQuirurgicas(props) {
                     </Col>
 
                     {/*Cirugía Cardiovascular*/}
-                    <Col xs={12} md={6} className="mt-3">
+                    <Col xs={12} md={12} className="mt-3">
 
                         <Row className="align-items-center">
                             <SelectorCantidad
@@ -354,7 +571,7 @@ function EspecialidadesQuirurgicas(props) {
                     </Col>
 
                     {/*Cirugía Oncológica*/}
-                    <Col xs={12} md={6} className="mt-3">
+                    <Col xs={12} md={12} className="mt-3">
 
                         <Row className="align-items-center">
                             <SelectorCantidad
@@ -371,7 +588,7 @@ function EspecialidadesQuirurgicas(props) {
                     </Col>
 
                     {/*Cirugía Oral y Maxilofacial */}
-                    <Col xs={12} md={6} className="mt-3">
+                    <Col xs={12} md={12} className="mt-3">
 
                         <Row className="align-items-center">
                             <SelectorCantidad
@@ -387,7 +604,7 @@ function EspecialidadesQuirurgicas(props) {
                     </Col>
 
                     {/*Cirugía Pediátrica*/}
-                    <Col xs={12} md={6} className="mt-3">
+                    <Col xs={12} md={12} className="mt-3">
 
                         <Row className="align-items-center">
                             <SelectorCantidad
@@ -403,7 +620,7 @@ function EspecialidadesQuirurgicas(props) {
                     </Col>
 
                     {/*Cirugía Plástica y Reconstructiva*/}
-                    <Col xs={12} md={6} className="mt-3">
+                    <Col xs={12} md={12} className="mt-3">
 
                         <Row className="align-items-center">
                             <SelectorCantidad
@@ -419,7 +636,7 @@ function EspecialidadesQuirurgicas(props) {
                     </Col>
 
                     {/*Neurocirugía*/}
-                    <Col xs={12} md={6} className="mt-3">
+                    <Col xs={12} md={12} className="mt-3">
 
                         <Row className="align-items-center">
                             <SelectorCantidad
@@ -435,7 +652,7 @@ function EspecialidadesQuirurgicas(props) {
                     </Col>
 
                     {/*Ortopedia y Traumatología */}
-                    <Col xs={12} md={6} className="mt-3">
+                    <Col xs={12} md={12} className="mt-3">
 
                         <Row className="align-items-center">
                             <SelectorCantidad
@@ -451,7 +668,7 @@ function EspecialidadesQuirurgicas(props) {
                     </Col>
 
                     {/*Otorrinolaringología */}
-                    <Col xs={12} md={6} className="mt-3">
+                    <Col xs={12} md={12} className="mt-3">
 
                         <Row className="align-items-center">
                             <SelectorCantidad
@@ -466,7 +683,7 @@ function EspecialidadesQuirurgicas(props) {
                     </Col>
 
                     {/*Proctología */}
-                    <Col xs={12} md={6} className="mt-3">
+                    <Col xs={12} md={12} className="mt-3">
 
                         <Row className="align-items-center">
                             <SelectorCantidad
@@ -481,7 +698,7 @@ function EspecialidadesQuirurgicas(props) {
                     </Col>
 
                     {/*Urología  */}
-                    <Col xs={12} md={6} className="mt-3">
+                    <Col xs={12} md={12} className="mt-3">
 
                         <Row className="align-items-center">
                             <SelectorCantidad
@@ -522,7 +739,7 @@ function EspecialidadesMedicas(props) {
                     </Col>
 
                     {/*Alergología*/}
-                    <Col xs={12} md={6} className="mb-3">
+                    <Col xs={12} md={12} className="mb-3">
                         <Row className="align-items-center">
                             <SelectorCantidad
                                 tituloSelector={"Alergología"}
@@ -536,7 +753,7 @@ function EspecialidadesMedicas(props) {
                     </Col>
 
                     {/*Cardiología*/}
-                    <Col xs={12} md={6} className="mb-3">
+                    <Col xs={12} md={12} className="mb-3">
 
                         <Row className="align-items-center">
                             <SelectorCantidad
@@ -551,7 +768,7 @@ function EspecialidadesMedicas(props) {
                     </Col>
 
                     {/*Electrofisiología*/}
-                    <Col xs={12} md={6} className="mb-3">
+                    <Col xs={12} md={12} className="mb-3">
 
                         <Row className="align-items-center">
 
@@ -567,7 +784,7 @@ function EspecialidadesMedicas(props) {
                     </Col>
 
                     {/*Dermatología*/}
-                    <Col xs={12} md={6} className="mb-3">
+                    <Col xs={12} md={12} className="mb-3">
 
                         <Row className="align-items-center">
 
@@ -583,7 +800,7 @@ function EspecialidadesMedicas(props) {
                     </Col>
 
                     {/*Endocrinología*/}
-                    <Col xs={12} md={6} className="mb-3">
+                    <Col xs={12} md={12} className="mb-3">
 
                         <Row className="align-items-center">
                             <SelectorCantidad
@@ -598,7 +815,7 @@ function EspecialidadesMedicas(props) {
                     </Col>
 
                     {/*Gastroenterología*/}
-                    <Col xs={12} md={6} className="mb-3">
+                    <Col xs={12} md={12} className="mb-3">
 
                         <Row className="align-items-center">
                             <SelectorCantidad
@@ -613,7 +830,7 @@ function EspecialidadesMedicas(props) {
                     </Col>
 
                     {/*Genética Humana*/}
-                    <Col xs={12} md={6} className="mt-3">
+                    <Col xs={12} md={12} className="mt-3">
 
                         <Row className="align-items-center">
 
@@ -629,7 +846,7 @@ function EspecialidadesMedicas(props) {
                     </Col>
 
                     {/*Geriatría*/}
-                    <Col xs={12} md={6} className="mt-3">
+                    <Col xs={12} md={12} className="mt-3">
                         <Row className="align-items-center">
                             <SelectorCantidad
                                 tituloSelector={"Geriatría"}
@@ -643,7 +860,7 @@ function EspecialidadesMedicas(props) {
                     </Col>
 
                     {/*Hemodinamia*/}
-                    <Col xs={12} md={6} className="mt-3">
+                    <Col xs={12} md={12} className="mt-3">
 
                         <Row className="align-items-center">
 
@@ -659,7 +876,7 @@ function EspecialidadesMedicas(props) {
                     </Col>
 
                     {/*Hematología */}
-                    <Col xs={12} md={6} className="mt-3">
+                    <Col xs={12} md={12} className="mt-3">
 
                         <Row className="align-items-center">
                             <SelectorCantidad
@@ -674,7 +891,7 @@ function EspecialidadesMedicas(props) {
                     </Col>
 
                     {/*Hepatología */}
-                    <Col xs={12} md={6} className="mt-3">
+                    <Col xs={12} md={12} className="mt-3">
 
                         <Row className="align-items-center">
                             <SelectorCantidad
@@ -689,7 +906,7 @@ function EspecialidadesMedicas(props) {
                     </Col>
 
                     {/*Infectología*/}
-                    <Col xs={12} md={6} className="mt-3">
+                    <Col xs={12} md={12} className="mt-3">
 
                         <Row className="align-items-center">
                             <SelectorCantidad
@@ -704,7 +921,7 @@ function EspecialidadesMedicas(props) {
                     </Col>
 
                     {/*Medicina Crítica*/}
-                    <Col xs={12} md={6} className="mt-3">
+                    <Col xs={12} md={12} className="mt-3">
 
                         <Row className="align-items-center">
                             <SelectorCantidad
@@ -719,7 +936,7 @@ function EspecialidadesMedicas(props) {
                     </Col>
 
                     {/*Nefrología*/}
-                    <Col xs={12} md={6} className="mt-3">
+                    <Col xs={12} md={12} className="mt-3">
 
                         <Row className="align-items-center">
                             <SelectorCantidad
@@ -734,7 +951,7 @@ function EspecialidadesMedicas(props) {
                     </Col>
 
                     {/*Neurología*/}
-                    <Col xs={12} md={6} className="mt-3">
+                    <Col xs={12} md={12} className="mt-3">
 
                         <Row className="align-items-center">
                             <SelectorCantidad
@@ -749,7 +966,7 @@ function EspecialidadesMedicas(props) {
                     </Col>
 
                     {/*Neumología*/}
-                    <Col xs={12} md={6} className="mt-3">
+                    <Col xs={12} md={12} className="mt-3">
 
                         <Row className="align-items-center">
                             <SelectorCantidad
@@ -764,7 +981,7 @@ function EspecialidadesMedicas(props) {
                     </Col>
 
                     {/*Psiquiatría*/}
-                    <Col xs={12} md={6} className="mt-3">
+                    <Col xs={12} md={12} className="mt-3">
 
                         <Row className="align-items-center">
                             <SelectorCantidad
@@ -779,7 +996,7 @@ function EspecialidadesMedicas(props) {
                     </Col>
 
                     {/*Oncología*/}
-                    <Col xs={12} md={6} className="mt-3">
+                    <Col xs={12} md={12} className="mt-3">
 
                         <Row className="align-items-center">
                             <SelectorCantidad
@@ -794,7 +1011,7 @@ function EspecialidadesMedicas(props) {
                     </Col>
 
                     {/*Reumatología*/}
-                    <Col xs={12} md={6} className="mt-3">
+                    <Col xs={12} md={12} className="mt-3">
 
                         <Row className="align-items-center">
                             <SelectorCantidad
@@ -835,7 +1052,7 @@ function ServiciosSoporteTerapeutico(props) {
                     </Col>
 
                     {/*Patología*/}
-                    <Col xs={12} md={6} className="mb-3">
+                    <Col xs={12} md={12} className="mb-3">
                         <Row className="align-items-center">
                             <SelectorCantidad
                                 tituloSelector={"Patología"}
@@ -849,7 +1066,7 @@ function ServiciosSoporteTerapeutico(props) {
                     </Col>
 
                     {/*Radiología e Imagen*/}
-                    <Col xs={12} md={6} className="mb-3">
+                    <Col xs={12} md={12} className="mb-3">
 
                         <Row className="align-items-center">
                             <SelectorCantidad
@@ -864,7 +1081,7 @@ function ServiciosSoporteTerapeutico(props) {
                     </Col>
 
                     {/*Electrofisiología*/}
-                    <Col xs={12} md={6} className="mb-3">
+                    <Col xs={12} md={12} className="mb-3">
 
                         <Row className="align-items-center">
 
@@ -880,7 +1097,7 @@ function ServiciosSoporteTerapeutico(props) {
                     </Col>
 
                     {/*Rehabilitación*/}
-                    <Col xs={12} md={6} className="mb-3">
+                    <Col xs={12} md={12} className="mb-3">
 
                         <Row className="align-items-center">
 
@@ -899,6 +1116,74 @@ function ServiciosSoporteTerapeutico(props) {
             </Col >
 
         </Fragment >
+    )
+
+}
+
+function GetSelect(props) {
+    const { label, value, name, handleChange } = props;
+
+    return (
+        <Fragment>
+
+            <span>
+                <OverlayTrigger
+                    placement="top"
+                    overlay={
+                        <Tooltip id="tooltip-rinion">{label}</Tooltip>
+                    }>
+                    <FloatingLabel controlId="floatingSelect" label={label}>
+                        <Form.Select aria-label="Floating label"
+                            value={value ? value : ''}
+                            onChange={handleChange} name={name}>
+                            <option value="" disabled>Seleccione una opción</option>
+                            {
+                                OPTIONS.map((option) => {
+                                    return (
+                                        <Fragment key={option.id}>
+                                            <option value={option.value}>{option.name}</option>
+                                        </Fragment>
+                                    )
+                                })
+                            }
+                        </Form.Select>
+                    </FloatingLabel>
+                </OverlayTrigger>
+            </span>
+
+        </Fragment>
+    )
+
+}
+
+function GetSelectTotalMedicos(props) {
+
+    const { label, value, name, handleChange } = props;
+
+    return (
+        <Fragment>
+            <span>
+                <OverlayTrigger
+                    placement="top"
+                    overlay={
+                        <Tooltip id="tooltip-rinion">{label}</Tooltip>
+                    }>
+
+                    <InputGroup>
+
+                        <InputGroup.Text id="totalMedicosCredencializados" className="input-group-text-primary"><FontAwesomeIcon icon={faUserDoctor} /></InputGroup.Text>
+                        <Form.Control
+                            type="number"
+                            readOnly
+                            placeholder="Nº. Méd."
+                            value={value ? value : ''}
+                            name={name}
+                            onChange={handleChange} />
+
+                    </InputGroup>
+                </OverlayTrigger>
+            </span>
+        </Fragment>
     )
 
 }

@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Form, FloatingLabel, Col, Row } from "react-bootstrap"
+import { Form, FloatingLabel, Col, Row, OverlayTrigger, Tooltip } from "react-bootstrap"
 //import makeAnimated from 'react-select/animated';
 
 //TODO: Volverlo un componente reutilizable
@@ -10,36 +10,79 @@ function SelectorCantidad(props) {
     //we obtain the props for this component
     const { campoSelector, tituloSelector, handleChange, nombreSelector, campoCantidad, nombreCantidad } = props
 
-    return (<Fragment>
-        <Row className="align-items-center">
-            {/*Selector*/}
-            <Col xs={6} md={8} className="mb-3">
-                <FloatingLabel controlId="floatingSelect" label={tituloSelector}>
+    const HasCantidad = () => {
+        if (campoSelector === 'true') {
+            return (
+                <Fragment>
 
-                    <Form.Select value={campoSelector ? campoSelector : ''} onChange={handleChange} name={nombreSelector}
-                    >
-                        <option value="" disabled>Seleccione una opción</option>
-                        <option value={true}>Si</option>
-                        <option value={false}>No</option>
-                    </Form.Select>
-                </FloatingLabel>
+                    <FloatingLabel controlId="floatingSelect" label="Cantidad">
+                        <OverlayTrigger
+                            placement="top"
+                            overlay={
+                                <Tooltip id="tooltip-rinion">Número de Médicos Credencializados en {tituloSelector}</Tooltip>
+                            }>
+
+                            <Form.Control
+                                type="number"
+                                placeholder="Cantidad"
+                                value={campoCantidad ? campoCantidad : ''}
+                                name={nombreCantidad}
+                                onChange={handleChange}
+                                min={0}
+                                required={true}
+                            />
+                        </OverlayTrigger>
+                    </FloatingLabel>
+
+                </Fragment>
+            )
+        } else {
+
+            return null;
+
+        }
+    }
+
+    return (<Fragment>
+
+        <Row className="justify-content-center">
+
+            {/*Selector*/}
+            <Col xs={12} md={6} className="mb-3">
+
+                <span>
+                    <OverlayTrigger
+                        placement="top"
+                        overlay={
+                            <Tooltip id="tooltip-rinion">¿Cuenta con servicio en {tituloSelector}?</Tooltip>
+                        }>
+
+                        <FloatingLabel controlId="floatingSelect" label={`¿Cuentas con servicio en ${tituloSelector}?`}>
+
+                            <Form.Select value={campoSelector ? campoSelector : ''} onChange={handleChange} name={nombreSelector} required={true}
+                            >
+                                <option value="" disabled>Seleccione una opción</option>
+                                <option value={true}>Si</option>
+                                <option value={false}>No</option>
+                            </Form.Select>
+                        </FloatingLabel>
+
+                    </OverlayTrigger>
+                </span>
+
             </Col>
 
             {/*Cantidad*/}
-            <Col xs={6} md={4} className="mb-3">
-                <FloatingLabel controlId="floatingSelect" label="Cantidad">
+            < Col xs={12} md={2} className="mb-3">
+                {
 
-                    <Form.Control
-                        type="number"
-                        placeholder="Cantidad"
-                        value={campoCantidad ? campoCantidad : ''}
-                        name={nombreCantidad}
-                        onChange={handleChange} />
-                </FloatingLabel>
-
+                    HasCantidad()
+                }
             </Col>
         </Row>
-    </Fragment>)
+
+
+    </Fragment >)
 }
 
 export default SelectorCantidad;

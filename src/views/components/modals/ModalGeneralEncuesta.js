@@ -50,7 +50,8 @@ function ModalGeneralEncuesta(props) {
             content: <Calidad />
         }, {
             id: 12,
-            content: <MKT />
+            content: <RHo />
+            //content: <MKT />
         }, {
             id: 13,
             content: <RHo />
