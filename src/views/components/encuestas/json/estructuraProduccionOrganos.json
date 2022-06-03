@@ -1,0 +1,44 @@
+[
+    {
+        "id": 1,
+        "organo": "riñon",
+        "name": "numeroRiniones",
+        "tooltip": "riñones"
+    },
+    {
+        "id": 2,
+        "organo": "higado",
+        "name": "numeroHigados",
+        "tooltip": "higados"
+    },
+    {
+        "id": 3,
+        "organo": "pulmon",
+        "name": "numeroPulmones",
+        "tooltip": "pulmones"
+    },
+    {
+        "id": 4,
+        "organo": "corazón",
+        "name": "numeroCorazones",
+        "tooltip": "corazones"
+    },
+    {
+        "id": 5,
+        "organo": "córnea",
+        "name": "numeroCorneas",
+        "tooltip": "córneas"
+    },
+    {
+        "id": 6,
+        "organo": "hueso",
+        "name": "numeroHuesos",
+        "tooltip": "huesos"
+    },
+    {
+        "id": 7,
+        "organo": "células hematopoyéticas (Médula ósea)",
+        "name": "numeroMedulas",
+        "tooltip": "células hematopoyéticas (Médula ósea)"
+    }
+]

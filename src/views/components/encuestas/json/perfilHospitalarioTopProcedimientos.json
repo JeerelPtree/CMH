@@ -1,0 +1,72 @@
+[
+    {
+        "id": 1,
+        "no": 1,
+        "procedimiento": "Cesarea",
+        "name": "cesarea",
+        "totalPacientes": null
+    },
+    {
+        "id": 2,
+        "no": 2,
+        "procedimiento": "Histerectomia",
+        "name": "histerectomia",
+        "totalPacientes": null
+    },
+    {
+        "id": 3,
+        "no": 3,
+        "procedimiento": "Apendicectomia",
+        "name": "apendicectomia",
+        "totalPacientes": null
+    },
+    {
+        "id": 4,
+        "no": 4,
+        "procedimiento": "Resección transuretral de prostata",
+        "name": "reseccionTransuretralProstata",
+        "totalPacientes": null
+    },
+    {
+        "id": 5,
+        "no": 5,
+        "procedimiento": "Colecistectomia",
+        "name": "colecistectomia",
+        "totalPacientes": null
+    },
+    {
+        "id": 6,
+        "no": 6,
+        "procedimiento": "Osteosistesis de miembros superiores",
+        "name": "osteosistesisMiembrosSuperiores",
+        "totalPacientes": null
+    },
+    {
+        "id": 7,
+        "no": 7,
+        "procedimiento": "Cateter doble j",
+        "name": "cateterDobleJ",
+        "totalPacientes": null
+    },
+    {
+        "id": 8,
+        "no": 8,
+        "procedimiento": "Craneotomia",
+        "name": "craneotomia",
+        "totalPacientes": null
+    },
+    {
+        "id": 9,
+        "no": 9,
+        "procedimiento": "Plastia inguinal",
+        "name": "plastiaInguinal",
+        "totalPacientes": null
+    },
+    {
+        "id": 10,
+        "no": 10,
+        "procedimiento": "Artroscopia de rodilla",
+        "name": "artroscopiaRodilla",
+        "totalPacientes": null
+    }
+]

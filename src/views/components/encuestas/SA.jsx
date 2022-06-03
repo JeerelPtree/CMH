@@ -39,7 +39,6 @@ function SA() {
             }
         );
 
-        console.log(form)
 
         /*Falta por subir los archivos en forma de enlace a una API o base de datos, o asignarlos al campo de 
         serviciosHabilitadosHospital para posteriormente subirlos*/
@@ -138,12 +137,10 @@ function SA() {
      */
     const getContentTotalMedicos = () => {
 
-        console.log('isNAN: ', isNaN(RHoTotalMedicos))
         if (!isNaN(RHoTotalMedicos)) {
-            console.log('AQUI:', RHoTotalMedicos)
 
             if (parseInt(RHoTotalMedicos) === parseInt(form.numeroTotalMedicosCredencializados)) {
-                console.log(2)
+
                 return (
                     <Fragment>
                         <Row className="justify-content-center">
@@ -204,7 +201,6 @@ function SA() {
                     </Fragment>
                 )
             } else {
-                console.log(1)
                 return (
                     <Fragment>
                         <Col xs={12} md={12}>
@@ -268,7 +264,6 @@ function SA() {
             }
 
         } else {
-            console.log(3)
             return (
                 <Fragment>
                     <Col xs={12} md={12}>

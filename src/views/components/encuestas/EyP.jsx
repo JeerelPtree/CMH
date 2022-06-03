@@ -901,7 +901,7 @@ function TipoOrgano(props) {
                                     }>
                                     <Form.Control
                                         type="number"
-                                        placeholder="Riñon"
+                                        placeholder="Pulmón"
                                         value={form.numeroPulmones ? form.numeroPulmones : ''}
                                         name="numeroPulmones"
                                         onChange={handleChange}
@@ -923,7 +923,7 @@ function TipoOrgano(props) {
                                     }>
                                     <Form.Control
                                         type="number"
-                                        placeholder="Riñon"
+                                        placeholder="Corazón"
                                         value={form.numeroCorazones ? form.numeroCorazones : ''}
                                         name="numeroCorazones"
                                         onChange={handleChange}
@@ -1242,8 +1242,7 @@ function ADT(props) {
                                     value={form.numeroPacientesHemodinamia ? form.numeroPacientesHemodinamia : ''}
                                     name="numeroPacientesHemodinamia"
                                     onChange={handleChange}
-                                    min={0}
-                                    style={{ height: '70px' }} />
+                                    min={0} />
                             </OverlayTrigger>
                         </FloatingLabel>
 
@@ -1265,35 +1264,12 @@ function ADT(props) {
                                     value={form.numeroPacientesHemodialisis ? form.numeroPacientesHemodialisis : ''}
                                     name="numeroPacientesHemodialisis"
                                     onChange={handleChange}
-                                    min={0}
-                                    style={{ height: '70px' }} />
+                                    min={0} />
                             </OverlayTrigger>
                         </FloatingLabel>
 
                     </Col>
 
-                    {/*TRANSFUSIÓN DE HEMOCOMPONENTES*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <FloatingLabel
-                            controlId="floatingInput"
-                            label="TRANSFUSIÓN DE HEMOCOMPONENTES">
-                            <OverlayTrigger
-                                placement="top"
-                                overlay={
-                                    <Tooltip id="tooltip-HEMOCOMPONENTES">Cantidad de pacientes atendidos en unidad de Transfusión de Hemocomponentes</Tooltip>
-                                }>
-                                <Form.Control
-                                    type="number"
-                                    placeholder="TRANSFUSIÓN DE HEMOCOMPONENTES"
-                                    value={form.numeroPacientesTransfusionHemocomponentes ? form.numeroPacientesTransfusionHemocomponentes : ''}
-                                    name="numeroPacientesTransfusionHemocomponentes"
-                                    onChange={handleChange}
-                                    min={0}
-                                    style={{ height: '70px' }} />
-                            </OverlayTrigger>
-                        </FloatingLabel>
-
-                    </Col>
 
                     {/*QUIMIOTERAPIA*/}
                     <Col xs={12} md={4} className="mb-3">
@@ -1361,23 +1337,45 @@ function ADT(props) {
 
                     </Col>
 
+                    {/*REHABILITACIÓN Y FISIATRIA*/}
+                    <Col xs={12} md={4} className="mb-3">
+                        <FloatingLabel
+                            controlId="floatingInput"
+                            label="REHABILITACIÓN Y FISIATRíA">
+                            <OverlayTrigger
+                                placement="top"
+                                overlay={
+                                    <Tooltip id="tooltip-ENDOSCOPIA">Cantidad de pacientes atendidos en unidad de Rehabilitación y Fisiatría</Tooltip>
+                                }>
+                                <Form.Control
+                                    type="number"
+                                    placeholder="REHABILITACIÓN Y FISIATRIA"
+                                    value={form.numeroPacientesRehabilitacionFisiatria ? form.numeroPacientesRehabilitacionFisiatria : ''}
+                                    name="numeroPacientesRehabilitacionFisiatria"
+                                    onChange={handleChange}
+                                    min={0} />
+                            </OverlayTrigger>
+                        </FloatingLabel>
+
+                    </Col>
+
                     <Row className="justify-content-center">
 
-                        {/*REHABILITACIÓN Y FISIATRIA*/}
-                        <Col xs={12} md={4} className="mb-3">
+                        {/*TRANSFUSIÓN DE HEMOCOMPONENTES*/}
+                        <Col xs={12} md={5} className="mb-3">
                             <FloatingLabel
                                 controlId="floatingInput"
-                                label="REHABILITACIÓN Y FISIATRíA">
+                                label="TRANSFUSIÓN DE HEMOCOMPONENTES">
                                 <OverlayTrigger
                                     placement="top"
                                     overlay={
-                                        <Tooltip id="tooltip-ENDOSCOPIA">Cantidad de pacientes atendidos en unidad de Rehabilitación y Fisiatría</Tooltip>
+                                        <Tooltip id="tooltip-HEMOCOMPONENTES">Cantidad de pacientes atendidos en unidad de Transfusión de Hemocomponentes</Tooltip>
                                     }>
                                     <Form.Control
                                         type="number"
-                                        placeholder="REHABILITACIÓN Y FISIATRIA"
-                                        value={form.numeroPacientesRehabilitacionFisiatria ? form.numeroPacientesRehabilitacionFisiatria : ''}
-                                        name="numeroPacientesRehabilitacionFisiatria"
+                                        placeholder="TRANSFUSIÓN DE HEMOCOMPONENTES"
+                                        value={form.numeroPacientesTransfusionHemocomponentes ? form.numeroPacientesTransfusionHemocomponentes : ''}
+                                        name="numeroPacientesTransfusionHemocomponentes"
                                         onChange={handleChange}
                                         min={0} />
                                 </OverlayTrigger>
@@ -1553,5 +1551,6 @@ function EquiposInversion(props) {
     const form = props.form
     const handleChange = props.handleChange
 }
+
 
 export default EyP;

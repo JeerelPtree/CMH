@@ -5,7 +5,7 @@ import OPTIONS from "./json/outsourcingOptions.json"
 //we import css
 import "../../../globalStyles.css"
 
-//TODO: PONER LOS TOOLTIPS EN ESTA SECC
+
 
 
 function Outsourcing() {
@@ -858,22 +858,30 @@ function GetSelect(props) {
     return (
         <Fragment>
 
-            <FloatingLabel controlId="floatingSelect" label={label}>
-                <Form.Select aria-label="Floating label"
-                    value={value ? value : ''}
-                    onChange={handleChange} name={name}>
-                    <option value="" disabled>Seleccione una opción</option>
-                    {//TODO: REPLICAR EN TODOS LOS SELECTORES
-                        OPTIONS.map((option) => {
-                            return (
-                                <Fragment key={option.id}>
-                                    <option value={option.value}>{option.name}</option>
-                                </Fragment>
-                            )
-                        })
-                    }
-                </Form.Select>
-            </FloatingLabel>
+            <span>
+                <OverlayTrigger
+                    placement="top"
+                    overlay={
+                        <Tooltip id="tooltip-rinion">{label}</Tooltip>
+                    }>
+                    <FloatingLabel controlId="floatingSelect" label={label}>
+                        <Form.Select aria-label="Floating label"
+                            value={value ? value : ''}
+                            onChange={handleChange} name={name}>
+                            <option value="" disabled>Seleccione una opción</option>
+                            {
+                                OPTIONS.map((option) => {
+                                    return (
+                                        <Fragment key={option.id}>
+                                            <option value={option.value}>{option.name}</option>
+                                        </Fragment>
+                                    )
+                                })
+                            }
+                        </Form.Select>
+                    </FloatingLabel>
+                </OverlayTrigger>
+            </span>
 
         </Fragment>
     )

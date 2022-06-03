@@ -1,0 +1,72 @@
+[
+    {
+        "id": 1,
+        "no": 1,
+        "diagnostico": "Embarazo",
+        "name": "embarazo",
+        "totalPacientes": 0
+    },
+    {
+        "id": 2,
+        "no": 2,
+        "diagnostico": "Hiperplasia Prostatica",
+        "name": "hiperplasiaProstatica",
+        "totalPacientes": null
+    },
+    {
+        "id": 3,
+        "no": 3,
+        "diagnostico": "Litiasis Renal",
+        "name": "litiasisRenal",
+        "totalPacientes": null
+    },
+    {
+        "id": 4,
+        "no": 4,
+        "diagnostico": "Fracturas de radio",
+        "name": "fracturasRadio",
+        "totalPacientes": null
+    },
+    {
+        "id": 5,
+        "no": 5,
+        "diagnostico": "Hipertesion Arterial",
+        "name": "hipertesionArterial",
+        "totalPacientes": null
+    },
+    {
+        "id": 6,
+        "no": 6,
+        "diagnostico": "Sindrome doloroso Abdominal",
+        "name": "sindromeDolorosoAbdominal",
+        "totalPacientes": null
+    },
+    {
+        "id": 7,
+        "no": 7,
+        "diagnostico": "Sindrome febril en estudio",
+        "name": "sindromeFebrilEstudio",
+        "totalPacientes": null
+    },
+    {
+        "id": 8,
+        "no": 8,
+        "diagnostico": "Sindrome Coronario Agudo (SICA)",
+        "name": "sindromeCoronarioAgudo",
+        "totalPacientes": null
+    },
+    {
+        "id": 9,
+        "no": 9,
+        "diagnostico": "Miomatosis uterina",
+        "name": "miomatosisUterina",
+        "totalPacientes": null
+    },
+    {
+        "id": 10,
+        "no": 10,
+        "diagnostico": "Diabetes Mellitus tipo 2",
+        "name": "diabetesMellitusTipoDos",
+        "totalPacientes": null
+    }
+]

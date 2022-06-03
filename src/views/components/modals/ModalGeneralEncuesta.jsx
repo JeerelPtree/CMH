@@ -23,7 +23,7 @@ function ModalGeneralEncuesta(props) {
             content: <SA />
         }, {
             id: 4,
-            content: <PH />
+            content: <PH modalIsOpen={modalIsOpen} />
         }, {
             id: 5,
             content: <Ops_part1 />

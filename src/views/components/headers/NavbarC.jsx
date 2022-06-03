@@ -1,7 +1,8 @@
 import React, { Fragment } from "react"; //importamos la libreria react y sus componentes useState
 import { Link } from "react-router-dom"; //importamos el componente Link de react-router-dom
-import Logo from "../../assets/cmhLogo.png"; //link or file for CMD logo
-import { Navbar, Container, Nav, Row, Col } from 'react-bootstrap'; //importamos los componentes de react-bootstrap
+//import Logo from "../../assets/cmhLogo.png"; //link or file for CMD logo
+import Logo from "../../assets/Prospectiva_Digital0.png"
+import { Navbar, Container, Nav, Row, Col, Overlay, Tooltip, OverlayTrigger } from 'react-bootstrap'; //importamos los componentes de react-bootstrap
 import './headersStyles.css';
 
 const NavbarC = () => {
@@ -36,9 +37,26 @@ const NavbarC = () => {
                                                             <Navbar.Collapse id="responsive-navbar-nav">
                                                                 <Nav className="me-auto">
                                                                     <Nav.Item>
-                                                                        <Link className="nav-link color-text" to='/encuestas'>
-                                                                            <strong>Encuestas</strong>
-                                                                        </Link>
+                                                                        <OverlayTrigger
+                                                                            placement="bottom"
+                                                                            overlay={
+                                                                                <Tooltip id="tooltip-rinion">Ir a encuestas</Tooltip>
+                                                                            }>
+                                                                            <Link className="nav-link color-text" to='/encuestas'>
+                                                                                <strong>Encuestas</strong>
+                                                                            </Link>
+                                                                        </OverlayTrigger>
+                                                                    </Nav.Item>
+                                                                    <Nav.Item>
+                                                                        <OverlayTrigger
+                                                                            placement="bottom"
+                                                                            overlay={
+                                                                                <Tooltip id="tooltip-rinion">Ir a perfiles</Tooltip>
+                                                                            }>
+                                                                            <Link className="nav-link color-text" to='/perfiles'>
+                                                                                <strong>Perfiles</strong>
+                                                                            </Link>
+                                                                        </OverlayTrigger>
                                                                     </Nav.Item>
                                                                     <Nav.Item>
                                                                         <Link className="nav-link color-text" to='/prueba'>

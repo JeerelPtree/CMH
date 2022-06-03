@@ -487,11 +487,11 @@ function Caracteristicas(props) {
 
                         <FloatingLabel
                             controlId="floatingTextarea"
-                            label="Lo Destacado del Hospital en el año 2019">
+                            label={`Lo Destacado del Hospital en el año ${currentYear}`}>
                             <OverlayTrigger
                                 placement="top"
                                 overlay={
-                                    <Tooltip id="tooltip-habitaciones">Lo Destacado del Hospital en el año 2019</Tooltip>
+                                    <Tooltip id="tooltip-habitaciones">Lo Destacado del Hospital en el año {currentYear}</Tooltip>
                                 }>
                                 <Form.Control
                                     as="textarea"

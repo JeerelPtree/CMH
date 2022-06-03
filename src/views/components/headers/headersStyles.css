@@ -30,7 +30,8 @@
 
 .navbar-img {
     height: auto;
-    max-width: 100%;
+    /*max-width: 100%;*/
+    max-width: 150%;
 }
 
 .color-text {

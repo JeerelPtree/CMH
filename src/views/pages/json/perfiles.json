@@ -1,0 +1,38 @@
+[
+    {
+        "email": "jeerel@ptree.com.mx",
+        "firstName": "Jeerel",
+        "middleName": "Zalatiel",
+        "lastName": "Herrejón",
+        "lastNameM": "Alarcón",
+        "rol": "Administrador General",
+        "hospital": "Ptree"
+    },
+    {
+        "email": "rocio@ptree.com.mx",
+        "firstName": "Rocio",
+        "middleName": null,
+        "lastName": "De la Mora",
+        "lastNameM": null,
+        "rol": "Administrador General",
+        "hospital": "Ptree"
+    },
+    {
+        "email": "osvaldo@ptree.com.mx",
+        "firstName": "Osvaldo",
+        "middleName": null,
+        "lastName": "Herrejón",
+        "lastNameM": "Ramírez",
+        "rol": "Administrador General",
+        "hospital": "Ptree"
+    },
+    {
+        "email": "jose@ptree.com.mx",
+        "firstName": "Jóse",
+        "middleName": "de Jesus",
+        "lastName": "Hernández",
+        "lastNameM": null,
+        "rol": "Administrador General",
+        "hospital": "Ptree"
+    }
+]

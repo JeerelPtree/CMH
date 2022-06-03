@@ -1,5 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { Container, Col, Row, FloatingLabel, Button, Form, OverlayTrigger, Tooltip, InputGroup } from "react-bootstrap";
+import { faPeopleLine } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 //import axios from "axios"
 
@@ -13,17 +15,33 @@ let totalEmpleados = 0;
 function GP() {
 
     //declared the variables, constants ans states for this module
-    const [form, setForm] = useState({})
+    const [form, setForm] = useState({ numeroTotalEmpleados: 0 })
+
+    //TODO:cuando se utilice el fetch hacia el backend inicializar numeroTotalEmpleados en 0 si no hay dato en el useEffect
 
     //module's functions
+
+    const handleChangeEmpleados = async (e) => {
+
+        e.persist();
+
+        let auxTotalEmpleados = form.numeroTotalEmpleados ? form.numeroTotalEmpleados : 0;
+
+        auxTotalEmpleados = !isNaN(e.target.value) ? getTotalEmpleados(e.target.value, e.target.name) : auxTotalEmpleados;
+
+        await setForm(
+            {
+                ...form,
+                [e.target.name]: e.target.value,
+                ['numeroTotalEmpleados']: auxTotalEmpleados
+            }
+        );
+    }
+
     const handleChange = async (e) => {
 
         e.persist();
 
-        //TODO: Como acumular este total empleados mientras se van recibiendo desde los inputs?
-        totalEmpleados += e.target.name.match(/escolaridad\w/) ? ~~e.target.value : 0;
-
-        console.log(totalEmpleados);
         await setForm(
             {
                 ...form,
@@ -45,6 +63,21 @@ function GP() {
         */
     }
 
+    /**
+     * It takes a value and a name, and returns the total number of employees
+     * @returns the value of the variable numeroEmpleadosTotal.
+     */
+    const getTotalEmpleados = (value, name) => {
+
+        let newValue = !isNaN(parseInt(value)) ? parseInt(value) : 0;
+        let oldValue = !isNaN(parseInt(form[name])) ? parseInt(form[name]) : 0;
+        let resOperation = oldValue - newValue;
+
+        let numeroEmpleadosTotal = !isNaN(form.numeroTotalEmpleados) ? form.numeroTotalEmpleados - resOperation : resOperation;
+
+        return numeroEmpleadosTotal;
+    }
+
     const prueba = () => {
         console.log(form)
     }
@@ -64,27 +97,39 @@ function GP() {
                             {/*TODO: Hacer la suma del personal*/}
                             {/*Total de empleados*/}
                             <Col xs={12} md={12} className="mt-3 mb-3">
-                                <Row>
-
-                                    {/*Etiqueta*/}
-                                    <Col xs={9} md={2} className="my-auto">
-                                        <Form.Label floatingInput>Total de Empleados:</Form.Label>
-                                    </Col>
+                                <Row className="justify-content-center">
 
                                     {/*Input*/}
-                                    <Col xs={3} md={4} className="my-auto">
-                                        <Form.Control
-                                            type="number"
-                                            readOnly
-                                            placeholder=""
-                                            value={form.numeroTotalEmpleados ? form.numeroTotalEmpleados : ''}
-                                            name="numeroTotalEmpleados"
-                                            onChange={handleChange} />
+                                    <Col xs={12} md={3}>
+
+                                        <span>
+                                            <OverlayTrigger
+                                                placement="top"
+                                                overlay={
+                                                    <Tooltip id="tooltip-rinion">{`Total de Empleados ${currentYear}`}</Tooltip>
+                                                }>
+
+                                                <InputGroup>
+
+                                                    <InputGroup.Text id="totalMedicosCredencializados" className="input-group-text-primary"><FontAwesomeIcon icon={faPeopleLine} /></InputGroup.Text>
+                                                    <Form.Control
+                                                        type="number"
+                                                        readOnly
+                                                        placeholder={`Total de Empleados`}
+                                                        value={form.numeroTotalEmpleados ? form.numeroTotalEmpleados : ''}
+                                                        name="numeroTotalEmpleados"
+                                                        onChange={handleChange} />
+
+                                                </InputGroup>
+                                            </OverlayTrigger>
+                                        </span>
+
                                     </Col>
+
                                 </Row>
                             </Col>
 
-                            <NivelEscolaridad form={form} handleChange={handleChange} />
+                            <NivelEscolaridad form={form} handleChange={handleChangeEmpleados} />
 
                             <RecursosHumanos form={form} handleChange={handleChange} />
 
@@ -131,73 +176,68 @@ function NivelEscolaridad(props) {
 
                     {/*Escolaridad Básica incompleta*/}
                     <Col xs={12} md={4} className="mb-3">
-                        <FloatingLabel
-                            controlId="floatingInput"
-                            label="Escolaridad Básica incompleta">
-                            <Form.Control
-                                type="number"
-                                placeholder="Escolaridad Básica incompleta"
-                                value={form.escolaridadBasicaIncompleta ? form.escolaridadBasicaIncompleta : ''}
-                                name="escolaridadBasicaIncompleta"
-                                onChange={handleChange} />
-                        </FloatingLabel>
+
+                        <GetSelectEmpleados
+                            label="Escolaridad Básica incompleta"
+                            value={form.escolaridadBasicaIncompleta}
+                            name="escolaridadBasicaIncompleta"
+                            handleChange={handleChange}
+                        />
+
                     </Col>
 
                     {/*Escolaridad Básica completa*/}
                     <Col xs={12} md={4} className="mb-3">
-                        <FloatingLabel
-                            controlId="floatingInput"
-                            label="Escolaridad Básica completa">
-                            <Form.Control
-                                type="number"
-                                placeholder="Escolaridad Básica completa"
-                                value={form.escolaridadBasicaCompleta ? form.escolaridadBasicaCompleta : ''}
-                                name="escolaridadBasicaCompleta"
-                                onChange={handleChange} />
-                        </FloatingLabel>
-                    </Col>
 
-                    {/*Medio Superior /Tecnica Completo*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <FloatingLabel
-                            controlId="floatingInput"
-                            label="Medio Superior/Tecnica Completo">
-                            <Form.Control
-                                type="number"
-                                placeholder="Medio Superior/Tecnica Completo"
-                                value={form.escolaridadMedioSuperiorTecnica ? form.escolaridadMedioSuperiorTecnica : ''}
-                                name="escolaridadMedioSuperiorTecnica"
-                                onChange={handleChange} />
-                        </FloatingLabel>
-                    </Col>
+                        <GetSelectEmpleados
+                            label="Escolaridad Básica completa"
+                            value={form.escolaridadBasicaCompleta}
+                            name="escolaridadBasicaCompleta"
+                            handleChange={handleChange}
+                        />
 
-                    {/*Profesional Completa*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <FloatingLabel
-                            controlId="floatingInput"
-                            label="Profesional Completa">
-                            <Form.Control
-                                type="number"
-                                placeholder="Profesional Completa"
-                                value={form.escolaridadMedioSuperiorTecnica ? form.escolaridadMedioSuperiorTecnica : ''}
-                                name="escolaridadMedioSuperiorTecnica"
-                                onChange={handleChange} />
-                        </FloatingLabel>
                     </Col>
 
                     {/*Maestría o más*/}
                     <Col xs={12} md={4} className="mb-3">
-                        <FloatingLabel
-                            controlId="floatingInput"
-                            label="Maestría o más">
-                            <Form.Control
-                                type="number"
-                                placeholder="Maestría o más"
-                                value={form.escolaridadMaestriaMas ? form.escolaridadMaestriaMas : ''}
-                                name="escolaridadMaestriaMas"
-                                onChange={handleChange} />
-                        </FloatingLabel>
+
+                        <GetSelectEmpleados
+                            label="Escolaridad Maestría o más"
+                            value={form.escolaridadMaestriaMas}
+                            name="escolaridadMaestriaMas"
+                            handleChange={handleChange}
+                        />
+
                     </Col>
+
+                    <Row className="justify-content-center">
+
+                        {/*Medio Superior /Tecnica Completo*/}
+                        <Col xs={12} md={5} className="mb-3">
+
+                            <GetSelectEmpleados
+                                label="Escolaridad Medio Superior/Tecnica Completo"
+                                value={form.escolaridadMedioSuperiorTecnica}
+                                name="escolaridadMedioSuperiorTecnica"
+                                handleChange={handleChange}
+                            />
+
+                        </Col>
+
+                        {/*Profesional Completa*/}
+                        <Col xs={12} md={5} className="mb-3">
+
+                            <GetSelectEmpleados
+                                label="Escolaridad Profesional Completa"
+                                value={form.profesionalCompleta}
+                                name="profesionalCompleta"
+                                handleChange={handleChange}
+                            />
+
+                        </Col>
+
+                    </Row>
+
 
                 </Row>
             </Col>
@@ -1348,5 +1388,36 @@ function GetSelectSueldos(props) {
     )
 }
 
+function GetSelectEmpleados(props) {
+
+    //we obtain their props
+    const { label, value, name, handleChange } = props;
+
+    return (
+        <Fragment>
+
+            <FloatingLabel
+                controlId="floatingInput"
+                label={label}>
+                <OverlayTrigger
+                    placement="top"
+                    overlay={
+                        <Tooltip>{`Empleados que cuentan con ${label}`}</Tooltip>
+                    }>
+                    <Form.Control
+                        type="number"
+                        min={0}
+                        placeholder={label}
+                        value={value ? value : ''}
+                        name={name}
+                        onChange={handleChange}
+                        autoComplete="off" />
+                </OverlayTrigger>
+            </FloatingLabel>
+
+        </Fragment>
+    )
+
+}
 
 export default GP;
