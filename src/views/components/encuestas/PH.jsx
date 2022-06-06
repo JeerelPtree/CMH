@@ -174,7 +174,7 @@ function TableTopTen(props) {
                                     <td>{procedimiento.procedimiento}</td>
                                     <td>
                                         <GetInputGroupPacientes
-                                            label={procedimiento.diagnostico}
+                                            label={procedimiento.procedimiento}
                                             value={procedimiento.totalPacientes}
                                             name={procedimiento.name}
                                             handleChange={handleChange}

@@ -95,9 +95,13 @@ function ModalGeneralEncuesta(props) {
         return content;
     }
 
+    const prueba = () => {
+        console.log(123)
+    }
+
     return (
         <Modal show={modalIsOpen} backdrop="static" keyboard={false} size="xl" arial-labelledby="contained-modal-title-vcenter" onHide={handleModalState} centered>
-            <Form>
+            <Form onSubmit={prueba}>
                 <Modal.Header className="modal-cmh-header-footer" closeButton>
                     <Modal.Title className="title-cmh">
                         {dataEncuesta.title}
@@ -119,7 +123,7 @@ function ModalGeneralEncuesta(props) {
                 <Modal.Footer className="modal-cmh-header-footer">
                     <Button variant="danger" onClick={handleModalState}>Cancelar</Button>
                     <Button variant="primary">Guardar</Button>
-                    <Button variant="success">Enviar</Button>
+                    <Button variant="success" type="submit">Enviar</Button>
                 </Modal.Footer>
             </Form>
         </Modal>

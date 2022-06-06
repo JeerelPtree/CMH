@@ -1411,6 +1411,7 @@ function GetSelectEmpleados(props) {
                         value={value ? value : ''}
                         name={name}
                         onChange={handleChange}
+                        required={true}
                         autoComplete="off" />
                 </OverlayTrigger>
             </FloatingLabel>
