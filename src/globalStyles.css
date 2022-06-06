@@ -30,3 +30,11 @@
     background-color: #0d6efd !important;
     font-weight: bold !important;
 }
+
+.tipIcon {
+    color: grey !important;
+}
+
+.popover {
+    max-width: 600px !important;
+}

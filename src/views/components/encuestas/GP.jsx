@@ -1,7 +1,9 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { Container, Col, Row, FloatingLabel, Button, Form, OverlayTrigger, Tooltip, InputGroup } from "react-bootstrap";
+import { Popover, Badge, Container, Col, Row, FloatingLabel, Button, Form, OverlayTrigger, Tooltip, InputGroup } from "react-bootstrap";
 import { faPeopleLine } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ProfesionalOptions from "./json/GPOptions/profesionalOptions.json"
+import formulas from "../../assets/formulas.png"
 
 //import axios from "axios"
 
@@ -21,6 +23,10 @@ function GP() {
 
     //module's functions
 
+    /**
+     * It takes the value of the input and the name of the input and then it sets the value of the
+     * input to the state.
+     */
     const handleChangeEmpleados = async (e) => {
 
         e.persist();
@@ -84,8 +90,8 @@ function GP() {
 
     return (
         <Fragment>
-            <Container className="mt-3">
-                <Row>
+            <Container className="mt-3 px-2">
+                <Row >
                     <Col xs={12} md={12}>
                         <Row>
 
@@ -131,11 +137,11 @@ function GP() {
 
                             <NivelEscolaridad form={form} handleChange={handleChangeEmpleados} />
 
-                            <RecursosHumanos form={form} handleChange={handleChange} />
+                            <RecursosHumanos form={form} handleChange={handleChange} formulas={formulas} />
 
                             <PersonalClinico form={form} handleChange={handleChange} />
 
-                            <NivelProfesional form={form} handleChange={handleChange} />
+                            <NivelProfesional form={form} handleChange={handleChange} profesionalOptions={ProfesionalOptions} />
 
                             <Sueldos form={form} handleChange={handleChange} />
 
@@ -167,7 +173,7 @@ function NivelEscolaridad(props) {
         <Fragment>
 
             <Col xs={12} md={12}>
-                <Row>
+                <Row className="justify-content-evenly">
 
                     {/*Titulo de la sección*/}
                     <Col xs={12} md={12} className="mt-3 mb-3">
@@ -252,200 +258,151 @@ function RecursosHumanos(props) {
     //we obtain the props for this component
     const form = props.form
     const handleChange = props.handleChange
+    const formulas = props.formulas
 
     return (
         <Fragment>
 
             <Col xs={12} md={12}>
-                <Row>
+                <Row className="justify-content-evenly">
 
                     {/*Titulo de la sección*/}
                     <Col xs={12} md={12} className="mt-3 mb-3">
-                        <h4 className="text-center sub-title-cmh">Recursos Humanos</h4>
+                        <Row className="justify-content-center">
+                            {/* <Col xs={3} md={3}>
+                                <h4 className="text-center sub-title-cmh">
+                                    Recursos Humanos <OverlayTrigger
+                                        placement="right"
+                                        overlay={
+                                            <Tooltip>
+                                                {
+                                                    `Formulas para obtener tasas e indices.`
+                                                }
+                                            </Tooltip>
+                                        }>
+                                        <Badge pill bg="secondary">?</Badge>
+                                    </OverlayTrigger>
+                                </h4>
+                            </Col> */}
+                            <Col xs={3} md={3}>
+                                <h4 className="text-center sub-title-cmh">
+                                    Recursos Humanos <OverlayTrigger
+                                        placement="right"
+                                        overlay={
+                                            <Popover>
+                                                <Popover.Header as="h3">Formulas de ayuda</Popover.Header>
+                                                <Popover.Body>
+                                                    <img src={formulas} />
+                                                </Popover.Body>
+                                            </Popover>
+                                        }
+                                    >
+                                        <Badge pill bg="secondary">?</Badge>
+                                    </OverlayTrigger>
+                                </h4>
+                            </Col>
+                        </Row>
                     </Col>
 
                     {/*Tasa de Contratación*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <InputGroup className="justify-content-center">
-                            <FloatingLabel
-                                controlId="floatingInput"
-                                label="Contratación">
-                                <OverlayTrigger
-                                    placement="top"
-                                    overlay={
-                                        <Tooltip id="tooltip-rinion">Tasa de Contratación</Tooltip>
-                                    }>
-                                    <Form.Control
-                                        type="number"
-                                        placeholder="Contratación"
-                                        value={form.tasaContratacion ? form.tasaContratacion : ''}
-                                        name="tasaContratacion"
-                                        onChange={handleChange} />
-                                </OverlayTrigger>
-                            </FloatingLabel>
-                            <InputGroup.Text id="percentage">%</InputGroup.Text>
-                        </InputGroup>
+                    <Col xs={12} md={3} className="mb-3">
+                        <GetInputRate
+                            label='Contratación'
+                            value={form.tasaContratacion}
+                            name='tasaContratacion'
+                            handleChange={handleChange}
+                            tooltipDescrip='Tasa de Contratación'
+                        />
                     </Col>
 
                     {/*Tasa de Despidos*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <InputGroup className="justify-content-center">
-                            <FloatingLabel
-                                controlId="floatingInput"
-                                label="Despidos">
-                                <OverlayTrigger
-                                    placement="top"
-                                    overlay={
-                                        <Tooltip id="tooltip-rinion">Tasa de Despidos</Tooltip>
-                                    }>
-                                    <Form.Control
-                                        type="number"
-                                        placeholder="Despidos"
-                                        value={form.tasaDespidos ? form.tasaDespidos : ''}
-                                        name="tasaDespidos"
-                                        onChange={handleChange} />
-                                </OverlayTrigger>
-                            </FloatingLabel>
-                            <InputGroup.Text id="percentage">%</InputGroup.Text>
-                        </InputGroup>
+                    <Col xs={12} md={3} className="mb-3">
+                        <GetInputRate
+                            label='Despidos'
+                            value={form.tasaDespidos}
+                            name='tasaDespidos'
+                            handleChange={handleChange}
+                            tooltipDescrip='Tasa de Despidos'
+                        />
+
                     </Col>
 
                     {/*Tasa de Renuncias*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <InputGroup className="justify-content-center">
-                            <FloatingLabel
-                                controlId="floatingInput"
-                                label="Renuncias">
-                                <OverlayTrigger
-                                    placement="top"
-                                    overlay={
-                                        <Tooltip id="tooltip-rinion">Tasa de Renuncias</Tooltip>
-                                    }>
-                                    <Form.Control
-                                        type="number"
-                                        placeholder="Renuncias"
-                                        value={form.tasaRenuncias ? form.tasaRenuncias : ''}
-                                        name="tasaRenuncias"
-                                        onChange={handleChange} />
-                                </OverlayTrigger>
-                            </FloatingLabel>
-                            <InputGroup.Text id="percentage">%</InputGroup.Text>
-                        </InputGroup>
+                    <Col xs={12} md={3} className="mb-3">
+
+                        <GetInputRate
+                            label='Renuncias'
+                            value={form.tasaRenuncias}
+                            name='tasaRenuncias'
+                            handleChange={handleChange}
+                            tooltipDescrip='Tasa de Renuncias'
+                        />
+
                     </Col>
 
                     {/*Tasa de Separación (Despido o Renuncia)*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <InputGroup className="justify-content-center">
-                            <FloatingLabel
-                                controlId="floatingInput"
-                                label="Separación">
-                                <OverlayTrigger
-                                    placement="top"
-                                    overlay={
-                                        <Tooltip id="tooltip-rinion">Tasa de Separación (Despido o Renuncia)</Tooltip>
-                                    }>
-                                    <Form.Control
-                                        type="number"
-                                        placeholder="Separación"
-                                        value={form.tasaSeparacion ? form.tasaSeparacion : ''}
-                                        name="tasaSeparacion"
-                                        onChange={handleChange} />
-                                </OverlayTrigger>
-                            </FloatingLabel>
-                            <InputGroup.Text id="percentage">%</InputGroup.Text>
-                        </InputGroup>
+                    <Col xs={12} md={3} className="mb-3">
+
+                        <GetInputRate
+                            label='Separación'
+                            value={form.tasaSeparacion}
+                            name='tasaSeparacion'
+                            handleChange={handleChange}
+                            tooltipDescrip='Tasa de Separación (Despido o Renuncia)'
+                        />
+
                     </Col>
 
                     {/*Indice General de Rotación */}
-                    <Col xs={12} md={4} className="mb-3">
-                        <InputGroup className="justify-content-center">
-                            <FloatingLabel
-                                controlId="floatingInput"
-                                label="Rotación General">
-                                <OverlayTrigger
-                                    placement="top"
-                                    overlay={
-                                        <Tooltip id="tooltip-rinion">Indice General de Rotación</Tooltip>
-                                    }>
-                                    <Form.Control
-                                        type="number"
-                                        placeholder="Rotación General"
-                                        value={form.indiceGeneralRotacion ? form.indiceGeneralRotacion : ''}
-                                        name="indiceGeneralRotacion"
-                                        onChange={handleChange} />
-                                </OverlayTrigger>
-                            </FloatingLabel>
-                            <InputGroup.Text id="percentage">%</InputGroup.Text>
-                        </InputGroup>
+                    <Col xs={12} md={3} className="mb-3">
+
+                        <GetInputRate
+                            label='Rotación General'
+                            value={form.indiceGeneralRotacion}
+                            name='indiceGeneralRotacion'
+                            handleChange={handleChange}
+                            tooltipDescrip='Indice General de Rotación'
+                        />
+
                     </Col>
 
                     {/*Indice de Rotación del Personal de Enfermería*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <InputGroup className="justify-content-center">
-                            <FloatingLabel
-                                controlId="floatingInput"
-                                label="Rotación Enfermería">
-                                <OverlayTrigger
-                                    placement="top"
-                                    overlay={
-                                        <Tooltip id="tooltip-rinion">Indice de Rotación del Personal de Enfermería</Tooltip>
-                                    }>
-                                    <Form.Control
-                                        type="number"
-                                        placeholder="Rotación Enfermería"
-                                        value={form.indiceRotacionEnfermeria ? form.indiceRotacionEnfermeria : ''}
-                                        name="indiceRotacionEnfermeria"
-                                        onChange={handleChange} />
-                                </OverlayTrigger>
-                            </FloatingLabel>
-                            <InputGroup.Text id="percentage">%</InputGroup.Text>
-                        </InputGroup>
+                    <Col xs={12} md={3} className="mb-3">
+
+                        <GetInputRate
+                            label='Rotación Enfermería'
+                            value={form.indiceRotacionEnfermeria}
+                            name='indiceRotacionEnfermeria'
+                            handleChange={handleChange}
+                            tooltipDescrip='Indice de Rotación del Personal de Enfermería'
+                        />
+
                     </Col>
 
                     {/*Indice de Ausentismo*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <InputGroup className="justify-content-center">
-                            <FloatingLabel
-                                controlId="floatingInput"
-                                label="Ausentismo">
-                                <OverlayTrigger
-                                    placement="top"
-                                    overlay={
-                                        <Tooltip id="tooltip-rinion">Indice de Ausentismo</Tooltip>
-                                    }>
-                                    <Form.Control
-                                        type="number"
-                                        placeholder="Ausentismo"
-                                        value={form.indiceAusentismo ? form.indiceAusentismo : ''}
-                                        name="indiceAusentismo"
-                                        onChange={handleChange} />
-                                </OverlayTrigger>
-                            </FloatingLabel>
-                            <InputGroup.Text id="percentage">%</InputGroup.Text>
-                        </InputGroup>
+                    <Col xs={12} md={3} className="mb-3">
+
+                        <GetInputRate
+                            label='Ausentismo'
+                            value={form.indiceAusentismo}
+                            name='indiceAusentismo'
+                            handleChange={handleChange}
+                            tooltipDescrip='Indice de Ausentismo'
+                        />
+
                     </Col>
 
                     {/*Indice de Inactivos por alguna Incapacidad*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <InputGroup className="justify-content-center">
-                            <FloatingLabel
-                                controlId="floatingInput"
-                                label="Incapacidad">
-                                <OverlayTrigger
-                                    placement="top"
-                                    overlay={
-                                        <Tooltip id="tooltip-rinion">Indice de Inactivos por alguna Incapacidad</Tooltip>
-                                    }>
-                                    <Form.Control
-                                        type="number"
-                                        placeholder="Incapacidad"
-                                        value={form.indiceInactivosIncapacidad ? form.indiceInactivosIncapacidad : ''}
-                                        name="indiceInactivosIncapacidad"
-                                        onChange={handleChange} />
-                                </OverlayTrigger>
-                            </FloatingLabel>
-                            <InputGroup.Text id="percentage">%</InputGroup.Text>
-                        </InputGroup>
+                    <Col xs={12} md={3} className="mb-3">
+
+                        <GetInputRate
+                            label='Incapacidad'
+                            value={form.indiceInactivosIncapacidad}
+                            name='indiceInactivosIncapacidad'
+                            handleChange={handleChange}
+                            tooltipDescrip='Indice de Inactivos por alguna Incapacidad'
+                        />
+
                     </Col>
 
                 </Row>
@@ -466,7 +423,7 @@ function PersonalClinico(props) {
         <Fragment>
 
             <Col xs={12} md={12}>
-                <Row>
+                <Row className="justify-content-evenly">
 
                     {/*Titulo de la sección*/}
                     <Col xs={12} md={12} className="mt-3 mb-3">
@@ -475,58 +432,48 @@ function PersonalClinico(props) {
 
                     {/*Total de Enfermeras*/}
                     <Col xs={12} md={6} className="mb-3">
-                        <FloatingLabel
-                            controlId="floatingInput"
-                            label="Total de Enfermeras">
-                            <Form.Control
-                                type="number"
-                                placeholder="Total de Enfermeras"
-                                value={form.totalEnfermeras ? form.totalEnfermeras : ''}
-                                name="totalEnfermeras"
-                                onChange={handleChange} />
-                        </FloatingLabel>
+                        <GetInputPersonal
+                            label="Total de Enfermeras"
+                            value={form.totalEnfermeras}
+                            name="totalEnfermeras"
+                            handleChange={handleChange}
+                        />
                     </Col>
 
                     {/*Total de Personal Administrativo*/}
                     <Col xs={12} md={6} className="mb-3">
-                        <FloatingLabel
-                            controlId="floatingInput"
-                            label="Total de Personal Administrativo">
-                            <Form.Control
-                                type="number"
-                                placeholder="Total de Personal Administrativo"
-                                value={form.totalPersonalAdministrativo ? form.totalPersonalAdministrativo : ''}
-                                name="totalPersonalAdministrativo"
-                                onChange={handleChange} />
-                        </FloatingLabel>
+
+                        <GetInputPersonal
+                            label="Total de Personal Administrativo"
+                            value={form.totalPersonalAdministrativo}
+                            name="totalPersonalAdministrativo"
+                            handleChange={handleChange}
+                        />
+
                     </Col>
 
                     {/*Total de Personal Médico en Nómina*/}
                     <Col xs={12} md={6} className="mb-3">
-                        <FloatingLabel
-                            controlId="floatingInput"
-                            label="Total de Personal Médico en Nómina">
-                            <Form.Control
-                                type="number"
-                                placeholder="Total de Personal Médico en Nómina"
-                                value={form.totalPersonalMedicoNomina ? form.totalPersonalMedicoNomina : ''}
-                                name="totalPersonalMedicoNomina"
-                                onChange={handleChange} />
-                        </FloatingLabel>
+
+                        <GetInputPersonal
+                            label="Total de Personal Médico en Nómina"
+                            value={form.totalPersonalMedicoNomina}
+                            name="totalPersonalMedicoNomina"
+                            handleChange={handleChange}
+                        />
+
                     </Col>
 
                     {/*Otros profesionales de la Salud (Nutrióloga, Apoyo diagnóstico-Radiología)*/}
                     <Col xs={12} md={6} className="mb-3">
-                        <FloatingLabel
-                            controlId="floatingInput"
-                            label="Otros profesionales de la Salud">
-                            <Form.Control
-                                type="number"
-                                placeholder="Otros profesionales de la Salud"
-                                value={form.otrosProfesionalesSalud ? form.otrosProfesionalesSalud : ''}
-                                name="otrosProfesionalesSalud"
-                                onChange={handleChange} />
-                        </FloatingLabel>
+
+                        <GetInputPersonal
+                            label="Otros profesionales de la Salud"
+                            value={form.otrosProfesionalesSalud}
+                            name="otrosProfesionalesSalud"
+                            handleChange={handleChange}
+                        />
+
                     </Col>
 
                 </Row>
@@ -542,12 +489,13 @@ function NivelProfesional(props) {
     //we obtain the props for this component
     const form = props.form
     const handleChange = props.handleChange
+    const ProfesionalOptions = props.profesionalOptions
 
     return (
         <Fragment>
 
             <Col xs={12} md={12}>
-                <Row>
+                <Row className="justify-content-evenly">
 
                     {/*Titulo de la sección*/}
                     <Col xs={12} md={12} className="mt-3 mb-3">
@@ -556,202 +504,132 @@ function NivelProfesional(props) {
 
                     {/*Recursos Humanos*/}
                     <Col xs={12} md={6} className="mb-3">
-                        <FloatingLabel controlId="floatingSelect" label="Recursos Humanos">
 
-                            <Form.Select
-                                aria-label="Floating label"
-                                value={form.recursosHumanos ? form.recursosHumanos : ''}
-                                onChange={handleChange}
-                                name="recursosHumanos"
-                            >
-                                <option value="" disabled>Seleccione una opción</option>
-                                <option value={"Preparatoria"}>Preparatoria</option>
-                                <option value={"Licenciatura"}>Licenciatura</option>
-                                <option value={"Maestria"}>Maestría</option>
-                                <option value={"Especialidad"}>Especialidad</option>
-                                <option value={"Doctorado"}>Doctorado</option>
-                            </Form.Select>
-                        </FloatingLabel>
+                        <GetSelectProfesional
+                            label="Recursos Humanos"
+                            name="recursosHumanos"
+                            value={form.recursosHumanos}
+                            handleChange={handleChange}
+                            options={ProfesionalOptions}
+                        />
+
                     </Col>
 
                     {/*Calidad*/}
                     <Col xs={12} md={6} className="mb-3">
-                        <FloatingLabel controlId="floatingSelect" label="Calidad">
 
-                            <Form.Select
-                                aria-label="Floating label"
-                                value={form.calidad ? form.calidad : ''}
-                                onChange={handleChange}
-                                name="calidad"
-                            >
-                                <option value="" disabled>Seleccione una opción</option>
-                                <option value={"Preparatoria"}>Preparatoria</option>
-                                <option value={"Licenciatura"}>Licenciatura</option>
-                                <option value={"Maestria"}>Maestría</option>
-                                <option value={"Especialidad"}>Especialidad</option>
-                                <option value={"Doctorado"}>Doctorado</option>
-                            </Form.Select>
-                        </FloatingLabel>
+                        <GetSelectProfesional
+                            label="Calidad"
+                            name="calidad"
+                            value={form.calidad}
+                            handleChange={handleChange}
+                            options={ProfesionalOptions}
+                        />
+
                     </Col>
 
                     {/*Compras*/}
                     <Col xs={12} md={6} className="mb-3">
-                        <FloatingLabel controlId="floatingSelect" label="Compras">
 
-                            <Form.Select
-                                aria-label="Floating label"
-                                value={form.compras ? form.compras : ''}
-                                onChange={handleChange}
-                                name="compras"
-                            >
-                                <option value="" disabled>Seleccione una opción</option>
-                                <option value={"Preparatoria"}>Preparatoria</option>
-                                <option value={"Licenciatura"}>Licenciatura</option>
-                                <option value={"Maestria"}>Maestría</option>
-                                <option value={"Especialidad"}>Especialidad</option>
-                                <option value={"Doctorado"}>Doctorado</option>
-                            </Form.Select>
-                        </FloatingLabel>
+                        <GetSelectProfesional
+                            label="Compras"
+                            name="compras"
+                            value={form.compras}
+                            handleChange={handleChange}
+                            options={ProfesionalOptions}
+                        />
+
                     </Col>
 
                     {/*Comercial*/}
                     <Col xs={12} md={6} className="mb-3">
-                        <FloatingLabel controlId="floatingSelect" label="Comercial">
 
-                            <Form.Select
-                                aria-label="Floating label"
-                                value={form.comercial ? form.comercial : ''}
-                                onChange={handleChange}
-                                name="comercial"
-                            >
-                                <option value="" disabled>Seleccione una opción</option>
-                                <option value={"Preparatoria"}>Preparatoria</option>
-                                <option value={"Licenciatura"}>Licenciatura</option>
-                                <option value={"Maestria"}>Maestría</option>
-                                <option value={"Especialidad"}>Especialidad</option>
-                                <option value={"Doctorado"}>Doctorado</option>
-                            </Form.Select>
-                        </FloatingLabel>
+                        <GetSelectProfesional
+                            label="Comercial"
+                            name="comercial"
+                            value={form.comercial}
+                            handleChange={handleChange}
+                            options={ProfesionalOptions}
+                        />
+
                     </Col>
 
                     {/*Jefa de Enfermería*/}
                     <Col xs={12} md={6} className="mb-3">
-                        <FloatingLabel controlId="floatingSelect" label="Jefa de Enfermería">
 
-                            <Form.Select
-                                aria-label="Floating label"
-                                value={form.jefaEnfermeria ? form.jefaEnfermeria : ''}
-                                onChange={handleChange}
-                                name="jefaEnfermeria"
-                            >
-                                <option value="" disabled>Seleccione una opción</option>
-                                <option value={"Preparatoria"}>Preparatoria</option>
-                                <option value={"Licenciatura"}>Licenciatura</option>
-                                <option value={"Maestria"}>Maestría</option>
-                                <option value={"Especialidad"}>Especialidad</option>
-                                <option value={"Doctorado"}>Doctorado</option>
-                            </Form.Select>
-                        </FloatingLabel>
+                        <GetSelectProfesional
+                            label="Jefa de Enfermería"
+                            name="jefaEnfermeria"
+                            value={form.jefaEnfermeria}
+                            handleChange={handleChange}
+                            options={ProfesionalOptions}
+                        />
+
                     </Col>
 
                     {/*Sistemas*/}
                     <Col xs={12} md={6} className="mb-3">
-                        <FloatingLabel controlId="floatingSelect" label="Sistemas">
 
-                            <Form.Select
-                                aria-label="Floating label"
-                                value={form.sistemas ? form.sistemas : ''}
-                                onChange={handleChange}
-                                name="sistemas"
-                            >
-                                <option value="" disabled>Seleccione una opción</option>
-                                <option value={"Preparatoria"}>Preparatoria</option>
-                                <option value={"Licenciatura"}>Licenciatura</option>
-                                <option value={"Maestria"}>Maestría</option>
-                                <option value={"Especialidad"}>Especialidad</option>
-                                <option value={"Doctorado"}>Doctorado</option>
-                            </Form.Select>
-                        </FloatingLabel>
+                        <GetSelectProfesional
+                            label="Sistemas"
+                            name="sistemas"
+                            value={form.sistemas}
+                            handleChange={handleChange}
+                            options={ProfesionalOptions}
+                        />
+
                     </Col>
 
                     {/*Dirección Médica */}
                     <Col xs={12} md={6} className="mb-3">
-                        <FloatingLabel controlId="floatingSelect" label="Dirección Médica ">
 
-                            <Form.Select
-                                aria-label="Floating label"
-                                value={form.direccionMedica ? form.direccionMedica : ''}
-                                onChange={handleChange}
-                                name="direccionMedica"
-                            >
-                                <option value="" disabled>Seleccione una opción</option>
-                                <option value={"Preparatoria"}>Preparatoria</option>
-                                <option value={"Licenciatura"}>Licenciatura</option>
-                                <option value={"Maestria"}>Maestría</option>
-                                <option value={"Especialidad"}>Especialidad</option>
-                                <option value={"Doctorado"}>Doctorado</option>
-                            </Form.Select>
-                        </FloatingLabel>
+                        <GetSelectProfesional
+                            label="Dirección Médica"
+                            name="direccionMedica"
+                            value={form.direccionMedica}
+                            handleChange={handleChange}
+                            options={ProfesionalOptions}
+                        />
+
                     </Col>
 
                     {/*Dirección de Operaciones*/}
                     <Col xs={12} md={6} className="mb-3">
-                        <FloatingLabel controlId="floatingSelect" label="Dirección de Operaciones">
 
-                            <Form.Select
-                                aria-label="Floating label"
-                                value={form.direccionOperaciones ? form.direccionOperaciones : ''}
-                                onChange={handleChange}
-                                name="direccionOperaciones"
-                            >
-                                <option value="" disabled>Seleccione una opción</option>
-                                <option value={"Preparatoria"}>Preparatoria</option>
-                                <option value={"Licenciatura"}>Licenciatura</option>
-                                <option value={"Maestria"}>Maestría</option>
-                                <option value={"Especialidad"}>Especialidad</option>
-                                <option value={"Doctorado"}>Doctorado</option>
-                            </Form.Select>
-                        </FloatingLabel>
+                        <GetSelectProfesional
+                            label="Dirección de Operaciones"
+                            name="direccionOperaciones"
+                            value={form.direccionOperaciones}
+                            handleChange={handleChange}
+                            options={ProfesionalOptions}
+                        />
+
                     </Col>
 
                     {/*Dirección de Administración y Finanzas*/}
                     <Col xs={12} md={6} className="mb-3">
-                        <FloatingLabel controlId="floatingSelect" label="Dirección de Administración y Finanzas">
 
-                            <Form.Select
-                                aria-label="Floating label"
-                                value={form.direccionAdministracionFinanzas ? form.direccionAdministracionFinanzas : ''}
-                                onChange={handleChange}
-                                name="direccionAdministracionFinanzas"
-                            >
-                                <option value="" disabled>Seleccione una opción</option>
-                                <option value={"Preparatoria"}>Preparatoria</option>
-                                <option value={"Licenciatura"}>Licenciatura</option>
-                                <option value={"Maestria"}>Maestría</option>
-                                <option value={"Especialidad"}>Especialidad</option>
-                                <option value={"Doctorado"}>Doctorado</option>
-                            </Form.Select>
-                        </FloatingLabel>
+                        <GetSelectProfesional
+                            label="Dirección de Administración y Finanzas"
+                            name="direccionAdministracionFinanzas"
+                            value={form.direccionAdministracionFinanzas}
+                            handleChange={handleChange}
+                            options={ProfesionalOptions}
+                        />
+
                     </Col>
 
                     {/*Dirección General*/}
                     <Col xs={12} md={6} className="mb-3">
-                        <FloatingLabel controlId="floatingSelect" label="Dirección General">
 
-                            <Form.Select
-                                aria-label="Floating label"
-                                value={form.direccionGeneral ? form.direccionGeneral : ''}
-                                onChange={handleChange}
-                                name="direccionGeneral"
-                            >
-                                <option value="" disabled>Seleccione una opción</option>
-                                <option value={"Preparatoria"}>Preparatoria</option>
-                                <option value={"Licenciatura"}>Licenciatura</option>
-                                <option value={"Maestria"}>Maestría</option>
-                                <option value={"Especialidad"}>Especialidad</option>
-                                <option value={"Doctorado"}>Doctorado</option>
-                            </Form.Select>
-                        </FloatingLabel>
+                        <GetSelectProfesional
+                            label="Dirección General"
+                            name="direccionGeneral"
+                            value={form.direccionGeneral}
+                            handleChange={handleChange}
+                            options={ProfesionalOptions}
+                        />
+
                     </Col>
 
                 </Row>
@@ -772,7 +650,7 @@ function Sueldos(props) {
         <Fragment>
 
             <Col xs={12} md={12}>
-                <Row>
+                <Row className="justify-content-evenly">
 
                     {/*Titulo de la sección*/}
                     <Col xs={12} md={12} className="mt-3 mb-3">
@@ -1198,153 +1076,69 @@ function Sueldos(props) {
 
                     </Col>
 
-                    <Col xs={12} md={12} className="mb-3">
-
-                        <InputGroup>
-                            <FloatingLabel
-                                controlId="floatingInput"
-                                label="Director de Operaciones">
-                                <OverlayTrigger
-                                    placement="top"
-                                    overlay={
-                                        <Tooltip id="tooltip-rinion">Director/Gerente de Operaciones</Tooltip>
-                                    }>
-                                    <Form.Control
-                                        type="number"
-                                        placeholder="Director de Operaciones"
-                                        value={form.sueldoDirectorGerenteOperaciones ? form.sueldoDirectorGerenteOperaciones : ''}
-                                        name="sueldoDirectorGerenteOperaciones"
-                                        onChange={handleChange}
-                                        style={{ height: '100px' }} />
-                                </OverlayTrigger>
-                            </FloatingLabel>
-                            <InputGroup.Text id="currency">$</InputGroup.Text>
-                        </InputGroup>
-
-                    </Col>
-
                     {/*Director/ Gerente de Operaciones*/}
-                    <Col xs={12} md={12} className="mb-3">
+                    <Col xs={12} md={3} className="mb-3">
 
-                        <InputGroup>
-                            <FloatingLabel
-                                controlId="floatingInput"
-                                label="Director de Operaciones">
-                                <OverlayTrigger
-                                    placement="top"
-                                    overlay={
-                                        <Tooltip id="tooltip-rinion">Director/Gerente de Operaciones</Tooltip>
-                                    }>
-                                    <Form.Control
-                                        type="number"
-                                        placeholder="Director de Operaciones"
-                                        value={form.sueldoDirectorGerenteOperaciones ? form.sueldoDirectorGerenteOperaciones : ''}
-                                        name="sueldoDirectorGerenteOperaciones"
-                                        onChange={handleChange}
-                                        style={{ height: '100px' }} />
-                                </OverlayTrigger>
-                            </FloatingLabel>
-                            <InputGroup.Text id="currency">$</InputGroup.Text>
-                        </InputGroup>
+                        <GetSelectSueldos
+                            label="Director de Operaciones"
+                            value={form.sueldoDirectorGerenteOperaciones}
+                            name="sueldoDirectorGerenteOperaciones"
+                            handleChange={handleChange}
+                            tooltipDescrip="Director/Gerente de Operaciones"
+                        />
 
                     </Col>
 
                     {/*Jefe/Gerente de Comercialización-Ventas*/}
                     <Col xs={12} md={3} className="mb-3">
 
-                        <InputGroup className="justify-content-center">
-                            <FloatingLabel
-                                controlId="floatingInput"
-                                label="Jefe de Comercialización">
-                                <OverlayTrigger
-                                    placement="top"
-                                    overlay={
-                                        <Tooltip id="tooltip-rinion">Jefe/Gerente de Comercialización-Ventas</Tooltip>
-                                    }>
-                                    <Form.Control
-                                        type="number"
-                                        placeholder="Jefe de Comercialización"
-                                        value={form.sueldoJefeGerenteComercializaciónVentas ? form.sueldoJefeGerenteComercializaciónVentas : ''}
-                                        name="sueldoJefeGerenteComercializaciónVentas"
-                                        onChange={handleChange}
-                                        style={{ height: '100px' }} />
-                                </OverlayTrigger>
-                            </FloatingLabel>
-                            <InputGroup.Text id="currency">$</InputGroup.Text>
-                        </InputGroup>
+                        <GetSelectSueldos
+                            label="Jefe de Comercialización"
+                            value={form.sueldoJefeGerenteComercializaciónVentas}
+                            name="sueldoJefeGerenteComercializaciónVentas"
+                            handleChange={handleChange}
+                            tooltipDescrip="Jefe/Gerente de Comercialización-Ventas"
+                        />
+
                     </Col>
 
                     {/*Jefe de Nutrición Clínica*/}
                     <Col xs={12} md={3} className="mb-3">
 
-                        <InputGroup className="justify-content-center">
-                            <FloatingLabel
-                                controlId="floatingInput"
-                                label="Jefe de Nutrición Clínica">
-                                <OverlayTrigger
-                                    placement="top"
-                                    overlay={
-                                        <Tooltip id="tooltip-rinion">Jefe de Nutrición Clínica</Tooltip>
-                                    }>
-                                    <Form.Control
-                                        type="number"
-                                        placeholder="Contratación"
-                                        value={form.sueldoJefeNutricionClinica ? form.sueldoJefeNutricionClinica : ''}
-                                        name="sueldoJefeNutricionClinica"
-                                        onChange={handleChange}
-                                        style={{ height: '100px' }} />
-                                </OverlayTrigger>
-                            </FloatingLabel>
-                            <InputGroup.Text id="currency">$</InputGroup.Text>
-                        </InputGroup>
+                        <GetSelectSueldos
+                            label="Jefe de Nutrición Clínica"
+                            value={form.sueldoJefeNutricionClinica}
+                            name="sueldoJefeNutricionClinica"
+                            handleChange={handleChange}
+                            tooltipDescrip="Jefe de Nutrición Clínica"
+                        />
+
                     </Col>
 
                     {/*Coordinadora de Enfermería*/}
                     <Col xs={12} md={3} className="mb-3">
-                        <InputGroup className="justify-content-center">
-                            <FloatingLabel
-                                controlId="floatingInput"
-                                label="Coordinadora Enfermería">
-                                <OverlayTrigger
-                                    placement="top"
-                                    overlay={
-                                        <Tooltip id="tooltip-rinion">Coordinadora de Enfermería</Tooltip>
-                                    }>
-                                    <Form.Control
-                                        type="number"
-                                        placeholder="Coordinadora Enfermería"
-                                        value={form.sueldoCoordinadoraEnfermeria ? form.sueldoCoordinadoraEnfermeria : ''}
-                                        name="sueldoCoordinadoraEnfermeria"
-                                        onChange={handleChange}
-                                        style={{ height: '100px' }} />
-                                </OverlayTrigger>
-                            </FloatingLabel>
-                            <InputGroup.Text id="currency">$</InputGroup.Text>
-                        </InputGroup>
+
+                        <GetSelectSueldos
+                            label="Coordinadora Enfermería"
+                            value={form.sueldoCoordinadoraEnfermeria}
+                            name="sueldoCoordinadoraEnfermeria"
+                            handleChange={handleChange}
+                            tooltipDescrip="Coordinadora Enfermería"
+                        />
+
                     </Col>
 
                     {/*Técnico en Inhaloterapia o Terapia Respiratoria*/}
                     <Col xs={12} md={3} className="mb-3">
 
-                        <InputGroup className="justify-content-center">
-                            <FloatingLabel
-                                controlId="floatingInput"
-                                label="Técnico en Inhaloterapia">
-                                <OverlayTrigger
-                                    placement="top"
-                                    overlay={
-                                        <Tooltip id="tooltip-rinion">Técnico en Inhaloterapia o Terapia Respiratoria</Tooltip>
-                                    }>
-                                    <Form.Control
-                                        type="number"
-                                        placeholder="Técnico en Inhaloterapia"
-                                        value={form.sueldoTecnicoInhaloterapia ? form.sueldoTecnicoInhaloterapia : ''}
-                                        name="sueldoTecnicoInhaloterapia"
-                                        onChange={handleChange} />
-                                </OverlayTrigger>
-                            </FloatingLabel>
-                            <InputGroup.Text id="currency">$</InputGroup.Text>
-                        </InputGroup>
+                        <GetSelectSueldos
+                            label="Técnico en Inhaloterapia"
+                            value={form.sueldoTecnicoInhaloterapia}
+                            name="sueldoTecnicoInhaloterapia"
+                            handleChange={handleChange}
+                            tooltipDescrip="Técnico en Inhaloterapia o Terapia Respiratoria"
+                        />
+
                     </Col>
 
                 </Row>
@@ -1353,6 +1147,82 @@ function Sueldos(props) {
         </Fragment>
     )
 
+}
+
+function GetInputRate(props) {
+
+    //we obtain their props
+    const { label, value, name, handleChange, tooltipDescrip } = props;
+
+    return <Fragment>
+        <InputGroup className="justify-content-center">
+            <FloatingLabel
+                controlId="floatingInput"
+                label={label}>
+                <OverlayTrigger
+                    placement="right"
+                    overlay={<Tooltip id={`tooltip-${name}`}>{tooltipDescrip}</Tooltip>}>
+                    <Form.Control
+                        type="number"
+                        placeholder={label}
+                        min={0}
+                        value={value ? value : ''}
+                        name={name}
+                        onChange={handleChange}
+                        required
+                        autoComplete="off" />
+                </OverlayTrigger>
+            </FloatingLabel>
+            <InputGroup.Text id="percentage">%</InputGroup.Text>
+        </InputGroup>
+    </Fragment>;
+}
+
+function GetInputPersonal(props) {
+
+    //we obtain their props
+    const { label, value, name, handleChange } = props;
+
+    return <Fragment>
+        <FloatingLabel
+            controlId="floatingInput"
+            label={label}>
+            <Form.Control
+                type="number"
+                min={0}
+                placeholder={label}
+                value={value ? value : ''}
+                name={name}
+                required
+                onChange={handleChange} />
+        </FloatingLabel>
+    </Fragment>;
+}
+
+function GetSelectProfesional(props) {
+    const { label, name, value, handleChange, options } = props;
+    return <Fragment>
+        <FloatingLabel controlId="floatingSelect" label={label}>
+
+            <Form.Select
+                aria-label="Floating label"
+                value={value ? value : ''}
+                onChange={handleChange}
+                name={name}
+            >
+                <option value="" disabled>Seleccione una opción</option>
+                {
+                    options.map((option) => {
+                        return (
+                            <Fragment key={option.id}>
+                                <option value={option.value}>{option.name}</option>
+                            </Fragment>
+                        )
+                    })
+                }
+            </Form.Select>
+        </FloatingLabel>
+    </Fragment>;
 }
 
 function GetSelectSueldos(props) {
@@ -1378,6 +1248,7 @@ function GetSelectSueldos(props) {
                             value={value ? value : ''}
                             name={name}
                             onChange={handleChange}
+                            required
                             autoComplete="off"
                         />
                     </OverlayTrigger>

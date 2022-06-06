@@ -2,6 +2,9 @@ import React, { Input, Fragment, useState, useEffect } from "react";
 import { Stack, Container, Col, Row, FloatingLabel, Button, Form, OverlayTrigger, Tooltip, FormGroup, InputGroup } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import OrganosCrud from "../tables/OrganosCrud";
+import ModalAdd from "../modals/modals encuestas/EyP/ModalAdd";
+
 //import axios from "axios"
 
 
@@ -13,7 +16,7 @@ const currentYear = new Date().getFullYear();
 function EyP() {
 
     //declared the variables, constants ans states for this module
-    const [form, setForm] = useState({})
+    const [form, setForm] = useState({ organos: [] })
     const [viewFlags, setViewFlags] = useState({})
 
     //module's functions
@@ -51,6 +54,153 @@ function EyP() {
 
     }
 
+    /**
+     * It adds an organ to the form.organos array if it doesn't already exist.
+     * @returns {
+     *         ...form,
+     *         organos: form.organos.concat(organo)
+     *     }
+     */
+    const handleChangeOrganos = async (organo) => {
+
+        //if exists at least one organ
+        if (form.organos.length > 0) {
+
+            //validate if that organ is already exists
+            if (nameRegistroValidation(organo.nombre, form.organos)) {
+
+                await setForm(
+                    {
+                        ...form,
+                        organos: form.organos.concat(organo)
+                    }
+                );
+
+                return true
+            } else {
+                return false
+            }
+
+        } else {
+
+            await setForm(
+                {
+                    ...form,
+                    organos: form.organos.concat(organo)
+                }
+            );
+
+            return true;
+
+        }
+
+    }
+
+    /**
+     * We create an aux for our array, we remove the content for it index, we re asigned our aux to
+     * organos array.
+     */
+    const handleChangeOrganosDelete = async (index) => {
+
+        //we create an aux for our array 
+        let organosArray = form.organos;
+
+        //we remove the content for it index
+        organosArray.splice(index, 1);
+
+        //we re asigned our aux to organos array
+        setForm(
+            {
+                ...form,
+                organos: organosArray
+            }
+        )
+
+    }
+
+    /**
+     * It takes an index and an object, and replaces the object at the index in the array.
+     * @returns a boolean value.
+     */
+    const handleChangeOrganosEdit = async (index, organo) => {
+
+        if (nameRegistroValidationEdit(organo.nombre, form.organos, index)) {
+
+            //we create an aux for our array 
+            let organosArray = form.organos;
+
+            //we replaces the content for it index
+            organosArray.splice(index, 1, organo);
+
+            await setForm(
+                {
+                    ...form,
+                    organos: organosArray
+                }
+            );
+            return true
+
+        } else {
+            return false;
+        }
+
+    }
+
+    /**
+     * It takes a string and an array of objects, and returns true if the string is not found in the
+     * array of objects, and false if it is found.
+     * @returns A function that takes two parameters, name and array.
+     */
+    const nameRegistroValidation = (name, array) => {
+
+        //Verifying the complete array
+        for (let i = 0; i < array.length; i++) {
+
+            //standarize our array elements and compare
+            if (array[i].nombre.toLowerCase() === name.toLowerCase()) {
+
+                return false; //the name exist
+
+            } else if (i === array.length - 1) {
+
+                return true; //doesnt exit the name
+
+            }
+
+        }
+
+    }
+
+    /**
+     * It takes a name, an array of objects, and an index. It then loops through the array of objects
+     * and compares the name to the name of each object in the array. If the name matches the name of
+     * an object in the array, and the index of the object in the array is not the same as the index
+     * passed to the function, it returns false. If the name does not match the name of any object in
+     * the array, or if the index of the object in the array is the same as the index passed to the
+     * function, it returns true.
+     * @returns a boolean value.
+     */
+    const nameRegistroValidationEdit = (name, array, index) => {
+
+        //validate our complete array
+        for (let i = 0; i < array.length; i++) {
+
+            //standarize the elements name and compare
+            if (array[i].nombre.toLowerCase() === name.toLowerCase() && index != i) {
+
+                return false; //the name exist
+
+            } else if (i === array.length - 1) {
+
+                return true; //doesnt exit the name
+
+            }
+
+        }
+
+    }
+
+
     const prueba = () => {
         console.log(form)
     }
@@ -72,7 +222,8 @@ function EyP() {
 
                             <ServicioImagenologia form={form} handleChange={handleChange} />
 
-                            <Transplantes form={form} handleChange={handleChange} viewFlags={viewFlags} />
+                            <Transplantes form={form} handleChange={handleChange} viewFlags={viewFlags} handleChangeOrganos={handleChangeOrganos} handleChangeOrganosDelete={handleChangeOrganosDelete}
+                                handleChangeOrganosEdit={handleChangeOrganosEdit} />
 
                             <ServiciosUrgencias form={form} handleChange={handleChange} />
 
@@ -782,6 +933,9 @@ function Transplantes(props) {
     const form = props.form
     const handleChange = props.handleChange
     const viewFlags = props.viewFlags
+    const handleChangeOrganos = props.handleChangeOrganos;
+    const handleChangeOrganosDelete = props.handleChangeOrganosDelete;
+    const handleChangeOrganosEdit = props.handleChangeOrganosEdit;
 
     return (
         <Fragment>
@@ -819,7 +973,8 @@ function Transplantes(props) {
 
                     </Row>
 
-                    <TipoOrgano form={form} handleChange={handleChange} show={viewFlags} />
+                    <TipoOrgano form={form} handleChange={handleChange} show={viewFlags} handleChangeOrganos={handleChangeOrganos} handleChangeOrganosDelete={handleChangeOrganosDelete}
+                        handleChangeOrganosEdit={handleChangeOrganosEdit} />
 
 
                 </Row>
@@ -831,9 +986,19 @@ function Transplantes(props) {
 }
 
 function TipoOrgano(props) {
-    const form = props.form;
-    const handleChange = props.handleChange;
+    //we obtain the props for this component
+    const form = props.form //Formulario
+    const handleChange = props.handleChange //HandleChange del formulario
+    const handleChangeOrganos = props.handleChangeOrganos;
+    const handleChangeOrganosDelete = props.handleChangeOrganosDelete;
+    const handleChangeOrganosEdit = props.handleChangeOrganosEdit;
+
+    const [modalTriggerAdd, setModalTriggerAdd] = useState(false);
     const show = props.show;
+
+    const handleModalChangeAdd = () => {
+        setModalTriggerAdd(!modalTriggerAdd);
+    }
 
     if (show.realizanTransplantes === 'true') {
         return (
@@ -1003,20 +1168,20 @@ function TipoOrgano(props) {
 
                             {/*TODO: Implementar como una tabla CRUD*/}
                             {/*Otro órgano (especifique)*/}
-                            <Col xs={12} md={4} className="mb-3">
-                                <Row>
-                                    <Col xs={12} md={8}>
-                                        <p>
+                            <Col xs={12} md={4} className="mb-3 d-flex align-items-center justify-content-center">
+                                <Row className="align-items-center">
+                                    <Col xs={12} md={10}>
+                                        <p className="my-auto">
                                             Otro órgano (especifique)
                                         </p>
                                     </Col>
-                                    <Col xs={12} md={4}>
+                                    <Col xs={12} md={2}>
                                         <OverlayTrigger
                                             placement="top"
                                             overlay={
                                                 <Tooltip id="tooltip-otroOrgano">Agregar otro tipo de organo</Tooltip>
                                             }>
-                                            <Button variant="success" onClick={() => { }}>
+                                            <Button variant="success" onClick={handleModalChangeAdd}>
                                                 <span> <FontAwesomeIcon icon={faPlus} /></span></Button>
                                         </OverlayTrigger>
                                     </Col>
@@ -1024,10 +1189,17 @@ function TipoOrgano(props) {
                             </Col>
 
                         </Row>
-
-
+                        <Col xs={12} md={12} className="mb-3">
+                            <OrganosCrud variableForm={form.organos} handleChange={handleChange} handleChangeRegistrosDelete={handleChangeOrganosDelete} handleChangeRegistrosEdit={handleChangeOrganosEdit} elemento={"Organo"} />
+                        </Col>
                     </Row>
                 </Col>
+                <ModalAdd
+                    modalTriggerAdd={modalTriggerAdd}
+                    handleModalChangeAdd={handleModalChangeAdd}
+                    handleChangeRegistros={handleChangeOrganos}
+                    elemento={"Organo"}
+                />
             </Fragment>
         )
     } else {

@@ -1,0 +1,27 @@
+[
+    {
+        "value": "preparatoria",
+        "name": "Preparatoria",
+        "id": 1
+    },
+    {
+        "value": "licenciatura",
+        "name": "Licenciatura",
+        "id": 2
+    },
+    {
+        "value": "maestria",
+        "name": "Maestria",
+        "id": 3
+    },
+    {
+        "value": "especialidad",
+        "name": "Especialidad",
+        "id": 4
+    },
+    {
+        "value": "doctorado",
+        "name": "Doctorado",
+        "id": 5
+    }
+]
