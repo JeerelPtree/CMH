@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 function GeneralCRUD(props) {
 
     //we obtain their props
-    const { data, tableHeaders, pageOrigin } = props
+    const { data, tableHeaders, pageOrigin, onClickDelete } = props
 
     /**
      * It returns a component based on the value of the variable pageOrigin
@@ -20,7 +20,7 @@ function GeneralCRUD(props) {
 
             case "perfiles":
 
-                return <CRUDPerfiles perfiles={data} />
+                return <CRUDPerfiles perfiles={data} onClickDelete={onClickDelete} />
 
         }
 
@@ -55,7 +55,7 @@ function GeneralCRUD(props) {
 function CRUDPerfiles(props) {
 
     //we obtaint their props
-    const { perfiles } = props
+    const { perfiles, onClickDelete } = props
 
     return (
         <Fragment>
@@ -80,6 +80,10 @@ function CRUDPerfiles(props) {
                                         </Col>
                                         <Col xs={6} md={3}>
                                             <ButtonDelete
+                                                onClickDelete={onClickDelete}
+                                                index={index}
+                                                title={`a ${perfil.firstName} ${perfil.lastName}`}
+                                                register="Perfil"
                                                 tooltip={`Eliminar a ${perfil.firstName} ${perfil.lastName}`}
                                             />
                                         </Col>
@@ -125,7 +129,7 @@ function ButtonEdit(props) {
 function ButtonDelete(props) {
 
     //we obtain their props
-    const { tooltip } = props
+    const { tooltip, onClickDelete, index, title, register } = props
 
     return (
         <Fragment>
@@ -135,7 +139,24 @@ function ButtonDelete(props) {
                 overlay={
                     <Tooltip id="tooltip-rinion">{tooltip}</Tooltip>
                 }>
-                <Button variant="danger" size="sm">
+                <Button variant="danger" size="sm" onClick={() => {
+                    Swal.fire({
+                        title: `¿Desea eliminar ${title} ?`,
+                        icon: 'error',
+                        iconHtml: '!',
+                        confirmButtonText: 'Aceptar',
+                        cancelButtonText: 'Cancelar',
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#3085d6',
+                        showCancelButton: true,
+                        showCloseButton: true
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            onClickDelete(index)
+                            Swal.fire(`¡${register} eliminado!`, '', 'success')
+                        }
+                    })
+                }}>
                     <FontAwesomeIcon icon={faTrash}></FontAwesomeIcon>
                 </Button>
             </OverlayTrigger>

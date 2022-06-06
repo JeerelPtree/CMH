@@ -1,14 +1,43 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { Container, Col, Row, Accordion, ProgressBar, Button } from "react-bootstrap"
-import GeneralCRUD from "../components/tables/GeneralCRUD";
+import { Container, Col, Row, OverlayTrigger, Tooltip } from "react-bootstrap"
+import GeneralCRUD from "../components/CRUD/GeneralCRUD";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import AddButton from "../components/CRUD/addButton/AddButton";
+import ModalGeneralAddCRUD from "../components/modals/ModalGeneralAddCRUD";
 
 import DATAPERFILES from "../pages/json/perfiles.json"
 
 function PagePerfiles() {
 
     //we asigned the constans, variables and states
-    const [dataPerfiles, setDataPerfiles] = useState({})
+    const [dataPerfiles, setDataPerfiles] = useState(DATAPERFILES)
     const tableHeaders = ['Nombre', 'Correo', 'Rol', 'Hospital']
+    const [modalIsOpen, setModalIsOpen] = useState(false)
+
+    //este hook se borrara
+    const [triggerDelete, setTriggerDelete] = useState(false)
+    //este useEffect sera diferente
+    useEffect(() => {
+        setDataPerfiles(DATAPERFILES)
+    }, [triggerDelete])
+
+    /**
+     * If the modal is open, close it. If the modal is closed, open it
+     */
+    const handleModal = () => {
+
+        setModalIsOpen(!modalIsOpen);
+
+    }
+
+    const onClickDelete = async (index) => {
+
+        DATAPERFILES.splice(index, 1)
+        await setDataPerfiles(DATAPERFILES)
+        setTriggerDelete(!triggerDelete)
+
+    }
 
     return (
         <Fragment>
@@ -30,15 +59,20 @@ function PagePerfiles() {
 
                                 {/*CRUD PERFILES*/}
                                 <GeneralCRUD
-                                    data={DATAPERFILES}
+                                    data={dataPerfiles}
                                     tableHeaders={tableHeaders}
                                     pageOrigin='perfiles'
+                                    onClickDelete={onClickDelete}
                                 />
 
                             </Col>
                         </Row>
                     </Col>
                 </Row>
+
+                <AddButton handleModal={handleModal} tooltipLabel='Agregar perfil' />
+                <ModalGeneralAddCRUD handleModal={handleModal} modalIsOpen={modalIsOpen} modalTitle="Nuevo Perfil" option="perfil" sizeModal="lg" dataPrueba={dataPerfiles} />
+
             </Container>
 
         </Fragment>
