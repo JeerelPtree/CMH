@@ -31,7 +31,7 @@ function TCCrud(props) {
 
         return (
             <Fragment>
-                <Table striped hover responsive className="align-middle text-center ">
+                <Table striped hover responsive className="align-middle text-center overflow-hidden">
                     <thead className="thead-cmh">
                         <tr>
                             <th>{elemento}</th>

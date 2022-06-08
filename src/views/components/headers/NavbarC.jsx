@@ -1,7 +1,7 @@
 import React, { Fragment } from "react"; //importamos la libreria react y sus componentes useState
 import { Link } from "react-router-dom"; //importamos el componente Link de react-router-dom
 //import Logo from "../../assets/cmhLogo.png"; //link or file for CMD logo
-import Logo from "../../assets/Prospectiva_Digital0.png"
+import Logo from "../../assets/img/Prospectiva_Digital0.png"
 import { Navbar, Container, Nav, Row, Col, Tooltip, OverlayTrigger } from 'react-bootstrap'; //importamos los componentes de react-bootstrap
 import './headersStyles.css';
 

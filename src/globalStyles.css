@@ -58,3 +58,11 @@
     margin-bottom: 0;
     z-index: 997;
 }
+
+.tipIcon {
+    color: grey !important;
+}
+
+.popover {
+    max-width: 600px !important;
+}

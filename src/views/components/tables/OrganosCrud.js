@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react";
 import { Container, Col, Row, Button, Table, Alert } from "react-bootstrap";
-import ModalEditarRegistro from "../modals/modals encuestas/Com/ModalEditarRegistro";
+import ModalEditarRegistro from "../modals/modals encuestas/EyP/ModalEditarRegistro";
 import { faTrash, faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../../../globalStyles.css"
@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 
 //TODO: hace falta poner tooltips en los botones
 
-function ComCrud(props) {
+function OrganosCrud(props) {
     //Obtenemos las propiedades de la tabla
     const { variableForm, handleChangeRegistrosDelete, handleChangeRegistrosEdit, elemento } = props
     const [dataEdit, setDataEdit] = useState({})
@@ -35,9 +35,7 @@ function ComCrud(props) {
                     <thead className="thead-cmh">
                         <tr>
                             <th>{elemento}</th>
-                            <th>Monto Anual de Compra</th>
-                            <th>Tipo de Insumos</th>
-                            <th>Financiamiento</th>
+                            <th>Cantidad</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -46,9 +44,7 @@ function ComCrud(props) {
                             variableForm && variableForm.map((item, index) => (
                                 <tr key={index}>
                                     <td>{item.nombre}</td>
-                                    <td>{item.montoAnualCompra}</td>
-                                    <td>{item.tipoInsumos}</td>
-                                    <td>{item.diasFinanciamientoProveedor}</td>
+                                    <td>{item.cantidad}</td>
                                     <td>
                                         <Row className="justify-content-center">
                                             <Col xs={3} md={3}>
@@ -103,23 +99,9 @@ function ComCrud(props) {
     } else {
         return (
             <Fragment>
-                <Container>
-                    <Row className="justify-content-center">
-                        <Col xs={12} md={8}>
-                            <Alert variant="danger">
-                                <Alert.Heading className="text-center">
-                                    No hay ningun registro que mostrar.
-                                </Alert.Heading>
-                                <hr />
-                                <p className="text-center">Favor de agregar uno nuevo haciendo click en el botón de arriba.</p>
-                                <p className="text-center">(Recuerde que son 8 registros necesarios).</p>
-                            </Alert>
-                        </Col>
-                    </Row>
-                </Container>
             </Fragment>
         )
     }
 }
 
-export default ComCrud;
+export default OrganosCrud;
