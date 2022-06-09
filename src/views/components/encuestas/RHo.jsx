@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { Container, Col, Row, FloatingLabel, Button, Form, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Container, Col, Row, FloatingLabel, Button, Form, OverlayTrigger, Tooltip, InputGroup } from "react-bootstrap";
 import MultiSelect from "../selectors/MultiSelect";
 
 //we import css
@@ -109,46 +109,35 @@ function PerfilHospital(props) {
                     </Col>
                     <Col xs={12} md={6}>
 
-                        <FloatingLabel
-                            controlId="floatingInput"
-                            label="Razón Social">
-                            <OverlayTrigger
-                                placement="top"
-                                overlay={
-                                    <Tooltip id="tooltip-habitaciones">Razón Social</Tooltip>
-                                }>
-                                <Form.Control
-                                    type="text"
-                                    placeholder="Razón Social"
-                                    value={form.razonSocial ? form.razonSocial : ''}
-                                    name="razonSocial"
-                                    onChange={handleChange}
-                                    autoComplete="off" />
-                            </OverlayTrigger>
-                        </FloatingLabel>
-
+                        <GetInput
+                            label="Razón Social"
+                            value={form.razonSocial}
+                            name="razonSocial"
+                            handleChange={handleChange}
+                            tooltipDescrip="Razón Social"
+                            type="text"
+                            min={0}
+                            isRequired={true}
+                            placement="top"
+                            show={true}
+                        />
 
                     </Col>
 
                     <Col xs={12} md={6}>
 
-                        <FloatingLabel
-                            controlId="floatingInput"
-                            label="Nombre Comercial">
-                            <OverlayTrigger
-                                placement="top"
-                                overlay={
-                                    <Tooltip id="tooltip-habitaciones">Nombre Comercial</Tooltip>
-                                }>
-                                <Form.Control
-                                    type="text"
-                                    placeholder="Nombre Comercial"
-                                    value={form.nombreComercial ? form.nombreComercial : ''}
-                                    name="nombreComercial"
-                                    onChange={handleChange}
-                                    autoComplete="off" />
-                            </OverlayTrigger>
-                        </FloatingLabel>
+                        <GetInput
+                            label="Nombre Comercial"
+                            value={form.nombreComercial}
+                            name="nombreComercial"
+                            handleChange={handleChange}
+                            tooltipDescrip="Nombre Comercial"
+                            type="text"
+                            min={0}
+                            isRequired={true}
+                            placement="top"
+                            show={true}
+                        />
 
                     </Col>
 
@@ -181,92 +170,72 @@ function Caracteristicas(props) {
                     {/*Hospital asociado desde*/}
                     <Col xs={12} md={4} className="mt-3">
 
-                        <FloatingLabel
-                            controlId="floatingInput"
-                            label="Hospital Asociado al CMH desde">
-                            <OverlayTrigger
-                                placement="top"
-                                overlay={
-                                    <Tooltip id="tooltip-habitaciones">Hospital Asociado al CMH desde</Tooltip>
-                                }>
-                                <Form.Control
-                                    type="date"
-                                    placeholder="Hospital Asociado al CMH desde"
-                                    value={form.hospitalAsociadoCMHDesde ? form.hospitalAsociadoCMHDesde : ''}
-                                    name="hospitalAsociadoCMHDesde"
-                                    onChange={handleChange} />
-                            </OverlayTrigger>
-                        </FloatingLabel>
+                        <GetInput
+                            label="Hospital Asociado al CMH desde"
+                            value={form.hospitalAsociadoCMHDesde}
+                            name="hospitalAsociadoCMHDesde"
+                            handleChange={handleChange}
+                            tooltipDescrip="Hospital Asociado al CMH desde"
+                            type="date"
+                            min={0}
+                            isRequired={true}
+                            placement="top"
+                            show={true}
+                        />
 
                     </Col>
 
                     {/*Fecha de fundación*/}
                     <Col xs={12} md={4} className="mt-3">
 
-                        <FloatingLabel
-                            controlId="floatingInput"
-                            label="Fecha de Fundación del Hospital">
-                            <OverlayTrigger
-                                placement="top"
-                                overlay={
-                                    <Tooltip id="tooltip-habitaciones">Fecha de Fundación del Hospital</Tooltip>
-                                }>
-                                <Form.Control
-                                    type="date"
-                                    placeholder="Fecha de Fundación del Hospital"
-                                    value={form.fechaFundacionHospital ? form.fechaFundacionHospital : ''}
-                                    name="fechaFundacionHospital"
-                                    onChange={handleChange} />
-                            </OverlayTrigger>
-                        </FloatingLabel>
+                        <GetInput
+                            label="Fecha de Fundación del Hospital"
+                            value={form.fechaFundacionHospital}
+                            name="fechaFundacionHospital"
+                            handleChange={handleChange}
+                            tooltipDescrip="Fecha de Fundación del Hospital"
+                            type="date"
+                            min={0}
+                            isRequired={true}
+                            placement="top"
+                            show={true}
+                        />
 
                     </Col>
 
                     {/*Área construida*/}
                     <Col xs={12} md={4} className="mt-3">
 
-                        <FloatingLabel
-                            controlId="floatingInput"
-                            label="Área construida [m²]">
-                            <OverlayTrigger
-                                placement="top"
-                                overlay={
-                                    <Tooltip id="tooltip-habitaciones">Área construida [m²]</Tooltip>
-                                }>
-                                <Form.Control
-                                    type="number"
-                                    step={0.01}
-                                    placeholder="Área construida [m²]"
-                                    value={form.areaConstruida ? form.areaConstruida : ''}
-                                    name="areaConstruida"
-                                    onChange={handleChange}
-                                    autoComplete="off"
-                                    min={0} />
-                            </OverlayTrigger>
-                        </FloatingLabel>
+                        <GetInput
+                            label="Área construida [m²]"
+                            value={form.areaConstruida}
+                            name="areaConstruida"
+                            handleChange={handleChange}
+                            tooltipDescrip="Área construida [m²]"
+                            type="number"
+                            min={0}
+                            isRequired={true}
+                            placement="top"
+                            show={true}
+                        />
 
                     </Col>
 
                     {/*Número de colaboradores*/}
                     <Col xs={12} md={4} className="mt-3">
 
-                        <FloatingLabel
-                            controlId="floatingInput"
-                            label="Número de colaboradores">
-                            <OverlayTrigger
-                                placement="top"
-                                overlay={
-                                    <Tooltip id="tooltip-habitaciones">Número de colaboradores</Tooltip>
-                                }>
-                                <Form.Control
-                                    type="number"
-                                    placeholder="Número de colaboradores"
-                                    value={form.numeroColaboradores ? form.numeroColaboradores : ''}
-                                    name="numeroColaboradores"
-                                    onChange={handleChange}
-                                    min={0} />
-                            </OverlayTrigger>
-                        </FloatingLabel>
+                        <GetInput
+                            label="Número de colaboradores"
+                            value={form.numeroColaboradores}
+                            name="numeroColaboradores"
+                            handleChange={handleChange}
+                            tooltipDescrip="Número de colaboradores"
+                            type="number"
+                            min={0}
+                            isRequired={true}
+                            placement="top"
+                            show={true}
+                        />
 
                     </Col>
 
@@ -510,6 +479,105 @@ function Caracteristicas(props) {
             </Col>
         </Fragment>
     )
+}
+
+function GetInput(props) {
+
+    //we obtain their props
+    const { label, value, name, handleChange, tooltipDescrip, type, isRequired, placement, show, isReadOnly = false, isTextArea = false, style = null } = props
+
+    if (show == true) {
+        return (
+            <Fragment>
+                <FloatingLabel
+                    controlId="floatingInput"
+                    label={label}>
+                    <OverlayTrigger
+                        placement={placement}
+                        overlay={
+                            <Tooltip id={`tooltip-${name}`}>{tooltipDescrip}</Tooltip>
+                        }>
+                        <Form.Control
+                            as={isTextArea ? "textarea" : "input"}
+                            type={type}
+                            placeholder={label}
+                            value={value ? value : ''}
+                            name={name}
+                            onChange={handleChange}
+                            required={isRequired}
+                            autoComplete="off"
+                            readOnly={isReadOnly}
+                            style={style}
+                        />
+                    </OverlayTrigger>
+                </FloatingLabel>
+            </Fragment>
+        )
+    }
+}
+
+function GetInputFormat(props) {
+
+    //we obtain their props
+    const { label, value, name, handleChange, tooltipDescrip, type, isRequired, placement, show, isReadOnly = false, leftSymbol, rightSymbol, isLeft = false, isRight = false } = props
+
+    if (show == true && isLeft == true) {
+        return (
+            <Fragment>
+                <InputGroup className="justify-content-center">
+                    <InputGroup.Text id="currency">{leftSymbol}</InputGroup.Text>
+                    <FloatingLabel
+                        controlId="floatingInput"
+                        label={label}>
+                        <OverlayTrigger
+                            placement={placement}
+                            overlay={
+                                <Tooltip id={`tooltip-${name}`}>{tooltipDescrip}</Tooltip>
+                            }>
+                            <Form.Control
+                                type={type}
+                                placeholder={label}
+                                value={value ? value : ''}
+                                name={name}
+                                onChange={handleChange}
+                                required={isRequired}
+                                autoComplete="off"
+                                readOnly={isReadOnly}
+                            />
+                        </OverlayTrigger>
+                    </FloatingLabel>
+                </InputGroup>
+            </Fragment>
+        )
+    } else if (show == true && isRight == true) {
+        return (
+            <Fragment>
+                <InputGroup className="justify-content-center">
+                    <FloatingLabel
+                        controlId="floatingInput"
+                        label={label}>
+                        <OverlayTrigger
+                            placement={placement}
+                            overlay={
+                                <Tooltip id={`tooltip-${name}`}>{tooltipDescrip}</Tooltip>
+                            }>
+                            <Form.Control
+                                type={type}
+                                placeholder={label}
+                                value={value ? value : ''}
+                                name={name}
+                                onChange={handleChange}
+                                required={isRequired}
+                                autoComplete="off"
+                                readOnly={isReadOnly}
+                            />
+                        </OverlayTrigger>
+                    </FloatingLabel>
+                    <InputGroup.Text id="currency">{rightSymbol}</InputGroup.Text>
+                </InputGroup>
+            </Fragment>
+        )
+    }
 }
 
 export default RHo;

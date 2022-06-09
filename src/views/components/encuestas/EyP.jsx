@@ -234,12 +234,12 @@ function EyP() {
                             <OtrosServicios form={form} handleChange={handleChange} />
 
 
-                            {/*Botón de enviar
+                            {/* {/* Botón de enviar * /}
                             <Col xs={12} md={6} className="mt-3 mb-5">
                                 <Button variant="primary" onClick={prueba}> Enviar
                                 </Button>
-                            </Col>
-                            */}
+                            </Col> */}
+
 
                         </Row>
                     </Col>
