@@ -1,0 +1,12 @@
+[
+    {
+        "value": "Hospital General",
+        "name": "Hospital General",
+        "id": 1
+    },
+    {
+        "value": "Hospital Especializado",
+        "name": "Hospital Especializado",
+        "id": 2
+    }
+]

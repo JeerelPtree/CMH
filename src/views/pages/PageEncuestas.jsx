@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { Container, Col, Row, Accordion, ProgressBar, Button } from "react-bootstrap"
+import { Container, Col, Row, Accordion, ProgressBar, Button, OverlayTrigger, Tooltip } from "react-bootstrap"
 import { faClipboard } from "@fortawesome/free-solid-svg-icons";
 import Encuestas from './json/encuestas.json'
 import ModalGeneralEncuesta from "../components/modals/ModalGeneralEncuesta";
@@ -108,12 +108,19 @@ function PageEncuestas() {
 
                         <Row>
 
-                            <Col xs={12} md={12} className="mb-3">
+                            <Col xs={12} md={12} className="mb-2">
                                 <h4 className="sub-title-cmh text-center">Progreso general de las encuestas</h4>
                             </Col>
 
                             <Col xs={12} md={12} className="mb-5">
-                                <ProgressBar animated variant={setVariant(60)} now={60} />
+                                <OverlayTrigger
+                                    placement={'top'}
+                                    overlay={
+                                        <Tooltip id='tooltip-general'>Progreso: <strong>{60}%</strong></Tooltip>
+                                    }
+                                >
+                                    <ProgressBar animated variant={setVariant(60)} now={60} />
+                                </OverlayTrigger>
                             </Col>
 
                             <Col xs={12} md={12}>

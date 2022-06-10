@@ -312,7 +312,6 @@ function SA() {
                                             hasCredentials()
                                         }
 
-
                                     </Col>
                                 </Row>
                             </Col>
