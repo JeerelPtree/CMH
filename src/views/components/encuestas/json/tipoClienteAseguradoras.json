@@ -1,0 +1,170 @@
+[
+    {
+        "id": 1,
+        "no": 1,
+        "nombreAseguradora": "AXA",
+        "name": "axa",
+        "numeroPacientes": null,
+        "ingresos": null
+    },
+    {
+        "id": 2,
+        "no": 2,
+        "nombreAseguradora": "GNP",
+        "name": "gnp",
+        "numeroPacientes": null,
+        "ingresos": null
+    },
+    {
+        "id": 3,
+        "no": 3,
+        "nombreAseguradora": "SEGUROS MONTERREY",
+        "name": "segurosMonterrey",
+        "numeroPacientes": null,
+        "ingresos": null
+    },
+    {
+        "id": 4,
+        "no": 4,
+        "nombreAseguradora": "METLIFE",
+        "name": "metlife",
+        "numeroPacientes": null,
+        "ingresos": null
+    },
+    {
+        "id": 5,
+        "no": 5,
+        "nombreAseguradora": "MAPFRE",
+        "name": "mapfre",
+        "numeroPacientes": null,
+        "ingresos": null
+    },
+    {
+        "id": 6,
+        "no": 6,
+        "nombreAseguradora": "BUPA",
+        "name": "bupa",
+        "numeroPacientes": null,
+        "ingresos": null
+    },
+    {
+        "id": 7,
+        "no": 7,
+        "nombreAseguradora": "PLAN SEGURO",
+        "name": "planSeguro",
+        "numeroPacientes": null,
+        "ingresos": null
+    },
+    {
+        "id": 8,
+        "no": 8,
+        "nombreAseguradora": "BANORTE",
+        "name": "banorte",
+        "numeroPacientes": null,
+        "ingresos": null
+    },
+    {
+        "id": 9,
+        "no": 9,
+        "nombreAseguradora": "ATLAS",
+        "name": "atlas",
+        "numeroPacientes": null,
+        "ingresos": null
+    },
+    {
+        "id": 10,
+        "no": 10,
+        "nombreAseguradora": "ALLIANZ",
+        "name": "allianz",
+        "numeroPacientes": null,
+        "ingresos": null
+    },
+    {
+        "id": 11,
+        "no": 11,
+        "nombreAseguradora": "INBURSA",
+        "name": "inbursa",
+        "numeroPacientes": null,
+        "ingresos": null
+    },
+    {
+        "id": 12,
+        "no": 12,
+        "nombreAseguradora": "SURA",
+        "name": "sura",
+        "numeroPacientes": null,
+        "ingresos": null
+    },
+    {
+        "id": 13,
+        "no": 13,
+        "nombreAseguradora": "ZURICH",
+        "name": "zurich",
+        "numeroPacientes": null,
+        "ingresos": null
+    },
+    {
+        "id": 14,
+        "no": 14,
+        "nombreAseguradora": "QUALITAS",
+        "name": "qualitas",
+        "numeroPacientes": null,
+        "ingresos": null
+    },
+    {
+        "id": 15,
+        "no": 15,
+        "nombreAseguradora": "VITAMEDICA",
+        "name": "vitamedica",
+        "numeroPacientes": null,
+        "ingresos": null
+    },
+    {
+        "id": 16,
+        "no": 16,
+        "nombreAseguradora": "CHUBB",
+        "name": "chubb",
+        "numeroPacientes": null,
+        "ingresos": null
+    },
+    {
+        "id": 17,
+        "no": 17,
+        "nombreAseguradora": "HDI SEGUROS",
+        "name": "hdi seguros",
+        "numeroPacientes": null,
+        "ingresos": null
+    },
+    {
+        "id": 18,
+        "no": 18,
+        "nombreAseguradora": "GENERAL DE SEGUROS",
+        "name": "general de seguros",
+        "numeroPacientes": null,
+        "ingresos": null
+    },
+    {
+        "id": 19,
+        "no": 19,
+        "nombreAseguradora": "LA LATINOAMERICANA",
+        "name": "la latinoamericana",
+        "numeroPacientes": null,
+        "ingresos": null
+    },
+    {
+        "id": 20,
+        "no": 20,
+        "nombreAseguradora": "OTRAS",
+        "name": "otras",
+        "numeroPacientes": null,
+        "ingresos": null
+    },
+    {
+        "id": 21,
+        "no": 21,
+        "nombreAseguradora": "LICITACIONES",
+        "name": "licitaciones",
+        "numeroPacientes": null,
+        "ingresos": null
+    }
+]
