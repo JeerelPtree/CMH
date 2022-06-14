@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Container, Row, Col, Modal, Button, Form, OverlayTrigger, Tooltip, FloatingLabel } from "react-bootstrap";
+import { Container, Row, Col, Form, OverlayTrigger, Tooltip, FloatingLabel } from "react-bootstrap";
 import ROLES from "./json/rol.json"
 
 import HOSPITALS from "./json/hospitales.json"

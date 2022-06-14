@@ -107,7 +107,7 @@ function PerfilHospital(props) {
                     <Col xs={12} md={12} className="mb-3">
                         <h4 className="text-center sub-title-cmh">Perfil del Hospital</h4>
                     </Col>
-                    <Col xs={12} md={6}>
+                    <Col xs={12} md={6} className="mb-3">
 
                         <FloatingLabel
                             controlId="floatingInput"
@@ -130,7 +130,7 @@ function PerfilHospital(props) {
 
                     </Col>
 
-                    <Col xs={12} md={6}>
+                    <Col xs={12} md={6} className="mb-3">
 
                         <FloatingLabel
                             controlId="floatingInput"
