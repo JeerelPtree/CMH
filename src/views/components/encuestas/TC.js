@@ -1,6 +1,6 @@
 import React, { Input, Fragment, useState, useEffect } from "react";
-import { Stack, Container, Col, Row, FloatingLabel, Button, Form, OverlayTrigger, Tooltip, FormGroup, InputGroup } from "react-bootstrap";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { Stack, Container, Col, Row, FloatingLabel, Button, Form, OverlayTrigger, Tooltip, FormGroup, Table, InputGroup } from "react-bootstrap";
+import { faPlus, faPerson, faHashtag } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ModalAdd from "../modals/modals encuestas/TC/ModalAdd";
 //import axios from "axios"
@@ -9,11 +9,44 @@ import ModalAdd from "../modals/modals encuestas/TC/ModalAdd";
 //we import css
 import "../../../globalStyles.css"
 import TCCrud from "../tables/TCCrud";
+import listaAseguradoras from "./json/tipoClienteAseguradoras.json"
+import listaGobierno from "./json/tipoClienteGobierno.json"
+import listaEmpresas from "./json/tipoClienteEmpresas.json"
 
-function TC() {
+
+function TC(props) {
+
+    const { modalIsOpen } = props
 
     //declared the variables, constants and states for this module
-    const [form, setForm] = useState({ aseguradoras: [], gobierno: [], empresas: [] })
+    const [form, setForm] = useState({})
+
+    useEffect(() => {
+
+        let dataAseguradoras = listaAseguradoras.map((aseguradora) => {
+            aseguradora.numeroPacientes = ''
+            aseguradora.ingresos = ''
+            return aseguradora
+        })
+
+        let dataGobierno = listaGobierno.map((institucion) => {
+            institucion.numeroPacientes = ''
+            institucion.ingresos = ''
+            return institucion
+        })
+
+        let dataEmpresas = listaEmpresas.map((empresa) => {
+            empresa.numeroPacientes = ''
+            empresa.ingresos = ''
+            return empresa
+        })
+
+        setForm({
+            aseguradoras: dataAseguradoras,
+            gobierno: dataGobierno,
+            empresas: dataEmpresas,
+        })
+    }, [modalIsOpen])
 
     //module's functions
     {/*Función para manejar el cambio en los campos del formulario de la modal*/ }
@@ -37,98 +70,92 @@ function TC() {
      * @param aseguradora - {
      * @returns a boolean value.
      */
-    const handleChangeAseguradoras = async (aseguradora) => {
+    /* const handleChangeAseguradoras = async (value, name, index, field) => {
 
-        if (form.aseguradoras.length > 0) {
+        let auxArray = getArrayAseguradoras(value, index, name, field)
 
-            if (nameRegistroValidation(aseguradora.nombre, form.aseguradoras)) {
+        console.log(form.aseguradoras);
 
-                await setForm(
-                    {
-                        ...form,
-                        aseguradoras: form.aseguradoras.concat(aseguradora)
-                    }
-                );
+        await setForm({
+            ...form,
+            aseguradoras: auxArray
+        })
 
-                return true
-            } else {
-                return false
-            }
+    } */
 
-        } else {
+    const handleChangeTables = async (value, name, index, field, clientType) => {
 
-            await setForm(
-                {
+        let auxArray = getArrayTables(value, index, name, field, clientType)
+
+        switch (clientType) {
+            case 'aseguradora':
+                await setForm({
                     ...form,
-                    aseguradoras: form.aseguradoras.concat(aseguradora)
-                }
-            );
+                    aseguradoras: auxArray
+                })
+                break;
+            case 'gobierno':
+                await setForm({
+                    ...form,
+                    gobierno: auxArray
+                })
+                break;
+            case 'empresas':
+                await setForm({
+                    ...form,
+                    empresas: auxArray
+                })
+                break;
 
-            return true;
-
+            default:
+                break;
         }
 
     }
 
-    /**
-     * We create an aux for our array, we remove the content for it index, we re asigned our aux to
-     * aseguradoras array.
-     * @param index - the index of the array that we want to remove
-     */
-    const handleChangeAseguradorasDelete = async (index) => {
+    const getArrayTables = (value, index, name, field, clientType) => {
 
-        //we create an aux for our array 
-        let aseguradorasArray = form.aseguradoras;
 
-        //we remove the content for it index
-        aseguradorasArray.splice(index, 1);
+        let arrayAux = clientType === 'aseguradora' ? listaAseguradoras :
+            clientType === 'gobierno' ? listaGobierno :
+                clientType === 'empresas' ? listaEmpresas : null;
 
-        //we re asigned our aux to aseguradoras array
-        setForm(
-            {
-                ...form,
-                aseguradoras: aseguradorasArray
+        for (let i = 0; i < arrayAux.length; i++) {
+
+            if (i === index && name === arrayAux[i].name && field === 'pacientes') {
+                arrayAux[i].numeroPacientes = value;
+                break
+            } else if (i === index && name === arrayAux[i].name && field === 'ingresos') {
+                arrayAux[i].ingresos = value;
+                break
             }
-        )
 
-    }
-
-    /**
-     * It takes an index and an object, and replaces the object in the array at the index with the new
-     * object.
-     * @param index - the index of the array that we want to replace
-     * @param aseguradora - {
-     * @returns {
-     *         "id": 1,
-     *         "nombre": "Aseguradora 1",
-     *         "porcentaje": "10",
-     *         "monto": "100",
-     *         "total": "10"
-     *     }
-     */
-    const handleChangeAseguradorasEdit = async (index, aseguradora) => {
-
-        if (nameRegistroValidationEdit(aseguradora.nombre, form.aseguradoras, index)) {
-
-            //we create an aux for our array 
-            let aseguradorasArray = form.aseguradoras;
-
-            //we replaces the content for it index
-            aseguradorasArray.splice(index, 1, aseguradora);
-
-            await setForm(
-                {
-                    ...form,
-                    aseguradoras: aseguradorasArray
-                }
-            );
-            return true
-
-        } else {
-            return false;
         }
 
+        return arrayAux
+
     }
+
+    /*  const getArrayAseguradoras = (value, index, name, field) => {
+ 
+ 
+         let arrayAux = listaAseguradoras;
+ 
+         for (let i = 0; i < arrayAux.length; i++) {
+ 
+             if (i === index && name === arrayAux[i].name && field === 'pacientes') {
+                 arrayAux[i].numeroPacientes = value;
+                 break
+             } else if (i === index && name === arrayAux[i].name && field === 'ingresos') {
+                 arrayAux[i].ingresos = value;
+                 break
+             }
+ 
+         }
+ 
+         return arrayAux
+ 
+     } */
 
     {/*Funciones para manejo del CRUD de Gobierno*/ }
     /**
@@ -408,20 +435,20 @@ function TC() {
 
                             <TotalAtendidos form={form} handleChange={handleChange} />
 
-                            <Aseguradoras form={form} handleChange={handleChange} handleChangeAseguradoras={handleChangeAseguradoras} handleChangeAseguradorasDelete={handleChangeAseguradorasDelete} handleChangeAseguradorasEdit={handleChangeAseguradorasEdit} />
+                            <Aseguradoras form={form} handleChange={handleChangeTables} />
 
-                            <Gobierno form={form} handleChange={handleChange} handleChangeGobierno={handleChangeGobierno} handleChangeGobiernoDelete={handleChangeGobiernoDelete} handleChangeGobiernoEdit={handleChangeGobiernoEdit} />
+                            <Gobierno form={form} handleChange={handleChangeTables} />
 
-                            <Empresas form={form} handleChange={handleChange} handleChangeEmpresas={handleChangeEmpresas} handleChangeEmpresasDelete={handleChangeEmpresasDelete} handleChangeEmpresasEdit={handleChangeEmpresasEdit} />
+                            <Empresas form={form} handleChange={handleChangeTables} />
 
                             <Particulares form={form} handleChange={handleChange} />
 
-                            {/*Botón de enviar
+                            {/* {/* Botón de enviar * /}
                             <Col xs={12} md={6} className="mt-3 mb-5">
                                 <Button variant="primary" onClick={prueba}> Enviar
                                 </Button>
-                            </Col>
-                            */}
+                            </Col> */}
+
 
                         </Row>
                     </Col>
@@ -638,58 +665,83 @@ function TotalAtendidos(props) {
 function Aseguradoras(props) {
 
     //we obtain the props for this component
-    const form = props.form //Formulario
-    const handleChange = props.handleChange //HandleChange del formulario
-    const handleChangeAseguradoras = props.handleChangeAseguradoras;
-    const handleChangeAseguradorasDelete = props.handleChangeAseguradorasDelete;
-    const handleChangeAseguradorasEdit = props.handleChangeAseguradorasEdit;
+    const form = props.form;
+    const handleChange = props.handleChange
 
-    const [modalTriggerAdd, setModalTriggerAdd] = useState(false);
+    const getTable = () => {
 
-
-    const handleModalChangeAdd = () => {
-        setModalTriggerAdd(!modalTriggerAdd);
+        return (
+            <Fragment>
+                {
+                    form.aseguradoras && form.aseguradoras.map((aseguradora, index) => {
+                        return (
+                            <tr key={aseguradora.no}>
+                                <td>{aseguradora.no}</td>
+                                <td>{aseguradora.nombreAseguradora}</td>
+                                <td>
+                                    <GetInputGroup
+                                        label={aseguradora.nombreAseguradora}
+                                        value={aseguradora.numeroPacientes}
+                                        name={aseguradora.name}
+                                        handleChange={handleChange}
+                                        index={index}
+                                        icon={faPerson}
+                                        placeholder="Nº Pxs"
+                                        field='pacientes'
+                                        tooltip='Numero total de pacientes'
+                                        clientType='aseguradora'
+                                    />
+                                </td>
+                                <td>
+                                    <GetInputGroup
+                                        label={aseguradora.nombreAseguradora}
+                                        value={aseguradora.ingresos}
+                                        name={aseguradora.name}
+                                        handleChange={handleChange}
+                                        index={index}
+                                        icon={faHashtag}
+                                        placeholder="Ingresos"
+                                        field='ingresos'
+                                        tooltip='Ingresos promedio'
+                                        clientType='aseguradora'
+                                    />
+                                </td>
+                            </tr>
+                        )
+                    })
+                }
+            </Fragment>
+        )
     }
 
     return (
         <Fragment>
 
-            <Col xs={12} md={12} >
-                <Row>
-
-                    {/*Título de la sección*/}
-                    <Col xs={12} md={12} className="mb-3">
-                        <h4 className="text-center sub-title-cmh">Aseguradoras</h4>
-                    </Col>
-                    <Col xs={12} md={12} className="mb-3">
-
-                        <Row className="justify-content-center">
-
-                            <Col xs={12} md={1} className="text-center">
-                                <OverlayTrigger
-                                    placement="right"
-                                    overlay={
-                                        <Tooltip id="tooltip-agregarAseguradora">Agregar nueva Aseguradora</Tooltip>
-                                    }>
-                                    <Button variant="success" onClick={handleModalChangeAdd}><FontAwesomeIcon icon={faPlus} /></Button>
-                                </OverlayTrigger>
-                            </Col>
-
-                        </Row>
-
-                    </Col>
-                    <Col xs={12} md={12} className="mb-3">
-                        <TCCrud variableForm={form.aseguradoras} handleChange={handleChange} handleChangeRegistrosDelete={handleChangeAseguradorasDelete} handleChangeRegistrosEdit={handleChangeAseguradorasEdit} elemento={"Aseguradora"} />
-                    </Col>
-
-                </Row>
+            {/*Título de la sección*/}
+            <Col xs={12} md={12} className="mb-3 mt-3">
+                <h4 className="text-center sub-title-cmh">Aseguradoras</h4>
             </Col>
-            <ModalAdd
-                modalTriggerAdd={modalTriggerAdd}
-                handleModalChangeAdd={handleModalChangeAdd}
-                handleChangeRegistros={handleChangeAseguradoras}
-                elemento={"Aseguradora"}
-            />
+
+            <Table className="text-center">
+                <thead className="thead-cmh">
+                    <tr>
+                        <th className="col-md-2 col-xs-4">No.</th>
+                        <th className="col-md-4 col-xs-4">Aseguradora</th>
+                        <th className="col-md-3 col-xs-4">Total de pacientes</th>
+                        <th className="col-md-3 col-xs-4">Ingresos promedio</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {
+
+                        getTable()
+
+                    }
+
+                </tbody>
+            </Table>
+
         </Fragment>
     )
 
@@ -701,56 +753,81 @@ function Gobierno(props) {
     //we obtain the props for this component
     const form = props.form //Formulario
     const handleChange = props.handleChange //HandleChange del formulario
-    const handleChangeGobierno = props.handleChangeGobierno;
-    const handleChangeGobiernoDelete = props.handleChangeGobiernoDelete;
-    const handleChangeGobiernoEdit = props.handleChangeGobiernoEdit;
 
-    const [modalTriggerAdd, setModalTriggerAdd] = useState(false);
+    const getTable = () => {
 
-
-    const handleModalChangeAdd = () => {
-        setModalTriggerAdd(!modalTriggerAdd);
+        return (
+            <Fragment>
+                {
+                    form.gobierno && form.gobierno.map((institucion, index) => {
+                        return (
+                            <tr key={institucion.no}>
+                                <td>{institucion.no}</td>
+                                <td>{institucion.nombreInstitucion}</td>
+                                <td>
+                                    <GetInputGroup
+                                        label={institucion.nombreInstitucion}
+                                        value={institucion.numeroPacientes}
+                                        name={institucion.name}
+                                        handleChange={handleChange}
+                                        index={index}
+                                        icon={faPerson}
+                                        placeholder="Nº Pxs"
+                                        field='pacientes'
+                                        tooltip='Numero total de pacientes'
+                                        clientType='gobierno'
+                                    />
+                                </td>
+                                <td>
+                                    <GetInputGroup
+                                        label={institucion.nombreInstitucion}
+                                        value={institucion.ingresos}
+                                        name={institucion.name}
+                                        handleChange={handleChange}
+                                        index={index}
+                                        icon={faHashtag}
+                                        placeholder="Ingresos"
+                                        field='ingresos'
+                                        tooltip='Ingresos promedio'
+                                        clientType='gobierno'
+                                    />
+                                </td>
+                            </tr>
+                        )
+                    })
+                }
+            </Fragment>
+        )
     }
 
     return (
         <Fragment>
 
-            <Col xs={12} md={12} >
-                <Row>
-
-                    {/*Título de la sección*/}
-                    <Col xs={12} md={12} className="mb-3">
-                        <h4 className="text-center sub-title-cmh">Gobierno</h4>
-                    </Col>
-                    <Col xs={12} md={12} className="mb-3">
-
-                        <Row className="justify-content-center">
-
-                            <Col xs={12} md={1} className="text-center">
-                                <OverlayTrigger
-                                    placement="right"
-                                    overlay={
-                                        <Tooltip id="tooltip-agregarInstitucion">Agregar nueva Institución gubernamental</Tooltip>
-                                    }>
-                                    <Button variant="success" onClick={handleModalChangeAdd}><FontAwesomeIcon icon={faPlus} /></Button>
-                                </OverlayTrigger>
-                            </Col>
-
-                        </Row>
-
-                    </Col>
-                    <Col xs={12} md={12} className="mb-3">
-                        <TCCrud variableForm={form.gobierno} handleChange={handleChange} handleChangeRegistrosDelete={handleChangeGobiernoDelete} handleChangeRegistrosEdit={handleChangeGobiernoEdit} elemento={"Institución"} />
-                    </Col>
-
-                </Row>
+            {/*Título de la sección*/}
+            <Col xs={12} md={12} className="mb-3 mt-3">
+                <h4 className="text-center sub-title-cmh">Gobierno</h4>
             </Col>
-            <ModalAdd
-                modalTriggerAdd={modalTriggerAdd}
-                handleModalChangeAdd={handleModalChangeAdd}
-                handleChangeRegistros={handleChangeGobierno}
-                elemento={"Institución"}
-            />
+
+            <Table className="text-center">
+                <thead className="thead-cmh">
+                    <tr>
+                        <th className="col-md-2 col-xs-4">No.</th>
+                        <th className="col-md-4 col-xs-4">Institución</th>
+                        <th className="col-md-3 col-xs-4">Total de pacientes</th>
+                        <th className="col-md-3 col-xs-4">Ingresos promedio</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {
+
+                        getTable()
+
+                    }
+
+                </tbody>
+            </Table>
+
         </Fragment>
     )
 
@@ -762,56 +839,81 @@ function Empresas(props) {
     //we obtain the props for this component
     const form = props.form //Formulario
     const handleChange = props.handleChange //HandleChange del formulario
-    const handleChangeEmpresas = props.handleChangeEmpresas;
-    const handleChangeEmpresasDelete = props.handleChangeEmpresasDelete;
-    const handleChangeEmpresasEdit = props.handleChangeEmpresasEdit;
 
-    const [modalTriggerAdd, setModalTriggerAdd] = useState(false);
+    const getTable = () => {
 
-
-    const handleModalChangeAdd = () => {
-        setModalTriggerAdd(!modalTriggerAdd);
+        return (
+            <Fragment>
+                {
+                    form.empresas && form.empresas.map((empresa, index) => {
+                        return (
+                            <tr key={empresa.no}>
+                                <td>{empresa.no}</td>
+                                <td>{empresa.nombreEmpresa}</td>
+                                <td>
+                                    <GetInputGroup
+                                        label={empresa.nombreEmpresa}
+                                        value={empresa.numeroPacientes}
+                                        name={empresa.name}
+                                        handleChange={handleChange}
+                                        index={index}
+                                        icon={faPerson}
+                                        placeholder="Nº Pxs"
+                                        field='pacientes'
+                                        tooltip='Numero total de pacientes'
+                                        clientType='empresas'
+                                    />
+                                </td>
+                                <td>
+                                    <GetInputGroup
+                                        label={empresa.nombreEmpresa}
+                                        value={empresa.ingresos}
+                                        name={empresa.name}
+                                        handleChange={handleChange}
+                                        index={index}
+                                        icon={faHashtag}
+                                        placeholder="Ingresos"
+                                        field='ingresos'
+                                        tooltip='Ingresos promedio'
+                                        clientType='empresas'
+                                    />
+                                </td>
+                            </tr>
+                        )
+                    })
+                }
+            </Fragment>
+        )
     }
 
     return (
         <Fragment>
 
-            <Col xs={12} md={12} >
-                <Row>
-
-                    {/*Título de la sección*/}
-                    <Col xs={12} md={12} className="mb-3">
-                        <h4 className="text-center sub-title-cmh">Empresas</h4>
-                    </Col>
-                    <Col xs={12} md={12} className="mb-3">
-
-                        <Row className="justify-content-center">
-
-                            <Col xs={12} md={1} className="text-center">
-                                <OverlayTrigger
-                                    placement="right"
-                                    overlay={
-                                        <Tooltip id="tooltip-agregarEmpresa">Agregar nueva Empresa local</Tooltip>
-                                    }>
-                                    <Button variant="success" onClick={handleModalChangeAdd}><FontAwesomeIcon icon={faPlus} /></Button>
-                                </OverlayTrigger>
-                            </Col>
-
-                        </Row>
-
-                    </Col>
-                    <Col xs={12} md={12} className="mb-3">
-                        <TCCrud variableForm={form.empresas} handleChange={handleChange} handleChangeRegistrosDelete={handleChangeEmpresasDelete} handleChangeRegistrosEdit={handleChangeEmpresasEdit} elemento={"Empresa"} />
-                    </Col>
-
-                </Row>
+            {/*Título de la sección*/}
+            <Col xs={12} md={12} className="mb-3 mt-3">
+                <h4 className="text-center sub-title-cmh">Empresas</h4>
             </Col>
-            <ModalAdd
-                modalTriggerAdd={modalTriggerAdd}
-                handleModalChangeAdd={handleModalChangeAdd}
-                handleChangeRegistros={handleChangeEmpresas}
-                elemento={"Empresa"}
-            />
+
+            <Table className="text-center">
+                <thead className="thead-cmh">
+                    <tr>
+                        <th className="col-md-2 col-xs-4">No.</th>
+                        <th className="col-md-4 col-xs-4">Empresa</th>
+                        <th className="col-md-3 col-xs-4">Total de pacientes</th>
+                        <th className="col-md-3 col-xs-4">Ingresos promedio</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {
+
+                        getTable()
+
+                    }
+
+                </tbody>
+            </Table>
+
         </Fragment>
     )
 
@@ -830,7 +932,7 @@ function Particulares(props) {
                 <Row>
 
                     {/*Título de la sección*/}
-                    <Col xs={12} md={12} className="mb-3">
+                    <Col xs={12} md={12} className="mb-3 mt-3">
                         <h4 className="text-center sub-title-cmh">Particulares</h4>
                     </Col>
 
@@ -932,6 +1034,42 @@ function Particulares(props) {
 
                 </Row>
             </Col>
+        </Fragment>
+    )
+
+}
+
+function GetInputGroup(props) {
+
+    const { label, value, name, handleChange, index, icon, placeholder, field, tooltip, clientType } = props;
+
+    const handleChangeInput = async (e) => {
+
+        await handleChange(e.target.value, e.target.name, index, field, clientType)
+
+    }
+
+    return (
+        <Fragment>
+
+            <span>
+                <OverlayTrigger
+                    placement="top"
+                    overlay={
+                        <Tooltip id="tooltip-rinion">{`${tooltip}`}</Tooltip>
+                    }>
+
+                    <InputGroup>
+                        <InputGroup.Text className="input-group-text-primary"><FontAwesomeIcon icon={icon} /></InputGroup.Text>
+                        <Form.Control type="number" min={0} placeholder={placeholder}
+                            value={value ? value : ''}
+                            name={name}
+                            onChange={handleChangeInput} />
+
+                    </InputGroup>
+                </OverlayTrigger>
+            </span>
+
         </Fragment>
     )
 

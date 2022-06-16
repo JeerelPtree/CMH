@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { Container, Col, Row, FloatingLabel, Button, Form, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Container, Col, Row, FloatingLabel, Button, Form, OverlayTrigger, Tooltip, InputGroup } from "react-bootstrap";
 import MultiSelect from "../selectors/MultiSelect";
+import HospitalOptions from "./json/RHo/hospitalOptions.json";
 
 //we import css
 import "../../../globalStyles.css"
@@ -72,7 +73,7 @@ function RHo() {
 
                             <PerfilHospital form={form} handleChange={handleChange} />
 
-                            <Caracteristicas form={form} handleChange={handleChange} dataMulti={dataMulti} handleMulti={handleMultiSelect} />
+                            <Caracteristicas form={form} handleChange={handleChange} dataMulti={dataMulti} handleMulti={handleMultiSelect} hospitalOptions={HospitalOptions} />
 
                             {/*Botón de enviar
                             <Col xs={12} md={6} className="mt-3 mb-5">
@@ -109,46 +110,35 @@ function PerfilHospital(props) {
                     </Col>
                     <Col xs={12} md={6}>
 
-                        <FloatingLabel
-                            controlId="floatingInput"
-                            label="Razón Social">
-                            <OverlayTrigger
-                                placement="top"
-                                overlay={
-                                    <Tooltip id="tooltip-habitaciones">Razón Social</Tooltip>
-                                }>
-                                <Form.Control
-                                    type="text"
-                                    placeholder="Razón Social"
-                                    value={form.razonSocial ? form.razonSocial : ''}
-                                    name="razonSocial"
-                                    onChange={handleChange}
-                                    autoComplete="off" />
-                            </OverlayTrigger>
-                        </FloatingLabel>
-
+                        <GetInput
+                            label="Razón Social"
+                            value={form.razonSocial}
+                            name="razonSocial"
+                            handleChange={handleChange}
+                            tooltipDescrip="Razón Social"
+                            type="text"
+                            min={0}
+                            isRequired={true}
+                            placement="top"
+                            show={true}
+                        />
 
                     </Col>
 
                     <Col xs={12} md={6}>
 
-                        <FloatingLabel
-                            controlId="floatingInput"
-                            label="Nombre Comercial">
-                            <OverlayTrigger
-                                placement="top"
-                                overlay={
-                                    <Tooltip id="tooltip-habitaciones">Nombre Comercial</Tooltip>
-                                }>
-                                <Form.Control
-                                    type="text"
-                                    placeholder="Nombre Comercial"
-                                    value={form.nombreComercial ? form.nombreComercial : ''}
-                                    name="nombreComercial"
-                                    onChange={handleChange}
-                                    autoComplete="off" />
-                            </OverlayTrigger>
-                        </FloatingLabel>
+                        <GetInput
+                            label="Nombre Comercial"
+                            value={form.nombreComercial}
+                            name="nombreComercial"
+                            handleChange={handleChange}
+                            tooltipDescrip="Nombre Comercial"
+                            type="text"
+                            min={0}
+                            isRequired={true}
+                            placement="top"
+                            show={true}
+                        />
 
                     </Col>
 
@@ -166,6 +156,7 @@ function Caracteristicas(props) {
     const handleChange = props.handleChange
     const dataMulti = props.dataMulti
     const handleMulti = props.handleMulti
+    const HospitalOptions = props.hospitalOptions
 
     return (
         <Fragment>
@@ -181,235 +172,179 @@ function Caracteristicas(props) {
                     {/*Hospital asociado desde*/}
                     <Col xs={12} md={4} className="mt-3">
 
-                        <FloatingLabel
-                            controlId="floatingInput"
-                            label="Hospital Asociado al CMH desde">
-                            <OverlayTrigger
-                                placement="top"
-                                overlay={
-                                    <Tooltip id="tooltip-habitaciones">Hospital Asociado al CMH desde</Tooltip>
-                                }>
-                                <Form.Control
-                                    type="date"
-                                    placeholder="Hospital Asociado al CMH desde"
-                                    value={form.hospitalAsociadoCMHDesde ? form.hospitalAsociadoCMHDesde : ''}
-                                    name="hospitalAsociadoCMHDesde"
-                                    onChange={handleChange} />
-                            </OverlayTrigger>
-                        </FloatingLabel>
+                        <GetInput
+                            label="Hospital Asociado al CMH desde"
+                            value={form.hospitalAsociadoCMHDesde}
+                            name="hospitalAsociadoCMHDesde"
+                            handleChange={handleChange}
+                            tooltipDescrip="Hospital Asociado al CMH desde"
+                            type="date"
+                            min={0}
+                            isRequired={true}
+                            placement="top"
+                            show={true}
+                        />
 
                     </Col>
 
                     {/*Fecha de fundación*/}
                     <Col xs={12} md={4} className="mt-3">
 
-                        <FloatingLabel
-                            controlId="floatingInput"
-                            label="Fecha de Fundación del Hospital">
-                            <OverlayTrigger
-                                placement="top"
-                                overlay={
-                                    <Tooltip id="tooltip-habitaciones">Fecha de Fundación del Hospital</Tooltip>
-                                }>
-                                <Form.Control
-                                    type="date"
-                                    placeholder="Fecha de Fundación del Hospital"
-                                    value={form.fechaFundacionHospital ? form.fechaFundacionHospital : ''}
-                                    name="fechaFundacionHospital"
-                                    onChange={handleChange} />
-                            </OverlayTrigger>
-                        </FloatingLabel>
+                        <GetInput
+                            label="Fecha de Fundación del Hospital"
+                            value={form.fechaFundacionHospital}
+                            name="fechaFundacionHospital"
+                            handleChange={handleChange}
+                            tooltipDescrip="Fecha de Fundación del Hospital"
+                            type="date"
+                            min={0}
+                            isRequired={true}
+                            placement="top"
+                            show={true}
+                        />
 
                     </Col>
 
                     {/*Área construida*/}
                     <Col xs={12} md={4} className="mt-3">
 
-                        <FloatingLabel
-                            controlId="floatingInput"
-                            label="Área construida [m²]">
-                            <OverlayTrigger
-                                placement="top"
-                                overlay={
-                                    <Tooltip id="tooltip-habitaciones">Área construida [m²]</Tooltip>
-                                }>
-                                <Form.Control
-                                    type="number"
-                                    step={0.01}
-                                    placeholder="Área construida [m²]"
-                                    value={form.areaConstruida ? form.areaConstruida : ''}
-                                    name="areaConstruida"
-                                    onChange={handleChange}
-                                    autoComplete="off"
-                                    min={0} />
-                            </OverlayTrigger>
-                        </FloatingLabel>
+                        <GetInput
+                            label="Área construida [m²]"
+                            value={form.areaConstruida}
+                            name="areaConstruida"
+                            handleChange={handleChange}
+                            tooltipDescrip="Área construida [m²]"
+                            type="number"
+                            min={0}
+                            isRequired={true}
+                            placement="top"
+                            show={true}
+                        />
 
                     </Col>
 
                     {/*Número de colaboradores*/}
                     <Col xs={12} md={4} className="mt-3">
 
-                        <FloatingLabel
-                            controlId="floatingInput"
-                            label="Número de colaboradores">
-                            <OverlayTrigger
-                                placement="top"
-                                overlay={
-                                    <Tooltip id="tooltip-habitaciones">Número de colaboradores</Tooltip>
-                                }>
-                                <Form.Control
-                                    type="number"
-                                    placeholder="Número de colaboradores"
-                                    value={form.numeroColaboradores ? form.numeroColaboradores : ''}
-                                    name="numeroColaboradores"
-                                    onChange={handleChange}
-                                    min={0} />
-                            </OverlayTrigger>
-                        </FloatingLabel>
+                        <GetInput
+                            label="Número de colaboradores"
+                            value={form.numeroColaboradores}
+                            name="numeroColaboradores"
+                            handleChange={handleChange}
+                            tooltipDescrip="Número de colaboradores"
+                            type="number"
+                            min={0}
+                            isRequired={true}
+                            placement="top"
+                            show={true}
+                        />
 
                     </Col>
 
                     {/*Número de camas de hospitalización*/}
                     <Col xs={12} md={4} className="mt-3">
 
-                        <FloatingLabel
-                            controlId="floatingInput"
-                            label="Nº de Camas de Hospitalización">
-                            <OverlayTrigger
-                                placement="top"
-                                overlay={
-                                    <Tooltip id="tooltip-habitaciones">Nº de Camas de Hospitalización</Tooltip>
-                                }>
-                                <Form.Control
-                                    type="number"
-                                    placeholder="Nº de Camas de Hospitalización"
-                                    value={form.numeroCamasHospitalizacion ? form.numeroCamasHospitalizacion : ''}
-                                    name="numeroCamasHospitalizacion"
-                                    onChange={handleChange}
-                                    autoComplete="off"
-                                    min={0} />
-                            </OverlayTrigger>
-                        </FloatingLabel>
+                        <GetInput
+                            label="Nº de Camas de Hospitalización"
+                            value={form.numeroCamasHospitalizacion}
+                            name="numeroCamasHospitalizacion"
+                            handleChange={handleChange}
+                            tooltipDescrip="Nº de Camas de Hospitalización"
+                            type="number"
+                            min={0}
+                            isRequired={true}
+                            placement="top"
+                            show={true}
+                        />
 
                     </Col>
 
                     {/*Número de camas UCIA*/}
                     <Col xs={12} md={4} className="mt-3">
 
-                        <FloatingLabel
-                            controlId="floatingInput"
-                            label="Nº Camas UCIA">
-                            <OverlayTrigger
-                                placement="bottom"
-                                overlay={
-                                    <Tooltip id="tooltip-UCIA">Tooltip para UCIA</Tooltip>
-                                }>
-                                <Form.Control
-                                    type="number"
-                                    placeholder="Nº Camas UCIA"
-                                    value={form.numeroCamasUCIA ? form.numeroCamasUCIA : ''}
-                                    name="numeroCamasUCIA"
-                                    onChange={handleChange}
-                                    autoComplete="off"
-                                    min={0} />
-                            </OverlayTrigger>
-                        </FloatingLabel>
+                        <GetInput
+                            label="Nº de Camas UCIA"
+                            value={form.numeroCamasUCIA}
+                            name="numeroCamasUCIA"
+                            handleChange={handleChange}
+                            tooltipDescrip="Nº de Camas de Unidad de Cuidados Intensivos Adultos"
+                            type="number"
+                            min={0}
+                            isRequired={true}
+                            placement="top"
+                            show={true}
+                        />
 
                     </Col>
 
                     {/*Número de camas UCIN*/}
                     <Col xs={12} md={4} className="mt-3">
 
-                        <FloatingLabel
-                            controlId="floatingInput"
-                            label="Nº Camas UCIN">
-                            <OverlayTrigger
-                                placement="bottom"
-                                overlay={
-                                    <Tooltip id="tooltip-UCIA">Tooltip para UCIN</Tooltip>
-                                }>
-                                <Form.Control
-                                    type="number"
-                                    placeholder="Nº Camas UCIN"
-                                    value={form.numeroCamasUCIN ? form.numeroCamasUCIN : ''}
-                                    name="numeroCamasUCIN"
-                                    onChange={handleChange}
-                                    autoComplete="off"
-                                    min={0} />
-                            </OverlayTrigger>
-                        </FloatingLabel>
+                        <GetInput
+                            label="Nº Camas UCIN"
+                            value={form.numeroCamasUCIN}
+                            name="numeroCamasUCIN"
+                            handleChange={handleChange}
+                            tooltipDescrip="Nº Camas Unidad de Cuidados Intensivos Neonatales"
+                            type="number"
+                            min={0}
+                            isRequired={true}
+                            placement="top"
+                            show={true}
+                        />
 
                     </Col>
 
                     {/*Número de salas de cirugía*/}
                     <Col xs={12} md={4} className="mt-3">
 
-                        <FloatingLabel
-                            controlId="floatingInput"
-                            label="Nº Salas de Cirugía">
-                            <OverlayTrigger
-                                placement="top"
-                                overlay={
-                                    <Tooltip id="tooltip-habitaciones">Nº Salas de Cirugía</Tooltip>
-                                }>
-                                <Form.Control
-                                    type="number"
-                                    placeholder="Nº Salas de Cirugía"
-                                    value={form.numeroSalasCirugia ? form.numeroSalasCirugia : ''}
-                                    name="numeroSalasCirugia"
-                                    onChange={handleChange}
-                                    autoComplete="off"
-                                    min={0} />
-                            </OverlayTrigger>
-                        </FloatingLabel>
+                        <GetInput
+                            label="Nº Salas de Cirugía"
+                            value={form.numeroSalasCirugia}
+                            name="numeroSalasCirugia"
+                            handleChange={handleChange}
+                            tooltipDescrip="Nº Salas de Cirugía"
+                            type="number"
+                            min={0}
+                            isRequired={true}
+                            placement="top"
+                            show={true}
+                        />
 
                     </Col>
 
                     {/*Número de médicos credencializados*/}
                     <Col xs={12} md={4} className="mt-3">
 
-                        <FloatingLabel
-                            controlId="floatingInput"
-                            label="Número de Médicos credencializados">
-                            <OverlayTrigger
-                                placement="top"
-                                overlay={
-                                    <Tooltip id="tooltip-habitaciones">Número de Médicos credencializados</Tooltip>
-                                }>
-                                <Form.Control
-                                    type="number"
-                                    placeholder="Número de Médicos credencializados"
-                                    value={form.numeroMedicosCredencializados ? form.numeroMedicosCredencializados : ''}
-                                    name="numeroMedicosCredencializados"
-                                    onChange={handleChange}
-                                    autoComplete="off"
-                                    min={0} />
-                            </OverlayTrigger>
-                        </FloatingLabel>
+                        <GetInput
+                            label="Número de Médicos credencializados"
+                            value={form.numeroMedicosCredencializados}
+                            name="numeroMedicosCredencializados"
+                            handleChange={handleChange}
+                            tooltipDescrip="Número de Médicos credencializados"
+                            type="number"
+                            min={0}
+                            isRequired={true}
+                            placement="top"
+                            show={true}
+                        />
 
                     </Col>
 
                     {/*Nivel de atención hospitalaria*/}
                     <Col xs={12} md={6} className="mt-3">
 
-                        <span>
-                            <OverlayTrigger
-                                placement="top"
-                                overlay={
-                                    <Tooltip id="tooltip-habitaciones">Nivel de Atención Hospitalaria:</Tooltip>
-                                }>
-                                <FloatingLabel controlId="floatingSelect" label="Nivel de Atención Hospitalaria">
-                                    <Form.Select aria-label="Floating label" value={form.nivelAtencionHospitalaria ? form.nivelAtencionHospitalaria : ''} onChange={handleChange} name="nivelAtencionHospitalaria"
-                                        style={{ height: '70px' }}>
-                                        <option value="" disabled>Seleccione el nivel de atención hospitalaria</option>
-                                        <option value="Hospital General">Hospital General</option>
-                                        <option value="Hospital Especializado">Hospital Especializado</option>
-                                    </Form.Select>
-                                </FloatingLabel>
-                            </OverlayTrigger>
-
-                        </span>
+                        <GetSelector
+                            label='Nivel de Atención Hospitalaria'
+                            style={{ height: '70px' }}
+                            value={form.nivelAtencionHospitalaria}
+                            tooltipDescrip='Nivel de Atención Hospitalaria:'
+                            name='nivelAtencionHospitalaria'
+                            handleChange={handleChange}
+                            options={HospitalOptions}
+                            isRequired={true}
+                            show={true}
+                        />
 
                     </Col>
 
@@ -461,48 +396,40 @@ function Caracteristicas(props) {
                     {/*Reseña del hospital*/}
                     <Col xs={12} md={6} className="mt-3">
 
-                        <FloatingLabel
-                            controlId="floatingTextarea"
-                            label="Reseña de Hospital">
-                            <OverlayTrigger
-                                placement="top"
-                                overlay={
-                                    <Tooltip id="tooltip-habitaciones">Reseña de Hospital</Tooltip>
-                                }>
-                                <Form.Control
-                                    as="textarea"
-                                    placeholder="Reseña de Hospital"
-                                    value={form.reseniaHospital ? form.reseniaHospital : ""}
-                                    name="reseniaHospital"
-                                    style={{ height: '100px' }}
-                                    onChange={handleChange}
-                                    autoComplete="off" />
-                            </OverlayTrigger>
-                        </FloatingLabel>
+                        <GetInput
+                            label="Reseña de Hospital"
+                            value={form.reseniaHospital}
+                            name="reseniaHospital"
+                            handleChange={handleChange}
+                            tooltipDescrip="Reseña de Hospital"
+                            type="text"
+                            isTextArea={true}
+                            style={{ height: '100px' }}
+                            min={0}
+                            isRequired={true}
+                            placement="top"
+                            show={true}
+                        />
 
                     </Col>
 
                     {/*Lo destacado en el año*/}
                     <Col xs={12} md={6} className="mt-3">
 
-                        <FloatingLabel
-                            controlId="floatingTextarea"
-                            label={`Lo Destacado del Hospital en el año ${currentYear}`}>
-                            <OverlayTrigger
-                                placement="top"
-                                overlay={
-                                    <Tooltip id="tooltip-habitaciones">Lo Destacado del Hospital en el año {currentYear}</Tooltip>
-                                }>
-                                <Form.Control
-                                    as="textarea"
-                                    placeholder="Lo Destacado del Hospital en el año 2019"
-                                    value={form.highlights ? form.highlights : ""}
-                                    name="highlights"
-                                    style={{ height: '100px' }}
-                                    onChange={handleChange}
-                                    autoComplete="off" />
-                            </OverlayTrigger>
-                        </FloatingLabel>
+                        <GetInput
+                            label={`Lo Destacado del Hospital en el año ${currentYear}`}
+                            value={form.highlights}
+                            name="highlights"
+                            handleChange={handleChange}
+                            tooltipDescrip={`Lo Destacado del Hospital en el año ${currentYear}`}
+                            type="text"
+                            isTextArea={true}
+                            style={{ height: '100px' }}
+                            min={0}
+                            isRequired={true}
+                            placement="top"
+                            show={true}
+                        />
 
                     </Col>
 
@@ -510,6 +437,150 @@ function Caracteristicas(props) {
             </Col>
         </Fragment>
     )
+}
+
+function GetInput(props) {
+
+    //we obtain their props
+    const { label, value, name, handleChange, tooltipDescrip, min, type, isRequired, placement, show, isReadOnly = false, isTextArea = false, style = null } = props
+
+    if (show == true) {
+        return (
+            <Fragment>
+                <FloatingLabel
+                    controlId="floatingInput"
+                    label={label}>
+                    <OverlayTrigger
+                        placement={placement}
+                        overlay={
+                            <Tooltip id={`tooltip-${name}`}>{tooltipDescrip}</Tooltip>
+                        }>
+                        <Form.Control
+                            as={isTextArea ? "textarea" : "input"}
+                            type={type}
+                            placeholder={label}
+                            value={value ? value : ''}
+                            min={min}
+                            name={name}
+                            onChange={handleChange}
+                            required={isRequired}
+                            autoComplete="off"
+                            readOnly={isReadOnly}
+                            style={style}
+                        />
+                    </OverlayTrigger>
+                </FloatingLabel>
+            </Fragment>
+        )
+    }
+}
+
+function GetInputFormat(props) {
+
+    //we obtain their props
+    const { label, value, name, handleChange, tooltipDescrip, type, min, isRequired, placement, show, isReadOnly = false, leftSymbol, rightSymbol, isLeft = false, isRight = false } = props
+
+    if (show == true && isLeft == true) {
+        return (
+            <Fragment>
+                <InputGroup className="justify-content-center">
+                    <InputGroup.Text id="currency">{leftSymbol}</InputGroup.Text>
+                    <FloatingLabel
+                        controlId="floatingInput"
+                        label={label}>
+                        <OverlayTrigger
+                            placement={placement}
+                            overlay={
+                                <Tooltip id={`tooltip-${name}`}>{tooltipDescrip}</Tooltip>
+                            }>
+                            <Form.Control
+                                type={type}
+                                placeholder={label}
+                                value={value ? value : ''}
+                                min={min}
+                                name={name}
+                                onChange={handleChange}
+                                required={isRequired}
+                                autoComplete="off"
+                                readOnly={isReadOnly}
+                            />
+                        </OverlayTrigger>
+                    </FloatingLabel>
+                </InputGroup>
+            </Fragment>
+        )
+    } else if (show == true && isRight == true) {
+        return (
+            <Fragment>
+                <InputGroup className="justify-content-center">
+                    <FloatingLabel
+                        controlId="floatingInput"
+                        label={label}>
+                        <OverlayTrigger
+                            placement={placement}
+                            overlay={
+                                <Tooltip id={`tooltip-${name}`}>{tooltipDescrip}</Tooltip>
+                            }>
+                            <Form.Control
+                                type={type}
+                                placeholder={label}
+                                value={value ? value : ''}
+                                min={min}
+                                name={name}
+                                onChange={handleChange}
+                                required={isRequired}
+                                autoComplete="off"
+                                readOnly={isReadOnly}
+                            />
+                        </OverlayTrigger>
+                    </FloatingLabel>
+                    <InputGroup.Text id="currency">{rightSymbol}</InputGroup.Text>
+                </InputGroup>
+            </Fragment>
+        )
+    }
+}
+
+function GetSelector(props) {
+
+    //we obtain their props
+    const { label, style = null, value, tooltipDescrip, name, handleChange, options, isRequired, show } = props
+
+    if (show == true) {
+        return (
+            <Fragment>
+
+                <OverlayTrigger
+                    placement="top"
+                    overlay={
+                        <Tooltip id={`tooltip-${name}`}>{tooltipDescrip}</Tooltip>
+                    }>
+                    <FloatingLabel controlId="floatingSelect" label={label}>
+                        <Form.Select
+                            aria-label="Floating label"
+                            value={value ? value : ''}
+                            onChange={handleChange}
+                            name={name}
+                            required={isRequired}
+                            style={style}
+                        >
+                            <option value="" disabled>Seleccione una opción</option>
+                            {
+                                options.map((option) => {
+                                    return (
+                                        <Fragment key={option.id}>
+                                            <option value={option.value}>{option.name}</option>
+                                        </Fragment>
+                                    )
+                                })
+                            }
+                        </Form.Select>
+                    </FloatingLabel>
+                </OverlayTrigger>
+
+            </Fragment>
+        )
+    }
 }
 
 export default RHo;

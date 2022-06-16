@@ -1,0 +1,34 @@
+[
+    {
+        "id": 1,
+        "no": 1,
+        "nombreInstitucion": "IMSS",
+        "name": "imss",
+        "numeroPacientes": null,
+        "ingresos": null
+    },
+    {
+        "id": 2,
+        "no": 2,
+        "nombreInstitucion": "ISSET",
+        "name": "isset",
+        "numeroPacientes": null,
+        "ingresos": null
+    },
+    {
+        "id": 3,
+        "no": 3,
+        "nombreInstitucion": "HOSPITAL MILITAR",
+        "name": "hospitalMilitar",
+        "numeroPacientes": null,
+        "ingresos": null
+    },
+    {
+        "id": 4,
+        "no": 4,
+        "nombreInstitucion": "BANRURAL",
+        "name": "banrural",
+        "numeroPacientes": null,
+        "ingresos": null
+    }
+]
