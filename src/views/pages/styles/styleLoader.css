@@ -1,0 +1,136 @@
+.lds-grid {
+    display: inline-block;
+    position: relative;
+    width: 64px;
+    height: 64px;
+}
+
+.lds-grid div {
+    position: absolute;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: #004976;
+    animation: lds-grid 1.2s linear infinite;
+}
+
+.lds-grid div:nth-child(1) {
+    top: 0px;
+    left: 0px;
+    background: #C6D602;
+    animation-delay: 0s;
+}
+
+.lds-grid div:nth-child(2) {
+    top: 0px;
+    left: 20px;
+    background: #07a8d3;
+    animation-delay: -0.4s;
+}
+
+.lds-grid div:nth-child(3) {
+    top: 0px;
+    left: 40px;
+    background: #ebad32;
+    animation-delay: -0.8s;
+}
+
+.lds-grid div:nth-child(4) {
+    top: 0px;
+    left: 60px;
+    animation-delay: -0.4s;
+}
+
+.lds-grid div:nth-child(5) {
+
+    top: 20px;
+    left: 0px;
+    animation-delay: -0.8s;
+}
+
+.lds-grid div:nth-child(6) {
+    background: #C6D602;
+    top: 20px;
+    left: 20px;
+    animation-delay: -1.2s;
+}
+
+.lds-grid div:nth-child(7) {
+    background: #07a8d3;
+    top: 20px;
+    left: 40px;
+    animation-delay: -0.8s;
+}
+
+.lds-grid div:nth-child(8) {
+    background: #ebad32;
+    top: 20px;
+    left: 60px;
+    animation-delay: -1.2s;
+}
+
+.lds-grid div:nth-child(9) {
+    background: #ebad32;
+    top: 40px;
+    left: 0px;
+    animation-delay: -1.6s;
+}
+
+.lds-grid div:nth-child(10) {
+    top: 40px;
+    left: 20px;
+    animation-delay: -1.6s;
+}
+
+.lds-grid div:nth-child(11) {
+    background: #C6D602;
+    top: 40px;
+    left: 40px;
+    animation-delay: -1.6s;
+}
+
+.lds-grid div:nth-child(12) {
+    background: #07a8d3;
+    top: 40px;
+    left: 60px;
+    animation-delay: -1.6s;
+}
+
+.lds-grid div:nth-child(13) {
+    background: #07a8d3;
+    top: 60px;
+    left: 0px;
+    animation-delay: -1.6s;
+}
+
+.lds-grid div:nth-child(14) {
+    background: #ebad32;
+    top: 60px;
+    left: 20px;
+    animation-delay: -1.6s;
+}
+
+.lds-grid div:nth-child(15) {
+    top: 60px;
+    left: 40px;
+    animation-delay: -1.6s;
+}
+
+.lds-grid div:nth-child(16) {
+    background: #C6D602;
+    top: 60px;
+    left: 60px;
+    animation-delay: -1.6s;
+}
+
+@keyframes lds-grid {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}

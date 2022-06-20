@@ -7,11 +7,7 @@ import './headersStyles.css';
 
 const NavbarC = () => {
 
-    //const [isOpen, setIsOpen] = useState(false); //collapse variable that indicate the state is open or close
-
-    //const toggle = () => setIsOpen(!isOpen) //change the state value
-
-    //if (window.location.pathname !== '/') { //we validate that just see the navbar content if the pathname doest'n root position
+    const classLogo = window.screen.availWidth < 768 ? "responsive-logo" : "full-screen-logo";
 
     return (
         <Fragment>
@@ -25,7 +21,7 @@ const NavbarC = () => {
                                         <Col sm={12} md={12} lg={12}>
                                             <div className="hidpi-logowrap">
                                                 <strong className="navbar-logo">
-                                                    <img className="navbar-img" src={Logo} alt="" />
+                                                    <img className={classLogo} src={Logo} alt="" />
                                                 </strong>
                                                 <div className="navbar-rightarea">
 
@@ -36,33 +32,24 @@ const NavbarC = () => {
                                                             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                                                             <Navbar.Collapse id="responsive-navbar-nav">
                                                                 <Nav className="me-auto">
-                                                                    <Nav.Item>
-                                                                        <OverlayTrigger
-                                                                            placement="bottom"
-                                                                            overlay={
-                                                                                <Tooltip id="tooltip-rinion">Ir a encuestas</Tooltip>
-                                                                            }>
-                                                                            <Link className="nav-link color-text" to='/encuestas'>
-                                                                                <strong>Encuestas</strong>
-                                                                            </Link>
-                                                                        </OverlayTrigger>
-                                                                    </Nav.Item>
-                                                                    <Nav.Item>
-                                                                        <OverlayTrigger
-                                                                            placement="bottom"
-                                                                            overlay={
-                                                                                <Tooltip id="tooltip-rinion">Ir a perfiles</Tooltip>
-                                                                            }>
-                                                                            <Link className="nav-link color-text" to='/perfiles'>
-                                                                                <strong>Perfiles</strong>
-                                                                            </Link>
-                                                                        </OverlayTrigger>
-                                                                    </Nav.Item>
-                                                                    <Nav.Item>
-                                                                        <Link className="nav-link color-text" to='/prueba'>
-                                                                            <strong>Prueba</strong>
-                                                                        </Link>
-                                                                    </Nav.Item>
+
+                                                                    <NavItem
+                                                                        label="Encuestas"
+                                                                        path="encuestas" />
+
+                                                                    <NavItem
+                                                                        label="Perfiles"
+                                                                        path="perfiles" />
+
+                                                                    <NavItem
+                                                                        label="Hospitales"
+                                                                        path="hospitales" />
+
+                                                                    <NavItem
+                                                                        label="Pruebas"
+                                                                        path="prueba" />
+
+
                                                                 </Nav>
                                                             </Navbar.Collapse>
                                                         </Container>
@@ -85,6 +72,28 @@ const NavbarC = () => {
     /*} else {
         return <Fragment></Fragment>
     }*/
+
+}
+
+function NavItem(props) {
+
+    const { label, path } = props
+
+    return (
+        <Fragment>
+            <Nav.Item>
+                <OverlayTrigger
+                    placement="bottom"
+                    overlay={
+                        <Tooltip id="tooltip-rinion">Ir a {label}</Tooltip>
+                    }>
+                    <Link className="nav-link color-text" to={`/${path}`}>
+                        <strong>{label}</strong>
+                    </Link>
+                </OverlayTrigger>
+            </Nav.Item>
+        </Fragment>
+    )
 
 }
 

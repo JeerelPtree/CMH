@@ -1,24 +1,20 @@
-import React, { Fragment, useState, useEffect } from "react";
-import { Container, Col, Row, FloatingLabel, Button, Form, OverlayTrigger, Tooltip, InputGroup } from "react-bootstrap";
-import MultiSelect from "../selectors/MultiSelect";
-import HospitalOptions from "./json/RHo/hospitalOptions.json";
+import React, { Fragment } from "react";
+import { Container, Col, Row, FloatingLabel, Form, OverlayTrigger, Tooltip } from "react-bootstrap";
+
+import PROPIETARIOSOPTIONS from "../../json/rho.json"
+import HOSPITALES from "../../json/hospitales.json"
 
 //we import css
 import "../../../globalStyles.css"
 
 const currentYear = new Date().getFullYear();
 
-function RHo() {
+function RHo(props) {
 
     //declared the variables, constants ans states for this module
-    const [form, setForm] = useState({})
-    const dataMulti = [
-        { value: 'ISO 9001', label: 'ISO 9001' },
-        { value: 'CSG', label: 'CSG' },
-        { value: 'CertCan', label: 'Certificación Canadiense' },
-        { value: 'JCI', label: 'JCI' },
-        { value: 'DistH', label: 'Distintivo "H"' },
-    ]
+    const { form, setForm } = props;
+    //const [form, setForm] = useState({})
+
 
     //module's functions
     const handleChange = async (e) => {
@@ -32,21 +28,6 @@ function RHo() {
                 [e.target.name]: e.target.value
             }
         );
-
-        /*Falta por subir los archivos en forma de enlace a una API o base de datos, o asignarlos al campo de 
-        serviciosHabilitadosHospital para posteriormente subirlos*/
-
-        /*
-        let reader = new FileReader();
-
-        reader.readAsDataURL(e.target.files[0]);
-        console.log(typeof (reader));
-        reader.onload = (e) => {
-            console.log("ing data ", e.target.result);
-        }
-        */
-
-
 
     }
 
@@ -73,14 +54,12 @@ function RHo() {
 
                             <PerfilHospital form={form} handleChange={handleChange} />
 
-                            <Caracteristicas form={form} handleChange={handleChange} dataMulti={dataMulti} handleMulti={handleMultiSelect} hospitalOptions={HospitalOptions} />
+                            <Caracteristicas form={form} handleChange={handleChange} />
 
-                            {/*Botón de enviar
-                            <Col xs={12} md={6} className="mt-3 mb-5">
-                                <Button variant="primary" onClick={prueba}> Enviar
-                                </Button>
-                            </Col>
-                            */}
+                            <PropiedadHospital form={form} handleChange={handleChange} />
+
+                            <CargaImagenes form={form} handleChange={handleChange} />
+
                         </Row>
                     </Col>
                 </Row>
@@ -98,6 +77,18 @@ function PerfilHospital(props) {
     const form = props.form
     const handleChange = props.handleChange
 
+    //DEMO
+    // Retorna un entero aleatorio entre min (incluido) y max (excluido)
+    // ¡Usando Math.round() te dará una distribución no-uniforme!
+    const getRandomInt = (min, max) => {
+        return Math.floor(Math.random() * (max - min)) + min;
+    }
+    const randomHospitalId = getRandomInt(2201, 2252)
+    const randomHospital = HOSPITALES.filter(hospital => parseInt(hospital.id) === randomHospitalId)
+    form.razonSocial = randomHospital[0].hospital;
+    form.nombreComercial = randomHospital[0].hospital;
+    //FIN DEMO
+
     return (
         <Fragment>
 
@@ -108,7 +99,7 @@ function PerfilHospital(props) {
                     <Col xs={12} md={12} className="mb-3">
                         <h4 className="text-center sub-title-cmh">Perfil del Hospital</h4>
                     </Col>
-                    <Col xs={12} md={6}>
+                    <Col xs={12} md={6} className="mb-3">
 
                         <GetInput
                             label="Razón Social"
@@ -121,6 +112,7 @@ function PerfilHospital(props) {
                             isRequired={true}
                             placement="top"
                             show={true}
+                            isReadOnly={true}
                         />
 
                     </Col>
@@ -138,6 +130,7 @@ function PerfilHospital(props) {
                             isRequired={true}
                             placement="top"
                             show={true}
+                            isReadOnly={true}
                         />
 
                     </Col>
@@ -154,9 +147,11 @@ function Caracteristicas(props) {
     //we obtain the props for this component
     const form = props.form
     const handleChange = props.handleChange
-    const dataMulti = props.dataMulti
-    const handleMulti = props.handleMulti
-    const HospitalOptions = props.hospitalOptions
+
+    //DEMO
+    form.fechaFundacionHospital = "1978-02-21"
+    form.hospitalAsociadoCMHDesde = "2005-08-20"
+    //FIN DEMO
 
     return (
         <Fragment>
@@ -169,264 +164,61 @@ function Caracteristicas(props) {
                         <h4 className="text-center sub-title-cmh">Características</h4>
                     </Col>
 
-                    {/*Hospital asociado desde*/}
-                    <Col xs={12} md={4} className="mt-3">
+                    <Row className="justify-content-center">
 
-                        <GetInput
-                            label="Hospital Asociado al CMH desde"
-                            value={form.hospitalAsociadoCMHDesde}
-                            name="hospitalAsociadoCMHDesde"
-                            handleChange={handleChange}
-                            tooltipDescrip="Hospital Asociado al CMH desde"
-                            type="date"
-                            min={0}
-                            isRequired={true}
-                            placement="top"
-                            show={true}
-                        />
+                        {/*Fecha de fundación*/}
+                        <Col xs={12} md={4} className="mt-3">
 
-                    </Col>
-
-                    {/*Fecha de fundación*/}
-                    <Col xs={12} md={4} className="mt-3">
-
-                        <GetInput
-                            label="Fecha de Fundación del Hospital"
-                            value={form.fechaFundacionHospital}
-                            name="fechaFundacionHospital"
-                            handleChange={handleChange}
-                            tooltipDescrip="Fecha de Fundación del Hospital"
-                            type="date"
-                            min={0}
-                            isRequired={true}
-                            placement="top"
-                            show={true}
-                        />
-
-                    </Col>
-
-                    {/*Área construida*/}
-                    <Col xs={12} md={4} className="mt-3">
-
-                        <GetInput
-                            label="Área construida [m²]"
-                            value={form.areaConstruida}
-                            name="areaConstruida"
-                            handleChange={handleChange}
-                            tooltipDescrip="Área construida [m²]"
-                            type="number"
-                            min={0}
-                            isRequired={true}
-                            placement="top"
-                            show={true}
-                        />
-
-                    </Col>
-
-                    {/*Número de colaboradores*/}
-                    <Col xs={12} md={4} className="mt-3">
-
-                        <GetInput
-                            label="Número de colaboradores"
-                            value={form.numeroColaboradores}
-                            name="numeroColaboradores"
-                            handleChange={handleChange}
-                            tooltipDescrip="Número de colaboradores"
-                            type="number"
-                            min={0}
-                            isRequired={true}
-                            placement="top"
-                            show={true}
-                        />
-
-                    </Col>
-
-                    {/*Número de camas de hospitalización*/}
-                    <Col xs={12} md={4} className="mt-3">
-
-                        <GetInput
-                            label="Nº de Camas de Hospitalización"
-                            value={form.numeroCamasHospitalizacion}
-                            name="numeroCamasHospitalizacion"
-                            handleChange={handleChange}
-                            tooltipDescrip="Nº de Camas de Hospitalización"
-                            type="number"
-                            min={0}
-                            isRequired={true}
-                            placement="top"
-                            show={true}
-                        />
-
-                    </Col>
-
-                    {/*Número de camas UCIA*/}
-                    <Col xs={12} md={4} className="mt-3">
-
-                        <GetInput
-                            label="Nº de Camas UCIA"
-                            value={form.numeroCamasUCIA}
-                            name="numeroCamasUCIA"
-                            handleChange={handleChange}
-                            tooltipDescrip="Nº de Camas de Unidad de Cuidados Intensivos Adultos"
-                            type="number"
-                            min={0}
-                            isRequired={true}
-                            placement="top"
-                            show={true}
-                        />
-
-                    </Col>
-
-                    {/*Número de camas UCIN*/}
-                    <Col xs={12} md={4} className="mt-3">
-
-                        <GetInput
-                            label="Nº Camas UCIN"
-                            value={form.numeroCamasUCIN}
-                            name="numeroCamasUCIN"
-                            handleChange={handleChange}
-                            tooltipDescrip="Nº Camas Unidad de Cuidados Intensivos Neonatales"
-                            type="number"
-                            min={0}
-                            isRequired={true}
-                            placement="top"
-                            show={true}
-                        />
-
-                    </Col>
-
-                    {/*Número de salas de cirugía*/}
-                    <Col xs={12} md={4} className="mt-3">
-
-                        <GetInput
-                            label="Nº Salas de Cirugía"
-                            value={form.numeroSalasCirugia}
-                            name="numeroSalasCirugia"
-                            handleChange={handleChange}
-                            tooltipDescrip="Nº Salas de Cirugía"
-                            type="number"
-                            min={0}
-                            isRequired={true}
-                            placement="top"
-                            show={true}
-                        />
-
-                    </Col>
-
-                    {/*Número de médicos credencializados*/}
-                    <Col xs={12} md={4} className="mt-3">
-
-                        <GetInput
-                            label="Número de Médicos credencializados"
-                            value={form.numeroMedicosCredencializados}
-                            name="numeroMedicosCredencializados"
-                            handleChange={handleChange}
-                            tooltipDescrip="Número de Médicos credencializados"
-                            type="number"
-                            min={0}
-                            isRequired={true}
-                            placement="top"
-                            show={true}
-                        />
-
-                    </Col>
-
-                    {/*Nivel de atención hospitalaria*/}
-                    <Col xs={12} md={6} className="mt-3">
-
-                        <GetSelector
-                            label='Nivel de Atención Hospitalaria'
-                            style={{ height: '70px' }}
-                            value={form.nivelAtencionHospitalaria}
-                            tooltipDescrip='Nivel de Atención Hospitalaria:'
-                            name='nivelAtencionHospitalaria'
-                            handleChange={handleChange}
-                            options={HospitalOptions}
-                            isRequired={true}
-                            show={true}
-                        />
-
-                    </Col>
-
-                    {/*Servicios de habilitados*/}
-                    <Col xs={12} md={6} className="mt-3">
-
-                        <Form.Group controlId="formFileMultiple" className="mb-3">
-                            <Form.Label>Servicios habilitados en su Hospital:</Form.Label>
-                            <OverlayTrigger
+                            <GetInput
+                                label="Fecha de Fundación del Hospital"
+                                value={form.fechaFundacionHospital}
+                                name="fechaFundacionHospital"
+                                handleChange={handleChange}
+                                tooltipDescrip="Fecha de Fundación del Hospital"
+                                type="date"
+                                min={0}
+                                isRequired={true}
                                 placement="top"
-                                overlay={
-                                    <Tooltip id="tooltip-habitaciones">Servicios habilitados en su Hospital:</Tooltip>
-                                }>
-                                <Form.Control
-                                    placeholder="Ningún archivo seleccionado"
-                                    type="file"
-                                    value={form.serviciosHabilitadosHospital ? form.serviciosHabilitadosHospital : ''}
-                                    name="serviciosHabilitadosHospital"
-                                    onChange={handleChange}
-                                    multiple />
-                            </OverlayTrigger>
-                        </Form.Group>
+                                show={true}
+                                isReadOnly={true}
+                            />
 
-                    </Col>
+                        </Col>
 
-                    {/*Acreditaciones hospitalarias*/}
+                        {/*Hospital asociado desde*/}
+                        <Col xs={12} md={4} className="mt-3">
+
+                            <GetInput
+                                label="Hospital Asociado al CMH desde"
+                                value={form.hospitalAsociadoCMHDesde}
+                                name="hospitalAsociadoCMHDesde"
+                                handleChange={handleChange}
+                                tooltipDescrip="Hospital Asociado al CMH desde"
+                                type="date"
+                                min={0}
+                                isRequired={true}
+                                placement="top"
+                                show={true}
+                                isReadOnly={true}
+                            />
+
+                        </Col>
+                    </Row>
+
+                    {/*Observaciones*/}
                     <Col xs={12} md={12} className="mt-3">
 
-                        <span>
-                            <OverlayTrigger
-                                placement="top"
-                                overlay={
-                                    <Tooltip id="tooltip-habitaciones">Acreditación(es) Hospitalaria(s):</Tooltip>
-                                }>
-                                <Form.Group className="mb-3">
-                                    <Form.Label>Acreditación(es) Hospitalaria(s):</Form.Label>
-                                    <MultiSelect
-                                        options={dataMulti} form={form}
-                                        valueName={"acreditacionesHospitalarias"}
-                                        handleChange={handleMulti}
-                                        controlId="formHospitalCertifications" />
-                                </Form.Group>
-
-                            </OverlayTrigger>
-                        </span>
-
-                    </Col>
-
-                    {/*Reseña del hospital*/}
-                    <Col xs={12} md={6} className="mt-3">
-
                         <GetInput
-                            label="Reseña de Hospital"
-                            value={form.reseniaHospital}
-                            name="reseniaHospital"
+                            label="Observaciones"
+                            value={form.observaciones}
+                            name="observaciones"
                             handleChange={handleChange}
-                            tooltipDescrip="Reseña de Hospital"
+                            tooltipDescrip="Escriba sus observaciones"
                             type="text"
                             isTextArea={true}
                             style={{ height: '100px' }}
                             min={0}
-                            isRequired={true}
-                            placement="top"
-                            show={true}
-                        />
-
-                    </Col>
-
-                    {/*Lo destacado en el año*/}
-                    <Col xs={12} md={6} className="mt-3">
-
-                        <GetInput
-                            label={`Lo Destacado del Hospital en el año ${currentYear}`}
-                            value={form.highlights}
-                            name="highlights"
-                            handleChange={handleChange}
-                            tooltipDescrip={`Lo Destacado del Hospital en el año ${currentYear}`}
-                            type="text"
-                            isTextArea={true}
-                            style={{ height: '100px' }}
-                            min={0}
-                            isRequired={true}
+                            isRequired={false}
                             placement="top"
                             show={true}
                         />
@@ -437,6 +229,135 @@ function Caracteristicas(props) {
             </Col>
         </Fragment>
     )
+}
+
+function PropiedadHospital(props) {
+
+    const { form, handleChange } = props
+
+    //DEMO
+    // Retorna un entero aleatorio entre min (incluido) y max (excluido)
+    // ¡Usando Math.round() te dará una distribución no-uniforme!
+    const getRandomInt = (min, max) => {
+        return Math.floor(Math.random() * (max - min)) + min;
+    }
+    const randomPropietarioHospitalId = getRandomInt(1, 6)
+    const randomOropietarioHospital = PROPIETARIOSOPTIONS.filter(propietario => parseInt(propietario.id) === randomPropietarioHospitalId)
+    form.propietarioHospital = randomOropietarioHospital[0].name
+    //FIN DEMO
+
+    return (
+        <Fragment>
+
+            {/*Propietario del Hospital*/}
+            <Col xs={12} md={12} className="mt-3">
+                <Row>
+                    <Col xs={12} md={12} className="mb-3">
+                        <h4 className="text-center sub-title-cmh">Propietario del Hospital</h4>
+                    </Col>
+
+                    {/*select*/}
+                    <Col xs={12} md={6} className="mt-3">
+                        <GetSelector
+                            label="El Hospital es propiedad de:"
+                            value={form.propietarioHospital}
+                            tooltipDescrip={`El Hospital es propiedad de: ${form.propietarioHospital ? form.propietarioHospital : ''}`}
+                            name="propietarioHospital"
+                            handleChange={handleChange}
+                            options={PROPIETARIOSOPTIONS}
+                            show={true}
+
+                        />
+                    </Col>
+
+                    {/*OTRO*/}
+                    <Col xs={12} md={6} className="mt-3">
+                        <GetInput
+                            label="Otro ¿Cuál?, Especifique"
+                            value={form.otro}
+                            name="otro"
+                            handleChange={handleChange}
+                            tooltipDescrip="Especifique si el hospital no corresponde a la opción anteriormente señalada"
+                            type="text"
+                            min={0}
+                            isRequired={false}
+                            placement="top"
+                            show={true}
+                            isReadOnly={false}
+                        />
+                    </Col>
+                </Row>
+            </Col>
+
+        </Fragment>
+    )
+
+}
+
+function CargaImagenes(props) {
+
+    const { form, handleChange } = props
+
+    return (
+        <Fragment>
+
+            {/*Carga de Imagenes para la encuesta*/}
+            <Col xs={12} md={12} className="mt-3">
+                <Row>
+                    <Col xs={12} md={12} className="mb-3">
+                        <h4 className="text-center sub-title-cmh">Carga de Archivos</h4>
+                    </Col>
+
+                    {/*Logo*/}
+                    <Col xs={12} md={6} className="mt-3">
+
+                        <Form.Group controlId="formFile" className="mb-3">
+                            <Form.Label>Logo:</Form.Label>
+                            <OverlayTrigger
+                                placement="top"
+                                overlay={
+                                    <Tooltip id="tooltip-habitaciones">Subir el logo del Hospital (el formato debe del archivo debe de ser mayor o igual a 1000px de ancho)</Tooltip>
+                                }>
+                                <Form.Control
+                                    placeholder="Ningún archivo seleccionado"
+                                    type="file"
+                                    value={form.logoHospital ? form.logoHospital : ''}
+                                    name="logoHospital"
+                                    onChange={handleChange}
+                                    required={true} />
+                            </OverlayTrigger>
+                        </Form.Group>
+
+                    </Col>
+
+                    {/*Fachada principal del Hospital*/}
+                    <Col xs={12} md={6} className="mt-3">
+
+                        <Form.Group controlId="formFile" className="mb-3">
+                            <Form.Label>Fachada principal del Hospital:</Form.Label>
+                            <OverlayTrigger
+                                placement="top"
+                                overlay={
+                                    <Tooltip id="tooltip-habitaciones">Subir la fachada principal del Hospital (el formato debe del archivo debe de ser mayor o igual a 1000px de ancho)</Tooltip>
+                                }>
+                                <Form.Control
+                                    placeholder="Ningún archivo seleccionado"
+                                    type="file"
+                                    value={form.fachadaPrincipalHospital ? form.fachadaPrincipalHospital : ''}
+                                    name="fachadaPrincipalHospital"
+                                    onChange={handleChange}
+                                    required={true} />
+                            </OverlayTrigger>
+                        </Form.Group>
+
+                    </Col>
+
+                </Row>
+            </Col>
+
+        </Fragment>
+    )
+
 }
 
 function GetInput(props) {
@@ -475,72 +396,6 @@ function GetInput(props) {
     }
 }
 
-function GetInputFormat(props) {
-
-    //we obtain their props
-    const { label, value, name, handleChange, tooltipDescrip, type, min, isRequired, placement, show, isReadOnly = false, leftSymbol, rightSymbol, isLeft = false, isRight = false } = props
-
-    if (show == true && isLeft == true) {
-        return (
-            <Fragment>
-                <InputGroup className="justify-content-center">
-                    <InputGroup.Text id="currency">{leftSymbol}</InputGroup.Text>
-                    <FloatingLabel
-                        controlId="floatingInput"
-                        label={label}>
-                        <OverlayTrigger
-                            placement={placement}
-                            overlay={
-                                <Tooltip id={`tooltip-${name}`}>{tooltipDescrip}</Tooltip>
-                            }>
-                            <Form.Control
-                                type={type}
-                                placeholder={label}
-                                value={value ? value : ''}
-                                min={min}
-                                name={name}
-                                onChange={handleChange}
-                                required={isRequired}
-                                autoComplete="off"
-                                readOnly={isReadOnly}
-                            />
-                        </OverlayTrigger>
-                    </FloatingLabel>
-                </InputGroup>
-            </Fragment>
-        )
-    } else if (show == true && isRight == true) {
-        return (
-            <Fragment>
-                <InputGroup className="justify-content-center">
-                    <FloatingLabel
-                        controlId="floatingInput"
-                        label={label}>
-                        <OverlayTrigger
-                            placement={placement}
-                            overlay={
-                                <Tooltip id={`tooltip-${name}`}>{tooltipDescrip}</Tooltip>
-                            }>
-                            <Form.Control
-                                type={type}
-                                placeholder={label}
-                                value={value ? value : ''}
-                                min={min}
-                                name={name}
-                                onChange={handleChange}
-                                required={isRequired}
-                                autoComplete="off"
-                                readOnly={isReadOnly}
-                            />
-                        </OverlayTrigger>
-                    </FloatingLabel>
-                    <InputGroup.Text id="currency">{rightSymbol}</InputGroup.Text>
-                </InputGroup>
-            </Fragment>
-        )
-    }
-}
-
 function GetSelector(props) {
 
     //we obtain their props
@@ -563,13 +418,14 @@ function GetSelector(props) {
                             name={name}
                             required={isRequired}
                             style={style}
+                            disabled={true}
                         >
                             <option value="" disabled>Seleccione una opción</option>
                             {
                                 options.map((option) => {
                                     return (
                                         <Fragment key={option.id}>
-                                            <option value={option.value}>{option.name}</option>
+                                            <option value={option.name}>{option.name}</option>
                                         </Fragment>
                                     )
                                 })

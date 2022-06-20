@@ -1,8 +1,6 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { Container, Col, Row, OverlayTrigger, Tooltip } from "react-bootstrap"
+import { Container, Col, Row } from "react-bootstrap"
 import GeneralCRUD from "../components/CRUD/GeneralCRUD";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import AddButton from "../components/CRUD/addButton/AddButton";
 import ModalGeneralAddCRUD from "../components/modals/ModalGeneralAddCRUD";
 
