@@ -1,5 +1,5 @@
-import React, { Fragment } from "react";
-import { Container, Row, Col, Modal, FloatingLabel, Button, Form, OverlayTrigger, Tooltip } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Container, Row, Col, Modal, Button, Form } from "react-bootstrap";
 
 import '../../../globalStyles.css'
 import { RHo, EyP, SA, Outsourcing, PH, Ops_part1, TC, GP, CAP, SI, Com, Calidad, MKT } from '../encuestas/index_surveys';
@@ -8,19 +8,19 @@ import { RHo, EyP, SA, Outsourcing, PH, Ops_part1, TC, GP, CAP, SI, Com, Calidad
 function ModalGeneralEncuesta(props) {
 
     //we obtain the props
-    const modalIsOpen = props.modalIsOpen;
-    const handleModalState = props.handleModalState;
-    const dataEncuesta = props.dataEncuesta;
+    const { modalIsOpen, handleModalState, dataEncuesta } = props
+    const fullYear = new Date().getFullYear();
+    const [form, setForm] = useState({})
     const dictionaryEncuestas = [
         {
             id: 1,
-            content: <RHo />
+            content: <RHo form={form} setForm={setForm} />
         }, {
             id: 2,
             content: <EyP />
         }, {
             id: 3,
-            content: <SA />
+            content: <SA form={form} setForm={setForm} />
         }, {
             id: 4,
             content: <PH modalIsOpen={modalIsOpen} />
@@ -79,6 +79,10 @@ function ModalGeneralEncuesta(props) {
         }
     ];
 
+    useEffect(() => {
+        setForm({})
+    }, [modalIsOpen])
+
 
     const switchEncuesta = (idEncuesta) => {
 
@@ -95,8 +99,12 @@ function ModalGeneralEncuesta(props) {
         return content;
     }
 
-    const prueba = () => {
-        console.log(123)
+    const prueba = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        console.log('ENVIANDO: ', form)
+        handleModalState()
     }
 
     return (
@@ -104,7 +112,7 @@ function ModalGeneralEncuesta(props) {
             <Form onSubmit={prueba}>
                 <Modal.Header className="modal-cmh-header-footer" closeButton>
                     <Modal.Title className="title-cmh">
-                        {dataEncuesta.title}
+                        {`Prospectiva ${fullYear} - ${dataEncuesta.title}`}
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>

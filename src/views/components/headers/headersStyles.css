@@ -28,10 +28,15 @@
     float: right;
 }
 
-.navbar-img {
+.full-screen-logo {
     height: auto;
     /*max-width: 100%;*/
     max-width: 150%;
+}
+
+.responsive-logo {
+    height: auto;
+    max-width: 100%;
 }
 
 .color-text {

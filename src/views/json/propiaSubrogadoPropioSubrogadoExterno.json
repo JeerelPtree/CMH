@@ -1,0 +1,17 @@
+[
+    {
+        "value": "propio",
+        "name": "Propio",
+        "id": 1
+    },
+    {
+        "value": "subrogado propio",
+        "name": "Subrogado Propio",
+        "id": 2
+    },
+    {
+        "value": "subrogado externo",
+        "name": "Subrogado Externo",
+        "id": 3
+    }
+]

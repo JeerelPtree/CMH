@@ -1,0 +1,12 @@
+[
+    {
+        "value": "analogo",
+        "name": "Análogo",
+        "id": 1
+    },
+    {
+        "value": "digital",
+        "name": "Digital",
+        "id": 2
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "name": "Empresa familiar de un médico con más de 51% de acciones"
+    },
+    {
+        "id": 2,
+        "name": "Grupo de médicos con más del 51% de acciones"
+    },
+    {
+        "id": 3,
+        "name": "Inversionistas no médicos con más del 51% de acciones"
+    },
+    {
+        "id": 4,
+        "name": "Fondo de Inversión"
+    },
+    {
+        "id": 5,
+        "name": "Organización Religiosa"
+    },
+    {
+        "id": 6,
+        "name": "Organización civil sin fines de lucro (ONG)"
+    }
+]
