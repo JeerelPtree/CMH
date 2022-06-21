@@ -101,26 +101,6 @@ function PerfilHospital(props) {
                     </Col>
                     <Col xs={12} md={6} className="mb-3">
 
-<<<<<<< HEAD
-                        <FloatingLabel
-                            controlId="floatingInput"
-                            label="Razón Social">
-                            <OverlayTrigger
-                                placement="top"
-                                overlay={
-                                    <Tooltip id="tooltip-habitaciones">Razón Social</Tooltip>
-                                }>
-                                <Form.Control
-                                    type="text"
-                                    placeholder="Razón Social"
-                                    value={form.razonSocial ? form.razonSocial : ''}
-                                    name="razonSocial"
-                                    onChange={handleChange}
-                                    autoComplete="off" />
-                            </OverlayTrigger>
-                        </FloatingLabel>
-
-=======
                         <GetInput
                             label="Razón Social"
                             value={form.razonSocial}
@@ -134,7 +114,6 @@ function PerfilHospital(props) {
                             show={true}
                             isReadOnly={true}
                         />
->>>>>>> 9ad7a7317a43f25653c0b78560539e7141c302a5
 
                     </Col>
 
