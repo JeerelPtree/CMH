@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react";
 import { Container, Col, Row, Button, Table, Alert } from "react-bootstrap";
-import ModalEditarRegistro from "../modals/modals encuestas/EyP/ModalEditarRegistro";
+import ModalEditarRegistro from "../modals/modals encuestas/E/ModalEditarRegistro";
 import { faTrash, faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../../../globalStyles.css"
