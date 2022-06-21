@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Modal, Button, Form } from "react-bootstrap";
 
 import '../../../globalStyles.css'
-import { RHo, EyP, SA, Outsourcing, PH, Ops_part1, TC, GP, CAP, SI, Com, Calidad, MKT } from '../encuestas/index_surveys';
+import { RHo, E, SA, Outsourcing, PH, Ops_part1, TC, GP, CAP, SI, Com, Calidad, MKT } from '../encuestas/index_surveys';
 
 
 function ModalGeneralEncuesta(props) {
@@ -17,10 +17,10 @@ function ModalGeneralEncuesta(props) {
             content: <RHo form={form} setForm={setForm} />
         }, {
             id: 2,
-            content: <EyP />
+            content: <SA form={form} setForm={setForm} />
         }, {
             id: 3,
-            content: <SA form={form} setForm={setForm} />
+            content: <E />
         }, {
             id: 4,
             content: <PH modalIsOpen={modalIsOpen} />

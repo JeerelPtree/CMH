@@ -7,15 +7,15 @@
     },
     {
         "id": 2,
-        "abbreviation": "EyP",
-        "title": "Estructura y Producción",
-        "progress": 90
-    },
-    {
-        "id": 3,
         "abbreviation": "S.A.",
         "title": "Servicios Asistenciales",
         "progress": 80
+    },
+    {
+        "id": 3,
+        "abbreviation": "E",
+        "title": "Estructura",
+        "progress": 90
     },
     {
         "id": 4,
