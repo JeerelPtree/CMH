@@ -1,14 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
-import {
-    Container,
-    Col,
-    Row,
-    FloatingLabel,
-    InputGroup,
-    Form,
-    OverlayTrigger,
-    Tooltip,
-} from "react-bootstrap";
+import { Container, Col, Row, FloatingLabel, InputGroup, Form, OverlayTrigger, Tooltip, } from "react-bootstrap";
 import { faL, faUserDoctor } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 //import axios from "axios"
