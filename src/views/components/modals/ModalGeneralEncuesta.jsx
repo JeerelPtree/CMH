@@ -103,8 +103,12 @@ function ModalGeneralEncuesta(props) {
         e.preventDefault();
         e.stopPropagation();
 
-        console.log('ENVIANDO: ', form)
-        handleModalState()
+        console.log(form)
+        //handleModalState()
+    }
+
+    const pruebaButton = () => {
+        console.log('GUARDANDO ', form)
     }
 
     return (
@@ -130,7 +134,7 @@ function ModalGeneralEncuesta(props) {
                 </Modal.Body>
                 <Modal.Footer className="modal-cmh-header-footer">
                     <Button variant="danger" onClick={handleModalState}>Cancelar</Button>
-                    <Button variant="primary">Guardar</Button>
+                    <Button variant="primary" onClick={prueba}>Guardar</Button>
                     <Button variant="success" type="submit">Enviar</Button>
                 </Modal.Footer>
             </Form>

@@ -1,0 +1,12 @@
+[
+    {
+        "value": "si",
+        "name": "Si",
+        "id": 1
+    },
+    {
+        "value": "no",
+        "name": "No",
+        "id": 2
+    }
+]
