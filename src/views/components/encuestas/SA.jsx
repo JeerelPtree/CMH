@@ -2,12 +2,11 @@ import React, { Fragment, useState, useEffect } from "react";
 import { Container, Col, Row, FloatingLabel, InputGroup, Form, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { faUserDoctor } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+//import axios from "axios"
 
 import OPTIONSPSPSE from "../../json/propiaSubrogadoPropioSubrogadoExterno.json"
 import OPTIONSAD from "../../json/analogoDigital.json"
 import YESORNOTOPTIONS from "../../json/yesOrNot.json"
-
-//import axios from "axios"
 
 //we import css
 import "../../../globalStyles.css"
@@ -19,16 +18,23 @@ function SA(props) {
 
     //module's functions
 
-    const handleChange = async (e) => {
+    const handleChange = async (e, childId) => {
 
         e.persist();
 
-        await setForm(
-            {
+        if (childId != null)
+            await setForm(
+                {
+                    ...form,
+                    [e.target.name]: e.target.value,
+                    [childId]: null
+                }
+            );
+        else
+            await setForm({
                 ...form,
                 [e.target.name]: e.target.value,
-            }
-        );
+            });
 
     }
 
@@ -54,8 +60,6 @@ function SA(props) {
                             <OtrosServicios form={form} handleChange={handleChange} />
 
                             <Transplantes form={form} handleChange={handleChange} />
-
-                            <Prueba form={form} handleChange={handleChange} setForm={setForm} />
 
                         </Row>
                     </Col>
@@ -227,7 +231,7 @@ function Hospitalizacion(props) {
                         <Row className="justify-content-center">
 
                             {/*Subalmacenes*/}
-                            <Col xs={12} md={4} className="">
+                            <Col xs={12} md={4} className="mb-3">
                                 <GetInput
                                     label="Subalmacenes"
                                     value={form.subAlmacenes}
@@ -243,18 +247,16 @@ function Hospitalizacion(props) {
                             </Col>
 
                             {/*Subalmacenes Propia, Subrogado propio, Subrogado externo*/}
-                            <Col xs={12} md={4} className="mb-3">
-                                <GetSelector
-                                    label="Subalmacenes"
-                                    value={form.subAlmacenesPSB}
-                                    tooltipDescrip={`Subalmacenes`}
-                                    name="subAlmacenesPSB"
-                                    handleChange={handleChange}
-                                    options={OPTIONSPSPSE}
-                                    show={true}
-                                    isRequired={true}
-                                />
-                            </Col>
+                            <GetSelector
+                                label="Subalmacenes"
+                                value={form.subAlmacenesPSB}
+                                tooltipDescrip={`Subalmacenes`}
+                                name="subAlmacenesPSB"
+                                handleChange={handleChange}
+                                options={OPTIONSPSPSE}
+                                show={true}
+                                isRequired={true}
+                            />
 
                         </Row>
                     </Col>
@@ -286,7 +288,7 @@ function AreaCuneros(props) {
 
 
                             {/*Cunas*/}
-                            <Col xs={12} md={4}>
+                            <Col xs={12} md={4} className="mb-3">
                                 <GetInput
                                     label="Cunas"
                                     value={form.cunas}
@@ -398,7 +400,7 @@ function Quirofanos(props) {
 
 
                             {/*Salas exclusivas de Cirugía Ambulatoria*/}
-                            <Col xs={12} md={4}>
+                            <Col xs={12} md={4} className="mb-3">
                                 <GetInput
                                     label="Salas exclusivas de Cirugía Ambulatoria"
                                     value={form.salasExclusivasCirugiaAmbulatoria}
@@ -472,34 +474,30 @@ function ServicioImagenologia(props) {
                     </Col>
 
                     {/*Radiología simple (no considerar el área de urgencias) Propia, Subrogado propio, Subrogado externo*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <GetSelector
-                            label="Radiología simple"
-                            value={form.radiologiaSimplePSB}
-                            tooltipDescrip={`Radiología simple`}
-                            name="radiologiaSimplePSB"
-                            handleChange={handleChange}
-                            options={OPTIONSPSPSE}
-                            show={true}
-                            style={{ height: '90px' }}
-                            isRequired={true}
-                        />
-                    </Col>
+                    <GetSelector
+                        label="Radiología simple"
+                        value={form.radiologiaSimplePSB}
+                        tooltipDescrip={`Radiología simple`}
+                        name="radiologiaSimplePSB"
+                        handleChange={handleChange}
+                        options={OPTIONSPSPSE}
+                        show={true}
+                        style={{ height: '90px' }}
+                        isRequired={true}
+                    />
 
                     {/*Radiología simple (no considerar el área de urgencias) Análogo Digital*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <GetSelector
-                            label="Radiología simple"
-                            value={form.radiologiaSimpleAD}
-                            tooltipDescrip={`Radiología simple`}
-                            name="radiologiaSimpleAD"
-                            handleChange={handleChange}
-                            options={OPTIONSAD}
-                            show={true}
-                            style={{ height: '90px' }}
-                            isRequired={true}
-                        />
-                    </Col>
+                    <GetSelector
+                        label="Radiología simple"
+                        value={form.radiologiaSimpleAD}
+                        tooltipDescrip={`Radiología simple`}
+                        name="radiologiaSimpleAD"
+                        handleChange={handleChange}
+                        options={OPTIONSAD}
+                        show={true}
+                        style={{ height: '90px' }}
+                        isRequired={true}
+                    />
 
                     {/*Sala de fluroscopia*/}
                     <Col xs={12} md={4} className="mb-3">
@@ -518,32 +516,28 @@ function ServicioImagenologia(props) {
                     </Col>
 
                     {/*Sala de fluroscopia Propia, Subrogado propio, Subrogado externo*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <GetSelector
-                            label="Salas de fluroscopia"
-                            value={form.salasFluroscopiaPSB}
-                            tooltipDescrip={`Salas de fluroscopia`}
-                            name="salasFluroscopiaPSB"
-                            handleChange={handleChange}
-                            options={OPTIONSPSPSE}
-                            show={true}
-                            isRequired={true}
-                        />
-                    </Col>
+                    <GetSelector
+                        label="Salas de fluroscopia"
+                        value={form.salasFluroscopiaPSB}
+                        tooltipDescrip={`Salas de fluroscopia`}
+                        name="salasFluroscopiaPSB"
+                        handleChange={handleChange}
+                        options={OPTIONSPSPSE}
+                        show={true}
+                        isRequired={true}
+                    />
 
                     {/*Sala de fluroscopia Análogo Digital*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <GetSelector
-                            label="Salas de fluroscopia"
-                            value={form.salasFluroscopiaAD}
-                            tooltipDescrip={`Salas de fluroscopia`}
-                            name="salasFluroscopiaAD"
-                            handleChange={handleChange}
-                            options={OPTIONSAD}
-                            show={true}
-                            isRequired={true}
-                        />
-                    </Col>
+                    <GetSelector
+                        label="Salas de fluroscopia"
+                        value={form.salasFluroscopiaAD}
+                        tooltipDescrip={`Salas de fluroscopia`}
+                        name="salasFluroscopiaAD"
+                        handleChange={handleChange}
+                        options={OPTIONSAD}
+                        show={true}
+                        isRequired={true}
+                    />
 
                     {/*Tomografía axial computarizada (TAC)*/}
                     <Col xs={12} md={3} className="mb-3">
@@ -580,34 +574,32 @@ function ServicioImagenologia(props) {
                     </Col>
 
                     {/*Tomografía axial computarizada (TAC) Propia, Subrogado propio, Subrogado externo*/}
-                    <Col xs={12} md={3} className="mb-3">
-                        <GetSelector
-                            label="Tomografía axial computarizada (TAC)"
-                            value={form.tomografiaAxialComputarizadaPSB}
-                            tooltipDescrip={`Tomografía axial computarizada (TAC)`}
-                            name="tomografiaAxialComputarizadaPSB"
-                            handleChange={handleChange}
-                            options={OPTIONSPSPSE}
-                            show={true}
-                            style={{ height: '90px' }}
-                            isRequired={true}
-                        />
-                    </Col>
+                    <GetSelector
+                        label="Tomografía axial computarizada (TAC)"
+                        value={form.tomografiaAxialComputarizadaPSB}
+                        tooltipDescrip={`Tomografía axial computarizada (TAC)`}
+                        name="tomografiaAxialComputarizadaPSB"
+                        handleChange={handleChange}
+                        options={OPTIONSPSPSE}
+                        show={true}
+                        style={{ height: '90px' }}
+                        isRequired={true}
+                        md={3}
+                    />
 
                     {/*Tomografía axial computarizada (TAC) Análogo Digital*/}
-                    <Col xs={12} md={3} className="mb-3">
-                        <GetSelector
-                            label="Tomografía axial computarizada (TAC)"
-                            value={form.tomografiaAxialComputarizadaAD}
-                            tooltipDescrip={`Tomografía axial computarizada (TAC)`}
-                            name="tomografiaAxialComputarizadaAD"
-                            handleChange={handleChange}
-                            options={OPTIONSAD}
-                            show={true}
-                            isRequired={true}
-                            style={{ height: '90px' }}
-                        />
-                    </Col>
+                    <GetSelector
+                        label="Tomografía axial computarizada (TAC)"
+                        value={form.tomografiaAxialComputarizadaAD}
+                        tooltipDescrip={`Tomografía axial computarizada (TAC)`}
+                        name="tomografiaAxialComputarizadaAD"
+                        handleChange={handleChange}
+                        options={OPTIONSAD}
+                        show={true}
+                        isRequired={true}
+                        style={{ height: '90px' }}
+                        md={3}
+                    />
 
                     {/*Ultrasonografo*/}
                     <Col xs={12} md={4} className="mb-3">
@@ -626,32 +618,28 @@ function ServicioImagenologia(props) {
                     </Col>
 
                     {/*Ultrasonografo Propia, Subrogado propio, Subrogado externo*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <GetSelector
-                            label="Ultrasonografo"
-                            value={form.ultrasonografoPSB}
-                            tooltipDescrip={`Ultrasonografo`}
-                            name="ultrasonografoPSB"
-                            handleChange={handleChange}
-                            options={OPTIONSPSPSE}
-                            show={true}
-                            isRequired={true}
-                        />
-                    </Col>
+                    <GetSelector
+                        label="Ultrasonografo"
+                        value={form.ultrasonografoPSB}
+                        tooltipDescrip={`Ultrasonografo`}
+                        name="ultrasonografoPSB"
+                        handleChange={handleChange}
+                        options={OPTIONSPSPSE}
+                        show={true}
+                        isRequired={true}
+                    />
 
                     {/*Ultrasonografo Análogo Digital*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <GetSelector
-                            label="Ultrasonografo"
-                            value={form.ultrasonografoAD}
-                            tooltipDescrip={`Ultrasonografo`}
-                            name="ultrasonografoAD"
-                            handleChange={handleChange}
-                            options={OPTIONSAD}
-                            show={true}
-                            isRequired={true}
-                        />
-                    </Col>
+                    <GetSelector
+                        label="Ultrasonografo"
+                        value={form.ultrasonografoAD}
+                        tooltipDescrip={`Ultrasonografo`}
+                        name="ultrasonografoAD"
+                        handleChange={handleChange}
+                        options={OPTIONSAD}
+                        show={true}
+                        isRequired={true}
+                    />
 
                     {/*Mastografo*/}
                     <Col xs={12} md={4} className="mb-3">
@@ -670,32 +658,28 @@ function ServicioImagenologia(props) {
                     </Col>
 
                     {/*Mastografo Propia, Subrogado propio, Subrogado externo*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <GetSelector
-                            label="Mastografo"
-                            value={form.mastografoPSB}
-                            tooltipDescrip={`Mastografo`}
-                            name="mastografoPSB"
-                            handleChange={handleChange}
-                            options={OPTIONSPSPSE}
-                            show={true}
-                            isRequired={true}
-                        />
-                    </Col>
+                    <GetSelector
+                        label="Mastografo"
+                        value={form.mastografoPSB}
+                        tooltipDescrip={`Mastografo`}
+                        name="mastografoPSB"
+                        handleChange={handleChange}
+                        options={OPTIONSPSPSE}
+                        show={true}
+                        isRequired={true}
+                    />
 
                     {/*Mastografo Análogo Digital*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <GetSelector
-                            label="Mastografo"
-                            value={form.mastografoAD}
-                            tooltipDescrip={`Mastografo`}
-                            name="mastografoAD"
-                            handleChange={handleChange}
-                            options={OPTIONSAD}
-                            show={true}
-                            isRequired={true}
-                        />
-                    </Col>
+                    <GetSelector
+                        label="Mastografo"
+                        value={form.mastografoAD}
+                        tooltipDescrip={`Mastografo`}
+                        name="mastografoAD"
+                        handleChange={handleChange}
+                        options={OPTIONSAD}
+                        show={true}
+                        isRequired={true}
+                    />
 
                     {/*Densitómetro*/}
                     <Col xs={12} md={4} className="mb-3">
@@ -714,32 +698,28 @@ function ServicioImagenologia(props) {
                     </Col>
 
                     {/*Densitómetro Propia, Subrogado propio, Subrogado externo*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <GetSelector
-                            label="Densitómetro"
-                            value={form.densitometroPSB}
-                            tooltipDescrip={`Densitómetro`}
-                            name="densitometroPSB"
-                            handleChange={handleChange}
-                            options={OPTIONSPSPSE}
-                            show={true}
-                            isRequired={true}
-                        />
-                    </Col>
+                    <GetSelector
+                        label="Densitómetro"
+                        value={form.densitometroPSB}
+                        tooltipDescrip={`Densitómetro`}
+                        name="densitometroPSB"
+                        handleChange={handleChange}
+                        options={OPTIONSPSPSE}
+                        show={true}
+                        isRequired={true}
+                    />
 
                     {/*Densitómetro Análogo Digital*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <GetSelector
-                            label="Densitómetro"
-                            value={form.densitometroAD}
-                            tooltipDescrip={`Densitómetro`}
-                            name="densitometroAD"
-                            handleChange={handleChange}
-                            options={OPTIONSAD}
-                            show={true}
-                            isRequired={true}
-                        />
-                    </Col>
+                    <GetSelector
+                        label="Densitómetro"
+                        value={form.densitometroAD}
+                        tooltipDescrip={`Densitómetro`}
+                        name="densitometroAD"
+                        handleChange={handleChange}
+                        options={OPTIONSAD}
+                        show={true}
+                        isRequired={true}
+                    />
 
                     {/*Resonancia Magnética Nuclear (RM)*/}
                     <Col xs={12} md={3} className="mb-3">
@@ -776,34 +756,32 @@ function ServicioImagenologia(props) {
                     </Col>
 
                     {/*Resonancia Magnética Nuclear (RM) Propia, Subrogado propio, Subrogado externo*/}
-                    <Col xs={12} md={3} className="mb-3">
-                        <GetSelector
-                            label="Resonancia Magnética Nuclear (RM)"
-                            value={form.resonanciaMagneticaNuclearPSB}
-                            tooltipDescrip={`Resonancia Magnética Nuclear (RM)`}
-                            name="resonanciaMagneticaNuclearPSB"
-                            handleChange={handleChange}
-                            options={OPTIONSPSPSE}
-                            show={true}
-                            style={{ height: '90px' }}
-                            isRequired={true}
-                        />
-                    </Col>
+                    <GetSelector
+                        label="Resonancia Magnética Nuclear (RM)"
+                        value={form.resonanciaMagneticaNuclearPSB}
+                        tooltipDescrip={`Resonancia Magnética Nuclear (RM)`}
+                        name="resonanciaMagneticaNuclearPSB"
+                        handleChange={handleChange}
+                        options={OPTIONSPSPSE}
+                        show={true}
+                        style={{ height: '90px' }}
+                        isRequired={true}
+                        md={3}
+                    />
 
                     {/*Resonancia Magnética Nuclear (RM) Análogo Digital*/}
-                    <Col xs={12} md={3} className="mb-3">
-                        <GetSelector
-                            label="Resonancia Magnética Nuclear (RM)"
-                            value={form.resonanciaMagneticaNuclearAD}
-                            tooltipDescrip={`Resonancia Magnética Nuclear (RM)`}
-                            name="resonanciaMagneticaNuclearAD"
-                            handleChange={handleChange}
-                            options={OPTIONSAD}
-                            show={true}
-                            isRequired={true}
-                            style={{ height: '90px' }}
-                        />
-                    </Col>
+                    <GetSelector
+                        label="Resonancia Magnética Nuclear (RM)"
+                        value={form.resonanciaMagneticaNuclearAD}
+                        tooltipDescrip={`Resonancia Magnética Nuclear (RM)`}
+                        name="resonanciaMagneticaNuclearAD"
+                        handleChange={handleChange}
+                        options={OPTIONSAD}
+                        show={true}
+                        isRequired={true}
+                        style={{ height: '90px' }}
+                        md={3}
+                    />
 
                     {/*Sala de Hemodinamia*/}
                     <Col xs={12} md={4} className="mb-3">
@@ -822,32 +800,28 @@ function ServicioImagenologia(props) {
                     </Col>
 
                     {/*Sala de Hemodinamia Propia, Subrogado propio, Subrogado externo*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <GetSelector
-                            label="Salas de Hemodinamia"
-                            value={form.salasHemodinamiaPSB}
-                            tooltipDescrip={`Salas de Hemodinamia`}
-                            name="salasHemodinamiaPSB"
-                            handleChange={handleChange}
-                            options={OPTIONSPSPSE}
-                            show={true}
-                            isRequired={true}
-                        />
-                    </Col>
+                    <GetSelector
+                        label="Salas de Hemodinamia"
+                        value={form.salasHemodinamiaPSB}
+                        tooltipDescrip={`Salas de Hemodinamia`}
+                        name="salasHemodinamiaPSB"
+                        handleChange={handleChange}
+                        options={OPTIONSPSPSE}
+                        show={true}
+                        isRequired={true}
+                    />
 
                     {/*Sala de Hemodinamia Análogo Digital*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <GetSelector
-                            label="Salas de Hemodinamia"
-                            value={form.salasHemodinamiaAD}
-                            tooltipDescrip={`Salas de Hemodinamia`}
-                            name="salasHemodinamiaAD"
-                            handleChange={handleChange}
-                            options={OPTIONSAD}
-                            show={true}
-                            isRequired={true}
-                        />
-                    </Col>
+                    <GetSelector
+                        label="Salas de Hemodinamia"
+                        value={form.salasHemodinamiaAD}
+                        tooltipDescrip={`Salas de Hemodinamia`}
+                        name="salasHemodinamiaAD"
+                        handleChange={handleChange}
+                        options={OPTIONSAD}
+                        show={true}
+                        isRequired={true}
+                    />
 
                     {/*Gammacámara*/}
                     <Col xs={12} md={4} className="mb-3">
@@ -866,32 +840,28 @@ function ServicioImagenologia(props) {
                     </Col>
 
                     {/*Gammacámara Propia, Subrogado propio, Subrogado externo*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <GetSelector
-                            label="Gammacámara"
-                            value={form.gammacamaraPSB}
-                            tooltipDescrip={`Gammacámara`}
-                            name="gammacamaraPSB"
-                            handleChange={handleChange}
-                            options={OPTIONSPSPSE}
-                            show={true}
-                            isRequired={true}
-                        />
-                    </Col>
+                    <GetSelector
+                        label="Gammacámara"
+                        value={form.gammacamaraPSB}
+                        tooltipDescrip={`Gammacámara`}
+                        name="gammacamaraPSB"
+                        handleChange={handleChange}
+                        options={OPTIONSPSPSE}
+                        show={true}
+                        isRequired={true}
+                    />
 
                     {/*Gammacámara Análogo Digital*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <GetSelector
-                            label="Gammacámara"
-                            value={form.gammacamaraAD}
-                            tooltipDescrip={`Gammacámara`}
-                            name="gammacamaraAD"
-                            handleChange={handleChange}
-                            options={OPTIONSAD}
-                            show={true}
-                            isRequired={true}
-                        />
-                    </Col>
+                    <GetSelector
+                        label="Gammacámara"
+                        value={form.gammacamaraAD}
+                        tooltipDescrip={`Gammacámara`}
+                        name="gammacamaraAD"
+                        handleChange={handleChange}
+                        options={OPTIONSAD}
+                        show={true}
+                        isRequired={true}
+                    />
 
                     {/*Tomografía por Emisión de Positrones (PET)*/}
                     <Col xs={12} md={4} className="mb-3">
@@ -911,34 +881,30 @@ function ServicioImagenologia(props) {
                     </Col>
 
                     {/*Tomografía por Emisión de Positrones (PET) Propia, Subrogado propio, Subrogado externo*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <GetSelector
-                            label="Tomografía por Emisión de Positrones (PET)"
-                            value={form.tomografiaEmisionPositronesPSB}
-                            tooltipDescrip={`Tomografía por Emisión de Positrones (PET)`}
-                            name="tomografiaEmisionPositronesPSB"
-                            handleChange={handleChange}
-                            options={OPTIONSPSPSE}
-                            show={true}
-                            isRequired={true}
-                            style={{ height: '90px' }}
-                        />
-                    </Col>
+                    <GetSelector
+                        label="Tomografía por Emisión de Positrones (PET)"
+                        value={form.tomografiaEmisionPositronesPSB}
+                        tooltipDescrip={`Tomografía por Emisión de Positrones (PET)`}
+                        name="tomografiaEmisionPositronesPSB"
+                        handleChange={handleChange}
+                        options={OPTIONSPSPSE}
+                        show={true}
+                        isRequired={true}
+                        style={{ height: '90px' }}
+                    />
 
                     {/*Tomografía por Emisión de Positrones (PET) Análogo Digital*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <GetSelector
-                            label="Tomografía por Emisión de Positrones (PET)"
-                            value={form.tomografiaEmisionPositronesAD}
-                            tooltipDescrip={`Tomografía por Emisión de Positrones (PET)`}
-                            name="tomografiaEmisionPositronesAD"
-                            handleChange={handleChange}
-                            options={OPTIONSAD}
-                            show={true}
-                            isRequired={true}
-                            style={{ height: '90px' }}
-                        />
-                    </Col>
+                    <GetSelector
+                        label="Tomografía por Emisión de Positrones (PET)"
+                        value={form.tomografiaEmisionPositronesAD}
+                        tooltipDescrip={`Tomografía por Emisión de Positrones (PET)`}
+                        name="tomografiaEmisionPositronesAD"
+                        handleChange={handleChange}
+                        options={OPTIONSAD}
+                        show={true}
+                        isRequired={true}
+                        style={{ height: '90px' }}
+                    />
 
                     {/*Radioterapia*/}
                     <Col xs={12} md={4} className="mb-3">
@@ -957,32 +923,28 @@ function ServicioImagenologia(props) {
                     </Col>
 
                     {/*Radioterapia Propia, Subrogado propio, Subrogado externo*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <GetSelector
-                            label="Radioterapia"
-                            value={form.radioterapiaPSB}
-                            tooltipDescrip={`Radioterapia`}
-                            name="radioterapiaPSB"
-                            handleChange={handleChange}
-                            options={OPTIONSPSPSE}
-                            show={true}
-                            isRequired={true}
-                        />
-                    </Col>
+                    <GetSelector
+                        label="Radioterapia"
+                        value={form.radioterapiaPSB}
+                        tooltipDescrip={`Radioterapia`}
+                        name="radioterapiaPSB"
+                        handleChange={handleChange}
+                        options={OPTIONSPSPSE}
+                        show={true}
+                        isRequired={true}
+                    />
 
                     {/*Radioterapia Análogo Digital*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <GetSelector
-                            label="Radioterapia"
-                            value={form.radioterapiaAD}
-                            tooltipDescrip={`Radioterapia`}
-                            name="radioterapiaAD"
-                            handleChange={handleChange}
-                            options={OPTIONSAD}
-                            show={true}
-                            isRequired={true}
-                        />
-                    </Col>
+                    <GetSelector
+                        label="Radioterapia"
+                        value={form.radioterapiaAD}
+                        tooltipDescrip={`Radioterapia`}
+                        name="radioterapiaAD"
+                        handleChange={handleChange}
+                        options={OPTIONSAD}
+                        show={true}
+                        isRequired={true}
+                    />
 
                     {/*Rayos X rodable*/}
                     <Col xs={12} md={4} className="mb-3">
@@ -1001,32 +963,28 @@ function ServicioImagenologia(props) {
                     </Col>
 
                     {/*Rayos X rodable Propia, Subrogado propio, Subrogado externo*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <GetSelector
-                            label="Rayos X rodable"
-                            value={form.rayosXRodablePSB}
-                            tooltipDescrip={`Rayos X rodable`}
-                            name="rayosXRodablePSB"
-                            handleChange={handleChange}
-                            options={OPTIONSPSPSE}
-                            show={true}
-                            isRequired={true}
-                        />
-                    </Col>
+                    <GetSelector
+                        label="Rayos X rodable"
+                        value={form.rayosXRodablePSB}
+                        tooltipDescrip={`Rayos X rodable`}
+                        name="rayosXRodablePSB"
+                        handleChange={handleChange}
+                        options={OPTIONSPSPSE}
+                        show={true}
+                        isRequired={true}
+                    />
 
                     {/*Rayos X rodable Análogo Digital*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <GetSelector
-                            label="Rayos X rodable"
-                            value={form.rayosXRodableAD}
-                            tooltipDescrip={`Rayos X rodable`}
-                            name="rayosXRodableAD"
-                            handleChange={handleChange}
-                            options={OPTIONSAD}
-                            show={true}
-                            isRequired={true}
-                        />
-                    </Col>
+                    <GetSelector
+                        label="Rayos X rodable"
+                        value={form.rayosXRodableAD}
+                        tooltipDescrip={`Rayos X rodable`}
+                        name="rayosXRodableAD"
+                        handleChange={handleChange}
+                        options={OPTIONSAD}
+                        show={true}
+                        isRequired={true}
+                    />
 
                     {/*Arco en C*/}
                     <Col xs={12} md={4} className="mb-3">
@@ -1045,32 +1003,28 @@ function ServicioImagenologia(props) {
                     </Col>
 
                     {/*Arco en C Propia, Subrogado propio, Subrogado externo*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <GetSelector
-                            label="Arco en C"
-                            value={form.ArcoCPSB}
-                            tooltipDescrip={`Arco en C`}
-                            name="ArcoCPSB"
-                            handleChange={handleChange}
-                            options={OPTIONSPSPSE}
-                            show={true}
-                            isRequired={true}
-                        />
-                    </Col>
+                    <GetSelector
+                        label="Arco en C"
+                        value={form.ArcoCPSB}
+                        tooltipDescrip={`Arco en C`}
+                        name="ArcoCPSB"
+                        handleChange={handleChange}
+                        options={OPTIONSPSPSE}
+                        show={true}
+                        isRequired={true}
+                    />
 
                     {/*Arco en C Análogo Digital*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <GetSelector
-                            label="Arco en C"
-                            value={form.ArcoCAD}
-                            tooltipDescrip={`Arco en C`}
-                            name="ArcoCAD"
-                            handleChange={handleChange}
-                            options={OPTIONSAD}
-                            show={true}
-                            isRequired={true}
-                        />
-                    </Col>
+                    <GetSelector
+                        label="Arco en C"
+                        value={form.ArcoCAD}
+                        tooltipDescrip={`Arco en C`}
+                        name="ArcoCAD"
+                        handleChange={handleChange}
+                        options={OPTIONSAD}
+                        show={true}
+                        isRequired={true}
+                    />
 
                     {/*Electromiografo*/}
                     <Col xs={12} md={4} className="mb-3">
@@ -1089,32 +1043,28 @@ function ServicioImagenologia(props) {
                     </Col>
 
                     {/*Electromiografo Propia, Subrogado propio, Subrogado externo*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <GetSelector
-                            label="Electromiografo"
-                            value={form.electromiografoPSB}
-                            tooltipDescrip={`Electromiografo`}
-                            name="electromiografoPSB"
-                            handleChange={handleChange}
-                            options={OPTIONSPSPSE}
-                            show={true}
-                            isRequired={true}
-                        />
-                    </Col>
+                    <GetSelector
+                        label="Electromiografo"
+                        value={form.electromiografoPSB}
+                        tooltipDescrip={`Electromiografo`}
+                        name="electromiografoPSB"
+                        handleChange={handleChange}
+                        options={OPTIONSPSPSE}
+                        show={true}
+                        isRequired={true}
+                    />
 
                     {/*Electromiografo Análogo Digital*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <GetSelector
-                            label="Electromiografo"
-                            value={form.electromiografoAD}
-                            tooltipDescrip={`Electromiografo`}
-                            name="electromiografoAD"
-                            handleChange={handleChange}
-                            options={OPTIONSAD}
-                            show={true}
-                            isRequired={true}
-                        />
-                    </Col>
+                    <GetSelector
+                        label="Electromiografo"
+                        value={form.electromiografoAD}
+                        tooltipDescrip={`Electromiografo`}
+                        name="electromiografoAD"
+                        handleChange={handleChange}
+                        options={OPTIONSAD}
+                        show={true}
+                        isRequired={true}
+                    />
 
                     {/*Inmunoterapia de corta estancia*/}
                     <Col xs={12} md={4} className="mb-3">
@@ -1133,32 +1083,28 @@ function ServicioImagenologia(props) {
                     </Col>
 
                     {/*Inmunoterapia de corta estancia Propia, Subrogado propio, Subrogado externo*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <GetSelector
-                            label="Inmunoterapia de corta estancia"
-                            value={form.inmunoterapiaCortaEstanciaPSB}
-                            tooltipDescrip={`Inmunoterapia de corta estancia`}
-                            name="inmunoterapiaCortaEstanciaPSB"
-                            handleChange={handleChange}
-                            options={OPTIONSPSPSE}
-                            show={true}
-                            isRequired={true}
-                        />
-                    </Col>
+                    <GetSelector
+                        label="Inmunoterapia de corta estancia"
+                        value={form.inmunoterapiaCortaEstanciaPSB}
+                        tooltipDescrip={`Inmunoterapia de corta estancia`}
+                        name="inmunoterapiaCortaEstanciaPSB"
+                        handleChange={handleChange}
+                        options={OPTIONSPSPSE}
+                        show={true}
+                        isRequired={true}
+                    />
 
                     {/*Inmunoterapia de corta estancia Análogo Digital*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <GetSelector
-                            label="inmunoterapiaCortaEstancia"
-                            value={form.inmunoterapiaCortaEstanciaAD}
-                            tooltipDescrip={`Inmunoterapia de corta estancia`}
-                            name="inmunoterapiaCortaEstanciaAD"
-                            handleChange={handleChange}
-                            options={OPTIONSAD}
-                            show={true}
-                            isRequired={true}
-                        />
-                    </Col>
+                    <GetSelector
+                        label="inmunoterapiaCortaEstancia"
+                        value={form.inmunoterapiaCortaEstanciaAD}
+                        tooltipDescrip={`Inmunoterapia de corta estancia`}
+                        name="inmunoterapiaCortaEstanciaAD"
+                        handleChange={handleChange}
+                        options={OPTIONSAD}
+                        show={true}
+                        isRequired={true}
+                    />
 
                     {/*Laparoscopía*/}
                     <Col xs={12} md={4} className="mb-3">
@@ -1177,32 +1123,28 @@ function ServicioImagenologia(props) {
                     </Col>
 
                     {/*Laparoscopía Propia, Subrogado propio, Subrogado externo*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <GetSelector
-                            label="Laparoscopía"
-                            value={form.laparoscopiaPSB}
-                            tooltipDescrip={`Laparoscopía`}
-                            name="laparoscopiaPSB"
-                            handleChange={handleChange}
-                            options={OPTIONSPSPSE}
-                            show={true}
-                            isRequired={true}
-                        />
-                    </Col>
+                    <GetSelector
+                        label="Laparoscopía"
+                        value={form.laparoscopiaPSB}
+                        tooltipDescrip={`Laparoscopía`}
+                        name="laparoscopiaPSB"
+                        handleChange={handleChange}
+                        options={OPTIONSPSPSE}
+                        show={true}
+                        isRequired={true}
+                    />
 
                     {/*Laparoscopía Análogo Digital*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <GetSelector
-                            label="Laparoscopía"
-                            value={form.laparoscopiaAD}
-                            tooltipDescrip={`Laparoscopía`}
-                            name="laparoscopiaAD"
-                            handleChange={handleChange}
-                            options={OPTIONSAD}
-                            show={true}
-                            isRequired={true}
-                        />
-                    </Col>
+                    <GetSelector
+                        label="Laparoscopía"
+                        value={form.laparoscopiaAD}
+                        tooltipDescrip={`Laparoscopía`}
+                        name="laparoscopiaAD"
+                        handleChange={handleChange}
+                        options={OPTIONSAD}
+                        show={true}
+                        isRequired={true}
+                    />
 
                 </Row>
             </Col>
@@ -1231,38 +1173,30 @@ function ServiciosApoyoDiagnosticoTerapeutico(props) {
                         <Row className="justify-content-center">
 
                             {/*Laboratorio de análisis clínicos*/}
-                            <Col xs={12} md={4}>
-                                <GetSelector
-                                    label="Laboratorio de análisis clínicos"
-                                    value={form.laboratorioAnalisisClinicos}
-                                    tooltipDescrip={`¿Cuentas con el servicio de Laboratorio de análisis clínicos?`}
-                                    name="laboratorioAnalisisClinicos"
-                                    handleChange={handleChange}
-                                    options={YESORNOTOPTIONS}
-                                    show={true}
-                                    isRequired={true}
-                                />
-                            </Col>
+                            <GetSelector
+                                label="Laboratorio de análisis clínicos"
+                                value={form.laboratorioAnalisisClinicos}
+                                tooltipDescrip={`¿Cuentas con el servicio de Laboratorio de análisis clínicos?`}
+                                name="laboratorioAnalisisClinicos"
+                                handleChange={handleChange}
+                                options={YESORNOTOPTIONS}
+                                show={true}
+                                isRequired={true}
+                                childId="laboratorioAnalisisClinicosPSB"
+                            />
 
-                            {
-
-                                form.laboratorioAnalisisClinicos === "Si" ?
-                                    <>
-                                        {/*Laboratorio de análisis clínicos Propia, Subrogado propio, Subrogado externo*/}
-                                        <Col xs={12} md={4} className="mb-3">
-                                            <GetSelector
-                                                label="Laboratorio de análisis clínicos"
-                                                value={form.laboratorioAnalisisClinicosPSB}
-                                                tooltipDescrip={`Laboratorio de análisis clínicos`}
-                                                name="laboratorioAnalisisClinicosPSB"
-                                                handleChange={handleChange}
-                                                options={OPTIONSPSPSE}
-                                                show={true}
-                                                isRequired={true}
-                                            />
-                                        </Col>
-                                    </> : null
-                            }
+                            {/*Laboratorio de análisis clínicos Propia, Subrogado propio, Subrogado externo*/}
+                            <GetSelector
+                                id="laboratorioAnalisisClinicosPSB"
+                                label="Laboratorio de análisis clínicos"
+                                value={form.laboratorioAnalisisClinicosPSB}
+                                tooltipDescrip={`Laboratorio de análisis clínicos`}
+                                name="laboratorioAnalisisClinicosPSB"
+                                handleChange={handleChange}
+                                options={OPTIONSPSPSE}
+                                show={form.laboratorioAnalisisClinicos === 'true' ? true : false}
+                                isRequired={true}
+                            />
 
                         </Row>
                     </Col>
@@ -1272,38 +1206,32 @@ function ServiciosApoyoDiagnosticoTerapeutico(props) {
                         <Row className="justify-content-center">
 
                             {/*Banco de sangre*/}
-                            <Col xs={12} md={4}>
-                                <GetSelector
-                                    label="Banco de sangre"
-                                    value={form.bancoSangre}
-                                    tooltipDescrip={`¿Cuentas con el servicio de Banco de sangre?`}
-                                    name="bancoSangre"
-                                    handleChange={handleChange}
-                                    options={YESORNOTOPTIONS}
-                                    show={true}
-                                    isRequired={true}
-                                />
-                            </Col>
+                            <GetSelector
+                                label="Banco de sangre"
+                                value={form.bancoSangre}
+                                tooltipDescrip={`¿Cuentas con el servicio de Banco de sangre?`}
+                                name="bancoSangre"
+                                handleChange={handleChange}
+                                options={YESORNOTOPTIONS}
+                                show={true}
+                                isRequired={true}
+                                childId="bancoSangrePSB"
+                            />
 
-                            {
+                            {/*Banco de sangre Propia, Subrogado propio, Subrogado externo*/}
 
-                                form.bancoSangre === "Si" ?
-                                    <>
-                                        {/*Banco de sangre Propia, Subrogado propio, Subrogado externo*/}
-                                        <Col xs={12} md={4} className="mb-3">
-                                            <GetSelector
-                                                label="Banco de sangre"
-                                                value={form.bancoSangrePSB}
-                                                tooltipDescrip={`Banco de sangre`}
-                                                name="bancoSangrePSB"
-                                                handleChange={handleChange}
-                                                options={OPTIONSPSPSE}
-                                                show={true}
-                                                isRequired={true}
-                                            />
-                                        </Col>
-                                    </> : null
-                            }
+                            <GetSelector
+                                id="bancoSangrePSB"
+                                label="Banco de sangre"
+                                value={form.bancoSangrePSB}
+                                tooltipDescrip={`Banco de sangre`}
+                                name="bancoSangrePSB"
+                                handleChange={handleChange}
+                                options={OPTIONSPSPSE}
+                                show={form.bancoSangre === "true" ? true : false}
+                                isRequired={true}
+                            />
+
 
                         </Row>
                     </Col>
@@ -1313,38 +1241,32 @@ function ServiciosApoyoDiagnosticoTerapeutico(props) {
                         <Row className="justify-content-center">
 
                             {/*Transfusión de hemo componentes*/}
-                            <Col xs={12} md={4}>
-                                <GetSelector
-                                    label="Transfusión de hemo componentes"
-                                    value={form.transfusionHemoComponentes}
-                                    tooltipDescrip={`¿Cuentas con el servicio de Transfusión de hemo componentes?`}
-                                    name="transfusionHemoComponentes"
-                                    handleChange={handleChange}
-                                    options={YESORNOTOPTIONS}
-                                    show={true}
-                                    isRequired={true}
-                                />
-                            </Col>
+                            <GetSelector
+                                label="Transfusión de hemo componentes"
+                                value={form.transfusionHemoComponentes}
+                                tooltipDescrip={`¿Cuentas con el servicio de Transfusión de hemo componentes?`}
+                                name="transfusionHemoComponentes"
+                                handleChange={handleChange}
+                                options={YESORNOTOPTIONS}
+                                show={true}
+                                isRequired={true}
+                                childId="transfusionHemoComponentesPSB"
+                            />
 
-                            {
+                            {/*Transfusión de hemo componentes Propia, Subrogado propio, Subrogado externo*/}
 
-                                form.transfusionHemoComponentes === "Si" ?
-                                    <>
-                                        {/*Transfusión de hemo componentes Propia, Subrogado propio, Subrogado externo*/}
-                                        <Col xs={12} md={4} className="mb-3">
-                                            <GetSelector
-                                                label="Transfusión de hemo componentes"
-                                                value={form.transfusionHemoComponentesPSB}
-                                                tooltipDescrip={`Transfusión de hemo componentes`}
-                                                name="transfusionHemoComponentesPSB"
-                                                handleChange={handleChange}
-                                                options={OPTIONSPSPSE}
-                                                show={true}
-                                                isRequired={true}
-                                            />
-                                        </Col>
-                                    </> : null
-                            }
+                            < GetSelector
+                                id="transfusionHemoComponentesPSB"
+                                label="Transfusión de hemo componentes"
+                                value={form.transfusionHemoComponentesPSB}
+                                tooltipDescrip={`Transfusión de hemo componentes`}
+                                name="transfusionHemoComponentesPSB"
+                                handleChange={handleChange}
+                                options={OPTIONSPSPSE}
+                                show={form.transfusionHemoComponentes === "true" ? true : false}
+                                isRequired={true}
+                            />
+
 
                         </Row>
                     </Col>
@@ -1354,38 +1276,32 @@ function ServiciosApoyoDiagnosticoTerapeutico(props) {
                         <Row className="justify-content-center">
 
                             {/*Aferesis plaquetarias*/}
-                            <Col xs={12} md={4}>
-                                <GetSelector
-                                    label="Aferesis plaquetarias"
-                                    value={form.aferesisPlaquetarias}
-                                    tooltipDescrip={`¿Cuentas con el servicio de Aferesis plaquetarias?`}
-                                    name="aferesisPlaquetarias"
-                                    handleChange={handleChange}
-                                    options={YESORNOTOPTIONS}
-                                    show={true}
-                                    isRequired={true}
-                                />
-                            </Col>
 
-                            {
+                            <GetSelector
+                                label="Aferesis plaquetarias"
+                                value={form.aferesisPlaquetarias}
+                                tooltipDescrip={`¿Cuentas con el servicio de Aferesis plaquetarias?`}
+                                name="aferesisPlaquetarias"
+                                handleChange={handleChange}
+                                options={YESORNOTOPTIONS}
+                                show={true}
+                                isRequired={true}
+                                childId="aferesisPlaquetariasPSB"
+                            />
+                            {/*Aferesis plaquetarias Propia, Subrogado propio, Subrogado externo*/}
 
-                                form.aferesisPlaquetarias === "Si" ?
-                                    <>
-                                        {/*Aferesis plaquetarias Propia, Subrogado propio, Subrogado externo*/}
-                                        <Col xs={12} md={4} className="mb-3">
-                                            <GetSelector
-                                                label="Aferesis plaquetarias"
-                                                value={form.aferesisPlaquetariasPSB}
-                                                tooltipDescrip={`Aferesis plaquetarias`}
-                                                name="aferesisPlaquetariasPSB"
-                                                handleChange={handleChange}
-                                                options={OPTIONSPSPSE}
-                                                show={true}
-                                                isRequired={true}
-                                            />
-                                        </Col>
-                                    </> : null
-                            }
+                            <GetSelector
+                                id="aferesisPlaquetariasPSB"
+                                label="Aferesis plaquetarias"
+                                value={form.aferesisPlaquetariasPSB}
+                                tooltipDescrip={`Aferesis plaquetarias`}
+                                name="aferesisPlaquetariasPSB"
+                                handleChange={handleChange}
+                                options={OPTIONSPSPSE}
+                                show={form.aferesisPlaquetarias === "true" ? true : false}
+                                isRequired={true}
+                            />
+
 
                         </Row>
                     </Col>
@@ -1395,38 +1311,30 @@ function ServiciosApoyoDiagnosticoTerapeutico(props) {
                         <Row className="justify-content-center">
 
                             {/*Patología*/}
-                            <Col xs={12} md={4}>
-                                <GetSelector
-                                    label="Patología"
-                                    value={form.patologia}
-                                    tooltipDescrip={`¿Cuentas con el servicio de Patología?`}
-                                    name="patologia"
-                                    handleChange={handleChange}
-                                    options={YESORNOTOPTIONS}
-                                    show={true}
-                                    isRequired={true}
-                                />
-                            </Col>
+                            <GetSelector
+                                label="Patología"
+                                value={form.patologia}
+                                tooltipDescrip={`¿Cuentas con el servicio de Patología?`}
+                                name="patologia"
+                                handleChange={handleChange}
+                                options={YESORNOTOPTIONS}
+                                show={true}
+                                isRequired={true}
+                                childId="patologiaPSB"
+                            />
 
-                            {
-
-                                form.patologia === "Si" ?
-                                    <>
-                                        {/*Patología Propia, Subrogado propio, Subrogado externo*/}
-                                        <Col xs={12} md={4} className="mb-3">
-                                            <GetSelector
-                                                label="Patología"
-                                                value={form.patologiaPSB}
-                                                tooltipDescrip={`Patología`}
-                                                name="patologiaPSB"
-                                                handleChange={handleChange}
-                                                options={OPTIONSPSPSE}
-                                                show={true}
-                                                isRequired={true}
-                                            />
-                                        </Col>
-                                    </> : null
-                            }
+                            {/*Patología Propia, Subrogado propio, Subrogado externo*/}
+                            <GetSelector
+                                id="patologiaPSB"
+                                label="Patología"
+                                value={form.patologiaPSB}
+                                tooltipDescrip={`Patología`}
+                                name="patologiaPSB"
+                                handleChange={handleChange}
+                                options={OPTIONSPSPSE}
+                                show={form.patologia === "true" ? true : false}
+                                isRequired={true}
+                            />
 
                         </Row>
                     </Col>
@@ -3048,83 +2956,6 @@ function Transplantes(props) {
 
 }
 
-function Prueba({ handleChange, form, setForm }) {
-
-    const prueba = async (opcion1, opcion2) => {
-
-        console.log(1)
-
-        if (form[opcion1] === "No") {
-
-            console.log(2)
-
-            setTimeout(() => {
-
-                setForm(
-                    {
-                        ...form,
-                        [opcion2]: null
-                    }
-                )
-
-            }, 5000)
-        }
-        /* setForm(
-            {
-                ...form,
-                []
-            }
-        ) */
-    }
-
-    return (
-        <>
-            {/*PRUEBA*/}
-            < Col xs={12} md={12} className="mb-3" >
-                <Row className="justify-content-center">
-
-                    {/*PRUEBA*/}
-                    <Col xs={12} md={4}>
-                        <GetSelector
-                            label="PRUEBA"
-                            value={form.prueba}
-                            tooltipDescrip={`¿PRUEBA?`}
-                            name="prueba"
-                            handleChange={handleChange}
-                            onBlur={prueba}
-                            options={YESORNOTOPTIONS}
-                            show={true}
-                            isRequired={true}
-                        />
-                    </Col>
-
-                    {
-
-                        form.prueba === "Si" ?
-                            <>
-                                {/*PRUEBAPSB*/}
-                                <Col xs={12} md={4} className="mb-3">
-                                    <GetSelector
-                                        label="PRUEBA PSB"
-                                        value={form.pruebaPSB}
-                                        tooltipDescrip={`PRUEBA PSB`}
-                                        name="pruebaPSB"
-                                        handleChange={handleChange}
-                                        options={OPTIONSPSPSE}
-                                        show={true}
-                                        isRequired={true}
-                                    />
-                                </Col>
-                            </> : null
-                    }
-
-                </Row>
-            </Col >
-        </>
-    )
-
-}
-
 function GetInput(props) {
 
     //we obtain their props
@@ -3164,41 +2995,47 @@ function GetInput(props) {
 function GetSelector(props) {
 
     //we obtain their props
-    const { label, style = null, value, tooltipDescrip, name, handleChange, options, isRequired, show } = props
+    const { label, style = null, value, tooltipDescrip, name, handleChange, options, isRequired, show, xs = 12, md = 4, containerClass = "mb-3", childId = null, id = null } = props;
 
-    return (
-        show ?
-            <>
-                <OverlayTrigger
-                    placement="top"
-                    overlay={
-                        <Tooltip id={`tooltip-${name}`}>{tooltipDescrip}</Tooltip>
-                    }>
-                    <FloatingLabel controlId="floatingSelect" label={label}>
-                        <Form.Select
-                            aria-label="Floating label"
-                            value={value ? value : ''}
-                            onChange={handleChange}
-                            name={name}
-                            required={isRequired}
-                            style={style}
-                        >
-                            <option value="" disabled>Seleccione una opción</option>
-                            {
-                                options.map((option) => {
-                                    return (
-                                        <Fragment key={option.id}>
-                                            <option value={option.name}>{option.name}</option>
-                                        </Fragment>
-                                    )
-                                })
-                            }
-                        </Form.Select>
-                    </FloatingLabel>
-                </OverlayTrigger>
-            </> : null
-    )
+    if (show == true) {
+        return (
+            <Fragment>
+                <Col xs={xs} md={md} className={containerClass}>
+                    <OverlayTrigger
+                        placement="top"
+                        overlay={
+                            <Tooltip id={`tooltip-${name}`}>{tooltipDescrip}</Tooltip>
+                        }>
+                        <FloatingLabel controlId={id} label={label}>
+                            <Form.Select
+                                aria-label="Floating label"
+                                value={value ? value : ''}
+                                onChange={(e) => handleChange(e, childId)}
+                                name={name}
+                                required={isRequired}
+                                style={style}
+                            >
+                                <option value="" disabled>Seleccione una opción</option>
+                                {
+                                    options.map((option) => {
+                                        return (
+                                            <Fragment key={option.id}>
+                                                <option value={option.value}>{option.name}</option>
+                                            </Fragment>
+                                        )
+                                    })
+                                }
+                            </Form.Select>
+                        </FloatingLabel>
+                    </OverlayTrigger>
+                </Col>
+            </Fragment>
+        )
+    } else {
 
+        /* id && clearSelector(id); */
+        return null;
+    }
 }
 
 export default SA;

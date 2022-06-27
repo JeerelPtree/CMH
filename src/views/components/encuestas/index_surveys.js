@@ -1,7 +1,7 @@
 /*De esta manera podemos importar varios componentes desde un solo documento sin importar en que carpetas esten*/
 
 export { default as RHo } from './RHo'
-export { default as E } from './E'
+export { default as Estructura } from './Estructura'
 export { default as SA } from './SA'
 export { default as Outsourcing } from "./Outsourcing";
 export { default as PH } from "./PH";
@@ -13,3 +13,4 @@ export { default as SI } from "./SI"
 export { default as Com } from "./Com"
 export { default as Calidad } from "./Calidad"
 export { default as MKT } from "./MKT"
+export { default as RedMedica } from "./Red_Medica"

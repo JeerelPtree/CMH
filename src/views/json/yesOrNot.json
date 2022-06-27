@@ -1,11 +1,11 @@
 [
     {
-        "value": "si",
+        "value": true,
         "name": "Si",
         "id": 1
     },
     {
-        "value": "no",
+        "value": false,
         "name": "No",
         "id": 2
     }
