@@ -23,13 +23,29 @@ function SA(props) {
         e.persist();
 
         if (childId != null)
-            await setForm(
-                {
-                    ...form,
-                    [e.target.name]: e.target.value,
-                    [childId]: null
-                }
-            );
+
+            childId === "transplantesChildren" ?
+                await setForm(
+                    {
+                        ...form,
+                        [e.target.name]: e.target.value,
+                        ["rinion"]: null,
+                        ["higado"]: null,
+                        ["pulmon"]: null,
+                        ["corazon"]: null,
+                        ["corneas"]: null,
+                        ["hueso"]: null,
+                        ["celulasHematopoyeticas"]: null,
+                        ["otroOrgano"]: null,
+                    }
+                ) :
+                await setForm(
+                    {
+                        ...form,
+                        [e.target.name]: e.target.value,
+                        [childId]: null
+                    }
+                );
         else
             await setForm({
                 ...form,
@@ -2453,38 +2469,29 @@ function OtrosServicios(props) {
                         <Row className="justify-content-center">
 
                             {/*Clínica de oftalmología*/}
-                            <Col xs={12} md={4}>
-                                <GetSelector
-                                    label="Clínica de oftalmología"
-                                    value={form.clinicaOftalmologia}
-                                    tooltipDescrip={`¿Cuentas con el servicio de Clínica de oftalmología?`}
-                                    name="clinicaOftalmologia"
-                                    handleChange={handleChange}
-                                    options={YESORNOTOPTIONS}
-                                    show={true}
-                                    isRequired={true}
-                                />
-                            </Col>
+                            <GetSelector
+                                label="Clínica de oftalmología"
+                                value={form.clinicaOftalmologia}
+                                tooltipDescrip={`¿Cuentas con el servicio de Clínica de oftalmología?`}
+                                name="clinicaOftalmologia"
+                                handleChange={handleChange}
+                                options={YESORNOTOPTIONS}
+                                show={true}
+                                isRequired={true}
+                                childId="clinicaOftalmologiaPSB"
+                            />
 
-                            {
-
-                                form.clinicaOftalmologia === "Si" ?
-                                    <>
-                                        {/*Clínica de oftalmología Propia, Subrogado propio, Subrogado externo*/}
-                                        <Col xs={12} md={4} className="mb-3">
-                                            <GetSelector
-                                                label="Clínica de oftalmología"
-                                                value={form.clinicaOftalmologiaPSB}
-                                                tooltipDescrip={`Clínica de oftalmología`}
-                                                name="clinicaOftalmologiaPSB"
-                                                handleChange={handleChange}
-                                                options={OPTIONSPSPSE}
-                                                show={true}
-                                                isRequired={true}
-                                            />
-                                        </Col>
-                                    </> : null
-                            }
+                            {/*Clínica de oftalmología Propia, Subrogado propio, Subrogado externo*/}
+                            <GetSelector
+                                label="Clínica de oftalmología"
+                                value={form.clinicaOftalmologiaPSB}
+                                tooltipDescrip={`Clínica de oftalmología`}
+                                name="clinicaOftalmologiaPSB"
+                                handleChange={handleChange}
+                                options={OPTIONSPSPSE}
+                                show={form.clinicaOftalmologia === "true" ? true : false}
+                                isRequired={true}
+                            />
 
                         </Row>
                     </Col>
@@ -2494,38 +2501,29 @@ function OtrosServicios(props) {
                         <Row className="justify-content-center">
 
                             {/*Clínica del sueño*/}
-                            <Col xs={12} md={4}>
-                                <GetSelector
-                                    label="Clínica del sueño"
-                                    value={form.clinicaSuenio}
-                                    tooltipDescrip={`¿Cuentas con el servicio de Clínica del sueño?`}
-                                    name="clinicaSuenio"
-                                    handleChange={handleChange}
-                                    options={YESORNOTOPTIONS}
-                                    show={true}
-                                    isRequired={true}
-                                />
-                            </Col>
+                            <GetSelector
+                                label="Clínica del sueño"
+                                value={form.clinicaSuenio}
+                                tooltipDescrip={`¿Cuentas con el servicio de Clínica del sueño?`}
+                                name="clinicaSuenio"
+                                handleChange={handleChange}
+                                options={YESORNOTOPTIONS}
+                                show={true}
+                                isRequired={true}
+                                childId="clinicaSuenioPSB"
+                            />
 
-                            {
-
-                                form.clinicaSuenio === "Si" ?
-                                    <>
-                                        {/*Clínica del sueño Propia, Subrogado propio, Subrogado externo*/}
-                                        <Col xs={12} md={4} className="mb-3">
-                                            <GetSelector
-                                                label="Clínica del sueño"
-                                                value={form.clinicaSuenioPSB}
-                                                tooltipDescrip={`Clínica del sueño`}
-                                                name="clinicaSuenioPSB"
-                                                handleChange={handleChange}
-                                                options={OPTIONSPSPSE}
-                                                show={true}
-                                                isRequired={true}
-                                            />
-                                        </Col>
-                                    </> : null
-                            }
+                            {/*Clínica del sueño Propia, Subrogado propio, Subrogado externo*/}
+                            <GetSelector
+                                label="Clínica del sueño"
+                                value={form.clinicaSuenioPSB}
+                                tooltipDescrip={`Clínica del sueño`}
+                                name="clinicaSuenioPSB"
+                                handleChange={handleChange}
+                                options={OPTIONSPSPSE}
+                                show={form.clinicaSuenio === "true" ? true : false}
+                                isRequired={true}
+                            />
 
                         </Row>
                     </Col>
@@ -2535,38 +2533,29 @@ function OtrosServicios(props) {
                         <Row className="justify-content-center">
 
                             {/*Clínica del dolor*/}
-                            <Col xs={12} md={4}>
-                                <GetSelector
-                                    label="Clínica del dolor"
-                                    value={form.clinicaDolor}
-                                    tooltipDescrip={`¿Cuentas con el servicio de Clínica del dolor?`}
-                                    name="clinicaDolor"
-                                    handleChange={handleChange}
-                                    options={YESORNOTOPTIONS}
-                                    show={true}
-                                    isRequired={true}
-                                />
-                            </Col>
+                            <GetSelector
+                                label="Clínica del dolor"
+                                value={form.clinicaDolor}
+                                tooltipDescrip={`¿Cuentas con el servicio de Clínica del dolor?`}
+                                name="clinicaDolor"
+                                handleChange={handleChange}
+                                options={YESORNOTOPTIONS}
+                                show={true}
+                                isRequired={true}
+                                childId="clinicaDolorPSB"
+                            />
 
-                            {
-
-                                form.clinicaDolor === "Si" ?
-                                    <>
-                                        {/*Clínica del dolor Propia, Subrogado propio, Subrogado externo*/}
-                                        <Col xs={12} md={4} className="mb-3">
-                                            <GetSelector
-                                                label="Clínica del dolor"
-                                                value={form.clinicaDolorPSB}
-                                                tooltipDescrip={`Clínica del dolor`}
-                                                name="clinicaDolorPSB"
-                                                handleChange={handleChange}
-                                                options={OPTIONSPSPSE}
-                                                show={true}
-                                                isRequired={true}
-                                            />
-                                        </Col>
-                                    </> : null
-                            }
+                            {/*Clínica del dolor Propia, Subrogado propio, Subrogado externo*/}
+                            <GetSelector
+                                label="Clínica del dolor"
+                                value={form.clinicaDolorPSB}
+                                tooltipDescrip={`Clínica del dolor`}
+                                name="clinicaDolorPSB"
+                                handleChange={handleChange}
+                                options={OPTIONSPSPSE}
+                                show={form.clinicaDolor === "true" ? true : false}
+                                isRequired={true}
+                            />
 
                         </Row>
                     </Col>
@@ -2576,38 +2565,30 @@ function OtrosServicios(props) {
                         <Row className="justify-content-center">
 
                             {/*Clínica de fertilidad*/}
-                            <Col xs={12} md={4}>
-                                <GetSelector
-                                    label="Clínica de fertilidad"
-                                    value={form.clinicaFertilidad}
-                                    tooltipDescrip={`¿Cuentas con el servicio de Clínica de fertilidad?`}
-                                    name="clinicaFertilidad"
-                                    handleChange={handleChange}
-                                    options={YESORNOTOPTIONS}
-                                    show={true}
-                                    isRequired={true}
-                                />
-                            </Col>
+                            <GetSelector
+                                label="Clínica de fertilidad"
+                                value={form.clinicaFertilidad}
+                                tooltipDescrip={`¿Cuentas con el servicio de Clínica de fertilidad?`}
+                                name="clinicaFertilidad"
+                                handleChange={handleChange}
+                                options={YESORNOTOPTIONS}
+                                show={true}
+                                isRequired={true}
+                                childId="clinicaFertilidadPSB"
+                            />
 
-                            {
-
-                                form.clinicaFertilidad === "Si" ?
-                                    <>
-                                        {/*Clínica de fertilidad Propia, Subrogado propio, Subrogado externo*/}
-                                        <Col xs={12} md={4} className="mb-3">
-                                            <GetSelector
-                                                label="Clínica de fertilidad"
-                                                value={form.clinicaFertilidadPSB}
-                                                tooltipDescrip={`Clínica de fertilidad`}
-                                                name="clinicaFertilidadPSB"
-                                                handleChange={handleChange}
-                                                options={OPTIONSPSPSE}
-                                                show={true}
-                                                isRequired={true}
-                                            />
-                                        </Col>
-                                    </> : null
-                            }
+                            {/*Clínica de fertilidad Propia, Subrogado propio, Subrogado externo*/}
+                            <GetSelector
+                                id="clinicaFertilidadPSB"
+                                label="Clínica de fertilidad"
+                                value={form.clinicaFertilidadPSB}
+                                tooltipDescrip={`Clínica de fertilidad`}
+                                name="clinicaFertilidadPSB"
+                                handleChange={handleChange}
+                                options={OPTIONSPSPSE}
+                                show={form.clinicaFertilidad === "true" ? true : false}
+                                isRequired={true}
+                            />
 
                         </Row>
                     </Col>
@@ -2617,38 +2598,30 @@ function OtrosServicios(props) {
                         <Row className="justify-content-center">
 
                             {/*Clínica dental*/}
-                            <Col xs={12} md={4}>
-                                <GetSelector
-                                    label="Clínica dental"
-                                    value={form.clinicaDental}
-                                    tooltipDescrip={`¿Cuentas con el servicio de Clínica dental?`}
-                                    name="clinicaDental"
-                                    handleChange={handleChange}
-                                    options={YESORNOTOPTIONS}
-                                    show={true}
-                                    isRequired={true}
-                                />
-                            </Col>
+                            <GetSelector
+                                label="Clínica dental"
+                                value={form.clinicaDental}
+                                tooltipDescrip={`¿Cuentas con el servicio de Clínica dental?`}
+                                name="clinicaDental"
+                                handleChange={handleChange}
+                                options={YESORNOTOPTIONS}
+                                show={true}
+                                isRequired={true}
+                                childId="clinicaDentalPSB"
+                            />
 
-                            {
-
-                                form.clinicaDental === "Si" ?
-                                    <>
-                                        {/*Clínica dental Propia, Subrogado propio, Subrogado externo*/}
-                                        <Col xs={12} md={4} className="mb-3">
-                                            <GetSelector
-                                                label="Clínica dental"
-                                                value={form.clinicaDentalPSB}
-                                                tooltipDescrip={`Clínica dental`}
-                                                name="clinicaDentalPSB"
-                                                handleChange={handleChange}
-                                                options={OPTIONSPSPSE}
-                                                show={true}
-                                                isRequired={true}
-                                            />
-                                        </Col>
-                                    </> : null
-                            }
+                            {/*Clínica dental Propia, Subrogado propio, Subrogado externo*/}
+                            <GetSelector
+                                id="clinicaDentalPSB"
+                                label="Clínica dental"
+                                value={form.clinicaDentalPSB}
+                                tooltipDescrip={`Clínica dental`}
+                                name="clinicaDentalPSB"
+                                handleChange={handleChange}
+                                options={OPTIONSPSPSE}
+                                show={form.clinicaDental === "true" ? true : false}
+                                isRequired={true}
+                            />
 
                         </Row>
                     </Col>
@@ -2658,38 +2631,30 @@ function OtrosServicios(props) {
                         <Row className="justify-content-center">
 
                             {/*Clínica de la mujer*/}
-                            <Col xs={12} md={4}>
-                                <GetSelector
-                                    label="Clínica de la mujer"
-                                    value={form.clinicaMujer}
-                                    tooltipDescrip={`¿Cuentas con el servicio de Clínica de la mujer?`}
-                                    name="clinicaMujer"
-                                    handleChange={handleChange}
-                                    options={YESORNOTOPTIONS}
-                                    show={true}
-                                    isRequired={true}
-                                />
-                            </Col>
+                            <GetSelector
+                                label="Clínica de la mujer"
+                                value={form.clinicaMujer}
+                                tooltipDescrip={`¿Cuentas con el servicio de Clínica de la mujer?`}
+                                name="clinicaMujer"
+                                handleChange={handleChange}
+                                options={YESORNOTOPTIONS}
+                                show={true}
+                                isRequired={true}
+                                childId="clinicaMujerPSB"
+                            />
 
-                            {
-
-                                form.clinicaMujer === "Si" ?
-                                    <>
-                                        {/*Clínica de la mujer Propia, Subrogado propio, Subrogado externo*/}
-                                        <Col xs={12} md={4} className="mb-3">
-                                            <GetSelector
-                                                label="Clínica de la mujer"
-                                                value={form.clinicaMujerPSB}
-                                                tooltipDescrip={`Clínica de la mujer`}
-                                                name="clinicaMujerPSB"
-                                                handleChange={handleChange}
-                                                options={OPTIONSPSPSE}
-                                                show={true}
-                                                isRequired={true}
-                                            />
-                                        </Col>
-                                    </> : null
-                            }
+                            {/*Clínica de la mujer Propia, Subrogado propio, Subrogado externo*/}
+                            <GetSelector
+                                id="clinicaMujerPSB"
+                                label="Clínica de la mujer"
+                                value={form.clinicaMujerPSB}
+                                tooltipDescrip={`Clínica de la mujer`}
+                                name="clinicaMujerPSB"
+                                handleChange={handleChange}
+                                options={OPTIONSPSPSE}
+                                show={form.clinicaMujer === "true" ? true : false}
+                                isRequired={true}
+                            />
 
                         </Row>
                     </Col>
@@ -2699,38 +2664,30 @@ function OtrosServicios(props) {
                         <Row className="justify-content-center">
 
                             {/*Asistencia en casa (home care)*/}
-                            <Col xs={12} md={4}>
-                                <GetSelector
-                                    label="Asistencia en casa (home care)"
-                                    value={form.homeCare}
-                                    tooltipDescrip={`¿Cuentas con el servicio de Asistencia en casa (home care)?`}
-                                    name="homeCare"
-                                    handleChange={handleChange}
-                                    options={YESORNOTOPTIONS}
-                                    show={true}
-                                    isRequired={true}
-                                />
-                            </Col>
+                            <GetSelector
+                                label="Asistencia en casa (home care)"
+                                value={form.homeCare}
+                                tooltipDescrip={`¿Cuentas con el servicio de Asistencia en casa (home care)?`}
+                                name="homeCare"
+                                handleChange={handleChange}
+                                options={YESORNOTOPTIONS}
+                                show={true}
+                                isRequired={true}
+                                childId="homeCarePSB"
+                            />
 
-                            {
-
-                                form.homeCare === "Si" ?
-                                    <>
-                                        {/*Asistencia en casa (home care) Propia, Subrogado propio, Subrogado externo*/}
-                                        <Col xs={12} md={4} className="mb-3">
-                                            <GetSelector
-                                                label="Asistencia en casa (home care)"
-                                                value={form.homeCarePSB}
-                                                tooltipDescrip={`Asistencia en casa (home care)`}
-                                                name="homeCarePSB"
-                                                handleChange={handleChange}
-                                                options={OPTIONSPSPSE}
-                                                show={true}
-                                                isRequired={true}
-                                            />
-                                        </Col>
-                                    </> : null
-                            }
+                            {/*Asistencia en casa (home care) Propia, Subrogado propio, Subrogado externo*/}
+                            <GetSelector
+                                id="homeCarePSB"
+                                label="Asistencia en casa (home care)"
+                                value={form.homeCarePSB}
+                                tooltipDescrip={`Asistencia en casa (home care)`}
+                                name="homeCarePSB"
+                                handleChange={handleChange}
+                                options={OPTIONSPSPSE}
+                                show={form.homeCare === "true" ? true : false}
+                                isRequired={true}
+                            />
 
                         </Row>
                     </Col>
@@ -2740,46 +2697,38 @@ function OtrosServicios(props) {
                         <Row className="justify-content-center">
 
                             {/*Cuidados paleativos*/}
-                            <Col xs={12} md={4}>
-                                <GetSelector
-                                    label="Cuidados paleativos"
-                                    value={form.cuidadosPaleativos}
-                                    tooltipDescrip={`¿Cuentas con el servicio de Cuidados paleativos?`}
-                                    name="cuidadosPaleativos"
-                                    handleChange={handleChange}
-                                    options={YESORNOTOPTIONS}
-                                    show={true}
-                                    isRequired={true}
-                                />
-                            </Col>
+                            <GetSelector
+                                label="Cuidados paleativos"
+                                value={form.cuidadosPaleativos}
+                                tooltipDescrip={`¿Cuentas con el servicio de Cuidados paleativos?`}
+                                name="cuidadosPaleativos"
+                                handleChange={handleChange}
+                                options={YESORNOTOPTIONS}
+                                show={true}
+                                isRequired={true}
+                                childId="cuidadosPaleativosPSB"
+                            />
 
-                            {
-
-                                form.cuidadosPaleativos === "Si" ?
-                                    <>
-                                        {/*Cuidados paleativos Propia, Subrogado propio, Subrogado externo*/}
-                                        <Col xs={12} md={4} className="mb-3">
-                                            <GetSelector
-                                                label="Cuidados paleativos"
-                                                value={form.cuidadosPaleativosPSB}
-                                                tooltipDescrip={`Cuidados paleativos`}
-                                                name="cuidadosPaleativosPSB"
-                                                handleChange={handleChange}
-                                                options={OPTIONSPSPSE}
-                                                show={true}
-                                                isRequired={true}
-                                            />
-                                        </Col>
-                                    </> : null
-                            }
+                            {/*Cuidados paleativos Propia, Subrogado propio, Subrogado externo*/}
+                            <GetSelector
+                                id="cuidadosPaleativosPSB"
+                                label="Cuidados paleativos"
+                                value={form.cuidadosPaleativosPSB}
+                                tooltipDescrip={`Cuidados paleativos`}
+                                name="cuidadosPaleativosPSB"
+                                handleChange={handleChange}
+                                options={OPTIONSPSPSE}
+                                show={form.cuidadosPaleativos === "true" ? true : false}
+                                isRequired={true}
+                            />
 
                         </Row>
                     </Col>
 
                 </Row>
-            </Col>
+            </Col >
 
-        </Fragment>
+        </Fragment >
     )
 
 }
@@ -2787,133 +2736,6 @@ function OtrosServicios(props) {
 function Transplantes(props) {
 
     const { handleChange, form } = props;
-
-    const transplantesView = () => {
-        if (form.trasplantes === "Si") {
-            return (
-                <>
-                    {/*Riñon*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <GetSelector
-                            label="¿Realizan Trasplantes de riñon? "
-                            value={form.rinion}
-                            tooltipDescrip={`¿Realizan Trasplantes de riñon? `}
-                            name="rinion"
-                            handleChange={handleChange}
-                            options={YESORNOTOPTIONS}
-                            show={true}
-                            isRequired={true}
-                        />
-                    </Col>
-
-                    {/*Hígado*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <GetSelector
-                            label="¿Realizan Trasplantes de Hígado? "
-                            value={form.higado}
-                            tooltipDescrip={`¿Realizan Trasplantes de Hígado? `}
-                            name="higado"
-                            handleChange={handleChange}
-                            options={YESORNOTOPTIONS}
-                            show={true}
-                            isRequired={true}
-                        />
-                    </Col>
-
-                    {/*Pulmón*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <GetSelector
-                            label="¿Realizan Trasplantes de Pulmón? "
-                            value={form.pulmon}
-                            tooltipDescrip={`¿Realizan Trasplantes de Pulmón? `}
-                            name="pulmon"
-                            handleChange={handleChange}
-                            options={YESORNOTOPTIONS}
-                            show={true}
-                            isRequired={true}
-                        />
-                    </Col>
-
-                    {/*Corazón*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <GetSelector
-                            label="¿Realizan Trasplantes de Corazón? "
-                            value={form.corazon}
-                            tooltipDescrip={`¿Realizan Trasplantes de Corazón? `}
-                            name="corazon"
-                            handleChange={handleChange}
-                            options={YESORNOTOPTIONS}
-                            show={true}
-                            isRequired={true}
-                        />
-                    </Col>
-
-                    {/*Córneas*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <GetSelector
-                            label="¿Realizan Trasplantes de Córneas? "
-                            value={form.corneas}
-                            tooltipDescrip={`¿Realizan Trasplantes de Córneas? `}
-                            name="corneas"
-                            handleChange={handleChange}
-                            options={YESORNOTOPTIONS}
-                            show={true}
-                            isRequired={true}
-                        />
-                    </Col>
-
-                    {/*Hueso*/}
-                    <Col xs={12} md={4} className="mb-3">
-                        <GetSelector
-                            label="¿Realizan Trasplantes de Hueso? "
-                            value={form.hueso}
-                            tooltipDescrip={`¿Realizan Trasplantes de Hueso? `}
-                            name="hueso"
-                            handleChange={handleChange}
-                            options={YESORNOTOPTIONS}
-                            show={true}
-                            isRequired={true}
-                        />
-                    </Col>
-
-                    {/*Células hematopoyéticas (Médula ósea)*/}
-                    <Col xs={12} md={7} className="mb-3">
-                        <GetSelector
-                            label="¿Realizan Trasplantes de Células hematopoyéticas (Médula ósea)? "
-                            value={form.celulasHematopoyeticas}
-                            tooltipDescrip={`¿Realizan Trasplantes de Células hematopoyéticas (Médula ósea)? `}
-                            name="celulasHematopoyeticas"
-                            handleChange={handleChange}
-                            options={YESORNOTOPTIONS}
-                            show={true}
-                            isRequired={true}
-                            style={{ height: '100px' }}
-                        />
-                    </Col>
-
-                    {/*Otro órgano (especifique)*/}
-                    <Col xs={12} md={5} className="mb-3">
-                        <GetInput
-                            label="Otro órgano (especifique)"
-                            value={form.otroOrgano}
-                            name="otroOrgano"
-                            handleChange={handleChange}
-                            tooltipDescrip="Especifique que otro tipo de órgano"
-                            type="text"
-                            min={0}
-                            isRequired={false}
-                            placement="top"
-                            isTextArea={true}
-                            show={true}
-                            style={{ height: '100px' }}
-                        />
-                    </Col>
-                </>
-            )
-        } else {
-            return null
-        }
-    }
 
     return (
         <Fragment>
@@ -2929,24 +2751,132 @@ function Transplantes(props) {
                     {/*¿Realizan Trasplantes? */}
                     <Col xs={12} md={12} className="mb-3">
                         <Row className="justify-content-center">
-                            <Col xs={12} md={3}>
-                                <GetSelector
-                                    label="¿Realizan Trasplantes? "
-                                    value={form.trasplantes}
-                                    tooltipDescrip={`¿Realizan Trasplantes? `}
-                                    name="trasplantes"
-                                    handleChange={handleChange}
-                                    options={YESORNOTOPTIONS}
-                                    show={true}
-                                    isRequired={true}
-                                />
-                            </Col>
+
+                            <GetSelector
+                                label="¿Realizan Trasplantes? "
+                                value={form.trasplantes}
+                                tooltipDescrip={`¿Realizan Trasplantes? `}
+                                name="trasplantes"
+                                handleChange={handleChange}
+                                options={YESORNOTOPTIONS}
+                                show={true}
+                                isRequired={true}
+                                childId="transplantesChildren"
+                            />
+
                         </Row>
                     </Col>
 
-                    {
-                        transplantesView()
-                    }
+                    {/*Riñon*/}
+                    <GetSelector
+                        id="rinion"
+                        label="¿Realizan Trasplantes de riñon? "
+                        value={form.rinion}
+                        tooltipDescrip={`¿Realizan Trasplantes de riñon? `}
+                        name="rinion"
+                        handleChange={handleChange}
+                        options={YESORNOTOPTIONS}
+                        show={form.trasplantes === "true" ? true : false}
+                        isRequired={true}
+                    />
+
+                    {/*Hígado*/}
+                    <GetSelector
+                        id="higado"
+                        label="¿Realizan Trasplantes de Hígado? "
+                        value={form.higado}
+                        tooltipDescrip={`¿Realizan Trasplantes de Hígado? `}
+                        name="higado"
+                        handleChange={handleChange}
+                        options={YESORNOTOPTIONS}
+                        show={form.trasplantes === "true" ? true : false}
+                        isRequired={true}
+                    />
+
+                    {/*Pulmón*/}
+                    <GetSelector
+                        id="pulmon"
+                        label="¿Realizan Trasplantes de Pulmón? "
+                        value={form.pulmon}
+                        tooltipDescrip={`¿Realizan Trasplantes de Pulmón? `}
+                        name="pulmon"
+                        handleChange={handleChange}
+                        options={YESORNOTOPTIONS}
+                        show={form.trasplantes === "true" ? true : false}
+                        isRequired={true}
+                    />
+
+                    {/*Corazón*/}
+                    <GetSelector
+                        id="corazon"
+                        label="¿Realizan Trasplantes de Corazón? "
+                        value={form.corazon}
+                        tooltipDescrip={`¿Realizan Trasplantes de Corazón? `}
+                        name="corazon"
+                        handleChange={handleChange}
+                        options={YESORNOTOPTIONS}
+                        show={form.trasplantes === "true" ? true : false}
+                        isRequired={true}
+                    />
+
+                    {/*Córneas*/}
+                    <GetSelector
+                        id="corneas"
+                        label="¿Realizan Trasplantes de Córneas? "
+                        value={form.corneas}
+                        tooltipDescrip={`¿Realizan Trasplantes de Córneas? `}
+                        name="corneas"
+                        handleChange={handleChange}
+                        options={YESORNOTOPTIONS}
+                        show={form.trasplantes === "true" ? true : false}
+                        isRequired={true}
+                    />
+
+                    {/*Hueso*/}
+                    <GetSelector
+                        id="hueso"
+                        label="¿Realizan Trasplantes de Hueso? "
+                        value={form.hueso}
+                        tooltipDescrip={`¿Realizan Trasplantes de Hueso? `}
+                        name="hueso"
+                        handleChange={handleChange}
+                        options={YESORNOTOPTIONS}
+                        show={form.trasplantes === "true" ? true : false}
+                        isRequired={true}
+                    />
+
+                    {/*Células hematopoyéticas (Médula ósea)*/}
+                    <GetSelector
+                        id="celulasHematopoyeticas"
+                        label="¿Realizan Trasplantes de Células hematopoyéticas (Médula ósea)? "
+                        value={form.celulasHematopoyeticas}
+                        tooltipDescrip={`¿Realizan Trasplantes de Células hematopoyéticas (Médula ósea)? `}
+                        name="celulasHematopoyeticas"
+                        handleChange={handleChange}
+                        options={YESORNOTOPTIONS}
+                        show={form.trasplantes === "true" ? true : false}
+                        isRequired={true}
+                        style={{ height: '100px' }}
+                    />
+
+                    {/*Otro órgano (especifique)*/}
+                    <Col xs={12} md={5} className="mb-3">
+                        <GetInput
+                            id="otroOrgano"
+                            label="Otro órgano (especifique)"
+                            value={form.otroOrgano}
+                            name="otroOrgano"
+                            handleChange={handleChange}
+                            tooltipDescrip="Especifique que otro tipo de órgano"
+                            type="text"
+                            min={0}
+                            isRequired={false}
+                            placement="top"
+                            isTextArea={true}
+                            show={form.trasplantes === "true" ? true : false}
+                            style={{ height: '100px' }}
+                        />
+                    </Col>
 
                 </Row>
             </Col>
