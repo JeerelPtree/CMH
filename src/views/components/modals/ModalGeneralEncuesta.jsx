@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Modal, Button, Form } from "react-bootstrap";
 
 import '../../../globalStyles.css'
-import { RHo, E, SA, Outsourcing, PH, Ops_part1, TC, GP, CAP, SI, Com, Calidad, MKT } from '../encuestas/index_surveys';
+import { RHo, Estructura, SA, Outsourcing, RedMedica, PH, Ops_part1, TC, GP, CAP, SI, Com, Calidad, MKT } from '../encuestas/index_surveys';
 
 
 function ModalGeneralEncuesta(props) {
@@ -20,53 +20,50 @@ function ModalGeneralEncuesta(props) {
             content: <SA form={form} setForm={setForm} />
         }, {
             id: 3,
-            content: <E />
+            content: <Estructura form={form} setForm={setForm} />
         }, {
             id: 4,
             content: <PH modalIsOpen={modalIsOpen} />
         }, {
             id: 5,
-            content: <Ops_part1 />
-        }, {
-            id: 5.2,
-            content: <RHo />
+            content: <RedMedica form={form} setForm={setForm} />
         }, {
             id: 6,
-            content: <TC />
+            content: <Ops_part1 />
         }, {
             id: 7,
-            content: <GP />
+            content: <RHo />
         }, {
             id: 8,
-            content: <CAP />
+            content: <TC />
         }, {
             id: 9,
-            content: <SI />
+            content: <GP />
         }, {
             id: 10,
-            content: <Com />
+            content: <CAP />
         }, {
             id: 11,
-            content: <Calidad />
+            content: <SI />
         }, {
             id: 12,
-            content: <RHo />
-            //content: <MKT />
+            content: <Com />
         }, {
             id: 13,
-            content: <RHo />
+            content: <Calidad />
         }, {
             id: 14,
             content: <RHo />
+            //content: <MKT />
         }, {
             id: 15,
-            content: <Outsourcing />
+            content: <RHo />
         }, {
             id: 16,
             content: <RHo />
         }, {
             id: 17,
-            content: <RHo />
+            content: <Outsourcing />
         }, {
             id: 18,
             content: <RHo />
@@ -75,6 +72,9 @@ function ModalGeneralEncuesta(props) {
             content: <RHo />
         }, {
             id: 20,
+            content: <RHo />
+        }, {
+            id: 21,
             content: <RHo />
         }
     ];
@@ -104,7 +104,7 @@ function ModalGeneralEncuesta(props) {
         e.stopPropagation();
 
         console.log('ENVIANDO: ', form)
-        handleModalState()
+        //handleModalState()
     }
 
     return (
@@ -130,7 +130,7 @@ function ModalGeneralEncuesta(props) {
                 </Modal.Body>
                 <Modal.Footer className="modal-cmh-header-footer">
                     <Button variant="danger" onClick={handleModalState}>Cancelar</Button>
-                    <Button variant="primary">Guardar</Button>
+                    <Button variant="primary" onClick={prueba}>Guardar</Button>
                     <Button variant="success" type="submit">Enviar</Button>
                 </Modal.Footer>
             </Form>
