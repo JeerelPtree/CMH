@@ -9,11 +9,13 @@ import "../../../globalStyles.css"
 
 const currentYear = new Date().getFullYear();
 
-function TI({ form, setForm }) {
+function TI({ form, setForm })
+{
 
     //module's functions
-    const handleChange = async (e, childId) => {
-
+    const handleChange = async (e, childId) =>
+    {
+        console.log("e", e)
         e.persist();
 
         if (childId != null) {
@@ -34,7 +36,8 @@ function TI({ form, setForm }) {
      * It takes in a name, value, and an array of children ids, and sets the value of the name to the
      * value, and sets the value of the children ids to null
      */
-    const setNullChildren = async (name, value, arrayChildrenids) => {
+    const setNullChildren = async (name, value, arrayChildrenids) =>
+    {
 
         switch (arrayChildrenids.length) {
             case 1:
@@ -116,7 +119,8 @@ function TI({ form, setForm }) {
 
 }
 
-function ModuloTi1(props) {
+function ModuloTi1(props)
+{
 
     //we obtain their props 
     const { form, handleChange } = props;
@@ -361,7 +365,8 @@ function ModuloTi1(props) {
 
 }
 
-function ModuloTi3(props) {
+function ModuloTi3(props)
+{
 
     //we obtain their props 
     const { form, handleChange } = props;
@@ -369,22 +374,260 @@ function ModuloTi3(props) {
     return (
         <>
 
-            {/*Sistemas y Tecnologías de la información*/}
-            <Col xs={12} md={12} className="">
-                <h4 className="text-center title-cmh">Sistemas y Tecnologías de la información</h4>
+            {/*Expediente Clínico Electrónico*/}
+            <Col xs={12} md={12} className="mt-4">
+                <h4 className="text-center title-cmh">Expediente Clínico Electrónico</h4>
+
+                <Row className="justify-content-center">
+                    <GetCheckBox
+                        type="checkbox"
+                        label="Admisión"
+                        value={form.admision}
+                        name="admision"
+                        handleChange={handleChange}
+                        show={true}
+                    />
+
+                    <GetCheckBox
+                        type="checkbox"
+                        label="Expediente Clínico"
+                        value={form.expedienteClinico}
+                        name="expedienteClinico"
+                        handleChange={handleChange}
+                        show={true}
+                    />
+
+                    <GetCheckBox
+                        type="checkbox"
+                        label="Laboratorio"
+                        value={form.laboratorio}
+                        name="laboratorio"
+                        handleChange={handleChange}
+                        show={true}
+                    />
+
+                    <GetCheckBox
+                        type="checkbox"
+                        label="Imagenología"
+                        value={form.imagenologia}
+                        name="imagenologia"
+                        handleChange={handleChange}
+                        show={true}
+                    />
+
+                    <GetCheckBox
+                        type="checkbox"
+                        label="Receta Electrónica"
+                        value={form.recetaElectronica}
+                        name="recetaElectronica"
+                        handleChange={handleChange}
+                        show={true}
+                    />
+
+                    <GetCheckBox
+                        type="checkbox"
+                        label="Nutrición"
+                        value={form.nutricion}
+                        name="nutricion"
+                        handleChange={handleChange}
+                        show={true}
+                    />
+
+                </Row>
             </Col>
 
-            <Col xs={12} md={12} className="mt-3">
-                <Row className="justify-content-center">
+            {/*Contabilidad*/}
+            <Col xs={12} md={12} className="mt-4">
+                <h4 className="text-center title-cmh">Contabilidad</h4>
 
-                    <Col xs={12} md={12}>
-                        <Form.Check
-                            type="checkbox"
-                            label="Admisión"
-                            value={form.admision}
-                            name="admision"
-                        />
-                    </Col>
+                <Row className="justify-content-center">
+                    <GetCheckBox
+                        //md={2}
+                        type="checkbox"
+                        label="Inventarios"
+                        value={form.inventarios}
+                        name="inventarios"
+                        handleChange={handleChange}
+                        show={true}
+                    />
+
+                    <GetCheckBox
+                        type="checkbox"
+                        label="Cuentas por Cobrar"
+                        value={form.cuentasCobrar}
+                        name="cuentasCobrar"
+                        handleChange={handleChange}
+                        show={true}
+                    />
+
+                    <GetCheckBox
+                        type="checkbox"
+                        label="Cuentas por Pagar"
+                        value={form.laboratorio}
+                        name="laboratorio"
+                        handleChange={handleChange}
+                        show={true}
+                    />
+
+                    <GetCheckBox
+                        type="checkbox"
+                        label="Caja"
+                        value={form.caja}
+                        name="caja"
+                        handleChange={handleChange}
+                        show={true}
+                    />
+
+                    <GetCheckBox
+                        type="checkbox"
+                        label="Presupuestos"
+                        value={form.presupuestos}
+                        name="presupuestos"
+                        handleChange={handleChange}
+                        show={true}
+                    />
+
+                    <GetCheckBox
+                        type="checkbox"
+                        label="Compras"
+                        value={form.compras}
+                        name="compras"
+                        handleChange={handleChange}
+                        show={true}
+                    />
+
+                </Row>
+            </Col>
+
+            {/*Recursos humanos*/}
+            <Col xs={12} md={4} className="mt-4">
+                <h4 className="text-center title-cmh">Recursos Humanos</h4>
+
+                <Row>
+                    <GetCheckBox
+                        md={6}
+                        type="checkbox"
+                        label="Recursos Humanos"
+                        value={form.recursosHumanos}
+                        name="recursosHumanos"
+                        handleChange={handleChange}
+                        show={true}
+                    />
+
+                    <GetCheckBox
+                        md={6}
+                        type="checkbox"
+                        label="Nomina"
+                        value={form.nomina}
+                        name="nomina"
+                        handleChange={handleChange}
+                        show={true}
+                    />
+
+                </Row>
+            </Col>
+
+            {/*Gestión de Quirófanos*/}
+            <Col xs={12} md={4} className="mt-4">
+                <h4 className="text-center title-cmh">Gestión de Quirófanos</h4>
+
+                <Row className="justify-content-center">
+                    <GetCheckBox
+                        md={12}
+                        type="checkbox"
+                        label="Tabla Pre-Quirúrgica y Quirúrgica"
+                        value={form.tablaPrequirúrgicaQuirúrgica}
+                        name="tablaPrequirúrgicaQuirúrgica"
+                        handleChange={handleChange}
+                        show={true}
+                    />
+                </Row>
+            </Col>
+
+            {/*Modulo Urgencias*/}
+            <Col xs={12} md={4} className="mt-4">
+                <h4 className="text-center title-cmh">Modulo Urgencias</h4>
+
+                <Row className="justify-content-center">
+                    <GetCheckBox
+                        md={12}
+                        type="checkbox"
+                        label="Traige Categorización Pacientes"
+                        value={form.traigeCategorizacionPacientes}
+                        name="traigeCategorizacionPacientes"
+                        handleChange={handleChange}
+                        show={true}
+                    />
+                </Row>
+            </Col>
+
+            {/*Varios*/}
+            <Col xs={12} md={12} className="mt-4">
+                <h4 className="text-center title-cmh">Varios</h4>
+
+                <Row className="justify-content-center">
+                    <GetCheckBox
+                        type="checkbox"
+                        label="Administración de Citas y Agenda"
+                        value={form.administracionCitasAgenda}
+                        name="administracionCitasAgenda"
+                        handleChange={handleChange}
+                        show={true}
+                    />
+
+                    <GetCheckBox
+                        type="checkbox"
+                        label="Banco de Sangre"
+                        value={form.bancoSangre}
+                        name="bancoSangre"
+                        handleChange={handleChange}
+                        show={true}
+                    />
+
+                    <GetCheckBox
+                        type="checkbox"
+                        label="Sistemas de Seguridad"
+                        value={form.sistemasSeguridad}
+                        name="sistemasSeguridad"
+                        handleChange={handleChange}
+                        show={true}
+                    />
+
+                    <GetCheckBox
+                        type="checkbox"
+                        label="Reportes, Estadística y/o Análisis "
+                        value={form.reportesEstadísticaAnalisis}
+                        name="traigeCategorizacionPacientes"
+                        handleChange={handleChange}
+                        show={true}
+                    />
+
+                    <GetCheckBox
+                        type="checkbox"
+                        label="Gestión de Camas"
+                        value={form.gestionCamas}
+                        name="gestionCamas"
+                        handleChange={handleChange}
+                        show={true}
+                    />
+
+                    <GetCheckBox
+                        type="checkbox"
+                        label="Módulo Referencia y Contra-Referencia"
+                        value={form.moduloReferenciaContraReferencia}
+                        name="moduloReferenciaContraReferencia"
+                        handleChange={handleChange}
+                        show={true}
+                    />
+
+                    <GetCheckBox
+                        type="checkbox"
+                        label="Módulo Enfermería"
+                        value={form.moduloEnfermeria}
+                        name="traigeCategorizacionPacientes"
+                        handleChange={handleChange}
+                        show={true}
+                    />
 
                 </Row>
             </Col>
@@ -394,7 +637,8 @@ function ModuloTi3(props) {
 
 }
 
-function GetInput(props) {
+function GetInput(props)
+{
 
     //we obtain their props
     const { label, value, name, handleChange, tooltipDescrip, min, type, isRequired, placement, show, isReadOnly = false, isTextArea = false, style = null,
@@ -433,7 +677,8 @@ function GetInput(props) {
     }
 }
 
-function GetInputFormat(props) {
+function GetInputFormat(props)
+{
 
     //we obtain their props
     const { label, value, name, handleChange, tooltipDescrip, type, min, isRequired, placement, show, isReadOnly = false, leftSymbol, rightSymbol, isLeft = false, isRight = false } = props
@@ -499,14 +744,15 @@ function GetInputFormat(props) {
     }
 }
 
-function GetSelector(props) {
+function GetSelector(props)
+{
 
     //we obtain their props
     const { label, style = null, value, tooltipDescrip, name, handleChange, options, isRequired, show, xs = 12, md = 6, containerClass = "mb-3", childId = null, id = null } = props;
 
-    /* const [flag, setFlag] = useState({ id: id, show: show });
+    /* const [flag, setFlag] = useState({id: id, show: show });
 
-    console.log("ID:", flag) */
+            console.log("ID:", flag) */
 
     if (show == true) {
         return (
@@ -528,7 +774,8 @@ function GetSelector(props) {
                             >
                                 <option value="" disabled>Seleccione una opción</option>
                                 {
-                                    options.map((option) => {
+                                    options.map((option) =>
+                                    {
                                         return (
                                             <Fragment key={option.id}>
                                                 <option value={option.value}>{option.name}</option>
@@ -549,9 +796,36 @@ function GetSelector(props) {
     }
 }
 
-/* function GetCheckBox(props){
+function GetCheckBox(props)
+{
 
-} */
+    const { label, value, name, handleChange, type, isRequired = false, show,
+        xs = 12, md = 3, containerClass = "mt-3" } = props
+
+    if (show === true) {
+        return (
+            <Fragment>
+                <Col xs={xs} md={md} className={containerClass}>
+                    <Row className="justify-content-center">
+                        <Col xs={12} md={12}>
+                            <Form.Check
+                                type={type}
+                                label={label}
+                                value={value}
+                                name={name}
+                                onChange={handleChange}
+                                required={isRequired}
+                            />
+                        </Col>
+                    </Row>
+                </Col>
+            </Fragment>
+        )
+    } else {
+        return null;
+    }
+
+}
 
 
 export default TI;
