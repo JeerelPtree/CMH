@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Modal, Button, Form } from "react-bootstrap";
 
 import '../../../globalStyles.css'
-import { RHo, Estructura, SA, Outsourcing, RedMedica, PH, Ops_part1, TC, GP, CAP, SI, Com, Calidad, MKT } from '../encuestas/index_surveys';
+import { RHo, Estructura, SA, Outsourcing, RedMedica, PH, Ops_part1, TC, GP, CAP, SI, Com, Calidad, MKT, TI } from '../encuestas/index_surveys';
 
 
 function ModalGeneralEncuesta(props) {
@@ -13,21 +13,24 @@ function ModalGeneralEncuesta(props) {
     const [form, setForm] = useState({})
     const dictionaryEncuestas = [
         {
-            id: 1,
+            id: 1.1,
             content: <RHo form={form} setForm={setForm} />
         }, {
-            id: 2,
+            id: 1.2,
             content: <SA form={form} setForm={setForm} />
         }, {
-            id: 3,
+            id: 1.3,
             content: <Estructura form={form} setForm={setForm} />
         }, {
-            id: 4,
-            content: <PH modalIsOpen={modalIsOpen} />
+            id: 1.4,
+            content: <TI form={form} setForm={setForm} />
         }, {
-            id: 5,
+            id: 1.5,
             content: <RedMedica form={form} setForm={setForm} />
-        }, {
+        }/*,{
+            id: 1.4,
+            content: <PH modalIsOpen={modalIsOpen} />
+        } , {
             id: 6,
             content: <Ops_part1 />
         }, {
@@ -76,7 +79,7 @@ function ModalGeneralEncuesta(props) {
         }, {
             id: 21,
             content: <RHo />
-        }
+        } */
     ];
 
     useEffect(() => {

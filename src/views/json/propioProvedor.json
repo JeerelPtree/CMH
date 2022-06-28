@@ -1,0 +1,12 @@
+[
+    {
+        "value": "propio",
+        "name": "Propio",
+        "id": 1
+    },
+    {
+        "value": "proveedor",
+        "name": "Proveedor",
+        "id": 2
+    }
+]

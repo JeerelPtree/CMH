@@ -1,8 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { Container, Col, Row, FloatingLabel, InputGroup, Form, OverlayTrigger, Tooltip } from "react-bootstrap";
-import { faL, faUserDoctor } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-//import axios from "axios"
 
 import OPTIONSPSPSE from "../../json/propiaSubrogadoPropioSubrogadoExterno.json";
 import OPTIONSAD from "../../json/analogoDigital.json";
@@ -1781,25 +1778,27 @@ function Urgencias(props) {
                                 md={5}
                                 childId="camasUrgenciasCantidad"
                             />
-
-
-                            {/*Camas de urgencias Cantidad*/}
-                            <Col xs={12} md={5} className="mb-3">
-                                <GetInput
-                                    id="camasUrgenciasCantidad"
-                                    label="Número de Camas de urgencias"
-                                    value={form.camasUrgenciasCantidad}
-                                    name="camasUrgenciasCantidad"
-                                    handleChange={handleChange}
-                                    tooltipDescrip="Número de Camas de urgencias"
-                                    type="number"
-                                    min={0}
-                                    isRequired={true}
-                                    placement="top"
-                                    show={form.camasUrgencias === "true" ? true : false}
-                                />
-                            </Col>
-
+                            {
+                                form.camasUrgencias === "true" ?
+                                    <>
+                                        {/*Camas de urgencias Cantidad*/}
+                                        <Col xs={12} md={5} className="mb-3">
+                                            <GetInput
+                                                id="camasUrgenciasCantidad"
+                                                label="Número de Camas de urgencias"
+                                                value={form.camasUrgenciasCantidad}
+                                                name="camasUrgenciasCantidad"
+                                                handleChange={handleChange}
+                                                tooltipDescrip="Número de Camas de urgencias"
+                                                type="number"
+                                                min={0}
+                                                isRequired={true}
+                                                placement="top"
+                                                show={true}
+                                            />
+                                        </Col>
+                                    </> : null
+                            }
                         </Row>
                     </Col>
 
@@ -1820,24 +1819,27 @@ function Urgencias(props) {
                                 childId="salasObservacionCantidad"
                             />
 
-
-                            {/*Salas de observación Cantidad*/}
-                            <Col xs={12} md={4} className="mb-3">
-                                <GetInput
-                                    id="salasObservacionCantidad"
-                                    label="Salas de observación"
-                                    value={form.salasObservacionCantidad}
-                                    name="salasObservacionCantidad"
-                                    handleChange={handleChange}
-                                    tooltipDescrip="Número de Salas de observación"
-                                    type="number"
-                                    min={0}
-                                    isRequired={true}
-                                    placement="top"
-                                    show={form.salasObservacion === "true" ? true : false}
-                                />
-                            </Col>
-
+                            {
+                                form.salasObservacion === "true" ?
+                                    <>
+                                        {/*Salas de observación Cantidad*/}
+                                        <Col xs={12} md={4} className="mb-3">
+                                            <GetInput
+                                                id="salasObservacionCantidad"
+                                                label="Salas de observación"
+                                                value={form.salasObservacionCantidad}
+                                                name="salasObservacionCantidad"
+                                                handleChange={handleChange}
+                                                tooltipDescrip="Número de Salas de observación"
+                                                type="number"
+                                                min={0}
+                                                isRequired={true}
+                                                placement="top"
+                                                show={true}
+                                            />
+                                        </Col>
+                                    </> : null
+                            }
                         </Row>
                     </Col>
 
@@ -1858,24 +1860,27 @@ function Urgencias(props) {
                                 childId="salasChoqueCantidad"
                             />
 
-
-                            {/*Salas de choque Cantidad*/}
-                            <Col xs={12} md={4} className="mb-3">
-                                <GetInput
-                                    id="salasChoqueCantidad"
-                                    label="Salas de choque"
-                                    value={form.salasChoqueCantidad}
-                                    name="salasChoqueCantidad"
-                                    handleChange={handleChange}
-                                    tooltipDescrip="Número de Salas de choque"
-                                    type="number"
-                                    min={0}
-                                    isRequired={true}
-                                    placement="top"
-                                    show={form.salasChoque === "true" ? true : false}
-                                />
-                            </Col>
-
+                            {
+                                form.salasChoque === "true" ?
+                                    <>
+                                        {/*Salas de choque Cantidad*/}
+                                        <Col xs={12} md={4} className="mb-3">
+                                            <GetInput
+                                                id="salasChoqueCantidad"
+                                                label="Salas de choque"
+                                                value={form.salasChoqueCantidad}
+                                                name="salasChoqueCantidad"
+                                                handleChange={handleChange}
+                                                tooltipDescrip="Número de Salas de choque"
+                                                type="number"
+                                                min={0}
+                                                isRequired={true}
+                                                placement="top"
+                                                show={true}
+                                            />
+                                        </Col>
+                                    </> : null
+                            }
                         </Row>
                     </Col>
 
@@ -1895,25 +1900,27 @@ function Urgencias(props) {
                                 isRequired={true}
                                 childId="salasCuracionesYesosCantidad"
                             />
-
-
-                            {/*Salas de curaciones y yesos Cantidad*/}
-                            <Col xs={12} md={4} className="mb-3">
-                                <GetInput
-                                    id="salasCuracionesYesosCantidad"
-                                    label="Salas de curaciones y yesos"
-                                    value={form.salasCuracionesYesosCantidad}
-                                    name="salasCuracionesYesosCantidad"
-                                    handleChange={handleChange}
-                                    tooltipDescrip="Número de Salas de curaciones y yesos"
-                                    type="number"
-                                    min={0}
-                                    isRequired={true}
-                                    placement="top"
-                                    show={form.salasCuracionesYesos === "true" ? true : false}
-                                />
-                            </Col>
-
+                            {
+                                form.salasCuracionesYesos === "true" ?
+                                    <>
+                                        {/*Salas de curaciones y yesos Cantidad*/}
+                                        <Col xs={12} md={4} className="mb-3">
+                                            <GetInput
+                                                id="salasCuracionesYesosCantidad"
+                                                label="Salas de curaciones y yesos"
+                                                value={form.salasCuracionesYesosCantidad}
+                                                name="salasCuracionesYesosCantidad"
+                                                handleChange={handleChange}
+                                                tooltipDescrip="Número de Salas de curaciones y yesos"
+                                                type="number"
+                                                min={0}
+                                                isRequired={true}
+                                                placement="top"
+                                                show={true}
+                                            />
+                                        </Col>
+                                    </> : null
+                            }
                         </Row>
                     </Col>
 
@@ -1933,24 +1940,27 @@ function Urgencias(props) {
                                 isRequired={true}
                                 childId="ZonaTriageCantidad"
                             />
-
-                            {/*Zona de triage Cantidad*/}
-                            <Col xs={12} md={4} className="mb-3">
-                                <GetInput
-                                    id="ZonaTriageCantidad"
-                                    label="Zona de triage"
-                                    value={form.ZonaTriageCantidad}
-                                    name="ZonaTriageCantidad"
-                                    handleChange={handleChange}
-                                    tooltipDescrip="Número de Zona de triage"
-                                    type="number"
-                                    min={0}
-                                    isRequired={true}
-                                    placement="top"
-                                    show={form.ZonaTriage === "true" ? true : false}
-                                />
-                            </Col>
-
+                            {
+                                form.ZonaTriage === "true" ?
+                                    <>
+                                        {/*Zona de triage Cantidad*/}
+                                        <Col xs={12} md={4} className="mb-3">
+                                            <GetInput
+                                                id="ZonaTriageCantidad"
+                                                label="Zona de triage"
+                                                value={form.ZonaTriageCantidad}
+                                                name="ZonaTriageCantidad"
+                                                handleChange={handleChange}
+                                                tooltipDescrip="Número de Zona de triage"
+                                                type="number"
+                                                min={0}
+                                                isRequired={true}
+                                                placement="top"
+                                                show={true}
+                                            />
+                                        </Col>
+                                    </> : null
+                            }
                         </Row>
                     </Col>
 
@@ -2550,11 +2560,9 @@ function Transplantes(props) {
 
     return (
         <Fragment>
-
             {/*Trasplantes*/}
             <Col xs={12} md={12} className="mt-3">
                 <Row>
-
                     <Col xs={12} md={12} className="mb-3">
                         <h4 className="text-center sub-title-cmh">Trasplantes</h4>
                     </Col>
