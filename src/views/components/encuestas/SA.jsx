@@ -17,36 +17,81 @@ function SA(props) {
     const handleChange = async (e, childId) => {
         e.persist();
 
-        if (childId != null)
+        if (childId != null) {
+            const arrayChildrenids = childId.split(", ");
 
-            childId === "transplantesChildren" ?
-                await setForm(
-                    {
-                        ...form,
-                        [e.target.name]: e.target.value,
-                        ["rinion"]: null,
-                        ["higado"]: null,
-                        ["pulmon"]: null,
-                        ["corazon"]: null,
-                        ["corneas"]: null,
-                        ["hueso"]: null,
-                        ["celulasHematopoyeticas"]: null,
-                        ["otroOrgano"]: null,
-                    }
-                ) :
-                await setForm(
-                    {
-                        ...form,
-                        [e.target.name]: e.target.value,
-                        [childId]: null
-                    }
-                );
+            await setNullChildren(e.target.name, e.target.value, arrayChildrenids)
+        }
         else
             await setForm({
                 ...form,
                 [e.target.name]: e.target.value,
             });
     };
+
+    /**
+     * It sets the value of the form field to null and also sets the value of the children of the form
+     * field to null
+     */
+    const setNullChildren = async (name, value, arrayChildrenids) => {
+
+        switch (arrayChildrenids.length) {
+            case 1:
+
+                await setForm(
+                    {
+                        ...form,
+                        [name]: value,
+                        [arrayChildrenids[0]]: null
+                    }
+                )
+                break;
+
+            case 2:
+
+                await setForm(
+                    {
+                        ...form,
+                        [name]: value,
+                        [arrayChildrenids[0]]: null,
+                        [arrayChildrenids[1]]: null
+                    }
+                )
+                break;
+
+            case 3:
+
+                await setForm(
+                    {
+                        ...form,
+                        [name]: value,
+                        [arrayChildrenids[0]]: null,
+                        [arrayChildrenids[1]]: null,
+                        [arrayChildrenids[2]]: null
+                    }
+                )
+                break;
+
+            default:
+
+                await setForm(
+                    {
+                        ...form,
+                        [name]: value,
+                        [arrayChildrenids[0]]: null,
+                        [arrayChildrenids[1]]: null,
+                        [arrayChildrenids[2]]: null,
+                        [arrayChildrenids[3]]: null,
+                        [arrayChildrenids[4]]: null,
+                        [arrayChildrenids[5]]: null,
+                        [arrayChildrenids[6]]: null,
+                        [arrayChildrenids[7]]: null,
+                    }
+                )
+                break;
+        }
+
+    }
 
     return (
         <Fragment>
@@ -2580,7 +2625,7 @@ function Transplantes(props) {
                                 options={YESORNOTOPTIONS}
                                 show={true}
                                 isRequired={true}
-                                childId="transplantesChildren"
+                                childId="rinion, higado, pulmon, corazon, corneas, hueso, celulasHematopoyeticas, otroOrgano"
                             />
 
                         </Row>

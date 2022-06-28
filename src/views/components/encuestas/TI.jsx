@@ -31,6 +31,10 @@ function TI({ form, setForm }) {
 
     }
 
+    /**
+     * It takes in a name, value, and an array of children ids, and sets the value of the name to the
+     * value, and sets the value of the children ids to null
+     */
     const setNullChildren = async (name, value, arrayChildrenids) => {
 
         switch (arrayChildrenids.length) {
