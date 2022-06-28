@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { Container, Col, Row, FloatingLabel, InputGroup, Form, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Container, Col, Row, FloatingLabel, Form, OverlayTrigger, Tooltip } from "react-bootstrap";
 
 import OPTIONSPSPSE from "../../json/propiaSubrogadoPropioSubrogadoExterno.json";
 import OPTIONSAD from "../../json/analogoDigital.json";

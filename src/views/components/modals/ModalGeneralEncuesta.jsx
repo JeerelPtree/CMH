@@ -5,7 +5,8 @@ import '../../../globalStyles.css'
 import { RHo, Estructura, SA, Outsourcing, RedMedica, PH, Ops_part1, TC, GP, CAP, SI, Com, Calidad, MKT, TI } from '../encuestas/index_surveys';
 
 
-function ModalGeneralEncuesta(props) {
+function ModalGeneralEncuesta(props)
+{
 
     //we obtain the props
     const { modalIsOpen, handleModalState, dataEncuesta } = props
@@ -82,12 +83,14 @@ function ModalGeneralEncuesta(props) {
         } */
     ];
 
-    useEffect(() => {
+    useEffect(() =>
+    {
         setForm({})
     }, [modalIsOpen])
 
 
-    const switchEncuesta = (idEncuesta) => {
+    const switchEncuesta = (idEncuesta) =>
+    {
 
         let content = null;
 
@@ -102,7 +105,8 @@ function ModalGeneralEncuesta(props) {
         return content;
     }
 
-    const prueba = (e) => {
+    const prueba = (e) =>
+    {
         e.preventDefault();
         e.stopPropagation();
 

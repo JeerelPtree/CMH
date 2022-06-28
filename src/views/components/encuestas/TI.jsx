@@ -1,7 +1,6 @@
-import React, { Fragment, useState, useEffect, Children } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { Container, Col, Row, FloatingLabel, Form, OverlayTrigger, Tooltip, InputGroup } from "react-bootstrap";
 import YesOrNotOptions from "./json/yesOrNotOptionsTrueOrFalse.json"
-import SubrogadoOptions from "../../json/propiaSubrogadoPropioSubrogadoExterno.json"
 import PropioProveedorOptions from "../../json/propioProvedor.json"
 import ServidorPropioNubeOptions from "../../json/servidorPropioNube.json"
 
@@ -105,6 +104,8 @@ function TI({ form, setForm }) {
 
                             <ModuloTi1 form={form} handleChange={handleChange} />
 
+                            <ModuloTi3 form={form} handleChange={handleChange} />
+
                         </Row>
                     </Col>
                 </Row>
@@ -156,7 +157,7 @@ function ModuloTi1(props) {
                         childId='sistemaGestionHospitalariaProveedor, sistemaGestionHospitalariaPN'
                     />
 
-                    {/*Camas en Unidad de Cuidados Intentivos Adultos (UCIA)*/}
+                    {/*Gestión Hospitalaria Proveedor*/}
                     <GetInput
                         md={3}
                         label="Gestión Hospitalaria"
@@ -185,6 +186,205 @@ function ModuloTi1(props) {
                         isRequired={true}
                         show={form.sistemaGestionHospitalariaPP === "proveedor" ? true : false}
                     />
+
+                </Row>
+            </Col>
+
+            <Col xs={12} md={12} className="mt-3">
+                <Row className="justify-content-center">
+
+                    {/*¿Cuentan con expediente clínico electrónico (ECE)?*/}
+                    <GetSelector
+                        md={3}
+                        label='¿Cuentan con expediente clínico electrónico (ECE)?'
+                        style={{ height: '90px' }}
+                        value={form.expedienteClinicoElectronico}
+                        name='expedienteClinicoElectronico'
+                        tooltipDescrip='¿Cuentan con expediente clínico electrónico (ECE)?'
+                        handleChange={handleChange}
+                        options={YesOrNotOptions}
+                        isRequired={true}
+                        show={true}
+                        childId='expedienteClinicoElectronicoPP, expedienteClinicoElectronicoProveedor, expedienteClinicoElectronicoPN'
+                    />
+
+                    {/*Expediente clínico electrónico Propio o Proveedor*/}
+                    <GetSelector
+                        md={3}
+                        label='Expediente clínico electrónico'
+                        style={{ height: '90px' }}
+                        value={form.expedienteClinicoElectronicoPP}
+                        name='expedienteClinicoElectronicoPP'
+                        tooltipDescrip='Expediente clínico electrónico es propio o de un proveedor'
+                        handleChange={handleChange}
+                        options={PropioProveedorOptions}
+                        isRequired={true}
+                        show={form.expedienteClinicoElectronico === "true" ? true : false}
+                        childId='expedienteClinicoElectronicoProveedor, expedienteClinicoElectronicoPN'
+                    />
+
+                    {/*Expediente clínico electrónico Proveedor*/}
+                    <GetInput
+                        md={3}
+                        label="Expediente clínico electrónico"
+                        value={form.expedienteClinicoElectronicoProveedor}
+                        name="expedienteClinicoElectronicoProveedor"
+                        handleChange={handleChange}
+                        tooltipDescrip="¿Quién es su proveedor?"
+                        type="text"
+                        min={0}
+                        isRequired={true}
+                        placement="top"
+                        show={form.expedienteClinicoElectronicoPP === "proveedor" ? true : false}
+                        style={{ height: "90px" }}
+                    />
+
+                    {/*Expediente clínico electrónico Proveedor*/}
+                    <GetSelector
+                        md={3}
+                        label='Expediente clínico electrónico'
+                        style={{ height: '90px' }}
+                        value={form.expedienteClinicoElectronicoPN}
+                        name='expedienteClinicoElectronicoPN'
+                        tooltipDescrip='¿Su servidor es propio o se encuentra en la nube?'
+                        handleChange={handleChange}
+                        options={ServidorPropioNubeOptions}
+                        isRequired={true}
+                        show={form.expedienteClinicoElectronicoPP === "proveedor" ? true : false}
+                    />
+
+                </Row>
+            </Col>
+
+            <Col xs={12} md={12} className="mt-3">
+                <Row className="justify-content-center">
+
+                    {/*¿Cuentan con sistema de administración integrado? */}
+                    <GetSelector
+                        md={3}
+                        label='¿Cuentan con sistema de administración integrado?'
+                        style={{ height: '90px' }}
+                        value={form.sistemaAdministracionIntegrado}
+                        name='sistemaAdministracionIntegrado'
+                        tooltipDescrip='¿Cuentan con sistema de administración integrado?'
+                        handleChange={handleChange}
+                        options={YesOrNotOptions}
+                        isRequired={true}
+                        show={true}
+                        childId='sistemaAdministracionIntegradoPP, sistemaAdministracionIntegradoProveedor, sistemaAdministracionIntegradoPN'
+                    />
+
+                    {/* Administración Integrado Propio o Proveedor*/}
+                    <GetSelector
+                        md={3}
+                        label='Administración Integrado'
+                        style={{ height: '90px' }}
+                        value={form.sistemaAdministracionIntegradoPP}
+                        name='sistemaAdministracionIntegradoPP'
+                        tooltipDescrip='Sistema de administración integrado es propio o de un proveedor'
+                        handleChange={handleChange}
+                        options={PropioProveedorOptions}
+                        isRequired={true}
+                        show={form.sistemaAdministracionIntegrado === "true" ? true : false}
+                        childId='sistemaAdministracionIntegradoProveedor, sistemaAdministracionIntegradoPN'
+                    />
+
+                    {/* Administración Integrado Proveedor*/}
+                    <GetInput
+                        md={3}
+                        label="Administración Integrado"
+                        value={form.sistemaAdministracionIntegradoProveedor}
+                        name="sistemaAdministracionIntegradoProveedor"
+                        handleChange={handleChange}
+                        tooltipDescrip="¿Quién es su proveedor?"
+                        type="text"
+                        min={0}
+                        isRequired={true}
+                        placement="top"
+                        show={form.sistemaAdministracionIntegradoPP === "proveedor" ? true : false}
+                        style={{ height: "90px" }}
+                    />
+
+                    {/* Administración Integrado Proveedor*/}
+                    <GetSelector
+                        md={3}
+                        label='Administración Integrado'
+                        style={{ height: '90px' }}
+                        value={form.sistemaAdministracionIntegradoPN}
+                        name='sistemaAdministracionIntegradoPN'
+                        tooltipDescrip='¿Su servidor es propio o se encuentra en la nube?'
+                        handleChange={handleChange}
+                        options={ServidorPropioNubeOptions}
+                        isRequired={true}
+                        show={form.sistemaAdministracionIntegradoPP === "proveedor" ? true : false}
+                    />
+
+                </Row>
+            </Col>
+
+            <Col xs={12} md={12} className="mt-3">
+                <Row className="justify-content-center">
+
+                    {/* ¿Cuentan con RIS? */}
+                    <GetSelector
+                        md={3}
+                        label='¿Cuentan con RIS?'
+                        style={{ height: '90px' }}
+                        value={form.sistemaInformacionRadiologica}
+                        name='sistemaInformacionRadiologica'
+                        tooltipDescrip='¿Cuentan con sistema de información radiológica?'
+                        handleChange={handleChange}
+                        options={YesOrNotOptions}
+                        isRequired={true}
+                        show={true}
+                    />
+
+                    <GetSelector
+                        md={3}
+                        label='¿Cuentan con PACS?'
+                        style={{ height: '90px' }}
+                        value={form.sistemaComunicacionyArchivadoImagenes}
+                        name='sistemaComunicacionyArchivadoImagenes'
+                        tooltipDescrip='¿Cuentan con sistema de comunicación y archivado de imágenes?'
+                        handleChange={handleChange}
+                        options={YesOrNotOptions}
+                        isRequired={true}
+                        show={true}
+                    />
+
+                </Row>
+            </Col>
+
+
+        </>
+    )
+
+}
+
+function ModuloTi3(props) {
+
+    //we obtain their props 
+    const { form, handleChange } = props;
+
+    return (
+        <>
+
+            {/*Sistemas y Tecnologías de la información*/}
+            <Col xs={12} md={12} className="">
+                <h4 className="text-center title-cmh">Sistemas y Tecnologías de la información</h4>
+            </Col>
+
+            <Col xs={12} md={12} className="mt-3">
+                <Row className="justify-content-center">
+
+                    <Col xs={12} md={12}>
+                        <Form.Check
+                            type="checkbox"
+                            label="Admisión"
+                            value={form.admision}
+                            name="admision"
+                        />
+                    </Col>
 
                 </Row>
             </Col>
@@ -348,6 +548,10 @@ function GetSelector(props) {
         return null;
     }
 }
+
+/* function GetCheckBox(props){
+
+} */
 
 
 export default TI;
