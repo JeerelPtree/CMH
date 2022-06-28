@@ -1,6 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { Container, Col, Row, FloatingLabel, InputGroup, Form, OverlayTrigger, Tooltip } from "react-bootstrap";
-//import axios from "axios"
 
 import OPTIONSPSPSE from "../../json/propiaSubrogadoPropioSubrogadoExterno.json";
 import OPTIONSAD from "../../json/analogoDigital.json";
@@ -2571,11 +2570,9 @@ function Transplantes(props)
 
     return (
         <Fragment>
-
             {/*Trasplantes*/}
             <Col xs={12} md={12} className="mt-3">
                 <Row>
-
                     <Col xs={12} md={12} className="mb-3">
                         <h4 className="text-center sub-title-cmh">Trasplantes</h4>
                     </Col>

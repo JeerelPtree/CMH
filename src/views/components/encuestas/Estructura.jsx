@@ -1,14 +1,7 @@
-import React, { Input, Fragment, useState, useEffect } from "react";
-import { Stack, Container, Col, Row, FloatingLabel, Button, Form, OverlayTrigger, Tooltip, FormGroup, InputGroup } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import OrganosCrud from "../tables/OrganosCrud";
-import ModalAdd from "../modals/modals encuestas/Estructura/ModalAdd";
+import React, { Fragment, useState, useEffect } from "react";
+import { Container, Col, Row, FloatingLabel, Form, OverlayTrigger, Tooltip, InputGroup } from "react-bootstrap";
 import YesOrNotOptions from "./json/yesOrNotOptionsTrueOrFalse.json"
 import SubrogadoOptions from "../../json/propiaSubrogadoPropioSubrogadoExterno.json"
-
-//import axios from "axios"
-
 
 //we import css
 import "../../../globalStyles.css"
