@@ -1,7 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { Container, Col, Row, FloatingLabel, InputGroup, Form, OverlayTrigger, Tooltip, } from "react-bootstrap";
-import { faL, faUserDoctor } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Container, Col, Row, FloatingLabel, InputGroup, Form, OverlayTrigger, Tooltip } from "react-bootstrap";
 //import axios from "axios"
 
 import OPTIONSPSPSE from "../../json/propiaSubrogadoPropioSubrogadoExterno.json";
@@ -1992,23 +1990,27 @@ function Urgencias(props)
                                 childId="consultoriosCantidad"
                             />
 
-
-                            {/*Consultorios Cantidad*/}
-                            <Col xs={12} md={4} className="mb-3">
-                                <GetInput
-                                    id="consultoriosCantidad"
-                                    label="Consultorios"
-                                    value={form.consultoriosCantidad}
-                                    name="consultoriosCantidad"
-                                    handleChange={handleChange}
-                                    tooltipDescrip="Número de Consultorios"
-                                    type="number"
-                                    min={0}
-                                    isRequired={true}
-                                    placement="top"
-                                    show={form.consultorios === "true" ? true : false}
-                                />
-                            </Col>
+                            {
+                                form.consultorios === "true" ?
+                                    <>
+                                        {/*Consultorios Cantidad*/}
+                                        <Col xs={12} md={4} className="mb-3">
+                                            <GetInput
+                                                id="consultoriosCantidad"
+                                                label="Consultorios"
+                                                value={form.consultoriosCantidad}
+                                                name="consultoriosCantidad"
+                                                handleChange={handleChange}
+                                                tooltipDescrip="Número de Consultorios"
+                                                type="number"
+                                                min={0}
+                                                isRequired={true}
+                                                placement="top"
+                                                show={true}
+                                            />
+                                        </Col>
+                                    </> : null
+                            }
 
                         </Row>
                     </Col>
@@ -2030,23 +2032,27 @@ function Urgencias(props)
                                 childId="salaRayosXCantidad"
                             />
 
-
-                            {/*Sala de rayos X Cantidad*/}
-                            <Col xs={12} md={4} className="mb-3">
-                                <GetInput
-                                    id="salaRayosXCantidad"
-                                    label="Sala de rayos X"
-                                    value={form.salaRayosXCantidad}
-                                    name="salaRayosXCantidad"
-                                    handleChange={handleChange}
-                                    tooltipDescrip="Número de Sala de rayos X"
-                                    type="number"
-                                    min={0}
-                                    isRequired={true}
-                                    placement="top"
-                                    show={form.salaRayosX === "true" ? true : false}
-                                />
-                            </Col>
+                            {
+                                form.salaRayosX === "true" ?
+                                    <>
+                                        {/*Sala de rayos X Cantidad*/}
+                                        <Col xs={12} md={4} className="mb-3">
+                                            <GetInput
+                                                id="salaRayosXCantidad"
+                                                label="Sala de rayos X"
+                                                value={form.salaRayosXCantidad}
+                                                name="salaRayosXCantidad"
+                                                handleChange={handleChange}
+                                                tooltipDescrip="Número de Sala de rayos X"
+                                                type="number"
+                                                min={0}
+                                                isRequired={true}
+                                                placement="top"
+                                                show={form.salaRayosX === "true" ? true : false}
+                                            />
+                                        </Col>
+                                    </> : null
+                            }
 
                         </Row>
                     </Col>
@@ -2068,22 +2074,30 @@ function Urgencias(props)
                                 childId="duchaEmergenciaCantidad"
                             />
 
-                            {/*Ducha de emergencia Cantidad*/}
-                            <Col xs={12} md={4} className="mb-3">
-                                <GetInput
-                                    id="duchaEmergenciaCantidad"
-                                    label="Ducha de emergencia"
-                                    value={form.duchaEmergenciaCantidad}
-                                    name="duchaEmergenciaCantidad"
-                                    handleChange={handleChange}
-                                    tooltipDescrip="Número de Ducha de emergencia"
-                                    type="number"
-                                    min={0}
-                                    isRequired={true}
-                                    placement="top"
-                                    show={form.duchaEmergencia === "true" ? true : false}
-                                />
-                            </Col>
+                            {
+
+                                form.duchaEmergencia === "true" ?
+                                    <>
+                                        {/*Ducha de emergencia Cantidad*/}
+                                        < Col xs={12} md={4} className="mb-3">
+                                            <GetInput
+                                                id="duchaEmergenciaCantidad"
+                                                label="Ducha de emergencia"
+                                                value={form.duchaEmergenciaCantidad}
+                                                name="duchaEmergenciaCantidad"
+                                                handleChange={handleChange}
+                                                tooltipDescrip="Número de Ducha de emergencia"
+                                                type="number"
+                                                min={0}
+                                                isRequired={true}
+                                                placement="top"
+                                                show={true}
+                                            />
+                                        </Col>
+                                    </>
+                                    : null
+
+                            }
 
                         </Row>
                     </Col>
@@ -2105,23 +2119,28 @@ function Urgencias(props)
                                 childId="estacionLavadoOjosCantidad"
                             />
 
+                            {
+                                form.estacionLavadoOjos === "true" ?
+                                    <>
+                                        {/*Estación para lavado de ojos Cantidad*/}
+                                        <Col xs={12} md={4}>
+                                            <GetInput
+                                                id="estacionLavadoOjosCantidad"
+                                                label="Estación para lavado de ojos"
+                                                value={form.estacionLavadoOjosCantidad}
+                                                name="estacionLavadoOjosCantidad"
+                                                handleChange={handleChange}
+                                                tooltipDescrip="Número de Estación para lavado de ojos"
+                                                type="number"
+                                                min={0}
+                                                isRequired={true}
+                                                placement="top"
+                                                show={true}
+                                            />
+                                        </Col>
+                                    </> : null
+                            }
 
-                            {/*Estación para lavado de ojos Cantidad*/}
-                            <Col xs={12} md={4} className="mb-3">
-                                <GetInput
-                                    id="estacionLavadoOjosCantidad"
-                                    label="Estación para lavado de ojos"
-                                    value={form.estacionLavadoOjosCantidad}
-                                    name="estacionLavadoOjosCantidad"
-                                    handleChange={handleChange}
-                                    tooltipDescrip="Número de Estación para lavado de ojos"
-                                    type="number"
-                                    min={0}
-                                    isRequired={true}
-                                    placement="top"
-                                    show={form.estacionLavadoOjos === "true" ? true : false}
-                                />
-                            </Col>
                         </Row>
                     </Col>
 
@@ -2142,27 +2161,33 @@ function Urgencias(props)
                                 childId="carroRojoCantidad"
                             />
 
-                            {/*Carro rojo Cantidad*/}
-                            <Col xs={12} md={4} className="mb-3">
-                                <GetInput
-                                    id="carroRojoCantidad"
-                                    label="Carro rojo"
-                                    value={form.carroRojoCantidad}
-                                    name="carroRojoCantidad"
-                                    handleChange={handleChange}
-                                    tooltipDescrip="Número de Carro rojo"
-                                    type="number"
-                                    min={0}
-                                    isRequired={true}
-                                    placement="top"
-                                    show={form.carroRojo === "true" ? true : false}
-                                />
-                            </Col>
+                            {
+                                form.carroRojo === "true" ?
+                                    <>
+                                        {/*Carro rojo Cantidad*/}
+                                        <Col xs={12} md={4} className="mb-3">
+                                            <GetInput
+                                                id="carroRojoCantidad"
+                                                label="Carro rojo"
+                                                value={form.carroRojoCantidad}
+                                                name="carroRojoCantidad"
+                                                handleChange={handleChange}
+                                                tooltipDescrip="Número de Carro rojo"
+                                                type="number"
+                                                min={0}
+                                                isRequired={true}
+                                                placement="top"
+                                                show={true}
+                                            />
+                                        </Col>
+                                    </> : null
+                            }
+
                         </Row>
                     </Col>
                 </Row>
-            </Col>
-        </Fragment>
+            </Col >
+        </Fragment >
     );
 }
 
@@ -2546,9 +2571,11 @@ function Transplantes(props)
 
     return (
         <Fragment>
+
             {/*Trasplantes*/}
             <Col xs={12} md={12} className="mt-3">
                 <Row>
+
                     <Col xs={12} md={12} className="mb-3">
                         <h4 className="text-center sub-title-cmh">Trasplantes</h4>
                     </Col>
@@ -2725,7 +2752,8 @@ function GetInput(props)
 function GetSelector(props)
 {
     //we obtain their props
-    const { label, style = null, value, tooltipDescrip, name, handleChange, options, isRequired, show, xs = 12, md = 4, containerClass = "mb-3", childId = null, id = null, } = props;
+    const { label, style = null, value, tooltipDescrip, name, handleChange, options, isRequired, show, xs = 12, md = 4, containerClass = "mb-3", childId = null, id = null } = props;
+
     if (show == true) {
         return (
             <Fragment>
@@ -2761,7 +2789,6 @@ function GetSelector(props)
             </Fragment>
         );
     } else {
-        /* id && clearSelector(id); */
         return null;
     }
 }
