@@ -1,0 +1,26 @@
+[
+    {
+        "value": "Admisión",
+        "label": "Admisión"
+    },
+    {
+        "value": "Expediente Clínico",
+        "label": "Expediente Clínico"
+    },
+    {
+        "value": "Receta Electrónica",
+        "label": "Receta Electrónica"
+    },
+    {
+        "value": "Laboratorio",
+        "label": "Laboratorio"
+    },
+    {
+        "value": "Nutrición",
+        "label": "Nutrición"
+    },
+    {
+        "value": "Imagenología",
+        "label": "Imagenología"
+    }
+]

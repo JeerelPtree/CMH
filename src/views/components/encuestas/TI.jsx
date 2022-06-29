@@ -3,19 +3,18 @@ import { Container, Col, Row, FloatingLabel, Form, OverlayTrigger, Tooltip, Inpu
 import YesOrNotOptions from "./json/yesOrNotOptionsTrueOrFalse.json"
 import PropioProveedorOptions from "../../json/propioProvedor.json"
 import ServidorPropioNubeOptions from "../../json/servidorPropioNube.json"
+import ExpendienteClinicoOptions from "../../json/expedienteClinico.json"
+import Select from "react-select";
 
 //we import css
 import "../../../globalStyles.css"
 
 const currentYear = new Date().getFullYear();
 
-function TI({ form, setForm })
-{
+function TI({ form, setForm }) {
 
     //module's functions
-    const handleChange = async (e, childId) =>
-    {
-        console.log("e", e)
+    const handleChange = async (e, childId) => {
         e.persist();
 
         if (childId != null) {
@@ -36,8 +35,7 @@ function TI({ form, setForm })
      * It takes in a name, value, and an array of children ids, and sets the value of the name to the
      * value, and sets the value of the children ids to null
      */
-    const setNullChildren = async (name, value, arrayChildrenids) =>
-    {
+    const setNullChildren = async (name, value, arrayChildrenids) => {
 
         switch (arrayChildrenids.length) {
             case 1:
@@ -107,7 +105,7 @@ function TI({ form, setForm })
 
                             <ModuloTi1 form={form} handleChange={handleChange} />
 
-                            <ModuloTi3 form={form} handleChange={handleChange} />
+                            <ModuloTi3 form={form} handleChange={handleChange} setForm={setForm} />
 
                         </Row>
                     </Col>
@@ -119,8 +117,7 @@ function TI({ form, setForm })
 
 }
 
-function ModuloTi1(props)
-{
+function ModuloTi1(props) {
 
     //we obtain their props 
     const { form, handleChange } = props;
@@ -365,11 +362,26 @@ function ModuloTi1(props)
 
 }
 
-function ModuloTi3(props)
-{
+function ModuloTi3(props) {
 
     //we obtain their props 
-    const { form, handleChange } = props;
+    const { form, handleChange, setForm } = props;
+
+    const handleMultiSelectExpedienteClinicoElectronico = async (a) => {
+
+        console.log('a: ', a)
+
+        await setForm(
+            {
+                ...form,
+                expedienteClinicoElectronico: a
+            }
+        );
+    }
+
+    const prueba = () => {
+        console.log(form)
+    }
 
     return (
         <>
@@ -377,6 +389,19 @@ function ModuloTi3(props)
             {/*Expediente Clínico Electrónico*/}
             <Col xs={12} md={12} className="mt-4">
                 <h4 className="text-center title-cmh">Expediente Clínico Electrónico</h4>
+
+                <Row className="justify-content-center">
+
+                    <MultiSelect
+                        options={ExpendienteClinicoOptions}
+                        form={form}
+                        label="Expediente Clínico Electrónico"
+                        name={"expedienteClinicoElectronico"}
+                        handleChange={handleMultiSelectExpedienteClinicoElectronico}
+                        tooltipDescrip={`Seleccione de la lista los Expediente Clínico Electrónico`}
+                    />
+
+                </Row>
 
                 <Row className="justify-content-center">
                     <GetCheckBox
@@ -637,8 +662,7 @@ function ModuloTi3(props)
 
 }
 
-function GetInput(props)
-{
+function GetInput(props) {
 
     //we obtain their props
     const { label, value, name, handleChange, tooltipDescrip, min, type, isRequired, placement, show, isReadOnly = false, isTextArea = false, style = null,
@@ -677,8 +701,7 @@ function GetInput(props)
     }
 }
 
-function GetInputFormat(props)
-{
+function GetInputFormat(props) {
 
     //we obtain their props
     const { label, value, name, handleChange, tooltipDescrip, type, min, isRequired, placement, show, isReadOnly = false, leftSymbol, rightSymbol, isLeft = false, isRight = false } = props
@@ -744,8 +767,7 @@ function GetInputFormat(props)
     }
 }
 
-function GetSelector(props)
-{
+function GetSelector(props) {
 
     //we obtain their props
     const { label, style = null, value, tooltipDescrip, name, handleChange, options, isRequired, show, xs = 12, md = 6, containerClass = "mb-3", childId = null, id = null } = props;
@@ -774,8 +796,7 @@ function GetSelector(props)
                             >
                                 <option value="" disabled>Seleccione una opción</option>
                                 {
-                                    options.map((option) =>
-                                    {
+                                    options.map((option) => {
                                         return (
                                             <Fragment key={option.id}>
                                                 <option value={option.value}>{option.name}</option>
@@ -796,8 +817,7 @@ function GetSelector(props)
     }
 }
 
-function GetCheckBox(props)
-{
+function GetCheckBox(props) {
 
     const { label, value, name, handleChange, type, isRequired = false, show,
         xs = 12, md = 3, containerClass = "mt-3" } = props
@@ -825,6 +845,45 @@ function GetCheckBox(props)
         return null;
     }
 
+}
+
+function MultiSelect(props) {
+
+    //we obtain their props
+    const { label, tooltipDescrip, name, handleChange, options, xs = 12, md = 6, containerClass = "mb-3", dataSelector = null } = props;
+
+    return (
+        <>
+            <Col xs={xs} md={md} className={containerClass}>
+                <OverlayTrigger
+                    placement="top"
+                    overlay={
+                        <Tooltip>{tooltipDescrip}</Tooltip>
+                    }>
+                    <span>
+                        <Select
+                            placeholder={label}
+                            name={name}
+                            onChange={handleChange}
+                            closeMenuOnSelect={false}
+                            isMulti
+                            defaultValue={dataSelector}
+                            options={options}
+                            styles={{
+                                multiValueLabel: (base) => ({
+                                    ...base,
+                                    backgroundColor: "#C6D602",
+                                    color: '#004976',
+                                    fontWeight: "bold",
+                                    hover: "none"
+                                }),
+                            }}
+                        />
+                    </span>
+                </OverlayTrigger>
+            </Col>
+        </>
+    )
 }
 
 
