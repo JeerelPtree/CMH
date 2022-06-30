@@ -22,12 +22,10 @@ import "../../../globalStyles.css"
 
 const currentYear = new Date().getFullYear();
 
-function TI({ form, setForm })
-{
+function TI({ form, setForm }) {
 
     //module's functions
-    const handleChange = async (e, childId) =>
-    {
+    const handleChange = async (e, childId) => {
         e.persist();
 
         if (childId != null) {
@@ -49,8 +47,7 @@ function TI({ form, setForm })
      * It takes in a name, value, and an array of children ids, and sets the value of the name to the
      * value, and sets the value of the children ids to null
      */
-    const setNullChildren = async (name, value, arrayChildrenids) =>
-    {
+    const setNullChildren = async (name, value, arrayChildrenids) => {
 
         switch (arrayChildrenids.length) {
             case 1:
@@ -132,8 +129,7 @@ function TI({ form, setForm })
 
 }
 
-function ModuloTi1(props)
-{
+function ModuloTi1(props) {
 
     //we obtain their props 
     const { form, handleChange } = props;
@@ -378,14 +374,12 @@ function ModuloTi1(props)
 
 }
 
-function ModuloTi3(props)
-{
+function ModuloTi3(props) {
 
     //we obtain their props 
     const { form, handleChange, setForm } = props;
 
-    const handleMultiSelectExpedienteClinicoElectronico = async (a) =>
-    {
+    const handleMultiSelectExpedienteClinicoElectronico = async (a) => {
         await setForm(
             {
                 ...form,
@@ -394,8 +388,7 @@ function ModuloTi3(props)
         );
     }
 
-    const handleMultiSelectContabilidad = async (a) =>
-    {
+    const handleMultiSelectContabilidad = async (a) => {
         await setForm(
             {
                 ...form,
@@ -404,8 +397,7 @@ function ModuloTi3(props)
         );
     }
 
-    const handleMultiSelectRecursosHumanos = async (a) =>
-    {
+    const handleMultiSelectRecursosHumanos = async (a) => {
         await setForm(
             {
                 ...form,
@@ -414,48 +406,54 @@ function ModuloTi3(props)
         );
     }
 
-    const prueba = () =>
-    {
+    const prueba = () => {
         console.log(form)
     }
 
     return (
         <>
 
-            {/*Expediente Clínico Electrónico*/}
             <Col xs={12} md={12} className="mt-4">
-                <h4 className="text-center title-cmh">Expediente Clínico Electrónico</h4>
+                <Row>
 
-                <Row className="justify-content-center">
+                    {/*Expediente Clínico Electrónico*/}
+                    <Col xs={12} md={6}>
+                        <Row className="justify-content-center">
 
-                    <MultiSelect
-                        options={ExpendienteClinicoOptions}
-                        form={form}
-                        label="Expediente Clínico Electrónico"
-                        name={"expedienteClinicoElectronico"}
-                        handleChange={handleMultiSelectExpedienteClinicoElectronico}
-                        tooltipDescrip={`Seleccione una opción de la lista los Expediente Clínico Electrónico`}
-                    />
+                            <h4 className="text-center title-cmh">Expediente Clínico Electrónico</h4>
+
+                            <MultiSelect
+                                options={ExpendienteClinicoOptions}
+                                form={form}
+                                label="Expediente Clínico Electrónico"
+                                name={"expedienteClinicoElectronico"}
+                                handleChange={handleMultiSelectExpedienteClinicoElectronico}
+                                tooltipDescrip={`Seleccione una opción de la lista los Expediente Clínico Electrónico`}
+                            />
+                        </Row>
+                    </Col>
+
+                    {/*Contabilidad*/}
+                    <Col xs={12} md={6}>
+
+                        <Row className="justify-content-center">
+
+                            <h4 className="text-center title-cmh">Contabilidad</h4>
+
+                            <MultiSelect
+                                options={ContabilidadOptions}
+                                form={form}
+                                label="Contabilidad"
+                                name={"contabilidad"}
+                                handleChange={handleMultiSelectContabilidad}
+                                tooltipDescrip={`Seleccione una opción de la lista de Contabilidad`}
+                            />
+                        </Row>
+
+                    </Col>
 
                 </Row>
-            </Col>
 
-            {/*Contabilidad*/}
-            <Col xs={12} md={12} className="mt-4">
-                <h4 className="text-center title-cmh">Contabilidad</h4>
-
-                <Row className="justify-content-center">
-
-                    <MultiSelect
-                        options={ContabilidadOptions}
-                        form={form}
-                        label="Contabilidad"
-                        name={"contabilidad"}
-                        handleChange={handleMultiSelectContabilidad}
-                        tooltipDescrip={`Seleccione una opción de la lista de Contabilidad`}
-                    />
-
-                </Row>
             </Col>
 
             {/*Recursos humanos*/}
@@ -671,14 +669,13 @@ function ModuloTi3(props)
 
 }
 
-function GetInput(props)
-{
+function GetInput(props) {
 
     //we obtain their props
     const { label, value, name, handleChange, tooltipDescrip, min, type, isRequired, placement, show, isReadOnly = false, isTextArea = false, style = null,
         xs = 12, md = 6, containerClass = "mb-3" } = props
 
-    if (show == true) {
+    if (show === true) {
         return (
             <Fragment>
                 <Col xs={xs} md={md} className={containerClass}>
@@ -711,13 +708,12 @@ function GetInput(props)
     }
 }
 
-function GetInputFormat(props)
-{
+function GetInputFormat(props) {
 
     //we obtain their props
     const { label, value, name, handleChange, tooltipDescrip, type, min, isRequired, placement, show, isReadOnly = false, leftSymbol, rightSymbol, isLeft = false, isRight = false } = props
 
-    if (show == true && isLeft == true) {
+    if (show === true && isLeft === true) {
         return (
             <Fragment>
                 <InputGroup className="justify-content-center">
@@ -746,7 +742,7 @@ function GetInputFormat(props)
                 </InputGroup>
             </Fragment>
         )
-    } else if (show == true && isRight == true) {
+    } else if (show === true && isRight === true) {
         return (
             <Fragment>
                 <InputGroup className="justify-content-center">
@@ -778,8 +774,7 @@ function GetInputFormat(props)
     }
 }
 
-function GetSelector(props)
-{
+function GetSelector(props) {
 
     //we obtain their props
     const { label, style = null, value, tooltipDescrip, name, handleChange, options, isRequired, show, xs = 12, md = 6, containerClass = "mb-3", childId = null, id = null } = props;
@@ -788,7 +783,7 @@ function GetSelector(props)
 
             console.log("ID:", flag) */
 
-    if (show == true) {
+    if (show === true) {
         return (
             <Fragment>
                 <Col xs={xs} md={md} className={containerClass}>
@@ -808,8 +803,7 @@ function GetSelector(props)
                             >
                                 <option value="" disabled>Seleccione una opción</option>
                                 {
-                                    options.map((option) =>
-                                    {
+                                    options.map((option) => {
                                         return (
                                             <Fragment key={option.id}>
                                                 <option value={option.value}>{option.name}</option>
@@ -830,14 +824,13 @@ function GetSelector(props)
     }
 }
 
-function GetSelectorOneOption(props)
-{
+function GetSelectorOneOption(props) {
 
     //we obtain their props
     const { label, style = null, value, tooltipDescrip, name, handleChange, options, isRequired, show,
         xs = 12, md = 6, containerClass = "mb-3", childId = null, id = null } = props;
 
-    if (show == true) {
+    if (show === true) {
         return (
             <Fragment>
                 <Col xs={xs} md={md} className={containerClass}>
@@ -857,8 +850,7 @@ function GetSelectorOneOption(props)
                             >
                                 <option value="">Seleccione una opción</option>
                                 {
-                                    options.map((option) =>
-                                    {
+                                    options.map((option) => {
                                         return (
                                             <Fragment key={option.id}>
                                                 <option value={option.value}>{option.name}</option>
@@ -879,8 +871,7 @@ function GetSelectorOneOption(props)
     }
 }
 
-function GetCheckBox(props)
-{
+function GetCheckBox(props) {
 
     const { label, value, name, handleChange, type, isRequired = false, show,
         xs = 12, md = 3, containerClass = "mt-3" } = props
@@ -910,11 +901,10 @@ function GetCheckBox(props)
 
 }
 
-function MultiSelect(props)
-{
+function MultiSelect(props) {
 
     //we obtain their props
-    const { label, tooltipDescrip, name, handleChange, options, xs = 12, md = 6, containerClass = "mb-3", dataSelector = null } = props;
+    const { label, tooltipDescrip, name, handleChange, options, xs = 12, md = 12, containerClass = "mb-3", dataSelector = null } = props;
 
     return (
         <>
