@@ -1,0 +1,26 @@
+[
+    {
+        "value": "Inventarios",
+        "label": "Inventarios"
+    },
+    {
+        "value": "Cuentas por Cobrar",
+        "label": "Cuentas por Cobrar"
+    },
+    {
+        "value": "Cuentas por Pagar",
+        "label": "Cuentas por Pagar"
+    },
+    {
+        "value": "Caja",
+        "label": "Caja"
+    },
+    {
+        "value": "Presupuestos",
+        "label": "Presupuestos"
+    },
+    {
+        "value": "Compras",
+        "label": "Compras"
+    }
+]
