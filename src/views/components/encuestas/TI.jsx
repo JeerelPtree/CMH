@@ -6,15 +6,6 @@ import ServidorPropioNubeOptions from "../../json/servidorPropioNube.json"
 import ExpendienteClinicoOptions from "../../json/expedienteClinico.json"
 import ContabilidadOptions from "../../json/contabilidad.json"
 import RecursosHumanosOptions from "../../json/recursosHumanos.json"
-import GestionQuirofonoOptions from "../../json/gestionQuirofano.json"
-import ModuloUrgenciasOptions from "../../json/moduloUrgencias.json"
-import AdministracionCitasAgendaOptions from "../../json/administracionCitasAgenda.json"
-import BancoSangreOptions from "../../json/bancoSangre.json"
-import SistemasSeguridadOptions from "../../json/sistemasSeguridad.json"
-import ReportesEstadisticaAnalisisOptions from "../../json/reportesEstadisticaAnalisis.json"
-import GestionCamasOptions from "../../json/gestionCamas.json"
-import ModuloReferenciaContraReferenciaOptions from "../../json/moduloReferenciaContraReferencia.json"
-import ModuloEnfermeriaOptions from "../../json/moduloEnfermeria.json"
 import Select from "react-select";
 
 //we import css 
@@ -22,10 +13,12 @@ import "../../../globalStyles.css"
 
 const currentYear = new Date().getFullYear();
 
-function TI({ form, setForm }) {
+function TI({ form, setForm })
+{
 
     //module's functions
-    const handleChange = async (e, childId) => {
+    const handleChange = async (e, childId) =>
+    {
         e.persist();
 
         if (childId != null) {
@@ -47,7 +40,8 @@ function TI({ form, setForm }) {
      * It takes in a name, value, and an array of children ids, and sets the value of the name to the
      * value, and sets the value of the children ids to null
      */
-    const setNullChildren = async (name, value, arrayChildrenids) => {
+    const setNullChildren = async (name, value, arrayChildrenids) =>
+    {
 
         switch (arrayChildrenids.length) {
             case 1:
@@ -129,7 +123,8 @@ function TI({ form, setForm }) {
 
 }
 
-function ModuloTi1(props) {
+function ModuloTi1(props)
+{
 
     //we obtain their props 
     const { form, handleChange } = props;
@@ -374,12 +369,68 @@ function ModuloTi1(props) {
 
 }
 
-function ModuloTi3(props) {
+function ModuloTi3(props)
+{
 
     //we obtain their props 
     const { form, handleChange, setForm } = props;
 
-    const handleMultiSelectExpedienteClinicoElectronico = async (a) => {
+    const ModuloEnfermeriaOptions = [{
+        "value": "Módulo Enfermería",
+        "name": "Módulo Enfermería",
+        "id": 1
+    }]
+
+    const ModuloReferenciaContraReferenciaOptions = [{
+        "value": "Módulo Referencia y Contra-Referencia",
+        "name": "Módulo Referencia y Contra-Referencia",
+        "id": 1
+    }]
+
+    const ModuloUrgenciasOptions = [{
+        "value": "Traige Categorización Pacientes",
+        "name": "Traige Categorización Pacientes",
+        "id": 1
+    }]
+
+    const GestionCamasOptions = [{
+        "value": "Gestión de Camas",
+        "name": "Gestión de Camas",
+        "id": 1
+    }]
+
+    const GestionQuirofonoOptions = [{
+        "value": "Tabla Pre-Quirúrgica y Quirúrgica",
+        "name": "Tabla Pre-Quirúrgica y Quirúrgica",
+        "id": 1
+    }]
+
+    const ReportesEstadisticaAnalisisOptions = [{
+        "value": "Reportes, Estadística y/o Análisis",
+        "name": "Reportes, Estadística y/o Análisis",
+        "id": 1
+    }]
+
+    const SistemasSeguridadOptions = [{
+        "value": "Sistemas de Seguridad",
+        "name": "Sistemas de Seguridad",
+        "id": 1
+    }]
+
+    const BancoSangreOptions = [{
+        "value": "Banco de Sangre",
+        "name": "Banco de Sangre",
+        "id": 1
+    }]
+
+    const AdministracionCitasAgendaOptions = [{
+        "value": "Administración de Citas y Agenda",
+        "name": "Administración de Citas y Agenda",
+        "id": 1
+    }]
+
+    const handleMultiSelectExpedienteClinicoElectronico = async (a) =>
+    {
         await setForm(
             {
                 ...form,
@@ -388,7 +439,8 @@ function ModuloTi3(props) {
         );
     }
 
-    const handleMultiSelectContabilidad = async (a) => {
+    const handleMultiSelectContabilidad = async (a) =>
+    {
         await setForm(
             {
                 ...form,
@@ -397,7 +449,8 @@ function ModuloTi3(props) {
         );
     }
 
-    const handleMultiSelectRecursosHumanos = async (a) => {
+    const handleMultiSelectRecursosHumanos = async (a) =>
+    {
         await setForm(
             {
                 ...form,
@@ -406,7 +459,8 @@ function ModuloTi3(props) {
         );
     }
 
-    const prueba = () => {
+    const prueba = () =>
+    {
         console.log(form)
     }
 
@@ -456,210 +510,235 @@ function ModuloTi3(props) {
 
             </Col>
 
-            {/*Recursos humanos*/}
             <Col xs={12} md={12} className="mt-4">
-                <h4 className="text-center title-cmh">Recursos Humanos</h4>
+                <Row>
 
-                <Row className="justify-content-center">
+                    {/*Recursos humanos*/}
+                    <Col xs={12} md={6} className="mt-4">
+                        <Row className="justify-content-center">
+                            <h4 className="text-center title-cmh">Recursos Humanos</h4>
 
-                    <MultiSelect
-                        options={RecursosHumanosOptions}
-                        form={form}
-                        label="Recursos Humanos"
-                        name={"recursosHumanos"}
-                        handleChange={handleMultiSelectRecursosHumanos}
-                        tooltipDescrip={`Seleccione una opción de la lista de Recursos Humanos`}
-                    />
+                            <MultiSelect
+                                options={RecursosHumanosOptions}
+                                form={form}
+                                label="Recursos Humanos"
+                                name={"recursosHumanos"}
+                                handleChange={handleMultiSelectRecursosHumanos}
+                                tooltipDescrip={`Seleccione una opción de la lista de Recursos Humanos`}
+                            />
 
-                </Row>
+                        </Row>
 
-            </Col>
+                    </Col>
 
-            {/*Administración de Citas y Agenda*/}
-            <Col xs={12} md={12} className="mt-4">
-                <h4 className="text-center title-cmh">Administración de Citas y Agenda</h4>
+                    {/*Administración de Citas y Agenda*/}
+                    <Col xs={12} md={6} className="mt-4">
+                        <Row className="justify-content-center">
 
-                <Row className="justify-content-center">
+                            <h4 className="text-center title-cmh">Administración de Citas y Agenda</h4>
 
-                    <GetSelectorOneOption
-                        label="Administración de Citas y Agenda"
-                        value={form.administracionCitasAgenda}
-                        name={"administracionCitasAgenda"}
-                        tooltipDescrip={`Seleccione una opción de la lista de Administración de Citas y Agenda`}
-                        handleChange={handleChange}
-                        options={AdministracionCitasAgendaOptions}
-                        isRequired={false}
-                        show={true}
-                        childId={null}
-                    />
+                            <GetSelectorOneOption
+                                label="Administración de Citas y Agenda"
+                                value={form.administracionCitasAgenda}
+                                name={"administracionCitasAgenda"}
+                                tooltipDescrip={`Seleccione una opción de la lista de Administración de Citas y Agenda`}
+                                handleChange={handleChange}
+                                options={AdministracionCitasAgendaOptions}
+                                isRequired={false}
+                                show={true}
+                                childId={null}
+                            />
 
-                </Row>
-            </Col>
-
-            {/*Banco de Sangre*/}
-            <Col xs={12} md={12} className="mt-4">
-                <h4 className="text-center title-cmh">Banco de Sangre</h4>
-
-                <Row className="justify-content-center">
-
-                    <GetSelectorOneOption
-                        label="Banco de Sangre"
-                        value={form.bancoSangre}
-                        name={"bancoSangre"}
-                        tooltipDescrip={`Seleccione una opción de la lista de Banco de Sangre`}
-                        handleChange={handleChange}
-                        options={BancoSangreOptions}
-                        isRequired={false}
-                        show={true}
-                        childId={null}
-                    />
+                        </Row>
+                    </Col>
 
                 </Row>
             </Col>
 
-            {/*Sistemas de Seguridad*/}
             <Col xs={12} md={12} className="mt-4">
-                <h4 className="text-center title-cmh">Sistemas de Seguridad</h4>
+                <Row>
+                    {/*Banco de Sangre*/}
+                    <Col xs={12} md={6} className="mt-4">
+                        <h4 className="text-center title-cmh">Banco de Sangre</h4>
 
-                <Row className="justify-content-center">
+                        <Row className="justify-content-center">
 
-                    <GetSelectorOneOption
-                        label="Sistemas de Seguridad"
-                        value={form.sistemasSeguridad}
-                        name={"sistemasSeguridad"}
-                        tooltipDescrip={`Seleccione una opción de la lista de Sistemas de Seguridad`}
-                        handleChange={handleChange}
-                        options={SistemasSeguridadOptions}
-                        isRequired={false}
-                        show={true}
-                        childId={null}
-                    />
+                            <GetSelectorOneOption
+                                label="Banco de Sangre"
+                                value={form.bancoSangre}
+                                name={"bancoSangre"}
+                                tooltipDescrip={`Seleccione una opción de la lista de Banco de Sangre`}
+                                handleChange={handleChange}
+                                options={BancoSangreOptions}
+                                isRequired={false}
+                                show={true}
+                                childId={null}
+                            />
+
+                        </Row>
+                    </Col>
+
+                    {/*Sistemas de Seguridad*/}
+                    <Col xs={12} md={6} className="mt-4">
+                        <h4 className="text-center title-cmh">Sistemas de Seguridad</h4>
+
+                        <Row className="justify-content-center">
+
+                            <GetSelectorOneOption
+                                label="Sistemas de Seguridad"
+                                value={form.sistemasSeguridad}
+                                name={"sistemasSeguridad"}
+                                tooltipDescrip={`Seleccione una opción de la lista de Sistemas de Seguridad`}
+                                handleChange={handleChange}
+                                options={SistemasSeguridadOptions}
+                                isRequired={false}
+                                show={true}
+                                childId={null}
+                            />
+
+                        </Row>
+                    </Col>
+                </Row>
+            </Col>
+
+            <Col xs={12} md={12} className="mt-4">
+                <Row>
+                    {/*Reportes, Estadística y/o Análisis*/}
+                    <Col xs={12} md={6} className="mt-4">
+
+                        <Row className="justify-content-center">
+                            <h4 className="text-center title-cmh">Reportes, Estadística y/o Análisis</h4>
+
+                            <GetSelectorOneOption
+                                label="Reportes, Estadística y/o Análisis"
+                                value={form.reportesEstadisticaAnalisis}
+                                name={"reportesEstadisticaAnalisis"}
+                                tooltipDescrip={`Seleccione una opción de la lista de Reportes, Estadística y/o Análisis`}
+                                handleChange={handleChange}
+                                options={ReportesEstadisticaAnalisisOptions}
+                                isRequired={false}
+                                show={true}
+                                childId={null}
+                            />
+
+                        </Row>
+                    </Col>
+
+                    {/*Gestión de Quirófanos*/}
+                    <Col xs={12} md={6} className="mt-4">
+
+                        <Row className="justify-content-center">
+                            <h4 className="text-center title-cmh">Gestión de Quirófanos</h4>
+
+                            <GetSelectorOneOption
+                                label="Gestión de Quirófanos"
+                                value={form.gestionQuirofanos}
+                                name={"gestionQuirofanos"}
+                                tooltipDescrip={`Seleccione una opción de la lista de Gestión de Quirófanos`}
+                                handleChange={handleChange}
+                                options={GestionQuirofonoOptions}
+                                isRequired={false}
+                                show={true}
+                                childId={null}
+                            />
+
+                        </Row>
+                    </Col>
+                </Row>
+            </Col>
+
+            <Col xs={12} md={12} className="mt-4">
+                <Row>
+
+                    {/*Gestión de Camas*/}
+                    <Col xs={12} md={6} className="mt-4">
+
+
+                        <Row className="justify-content-center">
+                            <h4 className="text-center title-cmh">Gestión de Camas</h4>
+
+                            <GetSelectorOneOption
+                                label="Gestión de Camas"
+                                value={form.gestionCamas}
+                                name={"gestionCamas"}
+                                tooltipDescrip={`Seleccione una opción de la lista de Gestión de Camas`}
+                                handleChange={handleChange}
+                                options={GestionCamasOptions}
+                                isRequired={false}
+                                show={true}
+                                childId={null}
+                            />
+
+                        </Row>
+                    </Col>
+
+                    {/*Modulo Urgencias*/}
+                    <Col xs={12} md={6} className="mt-4">
+                        <h4 className="text-center title-cmh">Modulo Urgencias</h4>
+
+                        <Row className="justify-content-center">
+
+                            <GetSelectorOneOption
+                                label="Modulo Urgencias"
+                                value={form.moduloUrgencias}
+                                name={"moduloUrgencias"}
+                                tooltipDescrip={`Seleccione una opción de la lista del Modulo Urgencias`}
+                                handleChange={handleChange}
+                                options={ModuloUrgenciasOptions}
+                                isRequired={false}
+                                show={true}
+                                childId={null}
+                            />
+
+                        </Row>
+                    </Col>
 
                 </Row>
             </Col>
 
-            {/*Reportes, Estadística y/o Análisis*/}
             <Col xs={12} md={12} className="mt-4">
-                <h4 className="text-center title-cmh">Reportes, Estadística y/o Análisis</h4>
+                <Row>
+                    {/*Módulo Referencia y Contra-Referencia*/}
+                    <Col xs={12} md={6} className="mt-4">
+                        <h4 className="text-center title-cmh">Módulo Referencia y Contra-Referencia</h4>
 
-                <Row className="justify-content-center">
+                        <Row className="justify-content-center">
 
-                    <GetSelectorOneOption
-                        label="Reportes, Estadística y/o Análisis"
-                        value={form.reportesEstadisticaAnalisis}
-                        name={"reportesEstadisticaAnalisis"}
-                        tooltipDescrip={`Seleccione una opción de la lista de Reportes, Estadística y/o Análisis`}
-                        handleChange={handleChange}
-                        options={ReportesEstadisticaAnalisisOptions}
-                        isRequired={false}
-                        show={true}
-                        childId={null}
-                    />
+                            <GetSelectorOneOption
+                                label="Módulo Referencia y Contra-Referencia"
+                                value={form.moduloReferenciaContraReferencia}
+                                name={"moduloReferenciaContraReferencia"}
+                                tooltipDescrip={`Seleccione una opción de la lista de Módulo Referencia y Contra-Referencia`}
+                                handleChange={handleChange}
+                                options={ModuloReferenciaContraReferenciaOptions}
+                                isRequired={false}
+                                show={true}
+                                childId={null}
+                            />
 
-                </Row>
-            </Col>
+                        </Row>
+                    </Col>
 
-            {/*Gestión de Quirófanos*/}
-            <Col xs={12} md={12} className="mt-4">
-                <h4 className="text-center title-cmh">Gestión de Quirófanos</h4>
+                    {/*Módulo Enfermería*/}
+                    <Col xs={12} md={6} className="mt-4">
+                        <h4 className="text-center title-cmh">Módulo Enfermería</h4>
 
-                <Row className="justify-content-center">
+                        <Row className="justify-content-center">
 
-                    <GetSelectorOneOption
-                        label="Gestión de Quirófanos"
-                        value={form.gestionQuirofanos}
-                        name={"gestionQuirofanos"}
-                        tooltipDescrip={`Seleccione una opción de la lista de Gestión de Quirófanos`}
-                        handleChange={handleChange}
-                        options={GestionQuirofonoOptions}
-                        isRequired={false}
-                        show={true}
-                        childId={null}
-                    />
+                            <GetSelectorOneOption
+                                label='Módulo Enfermería'
+                                value={form.moduloEnfermeria}
+                                name='moduloEnfermeria'
+                                tooltipDescrip='Módulo Enfermería'
+                                handleChange={handleChange}
+                                options={ModuloEnfermeriaOptions}
+                                isRequired={false}
+                                show={true}
+                                childId={null}
+                            />
 
-                </Row>
-            </Col>
-
-            {/*Gestión de Camas*/}
-            <Col xs={12} md={12} className="mt-4">
-                <h4 className="text-center title-cmh">Gestión de Camas</h4>
-
-                <Row className="justify-content-center">
-
-                    <GetSelectorOneOption
-                        label="Gestión de Camas"
-                        value={form.gestionCamas}
-                        name={"gestionCamas"}
-                        tooltipDescrip={`Seleccione una opción de la lista de Gestión de Camas`}
-                        handleChange={handleChange}
-                        options={GestionCamasOptions}
-                        isRequired={false}
-                        show={true}
-                        childId={null}
-                    />
-
-                </Row>
-            </Col>
-
-            {/*Modulo Urgencias*/}
-            <Col xs={12} md={12} className="mt-4">
-                <h4 className="text-center title-cmh">Modulo Urgencias</h4>
-
-                <Row className="justify-content-center">
-
-                    <GetSelectorOneOption
-                        label="Modulo Urgencias"
-                        value={form.moduloUrgencias}
-                        name={"moduloUrgencias"}
-                        tooltipDescrip={`Seleccione una opción de la lista del Modulo Urgencias`}
-                        handleChange={handleChange}
-                        options={ModuloUrgenciasOptions}
-                        isRequired={false}
-                        show={true}
-                        childId={null}
-                    />
-
-                </Row>
-            </Col>
-
-            {/*Módulo Referencia y Contra-Referencia*/}
-            <Col xs={12} md={12} className="mt-4">
-                <h4 className="text-center title-cmh">Módulo Referencia y Contra-Referencia</h4>
-
-                <Row className="justify-content-center">
-
-                    <GetSelectorOneOption
-                        label="Módulo Referencia y Contra-Referencia"
-                        value={form.moduloReferenciaContraReferencia}
-                        name={"moduloReferenciaContraReferencia"}
-                        tooltipDescrip={`Seleccione una opción de la lista de Módulo Referencia y Contra-Referencia`}
-                        handleChange={handleChange}
-                        options={ModuloReferenciaContraReferenciaOptions}
-                        isRequired={false}
-                        show={true}
-                        childId={null}
-                    />
-
-                </Row>
-            </Col>
-
-            {/*Módulo Enfermería*/}
-            <Col xs={12} md={12} className="mt-4">
-                <h4 className="text-center title-cmh">Módulo Enfermería</h4>
-
-                <Row className="justify-content-center">
-
-                    <GetSelectorOneOption
-                        label='Módulo Enfermería'
-                        value={form.moduloEnfermeria}
-                        name='moduloEnfermeria'
-                        tooltipDescrip='Módulo Enfermería'
-                        handleChange={handleChange}
-                        options={ModuloEnfermeriaOptions}
-                        isRequired={false}
-                        show={true}
-                        childId={null}
-                    />
+                        </Row>
+                    </Col>
 
                 </Row>
             </Col>
@@ -669,7 +748,8 @@ function ModuloTi3(props) {
 
 }
 
-function GetInput(props) {
+function GetInput(props)
+{
 
     //we obtain their props
     const { label, value, name, handleChange, tooltipDescrip, min, type, isRequired, placement, show, isReadOnly = false, isTextArea = false, style = null,
@@ -708,7 +788,8 @@ function GetInput(props) {
     }
 }
 
-function GetInputFormat(props) {
+function GetInputFormat(props)
+{
 
     //we obtain their props
     const { label, value, name, handleChange, tooltipDescrip, type, min, isRequired, placement, show, isReadOnly = false, leftSymbol, rightSymbol, isLeft = false, isRight = false } = props
@@ -774,7 +855,8 @@ function GetInputFormat(props) {
     }
 }
 
-function GetSelector(props) {
+function GetSelector(props)
+{
 
     //we obtain their props
     const { label, style = null, value, tooltipDescrip, name, handleChange, options, isRequired, show, xs = 12, md = 6, containerClass = "mb-3", childId = null, id = null } = props;
@@ -803,7 +885,8 @@ function GetSelector(props) {
                             >
                                 <option value="" disabled>Seleccione una opción</option>
                                 {
-                                    options.map((option) => {
+                                    options.map((option) =>
+                                    {
                                         return (
                                             <Fragment key={option.id}>
                                                 <option value={option.value}>{option.name}</option>
@@ -824,11 +907,12 @@ function GetSelector(props) {
     }
 }
 
-function GetSelectorOneOption(props) {
+function GetSelectorOneOption(props)
+{
 
     //we obtain their props
     const { label, style = null, value, tooltipDescrip, name, handleChange, options, isRequired, show,
-        xs = 12, md = 6, containerClass = "mb-3", childId = null, id = null } = props;
+        xs = 12, md = 12, containerClass = "mb-3", childId = null, id = null } = props;
 
     if (show === true) {
         return (
@@ -850,7 +934,8 @@ function GetSelectorOneOption(props) {
                             >
                                 <option value="">Seleccione una opción</option>
                                 {
-                                    options.map((option) => {
+                                    options.map((option) =>
+                                    {
                                         return (
                                             <Fragment key={option.id}>
                                                 <option value={option.value}>{option.name}</option>
@@ -871,7 +956,8 @@ function GetSelectorOneOption(props) {
     }
 }
 
-function GetCheckBox(props) {
+function GetCheckBox(props)
+{
 
     const { label, value, name, handleChange, type, isRequired = false, show,
         xs = 12, md = 3, containerClass = "mt-3" } = props
@@ -901,7 +987,8 @@ function GetCheckBox(props) {
 
 }
 
-function MultiSelect(props) {
+function MultiSelect(props)
+{
 
     //we obtain their props
     const { label, tooltipDescrip, name, handleChange, options, xs = 12, md = 12, containerClass = "mb-3", dataSelector = null } = props;
