@@ -31,6 +31,10 @@ function RHo(props) {
 
     }
 
+    const hola = () => {
+        console.log('esto es una prueba')
+    }
+
     const handleMultiSelect = async (a) => {
 
         await setForm(
